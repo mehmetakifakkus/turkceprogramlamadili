@@ -1,0 +1,126 @@
+body {
+  background-color: #5c4084;
+  padding: 40px;
+}
+
+.container {
+  padding: 20px 20px 10px 30px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 1000px;
+  min-height: 400px;
+}
+
+.heading {
+  text-align: center;
+}
+.heading h1 {
+  background: -webkit-linear-gradient(#fff, #999);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  text-align: center;
+  margin: 0 0 5px 0;
+  font-weight: 900;
+  font-size: 4rem;
+  color: #fff;
+}
+.heading h4 {
+  color: #a990cc;
+  text-align: center;
+  margin: 0 0 35px 0;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.btn {
+  outline: none !important;
+}
+
+.btn.btn-primary {
+  background-color: #5c4084;
+  border-color: #5c4084;
+/*  width: 60px;*/
+  font-size: 20px;
+  height: 45px;
+  color: white;
+  outline: none;
+}
+.btn.btn-primary:hover {
+  background-color: #442f62;
+  border-color: #442f62;
+}
+.btn.btn-primary:active, .btn.btn-primary:focus {
+  background-color: #684895;
+  border-color: #684895;
+}
+.btn.btn-primary .fa {
+  padding-right: 4px;
+}
+
+.list-group {
+  background-color: #5c4084;
+  margin: 15px 0 0 0;
+  overflow: hidden;
+}
+.list-group:after {
+  display: none;
+}
+.list-group .list-group-item {
+  background-color: white;
+}
+.list-group .list-group-item:first-child,
+.list-group .list-group-item:last-child {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.CodeMirror {
+  padding: 12px 0px;
+  padding-left: 12px;
+  font-size: 16px;
+  text-align: left;
+  position: relative;
+  z-index: 999;
+  height: auto;
+}
+
+.CodeMirror pre {
+  padding: 0 8px;
+}
+
+.styled-background {
+  background-color: yellow;
+  color: #000;
+}
+
+div.column {
+  float: left;
+  width: 47%;
+  padding: 0px 5px 5px 0px;
+  margin: 0px 15px 10px 0px;
+  border: 0px solid #d8d8d8;
+  border-radius: 5px;
+  min-height: 300px;
+  height: 580px;
+}
+
+div.title {
+  padding: 0.4em 16px;
+  margin: 25px 0 5px;
+  margin-top: 16px;
+  margin-bottom: 24px;
+  margin-right: 20px;
+  background-color: #e7e8e6;
+  border-radius: 8px;
+  border-top: 1px solid #CC342D;
+  border-bottom: 1px solid #CC342D;
+  border-left: 6px solid #CC342D;
+  border-right: 1px solid #CC342D;
+  color: #0d62be;
+}

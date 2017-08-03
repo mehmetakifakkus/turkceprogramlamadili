@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Türkçe Programlama Dili</title>
+
+<script src='https://github.com/pegjs/pegjs/releases/download/v0.9.0/peg-0.9.0.min.js'></script>
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+<!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>-->
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.css'>
+<link href="https://codemirror.net/theme/eclipse.css" rel="stylesheet">
+
+<link rel="shortcut icon" href="css/tr.ico">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <style>
+  .breakpoints {
+    padding-right: 0.3em;
+<!--     width: 0em; -->
+  }
+  .breakpoint { color: #0f2; }
+
+  div .CodeMirror-linenumber .CodeMirror-gutter-elt{
+  left:20px;
+  width:21px;
+}
+ </style>
+
+<div class="heading">
+  <h1>Online Türkçe Programlama Dili</h1>
+  <h4>Yeni başlayanlar için kolay, pratik programlama öğrenme aracı</h4>
+</div>
+
+<div id="mainContainer" class="container">
+	<div id="column-left" class="column">
+		<div class="form-group">
+			<h3> Kodu buraya yazın </h3>
+			<textarea id="codemirror">var bayrak = yanlış
+var no = 2
+
+eğer(no > 1)
+{
+	no = no + 3
+}
+değilse
+	no = no + 1
+
+yinele(no < 10)
+	no = no + 1
+
+yaz no
+
+sayarakYinele(var t=0, t < 3, t = t+1)
+{
+	no = no+1
+	yaz t
+}
+yaz t</textarea>
+		</div>
+	</div>
+
+	<div id="column-right" class="column">
+		<div class="form-group">
+			<h3> Çıktılar </h3>
+			<br>
+			<textarea id="evaluate"></textarea>
+		</div>
+	</div>
+
+	<button type="button" onclick="parse()" style="position:relative" class="btn btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Çalıştır</button>
+
+	<button type="button" class="btn btn-primary" style="float:right; margin-left:20px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span> Kaydet</button>
+
+	<button type="button" class="btn btn-lg btn-danger" style="float:right; margin-left:30px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span> Temizle</button>
+<h4><div id = "result"></div> </h4>
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-103667062-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/mode/javascript/javascript.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/mode/css/css.js'></script>
+
+<script src='js/addon/active-line.js'></script>
+<script src='js/addon/closebrackets.js'></script>
+
+<script src='js/addon/foldcode.js'></script>
+<script src='js/addon/foldgutter.js'></script>
+
+<script src='js/addon/show-hint.js'></script>
+<script src='js/mode/simple.js'></script>
+
+<script src="js/custom-mode.js"></script>
+<script src="js/index.js"></script>
+
+<link rel="stylesheet" href="css/show-hint.css">
+
+<!--https://github.com/eligrey/FileSaver.js	-->
+<script async="" src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js"></script>
+<script async="" src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
+
+</body>
+</html>
