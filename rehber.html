@@ -54,9 +54,20 @@
 
 <ul>
   <li><a href="#intro">Programlamaya Giriş</a></li>
-  <li><a href="#variables">1. Değişkenler</a></li>
-  	<ul><a href="#variableOperations">Değişken İşlemleri</a></ul>
-	<ul><a href="#assignmentOperations">Atama Komutları</a></ul>
+  <li><a href="#variables">1. Değişkenler</a>
+  	<ul>
+		<li><a href="#variableOperations">Değişken İşlemleri</a></li>
+		<li><a href="#assignmentOperations">Atama Komutları</a></li>
+    </ul>
+  </li>
+  <li><a href="#operations">2. İşleçler (Operatörler)</a>
+	  <ul>
+		  <li><a href="#mathematicalOperations">Matematik İşleçleri (+, -, *, /)</a></li>
+		  <li><a href="#comperativeOperations">İlişkisel İşleçler (küçük, büyük, eşit)</a></li>
+		  <li><a href="#logicalOperations">Mantıksal İşleçler (ve, veya, değil)</a></li>
+
+	  </ul>
+		</li>
   <li><a href="#inputOutputCommand">2. Girdi ve Çıktı Komutları</a></li>
   <li><a href="https://pegjs.org/documentation#compatibility">3. Seçme Komutları</a></li>
   <li><a href="https://pegjs.org/documentation#compatibility">4. Döngü Komutları</a>
@@ -72,7 +83,7 @@
 	<p>Bu sayfayı ziyaret ettiğinize göre <strong>programlama</strong> işine meraklısınız demektir. Bu platform, diğerlerinden farklı olarak programlamanın mantığını <strong>Türk</strong>'lerin ana dili olan <strong>Türkçe</strong> anlatmayı amaçlamaktadır.
 	</p>
 
-	<p>Öncelikle bir bilgisayar programını çalıştırmak için programı bir bilgisayar editöründe yazmış olmamız gerekmektedir. Sonrasında ise, program derleyiciler ya da yorumlayıcılar ile çalıştırılabilir hale dönüşür. Bu site çalıştırılabilir dosya üretmekten daha çok programın işletilme mantığını anlatmaya yönelik olarak hazırlanmıştır.</p>
+	<p>Öncelikle bir bilgisayar programını çalıştırmak için programı bir yazı editöründe yazmış olmamız gerekmektedir. (Burada editör web sayfasıdır). Sonrasında ise, program derleyiciler ya da yorumlayıcılar ile çalıştırılabilir hale dönüşür. Bu site çalıştırılabilir dosya üretmekten daha çok programın işletilme mantığını anlatmaya yönelik olarak hazırlanmıştır.</p>
 
 	<p>Aşağıdaki bir dizi konuyu okuyup uygulayarak ilk programlarınızı geliştirebilirsiniz.	  </p>
 
@@ -122,18 +133,35 @@ yaz c</textarea>
 
 		  <p>Burada ne yaptık? Yine 3 farklı değişken oluşturduk, ama bu sefer değişkenler sabit değerlerle başlamadılar, aksine bir önce tanımlanan değişkenin değerini bağlı bir değerle başladılar. <variable>a</variable> değişkeni 5 değeri ile başladı. Ardından <variable>b</variable> bunun 3 fazlası olan 8 değerini aldı. <variable>c</variable> ise bunların farkına sahip oldu.</p>
 
-<h2 id="installation-browser">Browser</h2>
+<h2 id = "operations">Temel İşleçler (Operatörler)</h3>
 
-<p><a href="https://pegjs.org/#download">Download</a> the PEG.js library
-(regular or minified version) or install it using Bower:</p>
+<h3 id="mathematicalOperations">Matematik İşleçleri (+, -, *, /)</h3>
+		  <p>Aritmetik işleçler matematiksel işlemleri yapmamıza yarayan temel işleçlerdir. Yukarıdaki programlarda gördüğünüz üzere toplama (+) ve çıkarma (-) işlemlerini zaten kullanmıştık. Matematiksel işleçlerin nasıl çalıştığını örneklemek üzere gelin farklı bir program yazalım.</p>
 
-<pre><code>$ bower install pegjs</code></pre>
+		  <p><strong>Örnek1.</strong> Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bululım.</p>
 
-<h2 id="generating-a-parser">Generating a Parser</h2>
 
-<p>PEG.js generates parser from a grammar that describes expected input and can
-specify what the parser returns (using semantic actions on matched parts of the
-input). Generated parser itself is a JavaScript object with a simple API.</p>
+<textarea class="deneme">var dolarKuru = 3.45
+var saatFiyati = 60
+var telefonFiyati = 300
+var toplam = saatFiyati * dolarKuru + telefonFiyati * dolarKuru
+
+yaz toplam</textarea>
+
+		  <p><variable>saatFiyati</variable> adlı değişken almak istediğimiz saatin dolar para birimi cinsinden tutarını, <variable>telefonFiyati</variable> değişkeni ise almak istediğimiz telefonun dolar para birimi cinsinden tutarını içerisinde tutmaktadır. </p>
+
+		  <p>Programımız yurtdışından almak istediğimiz bu iki ürün için o günkü dolar kuru olan 3.45 TL karşılığı ile alışveriş sonrasında toplam harcamamız gereken toplam tutarı hesapladı. </p>
+
+		  <p><strong>Örnek2.</strong>Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım. </p>
+
+
+<h3 id="comperativeOperations">İlişkisel İşleçler (küçük, büyük, eşit)</h3>
+
+
+
+<h3 id="logicalOperations">Mantıksal İşleçler (ve, veya, değil)</h3>
+
+
 
 <h3 id="generating-a-parser-command-line">Command Line</h3>
 
