@@ -78,6 +78,7 @@ body {
 
 .form-group {
   margin-bottom: 25px;
+	height: auto;
 }
 
 .CodeMirror {
@@ -94,8 +95,19 @@ body {
   padding: 0 8px;
 }
 
-.styled-background {
+.styled-background-normal {
   background-color: yellow;
+  color: #000;
+}
+
+.styled-background-logical-true {
+  background-color: #62fd46;
+  color: #000;
+}
+
+
+.styled-background-logical-false {
+  background-color: #ff5850;
   color: #000;
 }
 
@@ -107,7 +119,7 @@ div.column {
   border: 0px solid #d8d8d8;
   border-radius: 5px;
   min-height: 300px;
-  height: 580px;
+  height: 450px;
 }
 
 div.title {

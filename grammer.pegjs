@@ -45,25 +45,25 @@ function drawLine(line, result, isLoop){
     if(line.type == 'assignment')
    	{
 		console.log('[assignment] '+ line.lhs +' line '+line.lineNumber +' is getting processed, result is: '+ result); 
-		highlightLine(line.lineNumber);
+		highlightLine(line);
 		insertTextAtCursor(result, line.lineNumber, isLoop);
 	}
   	else if(line.type == 'declaration')
  	{
 		console.log('[declaration] '+ line.lhs +' line '+line.lineNumber +' is getting processed, result is: '+ result);
-		highlightLine(line.lineNumber);
+		highlightLine(line);
 		insertTextAtCursor(result, line.lineNumber);
 	}
   	else if(line.type == 'logical')
  	{
 		console.log('[logical] line '+line.lineNumber +' is getting processed, result is: '+ result);
-		highlightLine(line.lineNumber);
+		highlightLine(line, 'logical', result);
 		insertTextAtCursor(result, line.lineNumber);
 	}
 	else if(line.type == 'print')
  	{
 		console.log('[print] line '+line.lineNumber +' is getting processed, result is: '+ result); 
-		highlightLine(line.lineNumber);
+		highlightLine(line);
 		insertTextAtCursor(result, line.lineNumber);
 	}
    }, 750 * time)	
@@ -76,7 +76,7 @@ time++;
        line['#evaluation']++;
        
        if(line.type == 'logical')
-       		drawLine(line, window.eval(line.text) ? 'doğru':'yanlış', isLoop);
+       		drawLine(line, window.eval(line.text), isLoop);
        else if(line.type == 'print')
 	   		drawLine(line, window.eval(line.text));
 	   else
@@ -118,8 +118,8 @@ statement
 if_statement
   = 'eğer(' _ los:logical_statement  _ ')' _ nl
   		_ lines1:(compound_statement / block_item) _ nl
-  _ 'değilse' _ nl 
-  		_ lines2:(compound_statement / block_item)? nl
+  (_ 'değilse' _ nl 
+  		_ lines2:(compound_statement / block_item))? nl
   {    
   
   myEval(los);
@@ -131,9 +131,9 @@ if_statement
         else
 			myEval(lines1);
             
-    	return lines1;
+    	return [los, lines1];
     }
-    else if(lines2){
+    else if(typeof(lines2) != "undefined"){
 
         if(lines2.constructor.name == "Array")
          for(var i=0; i < lines2.length; i++)
@@ -141,7 +141,7 @@ if_statement
         else
 			myEval(lines2); 
         
-    	return lines2;
+    	return [los, lines2];
     }
     return 'false returned if statement'; 
 }
@@ -162,7 +162,7 @@ while_statement
 	}
 	
 	myEval(los);  // calculate the value after loop
-	return lines;    
+	return [los, lines];    
 } 
  
 for_statement
@@ -208,7 +208,6 @@ block_item
  / print_statement
  / expression_statement
  / logical_statement
- / comment
 
 declaration
  =  _ "var " dec:init_declarator_list {
@@ -245,16 +244,15 @@ logical_statement = _ f1:factor2 f2:(_ operator _ factor2)* _ nl
     if(f2[0])
 	    text += f2[0][1] + ' ' + f2[0][3];
         
-    return {'type':'logical', 'text': text, 'lineNumber': location().end.line}; // evaluate it, then return it       
+    return {'type':'logical', 'text': text, 'lineNumber': location().end.line, 'start': location().start.column-1, 'end': location().end.column-1}; // evaluate it, then return it       
 }
 
 term = f1:factor f2:(_ ("*" / "+" / "/" / "-") _ factor)* 
 {
-	console.log(f1) 
-
 	var text = f1+' ';
-    if(f2[0])
-	    text += f2[0][1] + ' ' + f2[0][3];
+    for(var i=0; i<f2.length; i++)
+	   text += ' ' + f2[i][1] + ' ' + f2[i][3];
+
 	return text;
 }
     

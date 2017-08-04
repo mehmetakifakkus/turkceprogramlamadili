@@ -1,0 +1,91 @@
+blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  font-size: 18px;
+  border-left: 5px solid #eee;
+}
+blockquote p:last-child,
+blockquote ul:last-child,
+blockquote ol:last-child {
+  margin-bottom: 0;
+}
+blockquote footer,
+blockquote small,
+blockquote .small {
+  display: block;
+  font-size: 80%;
+  line-height: 1.42857143;
+  color: #777;
+}
+
+/*********************************************************************/
+
+/* carousel  https://bootsnipp.com/snippets/889Q  */
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.col-sm-3 {
+    width: 17%;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.col-sm-9 {
+    width: 82%;
+	float: left;
+	margin-bottom: 50px;
+	height: 110px;
+}
+
+blockquote {
+	padding: 10px 10px;
+    margin: 0 0 10px;
+    border-left: 5px solid #eee;
+	page-break-inside: avoid;
+    display: block;
+}
+
+.item blockquote {
+    border-left: none;
+    margin: 0;
+}
+
+.item blockquote img {
+    margin-bottom: 20px;
+}
+
+.item blockquote p:before {
+    content: "\f10d";
+    font-family: 'Fontawesome';
+    float: left;
+    margin-right: 10px;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.img-responsive,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-rounded {
+  border-radius: 6px;
+}
+
+.img-circle {
+  border-radius: 50%;
+}
+
+.text-center {
+  text-align: center;
+}

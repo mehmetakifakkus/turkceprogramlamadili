@@ -22,24 +22,31 @@ editor.on("gutterClick", function(cm, n) {
   cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
-editor.on('cursorActivity',function(){
-		editor.focus();
-    	var start_cursor = editor.getCursor();  //I need to get the cursor position
-    	console.log(start_cursor);  //Cursor position
+function setEditorArea(){
+	editor.focus();
 
-		var cursorLine = start_cursor.line;
-		var cursorCh = start_cursor.ch;
-		document.getElementById('mainContainer').style.height = 171 + editor.lineCount() * 24 + 'px';
+	document.getElementById('mainContainer').style.height = 171 + editor.lineCount() * 24 + 'px';
+	document.getElementById('column-left').style.height = 76 + editor.lineCount() * 24 + 'px';
 
-		document.getElementById('column-left').style.height = 76 + editor.lineCount() * 24 + 'px';
-		document.getElementById('column-right').style.height = 76 + editor.lineCount() * 24 + 'px';
-
-
-		var len = editor.lineCount();
-		//deleteLines(len);
+	$( "column-right" ).ready(function(){
 		evaluate.setValue('');
-		insertNewLines(len-1);
+		document.getElementById('column-right').style.height = 76 + editor.lineCount() * 24 + 'px';
+	});
+
+	var len = editor.lineCount();
+	insertNewLines(len-1);
+}
+setEditorArea();
+
+editor.on('cursorActivity', function(){
+   	var start_cursor = editor.getCursor();  //I need to get the cursor position
+   	console.log(start_cursor);  //Cursor position
+
+	var cursorLine = start_cursor.line;
+	var cursorCh = start_cursor.ch;
+	setEditorArea();
 });
+
 
 function makeMarker() {
   var marker = document.createElement("div");
@@ -48,13 +55,34 @@ function makeMarker() {
   return marker;
 }
 
-var markedLine;
-function highlightLine(lineNumber) {
+var markedLine, logicals = [];
+function highlightLine(line, type, result) { // type is used for logical,  result is logical true or false
+
+  var lineNumber = line.lineNumber;
 
   if(markedLine)
     markedLine.clear();
 
-  markedLine = editor.markText({line: lineNumber-1, ch: 0}, {line: lineNumber-1, ch: 50}, {className: "styled-background"});
+	for(var i=0; i < logicals.length; i++)
+	{
+		if(logicals[i].eval)
+			markedLine = editor.markText({line: logicals[i].line.lineNumber-1, ch: logicals[i].line.start}, {line: logicals[i].line.lineNumber-1, ch: logicals[i].line.end}, {className: "styled-background-logical-true"});
+		else
+			markedLine = editor.markText({line: logicals[i].line.lineNumber-1, ch: logicals[i].line.start}, {line: logicals[i].line.lineNumber-1, ch: logicals[i].line.end}, {className: "styled-background-logical-false"});
+	}
+
+	if(type == 'logical')
+	{
+		if(result)
+			markedLine = editor.markText({line: lineNumber-1, ch: line.start}, {line: lineNumber-1, ch: line.end}, {className: "styled-background-logical-true"});
+		else
+			markedLine = editor.markText({line: lineNumber-1, ch: line.start}, {line: lineNumber-1, ch: line.end}, {className: "styled-background-logical-false"});
+
+		logicals.push({line: line, eval: result});
+	}
+	else
+  		markedLine = editor.markText({line: lineNumber-1, ch: 0}, {line: lineNumber-1, ch: 50}, {className: "styled-background-normal"});
+
 }
 
 window.highlightLine = highlightLine;
@@ -82,6 +110,9 @@ function insertNewLines(number) {
 
 window.insertTextAtCursor = function(text, number, isLoop) {
     var doc = evaluate.getDoc();
+
+	if(typeof(text) == 'boolean')
+		 text = text ? 'doğru':'yanlış'
 
 	var pos = { // create a new object to avoid mutation of the original selection
         line: number-1,
@@ -115,6 +146,7 @@ $.get("/grammer.pegjs", function(response) {
 window.parse = function() {
 
 	console.clear()
+	logicals = []
 
 	try{
  		evaluate.setValue('');
@@ -139,3 +171,6 @@ window.kaydet = function(){
 	var blob = new Blob([editor.getValue()], {type: "text/plain;charset=utf-8"});
 	saveAs(blob, "merhaba dünya.txt");
 }
+
+
+

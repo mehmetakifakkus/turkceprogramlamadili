@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
   <meta charset="UTF-8">
   <title>Türkçe Programlama Dili</title>
@@ -10,7 +10,7 @@
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 <!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>-->
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.css'>
-<link href="https://codemirror.net/theme/eclipse.css" rel="stylesheet">
+<link href="css/eclipse.css" rel="stylesheet">
 
 <link rel="shortcut icon" href="css/tr.ico">
 <link rel="stylesheet" href="css/style.css">
@@ -40,7 +40,9 @@
 	<div id="column-left" class="column">
 		<div class="form-group">
 			<h3> Kodu buraya yazın </h3>
-			<textarea id="codemirror">var bayrak = yanlış
+
+			<!--
+var bayrak = yanlış
 var no = 2
 
 eğer(no > 1)
@@ -60,18 +62,28 @@ sayarakYinele(var t=0, t < 3, t = t+1)
 	no = no+1
 	yaz t
 }
-yaz t</textarea>
+yaz t
+-->
+
+			<textarea id="codemirror">var bayrak = yanlış // merhaba
+var no = 2
+
+yinele(no < 10)
+{
+	no = no + 3
+}
+no = 99</textarea>
+
 		</div>
 	</div>
 
 	<div id="column-right" class="column">
 		<div class="form-group">
 			<h3> Çıktılar </h3>
-			<br>
 			<textarea id="evaluate"></textarea>
 		</div>
 	</div>
-
+<br>
 	<button type="button" onclick="parse()" style="position:relative" class="btn btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Çalıştır</button>
 
 	<button type="button" class="btn btn-primary" style="float:right; margin-left:20px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span> Kaydet</button>
@@ -94,8 +106,11 @@ yaz t</textarea>
 
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/mode/javascript/javascript.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/mode/css/css.js'></script>
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/mode/javascript/javascript.js'></script>-->
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/mode/css/css.js'></script>-->
+
+<link rel="stylesheet" href="css/show-hint.css">
+
 
 <script src='js/addon/active-line.js'></script>
 <script src='js/addon/closebrackets.js'></script>
@@ -109,7 +124,6 @@ yaz t</textarea>
 <script src="js/custom-mode.js"></script>
 <script src="js/index.js"></script>
 
-<link rel="stylesheet" href="css/show-hint.css">
 
 <!--https://github.com/eligrey/FileSaver.js	-->
 <script async="" src="https://cdn.rawgit.com/eligrey/canvas-toBlob.js/f1a01896135ab378aa5c0118eadd81da55e698d8/canvas-toBlob.js"></script>

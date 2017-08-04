@@ -6,3 +6,17 @@ body {
 }
 aside, footer, header, nav { display: block; } /* HTML5 */
 a img { border: none; }
+
+variable{
+	font-family: monospace;
+	color: #00f;
+	font-size: 130%;
+}
+
+keyword{
+	font-family: monospace;
+	color: #7F0055;
+	font-size: 130%;
+    font-weight: bold;
+	line-height: 1em;
+}
