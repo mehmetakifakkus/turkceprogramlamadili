@@ -138,7 +138,8 @@ yaz c</textarea>
 <h3 id="mathematicalOperations">Matematik İşleçleri (+, -, *, /)</h3>
 		  <p>Aritmetik işleçler matematiksel işlemleri yapmamıza yarayan temel işleçlerdir. Yukarıdaki programlarda gördüğünüz üzere toplama (+) ve çıkarma (-) işlemlerini zaten kullanmıştık. Matematiksel işleçlerin nasıl çalıştığını örneklemek üzere gelin farklı bir program yazalım.</p>
 
-		  <p><strong>Örnek1.</strong> Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bululım.</p>
+		  <hr>
+		  <p><strong>Örnek1: </strong> Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bululım.</p>
 
 
 <textarea class="deneme">var dolarKuru = 3.45
@@ -152,7 +153,18 @@ yaz toplam</textarea>
 
 		  <p>Programımız yurtdışından almak istediğimiz bu iki ürün için o günkü dolar kuru olan 3.45 TL karşılığı ile alışveriş sonrasında toplam harcamamız gereken toplam tutarı hesapladı. </p>
 
-		  <p><strong>Örnek2.</strong>Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım. </p>
+		  <hr>
+		  <p><strong>Örnek2: </strong>Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım. </p>
+
+<textarea class="deneme">var toplamYol = 236
+var toplamTutar = 75
+var fiyat = toplamTutar / toplamYol
+
+yaz fiyat</textarea>
+
+		  <p>Kodumuz katettiğimiz toplam yolu adlı <variable>toplamYol</variable> değişkende, bu yol katedildiğinde harcanan tutarı ise <variable>toplamTutar</variable> adlı değişkende saklamakta ve
+		  <pre><code>toplamTutar / toplamYol</code></pre> ile
+		  bölme işlemini yapıp <variable>fiyat</variable> değişkeninde saklamaktadır. Her zamanki gibi bunu da <keyword>yaz</keyword> komutu ile yazdırmaktayız.</p>
 
 
 <h3 id="comperativeOperations">İlişkisel İşleçler (küçük, büyük, eşit)</h3>

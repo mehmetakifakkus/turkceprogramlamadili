@@ -276,7 +276,7 @@ yanlis = 'yanlış' {return false}
 
 
 letter "letter" 
-  = [a-z]+ {return text()} 
+  = [a-zA-Z]+ {return text()} 
 
 integer "integer"
   = [0-9]+ { return parseInt(text(), 10); }
