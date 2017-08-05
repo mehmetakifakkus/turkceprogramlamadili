@@ -94,10 +94,11 @@ statement
   / while_statement
   / for_statement
   / item:block_item {
-  
+ 
+ 
         if(item.type == 'print')
-	       drawLine(item, window.eval(item.text));
-		else if(item.type == 'assignment' || item.type == 'declaration')
+            drawLine(item, item.subtype == 'string'? item.text:window.eval(item.text));
+ 		else if(item.type == 'assignment' || item.type == 'declaration')
 		{
 			window.eval(item.text); 
 			item['#evaluation']++;
@@ -231,9 +232,12 @@ init_declarator
     else 
         return {'lhs': left, 'rhs': exp.text};        
 }   
- 
-print_statement = _ "yaz" _ exp:expression_statement _ comment? nl {
-	return {'type':'print', 'text': exp.text, 'lineNumber': location().start.line}; // evaluate it, then return it       
+
+print_statement = _ "yaz" _ exp:(expression_statement / StringLiteral) _ comment? nl {
+
+	if(typeof(exp.value) == 'string')
+		return {'type':'print', 'subtype': 'string', 'text': exp.value, 'lineNumber': location().start.line}; // evaluate it, then return it       
+	return {'type':'print', 'subtype': 'var', 'text': exp.text, 'lineNumber': location().start.line}; // evaluate it, then return it       
 }
 
 expression_statement = _ t:term (expression_statement)* _ nl{ // ()* gerek var mi?
@@ -279,6 +283,50 @@ yanlis = 'yanlış' {return false}
 
 letter "letter" 
   = [a-zA-Z]+ {return text()} 
+
+StringLiteral "string"
+  = '"' chars:DoubleStringCharacter* '"' {
+      return { type: "Literal", value: chars.join("") };
+    }
+
+DoubleStringCharacter
+  = !('"' / "\\" / LineTerminator) SourceCharacter { return text(); }
+  / "\\" sequence:EscapeSequence { return sequence; }
+  / LineContinuation
+
+LineContinuation
+  = "\\" LineTerminatorSequence { return ""; }  
+  
+LineTerminatorSequence "end of line"
+  = "\n"
+  / "\r\n"
+  / "\r"
+  / "\u2028"
+  / "\u2029"  
+  
+LineTerminator
+  = [\n\r\u2028\u2029]  
+ 
+SourceCharacter
+  = . 
+ 
+EscapeSequence
+  = CharacterEscapeSequence
+
+CharacterEscapeSequence
+  = SingleEscapeCharacter
+
+SingleEscapeCharacter
+  = "'"
+  / '"'
+  / "\\"
+  / "b"  { return "\b"; }
+  / "f"  { return "\f"; }
+  / "n"  { return "\n"; }
+  / "r"  { return "\r"; }
+  / "t"  { return "\t"; }
+  / "v"  { return "\v"; } 
+  
 
 integer "integer"
   = [0-9]+ { return parseInt(text(), 10); }

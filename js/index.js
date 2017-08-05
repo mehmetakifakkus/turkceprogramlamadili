@@ -145,8 +145,10 @@ $.get("grammer.pegjs", function(response) {
 
 window.parse = function() {
 
-	console.clear()
-	logicals = []
+	console.clear();
+	if(markedLine)
+		markedLine.clear();
+	logicals = [];
 
 	try{
  		evaluate.setValue('');
