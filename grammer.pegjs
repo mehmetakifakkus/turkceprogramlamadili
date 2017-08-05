@@ -118,11 +118,13 @@ statement
 if_statement
   = 'eğer(' _ los:logical_statement  _ ')' _ nl
   		_ lines1:(compound_statement / block_item) _ nl
-  (_ 'değilse' _ nl 
-  		_ lines2:(compound_statement / block_item))? nl
+  lines2:( _ 'değilse' _ nl 
+  		_ (compound_statement / block_item) )? nl
   {    
   
   myEval(los);
+  
+  lines2 = lines2[5];
   
      if(window.eval(los.text)){
         if(lines1.constructor.name == "Array")
