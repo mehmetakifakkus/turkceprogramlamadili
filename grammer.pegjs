@@ -125,7 +125,8 @@ if_statement
   
   myEval(los);
   
-  lines2 = lines2[5];
+  if(lines2 && typeof(lines2[5]) != "undefined")
+     lines2 = lines2[5] 
   
      if(window.eval(los.text)){
         if(lines1.constructor.name == "Array")
