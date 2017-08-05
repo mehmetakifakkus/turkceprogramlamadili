@@ -137,7 +137,7 @@ insertNewLines(editor.lineCount()-1);
 
 var grammer = null;
 
-$.get("/grammer.pegjs", function(response) {
+$.get("grammer.pegjs", function(response) {
 	grammer = response;
 	//console.log(response)
 });
