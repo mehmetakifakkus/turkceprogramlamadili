@@ -159,7 +159,7 @@ window.parse = function() {
 		 console.log(result)
   }catch(err){
   		//document.getElementById("result").textContent = err.toString();
-	  	//console.log(err)
+	  	console.log(err)
   }
 }
 
