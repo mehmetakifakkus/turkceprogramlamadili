@@ -17,7 +17,7 @@ CodeMirror.defineSimpleMode("simplemode", {
     {regex: /\/(?:[^\\]|\\.)*?\//, token: "variable-3"},
     // A next property will cause the mode to move to a different state
     {regex: /\/\*/, token: "comment", next: "comment"},
-    {regex: /[-+\/*=<>!]+/, token: "operator"},
+    {regex: /[-+\/*=<>!]+|küçük|büyük|küçükeşit|büyükeşit|ve|veya|eşit|eşitdeğil/, token: "operator"},
     // indent and dedent properties guide autoindentation
     {regex: /[\{\[\(]/, indent: true},
     {regex: /[\}\]\)]/, dedent: true},

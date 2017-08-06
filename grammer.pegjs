@@ -350,12 +350,12 @@ operator
 operator_text
   = "ve"					{ return "&&"; }
 	/ "veya"				{ return "||"; }
-	/ "kucuk"				{ return "<"; }
-	/ "kucuk esit"			{ return "<="; }
-	/ "buyuk"	 			{ return ">"; }
-	/ "buyuk esit" 			{ return ">="; }
-	/ "esit"				{ return "=="; }
-	/ "esit degil"			{ return "!="; }  
+	/ "büyükeşit" 			{ return ">="; }
+	/ "küçükeşit"			{ return "<="; }
+	/ "küçük"				{ return "<"; }
+	/ "büyük"	 			{ return ">"; }
+	/ "eşit"				{ return "=="; }
+	/ "eşitdeğil"			{ return "!="; }  
   
 operator_symbol
   = "&&"					{ return text(); }
