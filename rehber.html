@@ -83,7 +83,7 @@
 	<p>Bu sayfayı ziyaret ettiğinize göre <strong>programlama</strong> işine meraklısınız demektir. Bu platform, diğerlerinden farklı olarak programlamanın mantığını <strong>Türk</strong>'lerin ana dili olan <strong>Türkçe</strong> anlatmayı amaçlamaktadır.
 	</p>
 
-	<p>Öncelikle bir bilgisayar programını çalıştırmak için programı bir yazı editöründe yazmış olmamız gerekmektedir. (Burada editör web sayfasıdır). Sonrasında ise, program derleyiciler ya da yorumlayıcılar ile çalıştırılabilir hale dönüşür. Bu site çalıştırılabilir dosya üretmekten daha çok programın işletilme mantığını anlatmaya yönelik olarak hazırlanmıştır.</p>
+	<p>Öncelikle bir bilgisayar programını çalıştırmak için programı bir yazı editöründe yazmış olmamız gerekmektedir (burada editör web sayfasıdır). Sonrasında ise, program derleyiciler ya da yorumlayıcılar ile çalıştırılabilir hale dönüşür. Bu site çalıştırılabilir dosya üretmekten daha çok programın işletilme mantığını anlatmaya yönelik olarak hazırlanmıştır.</p>
 
 	<p>Aşağıdaki bir dizi konuyu okuyup uygulayarak ilk programlarınızı geliştirebilirsiniz. Bu arada burada yer alan tüm programlar Kodlama Sayfası kısmında çalışmaktadır. Kopyala-Yapıştır yapabilir nasıl çalıştığını gözlemleyebilirsiniz. </p>
 
@@ -98,14 +98,14 @@
 
 <textarea class="deneme">var puan = 90</textarea>
 
-	<p>Şeklinde bir kod ile program <variable>puan</variable> isminde bir değişken oluşturur ve içerisinde 90 sayı değerini saklar. Bu kod çalıştıktan sonra, bilgisayarın belleğinde bu sayının tutulması için bir hücre oluşturulur ve bu değer biz değiştirene vaya program bitene kadar bu hücrede saklanır.</p>
+	<p>Şeklinde bir kod ile program <variable>puan</variable> isminde bir değişken oluşturur ve içerisinde 90 sayı değerini saklar. Bu kod çalıştıktan sonra, bilgisayarın belleğinde bu sayının tutulması için bir hücre oluşturulur ve bu değer biz değiştirene veya program bitene kadar bu hücrede saklanır.</p>
 
 
 
 <div style="width: 60%; float: left;">
 	<p>Değişkenlerin nasıl kullanıldığını bir kaç örnek kod inceledikten sonra anlıyor olacaksınız.</p>
 
-	<p>Varsalım ki dolabımız açtık, bir takım meyveler var. Bunların kaç tane olduğunu programımız ile bulalım. Haydi, sahip olduğumuz toplam meyvelerin sayısını bulan programı yazalım beraber.</p>
+	<p>Varsalım ki dolabımız açtık, birtakım meyveler var. Bunların kaç tane olduğunu programımız ile bulalım. Haydi, sahip olduğumuz toplam meyvelerin sayısını bulan programı yazalım beraber.</p>
 
 </div>
 
@@ -141,7 +141,7 @@ var c = a - b
 
 yaz c</textarea>
 
-		  <p>Burada ne yaptık? Yine 3 farklı değişken oluşturduk, ama bu sefer değişkenler sabit değerlerle başlamadılar, aksine bir önce tanımlanan değişkenin değerini bağlı bir değerle başladılar. <variable>a</variable> değişkeni 5 değeri ile başladı. Ardından <variable>b</variable> bunun 3 fazlası olan 8 değerini aldı. <variable>c</variable> ise bunların farkına sahip oldu.</p>
+		  <p>Burada ne yaptık? Yine 3 farklı değişken oluşturduk, ama bu sefer değişkenler sabit değerlerle başlamadılar, aksine bir önce tanımlanan değişkenin değerine bağlı bir değerle başladılar. <variable>a</variable> değişkeni 5 değeri ile başladı. Ardından <variable>b</variable> bunun 3 fazlası olan 8 değerini aldı. <variable>c</variable> ise bunların farkına sahip oldu.</p>
 
 <h2 id = "operations">Temel İşleçler (Operatörler)</h3>
 
@@ -159,7 +159,7 @@ yaz c</textarea>
 </div>
 
 	  <br>
-		  <p><strong>Örnek1: </strong> Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bululım.</p>
+		  <p><strong>Örnek1: </strong> Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bulalım.</p>
 
 <textarea class="deneme">var dolarKuru = 3.45
 var saatFiyati = 60
@@ -219,11 +219,11 @@ değilse
 
 <pre><code>yaz değişken</code></pre>
 
-		Hali hazırdaki program çalışma düzeninde bir değişkene değer atandığında sağ taraftaki çıktılar bölmesinde zaten değişken değeri görüntülendiğinden, şimdilik kullanılması çok gerekli görülmeyen bir komuttur. Yalnız, değişkene değer atama yapımadan değeri görüntülenmek istendiğinde kullanılabilir.
+		Hali hazırdaki program çalışma düzeninde bir değişkene değer atandığında sağ taraftaki çıktılar bölmesinde zaten değişken değeri görüntülendiğinden, şimdilik kullanılması çok gerekli görülmeyen bir komuttur. Yalnız, değişkene değer atama yapılmadan değeri görüntülenmek istendiğinde kullanılabilir.
 
 <h2 id="selectionCommand">3. Seçme Komutları</h2>
 
-		<p>Programımızın bazen olası kodlar arasında seçim yapmasını isteyebiliriz. Yani yukarıdan aşağı doğru bütün kodların çalışması, istediğimiz bir program çalışma düzeni olmayablir. Dolayısıyla <keyword>eğer</keyword> ve <keyword>değilse</keyword> komutları bu noktada aradığımız komutlardır. <keyword>eğer</keyword> komutunun ardından gelen parantezlerin arasına doğruluğu kontrol edilecek olan ilişkisel komut yazılır. Doğruysa <keyword>eğer</keyword>in ardındaki kısım yanlışsa <keyword>değilse</keyword> kısmı çalışır. Zaten adi üzerinde gayet anlaşılır değil mi?</p>
+		<p>Programımızın bazen olası kodlar arasında seçim yapmasını isteyebiliriz. Yani yukarıdan aşağı doğru bütün kodların çalışması, istediğimiz bir program çalışma düzeni olmayabilir. Dolayısıyla <keyword>eğer</keyword> ve <keyword>değilse</keyword> komutları bu noktada aradığımız komutlardır. <keyword>eğer</keyword> komutunun ardından gelen parantezlerin arasına doğruluğu kontrol edilecek olan ilişkisel komut yazılır. Doğruysa <keyword>eğer</keyword>in ardındaki kısım yanlışsa <keyword>değilse</keyword> kısmı çalışır. Zaten adı üzerinde gayet anlaşılır değil mi?</p>
 
 		<p>Şöyle bir söz dizimi kuralını verelim:</p>
 		<pre><code>eğer(ilişkisel komut)
@@ -283,7 +283,7 @@ yaz no</textarea>
 
 <h3 id="yineleKomutu">yinele Komutu</h3>
 
-		<p>Bu komut kodlarımzı yineleyerek çalışmasın sağlar. <keyword>eğer</keyword> komutunda olduğu gibi çalışma şartı komutun parantez içindeki ilişkisel komut kısmın doğru olması şartıdır. Burası belli bir sonlu zaman sonra yanlış olacak ve döngümüz sonlanacaktır.</p>
+		<p>Bu komut kodlarımzı yineleyerek, diğer bir ifadeyle tekrarlayarak çalışmasını sağlar. Bu yüzden adı da <keyword>yinele</keyword>. Bu komut; <keyword>eğer</keyword> komutunda olduğu gibi çalışma şartı komutun parantez içindeki ilişkisel komut kısmın doğru olması şartıdır. Burası belli bir zaman sonra yanlış olacak ve döngümüz sonlanacaktır.</p>
 
 <p>Şöyle bir söz dizimi kuralını verelim:</p>
 		<pre><code>yinele(ilişkisel komut)
@@ -317,13 +317,13 @@ yaz no</textarea>
 
 sayarakYinele(var t = 0, t < 3, t = t+1)
 {
-	no = no+1
+	no = no + 1
 	yaz t
 }
 yaz t</textarea>
 
 
-		<p>Burada süslü parantez var bunlar ne diye soracak olabilirsiniz. Bunları bir sonraki konumuzda işleyeceğiz. Ama mantığını siz yakalınız sanırım...</p>
+		<p>Burada süslü parantez var bunlar ne diye soracak olabilirsiniz. Bunları bir sonraki konumuzda işleyeceğiz. Ama mantığını siz yakaladınız sanırım...</p>
 
 
 <footer id="footer" style = "margin-top:50px;">
