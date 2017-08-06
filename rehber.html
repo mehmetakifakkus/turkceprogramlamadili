@@ -223,7 +223,14 @@ değilse
 
 <h2 id="selectionCommand">3. Seçme Komutları</h2>
 
-		<p>Programımızın bazen olası kodlar arasında seçim yapmasını isteyebiliriz. Yani yukarıdan aşağı doğru bütün kodların çalışması istediğimiz bir program çalışma düzeni olmayablir. Dolayısıyla <keyword>eğer</keyword> ve <keyword>değilse</keyword> komutları bu noktada aradığımız komutlardır.</p>
+		<p>Programımızın bazen olası kodlar arasında seçim yapmasını isteyebiliriz. Yani yukarıdan aşağı doğru bütün kodların çalışması, istediğimiz bir program çalışma düzeni olmayablir. Dolayısıyla <keyword>eğer</keyword> ve <keyword>değilse</keyword> komutları bu noktada aradığımız komutlardır. <keyword>eğer</keyword> komutunun ardından gelen parantezlerin arasına doğruluğu kontrol edilecek olan ilişkisel komut yazılır. Doğruysa <keyword>eğer</keyword>in ardındaki kısım yanlışsa <keyword>değilse</keyword> kısmı çalışır. Zaten adi üzerinde gayet anlaşılır değil mi?</p>
+
+		<p>Şöyle bir söz dizimi kuralını verelim:</p>
+		<pre><code>eğer(ilişkisel komut)
+	doğruysa çalışacak komut
+değilse
+	yanlışsa çalışacak komut</code></pre>
+
 
 		<p>Yine örnekler üzerinden gidelim. Hatırlatmak gerekirse; bu kodları kodlama sayfasına kopyala yapıştır yapıp nasıl çalıştığını gözlemleyebiliriz.</p>
 
@@ -274,17 +281,49 @@ yaz no</textarea>
 
 <h2 id="repetitionCommand">4. Döngü Komutları</h2>
 
-<h3 id="selectionCommand">yinele Komutu</h3>
+<h3 id="yineleKomutu">yinele Komutu</h3>
 
-	<p>Bu komut kodlarımzı yineleyerek çalışmasın sağlar.</p>
+		<p>Bu komut kodlarımzı yineleyerek çalışmasın sağlar. <keyword>eğer</keyword> komutunda olduğu gibi çalışma şartı komutun parantez içindeki ilişkisel komut kısmın doğru olması şartıdır. Burası belli bir sonlu zaman sonra yanlış olacak ve döngümüz sonlanacaktır.</p>
+
+<p>Şöyle bir söz dizimi kuralını verelim:</p>
+		<pre><code>yinele(ilişkisel komut)
+	doğru olduğu sürece çalışacak komut
+</code></pre>
+
+		<p><strong>Uyarı: </strong>Unutmayalım ki; döngümüz mutlaka sonlanmalıdır. Sonlanmayan döngü istenmeyen bir durumdur.</p>
+
+		<p>Bu kodları Kodlama Sayfasına yapıştırıp deneyebiliriz. Kod görselleştirici kodları görsel hale getirip çalışma mantığının daha iyi anlaşılmasını sağlayacaktır.</p>
+<textarea class="deneme">var no = 2
+
+yinele(no < 10)
+	no = no + 1
+
+yaz no</textarea>
 
 
+<h3 id="sayarakYineleKomutu">sayarakYinele Komutu</h3>
 
-<h3 id="selectionCommand">sıralayarakYinele Komutu</h3>
+	<p>Eğer geçici bir değişkenle sayarak bir döngü kurmak istersek <keyword>sayarakYinele</keyword> aradığımız komuttur.</p>
+
+<p>Şöyle bir söz dizimi kuralını verelim:</p>
+		<pre><code>sayarakYinele(komut1, ilişkisel komut, komut2)
+	doğru olduğu sürece çalışacak komut</code></pre>
+
+	<p><strong>komut1</strong> geçici değişken oluşturma komutudur. Bir sayı değeri ile ilklendirme yaparız. <strong>komut2</strong> ise her döngü sonunda çalıştırılan komuttur. Aşağıdaki kodları görsel olarak görmek için denemeyi unutmayın. </p>
+
+	<p>Örnek kodumuz da şu şekilde:</p>
+
+<textarea class="deneme">var no = 2
+
+sayarakYinele(var t = 0, t < 3, t = t+1)
+{
+	no = no+1
+	yaz t
+}
+yaz t</textarea>
 
 
-
-		<p></p>
+		<p>Burada süslü parantez var bunlar ne diye soracak olabilirsiniz. Bunları bir sonraki konumuzda işleyeceğiz. Ama mantığını siz yakalınız sanırım...</p>
 
 
 <footer id="footer" style = "margin-top:50px;">
