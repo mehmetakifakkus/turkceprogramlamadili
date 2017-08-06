@@ -223,7 +223,7 @@ değilse
 
 		<p>Programımızın bazen olası kodlar arasında seçim yapmasını isteyebiliriz. Yani yukarıdan aşağı doğru bütün kodların çalışması istediğimiz bir program çalışma düzeni olmayablir. Dolayısıyla <keyword>eğer</keyword> ve <keyword>değilse</keyword> komutları bu noktada aradığımız komutlardır.</p>
 
-		<p>Yine örnekler üzerinden gidelim.</p>
+		<p>Yine örnekler üzerinden gidelim. Hatırlatmak gerekirse; bu kodları kodlama sayfasına kopyala yapıştır yapıp nasıl çalıştığını gözlemleyebiliriz.</p>
 
 		<hr>
 		  <p><strong>Örnek1: </strong>Öğretmeniz bize bir sınav yapsın. Sınavdan önce şöyle bir şey desin: "80 den fazla not alanları ödüllendireceğim ve 10 puan ekstra vereceğim, altında alan her kişiden ise ceza amaçlı 5 puan kıracağım." Kişinin son puan durumunu hesaplayan kodu yazalım.</p>
@@ -240,11 +240,35 @@ yaz puan</textarea>
 		  <p><strong>Örnek2: </strong>Ehliyet kursu yönetiyoruz. Öğrenciler bize ehliyet alabilmek için başvuruyor. Kodumuz ehliyet başvuru sisteminde çalışıyor varsayalım. Kişinin yaş bilgisine göre, "ehliyet alabilirsiniz" ya da "yaşınız ehliyet almaya yeterli değildir" gibi durum mesajlarını yazdırmak istiyoruz.</p>
 
 		<textarea class="deneme">var yas = 19
+
 eğer(yas > 18)
 	yaz "Ehliyet alabilirsiniz"
 değilse
 	yaz "Yaşınız ehliyet almaya yeterli değildir"</textarea>
 
+		<hr>
+		  <p><strong>Örnek3: </strong>3 sayıdan en büyüğünü bulan programı yazalım. İş biraz da karmaşıklaşıyor...</p>
+
+<textarea class="deneme">var num1 = 12
+var num2 = 10
+var num3 = 15
+
+var no = 0
+
+eğer(num1 > no)
+	no = num1
+
+eğer(num2 > no)
+	no = num2
+
+eğer(num3 > no)
+	no = num3
+
+yaz no</textarea>
+
+		<p>Bu 3 sayıyı 3 değişken ile başlatıyoruz. İsimleri hatırlaması ve kullanması kolay olsun diye <variable>num1</variable> gibi bir isim verdik. Diğerleri de bunun ismiyle ilişkili olarak değer aldı. -Unutmayın iyi bir programcı değişken isimlerini anlamlı seçer- Sırasıyla değerlerini veriyoruz.</p>
+
+		<p>Bu kodu kodlama sayfasındaki yere kopyalarak programın nasıl çalıştığına bakalım. Değişkenlerin ilk değerini farklılaştırarak kodun nasıl çalıştığına bakalım. Alternatif çözümler elbette var. Bunlar üzerine düşünelim. </p>
 
 <h2 id="repetitionCommand">4. Döngü Komutları</h2>
 

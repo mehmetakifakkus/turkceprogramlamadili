@@ -72,17 +72,20 @@ time++;
 }
 
    function myEval(line, isLoop){
-       window.eval(line.text);
-       line['#evaluation']++;
-       
+        
        if(line.type == 'logical')
        		drawLine(line, window.eval(line.text), isLoop);
        else if(line.type == 'print')
-	   		drawLine(line, window.eval(line.text));
-	   else
-	   		drawLine(line, window.eval(line.lhs), isLoop);
+	   		//drawLine(line, window.eval(line.text));
+			drawLine(line, line.subtype == 'string'? line.text : window.eval(line.text));
+	   else if(line.type == 'assignment' || line.type == 'declaration')
+	   {
+            window.eval(line.text);
+       		line['#evaluation']++;
+       
+       		drawLine(line, window.eval(line.lhs), isLoop);
+       }
    }
-
 }
 
 

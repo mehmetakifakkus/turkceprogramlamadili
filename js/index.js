@@ -55,7 +55,7 @@ function makeMarker() {
   return marker;
 }
 
-var markedLine, logicals = [];
+var markedLine, markedLines = [], logicals = [];
 function highlightLine(line, type, result) { // type is used for logical,  result is logical true or false
 
   var lineNumber = line.lineNumber;
@@ -83,6 +83,7 @@ function highlightLine(line, type, result) { // type is used for logical,  resul
 	else
   		markedLine = editor.markText({line: lineNumber-1, ch: 0}, {line: lineNumber-1, ch: 50}, {className: "styled-background-normal"});
 
+	markedLines.push(markedLine);
 }
 
 window.highlightLine = highlightLine;
@@ -146,8 +147,11 @@ $.get("grammer.pegjs", function(response) {
 window.parse = function() {
 
 	console.clear();
-	if(markedLine)
-		markedLine.clear();
+
+	for(var i=0; i < markedLines.length; i++) // it removes markes lines
+		markedLines[i].clear();
+
+
 	logicals = [];
 
 	try{
