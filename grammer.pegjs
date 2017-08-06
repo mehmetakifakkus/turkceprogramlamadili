@@ -137,7 +137,7 @@ if_statement
             
     	return [los, lines1];
     }
-    else if(typeof(lines2) != "undefined"){
+    else if(lines2 && typeof(lines2) != "undefined"){
 
         if(lines2.constructor.name == "Array")
          for(var i=0; i < lines2.length; i++)
