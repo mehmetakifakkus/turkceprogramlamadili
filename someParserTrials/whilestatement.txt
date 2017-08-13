@@ -1,0 +1,220 @@
+/*
+ * Simple Iteration Grammar
+ * ==========================
+ * Simple WHILE Statement
+ 
+var flag = true
+var num=2
+var num2 = num+3
+
+num = 4+6
+num = num+2
+num = num+2
+
+while(num < 20)
+{
+   num = num+1
+}
+
+num = num+2
+num = num+2
+print num
+ 
+ */
+ 
+ /*
+
+var flag = true
+var num=2
+var num2 = num+3
+
+num = 4+6
+num = num+2
+num = num+2
+
+while(num < 15)
+   num = num+1
+ 
+ */
+ 
+ 
+ {
+ var time = 1;
+
+function drawLine(line, result){
+	
+  	setTimeout(function(){
+  	if(line.type == 'assignment')
+   		console.log('[assignment] '+ line.lhs +' line '+line.lineNumber +' is getting processed, result is: '+ result); 
+  	else if(line.type == 'declaration')
+ 		console.log('[declaration] '+ line.lhs +' line '+line.lineNumber +' is getting processed, result is: '+ result);
+  	else if(line.type == 'logical')
+ 		console.log('[logical] line '+line.lineNumber +' is getting processed, result is: '+ line.result);
+	else if(line.type == 'print')
+ 		console.log('[print] line '+line.lineNumber +' is getting processed, '+ line.printed); 
+   }, 500 * time)	
+time++;
+}
+}
+
+start
+ = statement*
+
+statement 
+  =	while_statement
+  / item: block_item{
+
+    if(item.type == 'assignment' || item.type == 'declaration'){
+      window.eval(item.text); 
+      item['#evaluation']++;
+    }
+      console.log(item); 
+      drawLine(item, window.eval(item.lhs));
+      
+    return item;
+  } 
+
+while_statement
+ = 'while(' los:logical_statement ')' _ lines:(compound_statement / block_item)
+ {
+ 
+   function myEval(line){
+       window.eval(line.text + ';');
+       line['#evaluation']++;
+       drawLine(line, window.eval(line.lhs));
+   }
+
+	console.log(los)
+	
+	while(window.eval(los.text)){
+   
+      	drawLine(los, window.eval(los.text)); // calculate the current value
+      
+      	if(lines.constructor.name == "Array")
+        	for(var k=0; k < lines.length; k++)
+				myEval(lines[k]);
+       	else
+    	     myEval(lines);
+	}
+      	console.log(window.eval(los.text) + ' '+ los.text);
+	  	drawLine(los, window.eval(los.text)); // calculate the current value
+    	return lines;    
+ }
+ 
+compound_statement
+ = nl _'{' nl _ b:block_item_list '}' _ nl _{
+ 	return b
+ }
+
+block_item_list = (block_item)* 
+
+block_item
+ = declaration
+ / print_statement
+ / expression_statement
+ / logical_statement
+
+declaration
+ = nl _ "var " dec:init_declarator_list {
+	return {'type': 'declaration', '#evaluation': 0, 'text':'var '+dec.lhs+' = ' + dec.rhs, 'lhs':dec.lhs, 'rhs': dec.rhs, 'lineNumber': location().start.line};
+ }
+ /
+ nl _ ass:init_declarator_list  {
+	return {'type': 'assignment', '#evaluation': 0, 'text': ass.lhs+' = '+ass.rhs, 'lhs':ass.lhs, 'rhs': ass.rhs, 'lineNumber': location().start.line};
+ }
+
+init_declarator_list
+ = 	init:init_declarator (',' _ init_declarator)* {return init;}
+
+init_declarator
+	= _ left:name _"="_ exp:expression_statement nl{
+          
+          
+    if( typeof(exp.result) == 'boolean')
+    	return {'lhs': left, 'rhs': exp.result.toString()}; // evaluate it, then return it       
+    else 
+        return {'lhs': left, 'rhs': exp.text};        
+}   
+ 
+print_statement = "print" _ exp:expression_statement _ comment? nl {
+	return {'type':'print', 'printed': exp.result, 'lineNumber': location().start.line}; // evaluate it, then return it       
+}
+
+expression_statement = _ t:term (expression_statement)* _ nl{ // ()* gerek var mi?
+	var temp = eval(t) 
+
+	if(temp.toString() == "[object Object]")
+		return {'type':'expression', '#evaluation': 0, 'text':t, 'result': t, 'lineNumber': location().start.line};
+	else
+ 	 	return {'type':'expression', '#evaluation': 0, 'text':t, 'result': eval(t), 'lineNumber': location().start.line}; // evaluate it, then return it       
+        
+} 
+
+logical_statement = _ f1:factor2 f2:(_ operator _ factor2)* _ nl
+{
+	var text = f1+' ';
+    if(f2[0])
+	    text += f2[0][1] + ' ' + f2[0][3];
+        
+    return {'type':'logical', 'text': text, 'result': eval(text), 'lineNumber': location().start.line}; // evaluate it, then return it       
+}
+
+term = f1:factor f2:(_ ("*" / "+" / "/" / "-") _ factor)* 
+{
+	var text = f1+' ';
+    if(f2[0])
+	    text += f2[0][1] + ' ' + f2[0][3];
+	return text;
+}
+    
+factor = "(" expression_statement ")" 
+	   / name
+       / integer 
+
+factor2 = "(" logical_statement ")" 
+	   / name
+       / integer
+       / "true" / "false"
+
+///// Name = Variable
+
+name = l:letter i:integer {return l+i}
+     / l:letter {return l;} 
+
+letter "letter" 
+  = [a-z]+ {return text()} 
+
+integer "integer"
+  = [0-9]+ { return parseInt(text(), 10); }
+
+_ "whitespace"
+  = [ \t\r]* {return null;}
+  
+nl "newline"
+  = [\n]* {return null;}
+  
+comment 
+  = "//" _ [a-zA-Z0-9 ]* _ nl
+  
+operator
+  = operator_text / operator_symbol
+  
+operator_text
+  = "and"					{ return "&&"; }
+	/ "or"					{ return "||"; }
+	/ "smaller"				{ return "<"; }
+	/ "smaller or equal"	{ return "<="; }
+	/ "greater"	 			{ return ">"; }
+	/ "greater or equal" 	{ return ">="; }
+	/ "equal"				{ return "=="; }
+	/ "not equal"			{ return "!="; }  
+  
+operator_symbol
+  = "&&"					{ return text(); }
+	/ "||"					{ return text(); }
+	/ "<="					{ return text(); }
+	/ "<"					{ return text(); }
+	/ ">="					{ return text(); }
+	/ ">"					{ return text(); }
+	/ "=="					{ return text(); }
+	/ "!="					{ return text(); }

@@ -64,7 +64,7 @@ function drawLine(line, result, isLoop){
  	{
 		console.log('[print] line '+line.lineNumber +' is getting processed, result is: '+ result); 
 		highlightLine(line);
-		insertTextAtCursor(result, line.lineNumber);
+		insertTextAtCursor(result, line.lineNumber); 
 	}
    }, 750 * time)	
 
@@ -229,10 +229,10 @@ init_declarator_list
  = 	init:init_declarator (',' _ init_declarator)* {return init;}
 
 init_declarator
-	= _ left:name _"="_ exp:expression_statement nl{
-                   
-    if( typeof(exp.result) == 'boolean')
-    	return {'lhs': left, 'rhs': exp.result.toString()}; // evaluate it, then return it       
+	= _ left:name _"="_ exp: (dogru / yanlis / expression_statement) nl{
+
+	if( typeof(exp) == 'boolean')
+    	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it       
     else 
         return {'lhs': left, 'rhs': exp.text};        
 }   
@@ -244,9 +244,13 @@ print_statement = _ "yaz" _ exp:(expression_statement / StringLiteral) _ comment
 	return {'type':'print', 'subtype': 'var', 'text': exp.text, 'lineNumber': location().start.line}; // evaluate it, then return it       
 }
 
-expression_statement = _ t:term (expression_statement)* _ nl{ // ()* gerek var mi?
- 	return {'type':'expression', '#evaluation': 0, 'text':t, 'result': eval(t), 'lineNumber': location().end.line}; // evaluate it, then return it        
-} 
+expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* {  	    
+    console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));
+ 	return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+}
+
+Term
+  = head:factor tail:(_ ("*" / "/") _ factor)* 
 
 logical_statement = _ f1:factor2 f2:(_ operator _ factor2)* _ nl
 {
@@ -257,17 +261,7 @@ logical_statement = _ f1:factor2 f2:(_ operator _ factor2)* _ nl
     return {'type':'logical', 'text': text, 'lineNumber': location().end.line, 'start': location().start.column-1, 'end': location().end.column-1}; // evaluate it, then return it       
 }
 
-term = f1:factor f2:(_ ("*" / "+" / "/" / "-") _ factor)* 
-{
-	var text = f1+' ';
-    for(var i=0; i<f2.length; i++)
-	   text += ' ' + f2[i][1] + ' ' + f2[i][3];
-
-	return text;
-}
-    
-factor = "(" expression_statement ")" 
-	   / dogru / yanlis
+factor = "(" expr: expression_statement ")" {return expr;}
 	   / name
        / integer 
 	  
@@ -281,12 +275,12 @@ factor2 = "(" logical_statement ")"
 name = l:letter i:integer {return l+i}
      / l:letter {return l;} 
 
-dogru = 'doğru' {return true}
-yanlis = 'yanlış' {return false}
+dogru = 'doğru' {return true;}
+yanlis = 'yanlış' {return false;}
 
 
 letter "letter" 
-  = [a-zA-Z]+ {return text()} 
+  = [a-zA-Z_]+ {return text()} 
 
 StringLiteral "string"
   = '"' chars:DoubleStringCharacter* '"' {
@@ -321,9 +315,7 @@ CharacterEscapeSequence
   = SingleEscapeCharacter
 
 SingleEscapeCharacter
-  = "'"
-  / '"'
-  / "\\"
+  = "'" / '"'  / "\\"  
   / "b"  { return "\b"; }
   / "f"  { return "\f"; }
   / "n"  { return "\n"; }
@@ -331,7 +323,6 @@ SingleEscapeCharacter
   / "t"  { return "\t"; }
   / "v"  { return "\v"; } 
   
-
 integer "integer"
   = [0-9]+ { return parseInt(text(), 10); }
 
@@ -342,7 +333,7 @@ nl "newline"
   = comment? [\n]* {return null;}
   
 comment 
-  = _ "//" _ [a-zA-Z0-9 ]* _ nl
+   = _ "//" _ [ a-zA-Z0-9|\=|(|)|+|\-|\+|* ]* _ nl {return {type: 'comment', value: text()}; }
   
 operator
   = operator_text / operator_symbol

@@ -1,0 +1,79 @@
+/*
+ * Simple Programming Language Grammar
+ * ==========================
+ * Accepts expressions like a1+a2*4
+ */
+
+statement 
+  = print_statement _ {return text()}
+  / compound_statement 
+  / expression_statement _ 
+//	/ iteration_statement
+
+compound_statement
+ = _'{' _ '}' _
+ / _'{' nl block_item_list _ '}' nl 
+
+block_item_list	
+ = (block_item nl)*
+
+block_item
+ = declaration {return text()}
+   / statement {return text()}
+
+declaration
+ = init_declarator_list 
+ / declaration_specifiers init_declarator_list //{return what[7] +'  ==>  '+ text()}
+ 
+declaration_specifiers
+ = "var" _
+ 
+init_declarator_list
+ = 	init:init_declarator tail:(',' _ init_declarator)*  {return init +'<-->'+ tail}
+	
+init_declarator
+	= left:name _"="_ right:name {
+        
+		if(eval("typeof "+left+" === 'undefined'")){
+            window.eval("var "+left+"="+right);
+        } 
+        else 
+        	eval(left+'='+right);
+            
+        return left+'<=>'+right
+        }
+    / left:name _"="_ right:integer {
+    
+        if(eval("typeof "+left+" === 'undefined'")){ 
+            window.eval("var "+left+"="+right);
+        }
+        else
+        	eval(left+"="+right); 
+
+		return left+'<=>'+right 
+    }
+
+print_statement = "print" _ n:name { eval("console.log("+n+")"); return "print "+n;}
+
+expression_statement = term (expression_statement)* 
+    
+term = factor (_ ("*" / "+" / "/" / "-") _ factor)*
+    
+factor = "(" expression_statement ")" 
+	   / name
+       / integer
+
+name = l:letter i:integer {return l+i}
+     / l:letter {return l;} 
+
+letter "letter" 
+  = [a-z]+ {return text()} 
+
+integer "integer"
+  = [0-9]+ { return parseInt(text(), 10); }
+
+_ "whitespace"
+  = [ \t\r]*
+  
+nl "newline"
+  = [\n]*

@@ -1,0 +1,42 @@
+// Aritmetik işlemleri ayrı ayrı highlight etmek için kullanılabilir
+// 
+// Simple Arithmetics Grammar
+// ==========================
+//
+// Accepts expressions like 
+// "2 * (3 + 4)"
+// "(4 * (3 + 2) - 10 ) - 2"
+//  and computes their value.
+
+Expression
+  = head:Term tail:(_ ("+" / "-") _ Term)* {
+      var res = tail.reduce(function(result, element) {
+        if (element[1] === "+") { return result + element[3]; }
+        if (element[1] === "-") { return result - element[3]; }
+      }, head);
+      
+		console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));      return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it      
+    }
+
+Term
+  = head:Factor tail:(_ ("*" / "/") _ Factor)* {
+      var res = tail.reduce(function(result, element) {
+        if (element[1] === "*") { return result * element[3]; }
+        if (element[1] === "/") { return result / element[3]; } 
+      }, head);
+     
+      if(tail[0]) // check if tail exist
+     	 console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));
+      return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': res, 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+    }
+
+Factor
+  = "(" _ expr:Expression _ ")" { return expr; }
+  / Integer
+
+Integer "integer"
+  = _ [0-9]+ { return parseInt(text(), 10); }
+
+_ "whitespace"
+  = [ \t\n\r]*
+              

@@ -1,0 +1,30 @@
+/*
+
+peg.js parser for basic mathematical operations
+
+*/
+
+start
+  = additive
+
+additive
+  = left:multiplicative _ "+" _ right:additive 
+  { 
+  var i = left*2;
+  return i + right; 
+  }
+  / multiplicative
+
+multiplicative
+  = left:primary _ "*" _ right:multiplicative { return left * right; }
+  / primary
+
+primary
+  = integer
+  / _ "(" _ additive:additive _ ")" _ { return additive; }
+
+integer "integer"
+  = digits:[0-9]+ { return parseInt(digits.join(""), 10); }
+  
+ _ "whitespace"
+ = [ \t\n\r]*

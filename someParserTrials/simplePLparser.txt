@@ -1,0 +1,25 @@
+/*
+ * Simple Programming Language Grammar
+ * ==========================
+ * Accepts expressions like a1+a2*4
+ */
+
+expression = term (expression)* 
+    
+term = factor (_ ("*" / "+" / "/" / "-") _ factor)*
+    
+factor = "(" expression ")" 
+	   / name
+       / integer
+
+name = letter 
+     / letter integer
+
+letter "letter" 
+  = [a-z]+
+
+integer "integer"
+  = [0-9]+ { return parseInt(text(), 10); }
+
+_ "whitespace"
+  = [ \t\n\r]*

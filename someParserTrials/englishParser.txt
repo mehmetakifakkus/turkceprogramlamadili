@@ -1,0 +1,38 @@
+/*
+
+peg.js parser for an english sentence
+
+*/
+
+start
+ = np:NP _ vp:VP _    {return "NP:"+np+ "VP:"+vp}   		    // I + want a morning flight 
+
+NP 
+ = p:Pronoun _  {return "NP1:"+p+ " "}               // I
+ / pn:ProperNoun _	{return "NP2:"+pn+ " "}	        // Los Angeles
+ / det:Determiner _ nom:Nominal _   {return "NP3:"+det+ " " + nom} // a + flight
+ 
+Nominal 
+ = n:Noun _ nom:Nominal   {return "N1:"+n+" "+nom}		// morning + flight
+ / Noun      			    // flights
+ 
+VP
+ = verb:Verb _ np:NP _ pp:PP _ 		{return "VP1."+verb+" "+np+" "+pp}   	// leave + Boston + in the morning
+ / verb:Verb _ np:NP _	{return "VP2. "+verb+" "+np}	// want + a flight
+ / verb:Verb _ pp:PP _		{return "VP3."+verb+" "+pp}	// leaving + on Thursday
+ / verb:Verb {return "VP4."+verb}
+ 
+PP 
+ = prep:Preposition _ np:NP     {return "PP "+prep+ " "+np}      // from + Los Angeles 
+ 
+Noun = "flight" / "breeze" / "trip" / "morning"
+Verb = "is" / "prefer" / "like" / "need" / "want" / "fly" / "leave"
+Adjective = "cheapest" / "non-stop" / "first" / "latest" / "other" / "direct"
+Pronoun = "me" / "I" / "You" / "you" / "it"
+ProperNoun = "Alaska" / "Baltimore" / "Boston" / "Los Angeles" / "Chicago"
+Determiner = "the" / "a" / "an" / "this" / "these" / "that"
+Preposition = "from" / "to" / "on" / "in" / "near"
+Conjunction = "and" / "or" / "but"
+
+_ "whitespace"
+= [ \t\n\r]*

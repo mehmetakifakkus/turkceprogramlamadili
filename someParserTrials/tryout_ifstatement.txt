@@ -1,0 +1,79 @@
+/*
+ * Simple Selection Grammar
+ * ==========================
+ * Simple IF ELSE Statement
+ */
+
+start
+ = statement*
+
+statement 
+  =	if_statement
+  / block_item
+
+if_statement
+  = "if(" _ exp:expression_statement  _ ")" _ c:(compound_statement / (nl block_item) )
+  {
+  	if(exp)
+    	return c;
+    return 'false returned if statement';    
+  }
+
+compound_statement
+ = nl _'{' nl _ b:block_item_list _ nl '}' nl {
+       console.log('program ended');
+       return b
+   }
+
+block_item_list	
+ = bl:(block_item nl)* {return bl.join('');}
+
+block_item
+ = print_statement
+ / expression_statement
+
+print_statement = "print" _ n:name _ comment? nl
+{ return eval(n); }
+
+expression_statement = _ t:term (expression_statement)* nl{
+	var temp = eval(text()) 
+
+	if(temp.toString() == "[object Object]")
+		return t;
+	else
+		return eval(text()); // evaluate it, then return it
+} 
+        
+term = factor (_ ("*" / "+" / "/" / "-" / operator) _ factor)* 
+    
+factor = "(" expression_statement ")" 
+	   / name
+       / integer 
+
+///// Name = Variable
+
+name = l:letter i:integer {return l+i}
+     / l:letter {return l;} 
+
+letter "letter" 
+  = [a-z]+ {return text()} 
+
+integer "integer"
+  = [0-9]+ { return parseInt(text(), 10); }
+
+_ "whitespace"
+  = [ \t\r]*
+  
+nl "newline"
+  = [\n]*
+  
+comment 
+  = "//" _ [a-zA-Z0-9 ]* _ nl
+  
+operator
+  = "&&"					{ return text(); }
+	/ "||"					{ return text(); }
+	/ "<="					{ return text(); }
+	/ ">="					{ return text(); }
+	/ "=="					{ return text(); }
+	/ "!="					{ return text(); }

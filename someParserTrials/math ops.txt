@@ -1,0 +1,60 @@
+
+// Simple Arithmetics Grammar
+// ==========================
+//
+// Accepts expressions like "2 * (3 + 4)" and computes their value.
+
+start = item*
+
+item 
+= declaration
+/ expression_statement
+
+declaration
+ =  _ "var " dec:init_declarator {
+ 	window.eval('var '+dec.lhs+' = ' + dec.rhs);
+	return {'type': 'declaration', '#evaluation': 0, 'text':'var '+dec.lhs+' = ' + dec.rhs, 'lhs':dec.lhs, 'rhs': dec.rhs, 'lineNumber': location().start.line};
+ }
+
+init_declarator
+	= _ left:name _"="_ exp:expression_statement nl{
+                   
+    if( typeof(exp.result) == 'boolean')
+    	return {'lhs': left, 'rhs': exp.result.toString()}; // evaluate it, then return it       
+    else 
+        return {'lhs': left, 'rhs': exp.text};        
+} 
+
+expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* {  
+	console.log(tail);
+
+	console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));
+ return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+}
+
+Term
+  = head:Factor tail:(_ ("*" / "/") _ Factor)* 
+
+Factor
+  = "(" _ expr:expression_statement _ ")" { return expr; }
+  / Integer
+  / name
+
+name = l:letter i:Integer {return l+i}
+     / l:letter {return l;} 
+
+letter "letter" 
+  = [a-zA-Z_]+ {return text()} 
+Integer "integer"
+  = _ [0-9]+ { return parseInt(text(), 10); }
+
+_ "whitespace"
+  = [ \t\n\r]*
+   
+nl "newline"
+  = comment? [\n]* {return null;}
+  
+comment 
+  = _ "//" _ [ a-zA-Z0-9|\=|(|)|+|\-|\+|* ]* _ nl
+ 
+              
