@@ -87,12 +87,23 @@ body {
   font-size: 16px;
   text-align: left;
   position: relative;
-  z-index: 999;
+  z-index: 0;
   height: auto;
 }
 
 .CodeMirror pre {
   padding: 0 8px;
+}
+
+.breakpoints {
+    padding-right: 0.3em;
+ }
+
+.breakpoint { color: #0f2; }
+
+div .CodeMirror-linenumber .CodeMirror-gutter-elt{
+  left:20px;
+  width:21px;
 }
 
 .styled-background-normal {

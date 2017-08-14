@@ -217,7 +217,7 @@ block_item
  / logical_statement
 
 declaration
- =  _ "var " dec:init_declarator_list {
+ =  _ ('var' / 'değişken') _ dec:init_declarator_list {
 	return {'type': 'declaration', '#evaluation': 0, 'text':'var '+dec.lhs+' = ' + dec.rhs, 'lhs':dec.lhs, 'rhs': dec.rhs, 'lineNumber': location().start.line};
  }
  /
@@ -287,7 +287,7 @@ yanlis = 'yanlış' {return false;}
 
 
 letter "letter" 
-  = [a-zA-Z_]+ {return text()} 
+  = [a-zA-Z_|ş|ğ|ç|ö|ü|ı|ü]+ {return text()} 
 
 StringLiteral "string"
   = '"' chars:DoubleStringCharacter* '"' {
