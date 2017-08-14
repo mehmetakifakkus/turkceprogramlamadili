@@ -166,6 +166,9 @@ window.parse = function() {
   }catch(err){
   		//document.getElementById("result").textContent = err.toString();
 	  	console.log(err)
+
+	  console.log(err.expected)
+		console.log(err.found)
   }
 }
 

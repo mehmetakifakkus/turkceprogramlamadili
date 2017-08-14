@@ -3,6 +3,8 @@
 // Accepts expressions like 
 // Line 1, column 23: Expected ")", "*", "+", "-", or "/" but "p" found.
 
+// ReferenceError: a is not defined
+
 start = errorLineExpected
 
 errorLineExpected 

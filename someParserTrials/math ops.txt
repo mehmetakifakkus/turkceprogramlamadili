@@ -2,7 +2,11 @@
 // Simple Arithmetics Grammar
 // ==========================
 //
-// Accepts expressions like "2 * (3 + 4)" and computes their value.
+// Accepts expressions like
+// var hehe = 3 + 5
+// var dd  = (hehe + 1) * 3 - 2
+// (hehe + 1) * 3 - 2
+// and computes their value.
 
 start = item*
 
@@ -26,10 +30,9 @@ init_declarator
 } 
 
 expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* {  
-	console.log(tail);
 
 	console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));
- return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+ 	return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
 Term
@@ -37,7 +40,8 @@ Term
 
 Factor
   = "(" _ expr:expression_statement _ ")" { return expr; }
-  / Integer
+  / f:Float {console.log(f); return f.text;}
+  / i:Integer {console.log(i); return i.text;}
   / name
 
 name = l:letter i:Integer {return l+i}
@@ -45,8 +49,13 @@ name = l:letter i:Integer {return l+i}
 
 letter "letter" 
   = [a-zA-Z_]+ {return text()} 
+  
+
+Float "float" 
+  = _ [0-9]+ '.' [0-9]* { return {type: 'float', text: text()}; }
+
 Integer "integer"
-  = _ [0-9]+ { return parseInt(text(), 10); }
+  = _ [0-9]+ { return {type: 'integer', text: text()}; }
 
 _ "whitespace"
   = [ \t\n\r]*

@@ -250,7 +250,14 @@ expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* {
 }
 
 Term
-  = head:factor tail:(_ ("*" / "/") _ factor)* 
+  = head:Factor tail:(_ ("*" / "/") _ Factor)* 
+
+Factor
+  = "(" _ expr:expression_statement _ ")" { return expr; }
+  / f:Float { return f.text;}
+  / i:Integer { return i.text;}
+  / name
+  
 
 logical_statement = _ f1:factor2 f2:(_ operator _ factor2)* _ nl
 {
@@ -323,6 +330,12 @@ SingleEscapeCharacter
   / "t"  { return "\t"; }
   / "v"  { return "\v"; } 
   
+Float "float" 
+  = _ [0-9]+ '.' [0-9]* { return {type: 'float', text: text()}; }
+
+Integer "integer"
+  = _ [0-9]+ { return {type: 'integer', text: text()}; }
+    
 integer "integer"
   = [0-9]+ { return parseInt(text(), 10); }
 
