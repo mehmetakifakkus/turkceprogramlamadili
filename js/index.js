@@ -1,6 +1,6 @@
 var editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
 //  mode: "javascript",
-  mode: "simplemode",
+	mode: "turkish",
   extraKeys: {"Ctrl-Space": "autocomplete"},
   styleActiveLine: true,
   lineNumbers: true,
@@ -9,6 +9,8 @@ var editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
   theme: 'eclipse',
   gutters: ["CodeMirror-linenumbers", "breakpoints"]
 });
+
+
 
 var evaluate = CodeMirror.fromTextArea(document.getElementById('evaluate'), {
   mode: "simplemode",
@@ -40,11 +42,19 @@ setEditorArea();
 
 editor.on('cursorActivity', function(){
    	var start_cursor = editor.getCursor();  //I need to get the cursor position
-   	console.log(start_cursor);  //Cursor position
+   	//console.log(start_cursor);  //Cursor position
 
 	var cursorLine = start_cursor.line;
 	var cursorCh = start_cursor.ch;
 	setEditorArea();
+
+});
+
+editor.on("keyup", function (cm, event) {
+	/*Enter - do not open autocomplete list just after item has been selected in it*/
+	if (!editor.state.completionActive &&  event.keyCode != 13 && event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40 && event.keyCode != 27 && event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 9) {
+            CodeMirror.commands.autocomplete(editor, null, {completeSingle: false});
+     }
 });
 
 
@@ -181,5 +191,5 @@ window.kaydet = function(){
 	saveAs(blob, "merhaba dünya.txt");
 }
 
-
+console.log(exampleCodes)
 

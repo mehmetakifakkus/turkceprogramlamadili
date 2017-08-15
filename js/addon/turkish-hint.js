@@ -8,14 +8,14 @@
     define(["../../lib/codemirror"], mod);
   else // Plain browser env
     mod(CodeMirror);
-})(function(CodeMirror) {
+})	(function(CodeMirror) {
   var Pos = CodeMirror.Pos;
 
-  function forEach(arr, f) {
+ function forEach(arr, f) {
     for (var i = 0, e = arr.length; i < e; ++i) f(arr[i]);
   }
 
-  function arrayContains(arr, item) {
+ function arrayContains(arr, item) {
     if (!Array.prototype.indexOf) {
       var i = arr.length;
       while (i--) {
@@ -28,16 +28,15 @@
     return arr.indexOf(item) != -1;
   }
 
-  function scriptHint(editor, keywords, getToken, options) {
+function scriptHint(editor, keywords, getToken, options) {
     // Find the token at the cursor
     var cur = editor.getCursor(), token = getToken(editor, cur);
-    if (/\b(?:string|comment)\b/.test(token.type)) return;
+    if (/\b(?:string|comment|number)\b/.test(token.type)) return;
     token.state = CodeMirror.innerMode(editor.getMode(), token.state).state;
 
     // If it's not a 'word-style' token, ignore the token.
     if (!/^[\w$_]*$/.test(token.string)) {
-      token = {start: cur.ch, end: cur.ch, string: "", state: token.state,
-               type: token.string == "." ? "property" : null};
+      token = {start: cur.ch, end: cur.ch, string: "", state: token.state, type: token.string == "." ? "property" : null};
     } else if (token.end > cur.ch) {
       token.end = cur.ch;
       token.string = token.string.slice(0, cur.ch - token.start);
@@ -45,6 +44,7 @@
 
     var tprop = token;
     // If it is a property, find out what it is a property of.
+
     while (tprop.type == "property") {
       tprop = getToken(editor, Pos(cur.line, tprop.start));
       if (tprop.string != ".") return;
@@ -53,52 +53,71 @@
       context.push(tprop);
     }
 
-    return {list: getCompletions(token, context, keywords, options),
-            from: Pos(cur.line, token.start),
-            to: Pos(cur.line, token.end)};
-  }
 
-  function javascriptHint(editor, options) {
+	///////////////////////////////////////////       here is the local variables    //////////////////////////////////////
+
+	var WORD = /[a-z|ç|ş|ğ|ç|ö|ı|ü$]+/, RANGE = 500;
+	var word = options && options.word || WORD;
+    var range = options && options.range || RANGE;
+	var curLine = editor.getLine(cur.line);
+    var end = cur.ch, start = end;
+    while (start && word.test(curLine.charAt(start - 1))) --start;
+    var curWord = start != end && curLine.slice(start, end);
+
+    var list2 = options && options.list || [], seen = {};
+    var re = new RegExp(word.source, "g");
+    for (var dir = -1; dir <= 1; dir += 2) {
+      var line = cur.line, endLine = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
+      for (; line != endLine; line += dir) {
+        var text = editor.getLine(line), m;
+        while (m = re.exec(text)) {
+          if (line == cur.line && m[0] === curWord) continue;
+          if ((!curWord || m[0].lastIndexOf(curWord, 0) == 0) && !Object.prototype.hasOwnProperty.call(seen, m[0])) {
+            seen[m[0]] = true;
+            list2.push(m[0]);
+          }
+        }
+      }
+    }
+
+	//////////////////////////////////////////    here is the predefined keywords    //////////////////////////////////////
+
+	var list1 = getCompletions(token, context, keywords, options)
+
+	///////////////////////////////////////////////////    merge them     /////////////////////////////////////////////////
+
+
+	for(var i=0; i < list2.length; i++) //  add list2 to the list1
+		if(list1.indexOf(list2[i]) == -1 )
+			list1.push(list2[i]);
+
+    return {list: list1, from: Pos(cur.line, token.start), to: Pos(cur.line, token.end)};
+ }
+
+
+ function javascriptHint(editor, options) {
     return scriptHint(editor, javascriptKeywords,
                       function (e, cur) {return e.getTokenAt(cur);},
                       options);
   };
-  CodeMirror.registerHelper("hint", "javascript", javascriptHint);
 
-  function getCoffeeScriptToken(editor, cur) {
-  // This getToken, it is for coffeescript, imitates the behavior of
-  // getTokenAt method in javascript.js, that is, returning "property"
-  // type and treat "." as indepenent token.
-    var token = editor.getTokenAt(cur);
-    if (cur.ch == token.start + 1 && token.string.charAt(0) == '.') {
-      token.end = token.start;
-      token.string = '.';
-      token.type = "property";
-    }
-    else if (/^\.[\w$_]*$/.test(token.string)) {
-      token.type = "property";
-      token.start++;
-      token.string = token.string.replace(/\./, '');
-    }
-    return token;
-  }
 
-  function coffeescriptHint(editor, options) {
-    return scriptHint(editor, coffeescriptKeywords, getCoffeeScriptToken, options);
-  }
-  CodeMirror.registerHelper("hint", "coffeescript", coffeescriptHint);
+CodeMirror.registerHelper("hint", "turkish", javascriptHint);
+
 
   var stringProps = ("charAt charCodeAt indexOf lastIndexOf substring substr slice trim trimLeft trimRight " +
                      "toUpperCase toLowerCase split concat match replace search").split(" ");
+
   var arrayProps = ("length concat join splice push pop shift unshift slice reverse sort indexOf " +
                     "lastIndexOf every some filter forEach map reduce reduceRight ").split(" ");
-  var funcProps = "prototype apply call bind".split(" ");
-  var javascriptKeywords = ("break case catch continue debugger default delete do else false finally for function " +
-                  "if in instanceof new null return switch throw true try typeof var void while with").split(" ");
-  var coffeescriptKeywords = ("and break catch class continue delete do else extends false finally for " +
-                  "if in instanceof isnt new no not null of off on or return switch then throw true try typeof until void while with yes").split(" ");
 
-  function forAllProps(obj, callback) {
+  var funcProps = "prototype apply call bind".split(" ");
+
+  var javascriptKeywords = ("değişken eğer değilse yinele sayarakYinele yordam yaz terket devamet yakala sil doğru yanlış" +
+						   " ve veya eşit eşitdeğil küçük küçükeşit büyük büyükeşit").split(" ");
+
+
+function forAllProps(obj, callback) {
     if (!Object.getOwnPropertyNames || !Object.getPrototypeOf) {
       for (var name in obj) callback(name)
     } else {
@@ -107,15 +126,31 @@
     }
   }
 
-  function getCompletions(token, context, keywords, options) {
+function getCompletions(token, context, keywords, options) {
+
     var found = [], start = token.string, global = options && options.globalScope || window;
+
     function maybeAdd(str) {
       if (str.lastIndexOf(start, 0) == 0 && !arrayContains(found, str)) found.push(str);
     }
+
     function gatherCompletions(obj) {
-      if (typeof obj == "string") forEach(stringProps, maybeAdd);
-      else if (obj instanceof Array) forEach(arrayProps, maybeAdd);
-      else if (obj instanceof Function) forEach(funcProps, maybeAdd);
+
+		console.log(obj)
+		console.log(typeof(obj))
+
+      if (typeof obj == "string"){
+		  forEach(stringProps, maybeAdd);
+		  console.log('string')
+	  }
+      else if (obj instanceof Array){
+		  forEach(arrayProps, maybeAdd);
+  		  console.log('array')
+	  }
+      else if (obj instanceof Function){
+		  forEach(funcProps, maybeAdd);
+		  console.log('function')
+	  }
       forAllProps(obj, maybeAdd)
     }
 
@@ -145,12 +180,16 @@
     } else {
       // If not, just look in the global object and any local scope
       // (reading into JS mode internals to get at the local and global variables)
-      for (var v = token.state.localVars; v; v = v.next) maybeAdd(v.name);
-      for (var v = token.state.globalVars; v; v = v.next) maybeAdd(v.name);
+      for (var v = token.state.localVars; v; v = v.next)  			maybeAdd(v.name);
+      for (var v = token.state.globalVars; v; v = v.next)   		maybeAdd(v.name);
       if (!options || options.useGlobalScope !== false)
-        gatherCompletions(global);
-      forEach(keywords, maybeAdd);
+        ;//gatherCompletions(global);
+
+		forEach(keywords, maybeAdd);
     }
     return found;
   }
+
+
+
 });

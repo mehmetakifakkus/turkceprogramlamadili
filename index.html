@@ -34,7 +34,7 @@
 </nav>
 
 <div id="mainContainer" class="container">
-	<div id="column-left" class="column">
+	<div id="column-left" class="column-left">
 		<div class="form-group">
 			<h3> Kodu buraya yazın </h3>
 
@@ -62,7 +62,7 @@ sayarakYinele(var t=0, t < 3, t = t+1)
 yaz t
 -->
 
-<textarea id="codemirror">var no = 3
+<textarea id="codemirror">değişken no = 3
 
 eğer(no küçükeşit 3) // sembol de olur
 	no = no + 3
@@ -77,7 +77,7 @@ yaz no</textarea>
 		</div>
 	</div>
 
-	<div id="column-right" class="column">
+	<div id="column-right" class="column-right">
 		<div class="form-group">
 			<h3> Çıktılar </h3>
 			<textarea id="evaluate"></textarea>
@@ -104,7 +104,7 @@ yaz no</textarea>
 
 </script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.28.0/codemirror.js'></script>
 <link rel="stylesheet" href="css/show-hint.css">
 
 
@@ -115,12 +115,19 @@ yaz no</textarea>
 <script src='js/addon/foldgutter.js'></script>
 
 <script src='js/addon/show-hint.js'></script>
-<!--<script src='js/addon/javascript-hint.js'></script>-->
-<script src='js/addon/anyword-hint.js'></script>
 
-<script src='js/mode/simple.js'></script>
+<script src="js/mode/turkish.js"></script>
+<script src='js/addon/turkish-hint.js'></script>
 
-<script src="js/custom-mode.js"></script>
+<!--<script src='js/mode/javascript.js'></script>	-->
+<!--<script src='js/addon/javascript-hint.js'></script>	-->
+
+<!--<script src='js/addon/anyword-hint.js'></script>-->
+
+<script src="js/addon/simple.js"></script>
+<script src="js/mode/custom-mode.js"></script>
+
+<script src="js/examples.js"></script>
 <script src="js/index.js"></script>
 
 

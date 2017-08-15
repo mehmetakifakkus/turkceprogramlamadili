@@ -173,19 +173,18 @@ while_statement
 } 
  
 for_statement
- = 'sayarakYinele(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ 
+ = 'sayarakYinele(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ nl
  	lines:(compound_statement / block_item) _ nl
  {
      console.log({'dec1': dec1, 'los': los, 'dec2':dec2})
+
 
 	window.eval(dec1.text);	 // initialization part
 		
 	while(window.eval(los.text)){
    
       	myEval(los);  // calculate the current value
-		
-        //drawLine(los, window.eval(los.text)); // calculate the current value
-      	
+		      	
 		if(lines.constructor.name == "Array")
         	for(var k=0; k < lines.length; k++)
 				myEval(lines[k], true);
@@ -196,12 +195,8 @@ for_statement
 	}
 	myEval(los);  // calculate the value after loop
 	
-	//        drawLine(los, window.eval(los.text)); // calculate the current value
-
-	
     return lines; 
  }
- 
  
 compound_statement
  = nl _'{' nl _ b:block_item_list '}' _ nl _{
@@ -245,8 +240,9 @@ print_statement = _ "yaz" _ exp:(expression_statement / StringLiteral) _ comment
 }
 
 expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* {  	    
-    console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));
- 	return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+    // console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));
+ 	// return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
 Term

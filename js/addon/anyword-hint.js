@@ -14,6 +14,8 @@
 //  var WORD = /[\w$]+/, RANGE = 500;
   var WORD = /[a-z|ç|ş|ğ|ç|ö|ı|ü$]+/, RANGE = 500;
 
+
+
   CodeMirror.registerHelper("hint", "anyword", function(editor, options) {
     var word = options && options.word || WORD;
     var range = options && options.range || RANGE;
@@ -37,6 +39,10 @@
         }
       }
     }
+
+	console.log(list)
     return {list: list, from: CodeMirror.Pos(cur.line, start), to: CodeMirror.Pos(cur.line, end)};
-  });
+ });
+
 });
+

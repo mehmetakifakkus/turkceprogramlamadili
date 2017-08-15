@@ -122,9 +122,9 @@ div .CodeMirror-linenumber .CodeMirror-gutter-elt{
   color: #000;
 }
 
-div.column {
+div.column-left {
   float: left;
-  width: 48%;
+  width: 62%;
   padding: 0px 5px 5px 0px;
   margin: 0px 15px 10px 0px;
   border: 0px solid #d8d8d8;
@@ -132,6 +132,19 @@ div.column {
   min-height: 300px;
   height: 450px;
 }
+
+
+div.column-right {
+  float: left;
+  width: 34%;
+  padding: 0px 5px 5px 0px;
+  margin: 0px 15px 10px 0px;
+  border: 0px solid #d8d8d8;
+  border-radius: 5px;
+  min-height: 300px;
+  height: 450px;
+}
+
 
 div.title {
   padding: 0.4em 16px;

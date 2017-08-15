@@ -114,9 +114,9 @@
 	</div>
 
 
-<textarea class="deneme">var elma = 2
-var armut = 1
-var muz = 3
+<textarea class="deneme">değişken elma = 2
+değişken armut = 1
+değişken muz = 3
 
 yaz elma + armut + muz</textarea>
 
@@ -137,14 +137,14 @@ yaz elma + armut + muz</textarea>
 		  <img src="images/assignment.png" style="border-radius: 25px; margin:0px 0px 20px 20px;" alt="Matematik Operasyonlari" width="340" height="240">
 	</div>
 
-		  <pre><code>var değişken = değer </code></pre>
+		  <pre><code>değişken değişken = değer </code></pre>
 
 		  <p>Bu ifade tarzı biraz kafa karıştırabilir. Matematiksel eşitlik (=) anlamına gelen atama işlemi programlamada sağdaki al, bunu solda gördüğün ifadenin (değişkenin) içine koy demektir. </p>
 
 		  <p>Gelin işleri biraz daha karmaşık hale getirelim. Örneklerle devam ediyoruz.</p>
-<textarea class="deneme">var a = 5
-var b = a + 3
-var c = a - b
+<textarea class="deneme">değişken a = 5
+değişken b = a + 3
+değişken c = a - b
 
 yaz c</textarea>
 
@@ -168,10 +168,10 @@ yaz c</textarea>
 	  <br>
 		  <p><strong>Örnek1: </strong> Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bulalım.</p>
 
-<textarea class="deneme">var dolarKuru = 3.45
-var saatFiyati = 60
-var telefonFiyati = 300
-var toplam = saatFiyati * dolarKuru + telefonFiyati * dolarKuru
+<textarea class="deneme">değişken dolarKuru = 3.45
+değişken saatFiyati = 60
+değişken telefonFiyati = 300
+değişken toplam = saatFiyati * dolarKuru + telefonFiyati * dolarKuru
 
 yaz toplam</textarea>
 
@@ -182,9 +182,9 @@ yaz toplam</textarea>
 		  <hr>
 		  <p><strong>Örnek2: </strong>Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım. </p>
 
-<textarea class="deneme">var toplamYol = 236
-var toplamTutar = 75
-var fiyat = toplamTutar / toplamYol
+<textarea class="deneme">değişken toplamYol = 236
+değişken toplamTutar = 75
+değişken fiyat = toplamTutar / toplamYol
 
 yaz fiyat</textarea>
 
@@ -205,7 +205,7 @@ yaz fiyat</textarea>
 
 
 
-<textarea class="deneme">var no = 21
+<textarea class="deneme">değişken no = 21
 eğer(no > 10) // burası büyüklüğü kontrol eder
 	no = no + 3
 değilse
@@ -252,7 +252,7 @@ değilse
 		<hr>
 		  <p><strong>Örnek1: </strong>Öğretmeniz bize bir sınav yapsın. Sınavdan önce şöyle bir şey desin: "80 den fazla not alanları ödüllendireceğim ve 10 puan ekstra vereceğim, altında alan her kişiden ise ceza amaçlı 5 puan kıracağım." Kişinin son puan durumunu hesaplayan kodu yazalım.</p>
 
-		<textarea class="deneme">var puan = 75
+		<textarea class="deneme">değişken puan = 75
 eğer(puan > 80)
 	puan = puan + 10
 değilse
@@ -263,9 +263,9 @@ yaz puan</textarea>
 		<hr>
 		  <p><strong>Örnek2: </strong>Ehliyet kursu yönetiyoruz. Öğrenciler bize ehliyet alabilmek için başvuruyor. Kodumuz ehliyet başvuru sisteminde çalışıyor varsayalım. Kişinin yaş bilgisine göre, "ehliyet alabilirsiniz" ya da "yaşınız ehliyet almaya yeterli değildir" gibi durum mesajlarını yazdırmak istiyoruz.</p>
 
-		<textarea class="deneme">var yas = 19
+		<textarea class="deneme">değişken yaş = 19
 
-eğer(yas > 18)
+eğer(yaş > 18)
 	yaz "Ehliyet alabilirsiniz"
 değilse
 	yaz "Yaşınız ehliyet almaya yeterli değildir"</textarea>
@@ -273,11 +273,11 @@ değilse
 		<hr>
 		  <p><strong>Örnek3: </strong>3 sayıdan en büyüğünü bulan programı yazalım. İş biraz da karmaşıklaşıyor...</p>
 
-<textarea class="deneme">var num1 = 12
-var num2 = 10
-var num3 = 15
+<textarea class="deneme">değişken num1 = 12
+değişken num2 = 10
+değişken num3 = 15
 
-var no = 0
+değişken no = 0
 
 eğer(num1 > no)
 	no = num1
@@ -308,7 +308,7 @@ yaz no</textarea>
 		<p><strong>Uyarı: </strong>Unutmayalım ki; döngümüz mutlaka sonlanmalıdır. Sonlanmayan döngü istenmeyen bir durumdur.</p>
 
 		<p>Bu kodları Kodlama Sayfasına yapıştırıp deneyebiliriz. Kod görselleştirici kodları görsel hale getirip çalışma mantığının daha iyi anlaşılmasını sağlayacaktır.</p>
-<textarea class="deneme">var no = 2
+<textarea class="deneme">değişken no = 2
 
 yinele(no < 10)
 	no = no + 1
@@ -328,9 +328,9 @@ yaz no</textarea>
 
 	<p>Örnek kodumuz da şu şekilde:</p>
 
-<textarea class="deneme">var no = 2
+<textarea class="deneme">değişken no = 2
 
-sayarakYinele(var t = 0, t < 3, t = t+1)
+sayarakYinele(değişken t = 0, t < 3, t = t+1)
 {
 	no = no + 1
 	yaz t
@@ -362,8 +362,8 @@ yaz t</textarea>
 </script>
 
 
-<script src='js/mode/simple.js'></script>
-<script src="js/custom-mode.js"></script>
+<script src='js/addon/simple.js'></script>
+<script src="js/mode/custom-mode.js"></script>
 
 <script type="text/javascript">
 function qsa(sel) {
