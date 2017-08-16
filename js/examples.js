@@ -29,6 +29,6 @@ exampleCodes  = [
 	{
       "name": "3 sayıdan en büyüğünü bulalım",
       "description": 'Birbirlerine kıyasla başlangış değerlerini bilmediğimiz 3 sayı arasından en büyüğünü bulan programı geliştirelim.',
-	  "code": "değişken num1 = 12\ndeğişken num2 = 10\n değişken num3 = 15\n\ndeğişken no = 0\n\neğer(num1 > no)\n\n	no = num1\neğer(num2 > no)\n\n	no = num2\neğer(num3 > no)\n\n	no = num3\n\nyaz no"
+	  "code": "değişken num1 = 12\ndeğişken num2 = 10\ndeğişken num3 = 15\n\ndeğişken no = 0\n\neğer(num1 > no)\n	no = num1\n\neğer(num2 > no)\n	no = num2\n\neğer(num3 > no)\n	no = num3\n\nyaz no"
     }
 ];
