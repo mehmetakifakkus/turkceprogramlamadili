@@ -3,13 +3,92 @@ body {
   padding: 40px;
 }
 
-.container {
+div.mycontainer {
   padding: 20px 20px 10px 30px;
   background-color: #fff;
   border-radius: 8px;
-  max-width: 1000px;
-  min-height: 400px;
+
+	width: 75%;
+	margin: auto;
+	height: auto;
+
+  	margin-left: 12.5%;
+
+
+
+  max-width: 1100px;
+  min-height: 200px;
 }
+
+.subcontainer {
+  width: 75%;
+
+  margin-top: 5px;
+  margin-bottom: 15px;
+
+  padding: 0px 5px 0px 5px;
+
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 1100px;
+  min-height: 50px;
+  height: auto;
+}
+
+.denemecontainer {
+	display: block;
+	position: relative;
+	overflow: auto;
+	padding-top: 0px;
+	padding-bottom: 5px;
+	width: 76.5%;
+
+    max-width: 1100px;
+
+  	margin-left: 12.5%;
+/*	margin-right: auto;*/
+}
+
+.deneme-left {
+	display: block;
+	position: relative;
+	float:left;
+
+	margin-right: 1%;
+	padding-left: 0px;
+
+	width: 62%;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.deneme-right{
+	display: block;
+	position: relative;
+	float:left;
+
+	padding-left: 0px;
+
+	width: 35%;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+
+div.column {
+  float: left;
+  width: 100%;
+
+/*  margin: 0px 15px 10px 0px;*/
+  border: 0px solid #d8d8d8;
+/*  height: auto;*/
+
+  padding: 10px 0px 10px 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 1000px;
+}
+
 
 .heading {
   text-align: center;
@@ -40,8 +119,8 @@ body {
   background-color: #5c4084;
   border-color: #5c4084;
 /*  width: 60px;*/
-  font-size: 20px;
-  height: 45px;
+  font-size: 16px;
+  height: 34px;
   color: white;
   outline: none;
 }
@@ -82,13 +161,14 @@ body {
 }
 
 .CodeMirror {
-  padding: 12px 0px;
-  padding-left: 12px;
+  padding: 16px 0px;
+  padding-left: 2px;
   font-size: 16px;
   text-align: left;
   position: relative;
   z-index: 0;
   height: auto;
+  border-radius: 8px;
 }
 
 .CodeMirror pre {
@@ -120,29 +200,6 @@ div .CodeMirror-linenumber .CodeMirror-gutter-elt{
 .styled-background-logical-false {
   background-color: #ff5850;
   color: #000;
-}
-
-div.column-left {
-  float: left;
-  width: 62%;
-  padding: 0px 5px 5px 0px;
-  margin: 0px 15px 10px 0px;
-  border: 0px solid #d8d8d8;
-  border-radius: 5px;
-  min-height: 300px;
-  height: 450px;
-}
-
-
-div.column-right {
-  float: left;
-  width: 34%;
-  padding: 0px 5px 5px 0px;
-  margin: 0px 15px 10px 0px;
-  border: 0px solid #d8d8d8;
-  border-radius: 5px;
-  min-height: 300px;
-  height: 450px;
 }
 
 

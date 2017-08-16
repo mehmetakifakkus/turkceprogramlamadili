@@ -9,8 +9,9 @@
 
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 <!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>-->
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.css'>
-<link href="css/eclipse.css" rel="stylesheet">
+<link rel='stylesheet prefetch' href='css/codemirror.css'>
+
+	<link href="css/eclipse.css" rel="stylesheet">
 
 <link rel="shortcut icon" href="css/tr.ico">
 <link rel="stylesheet" href="css/style.css">
@@ -25,7 +26,7 @@
   <h4>Yeni başlayanlar için kolay, pratik programlama öğrenme aracı</h4>
 </div>
 
-  <nav id="menu" style="width: 74%; margin-left: 13%; margin-top: 40px; margin-bottom: 20px;">
+  <nav id="menu" style="width: 75%; margin-left: 12.5%; margin-right: 12%; margin-top: 40px; margin-bottom: 40px; padding: 10px">
 <!--	<a href="http://turkceprogramlamadili.org">Ana Sayfa</a>-->
 
 	  <a class="current" href="">Kodlama Sayfası</a>
@@ -33,36 +34,22 @@
 	  <a href="hakkinda.html">Hakkında</a>
 </nav>
 
-<div id="mainContainer" class="container">
-	<div id="column-left" class="column-left">
-		<div class="form-group">
-			<h3> Kodu buraya yazın </h3>
 
-			<!--
-var bayrak = yanlış
-var no = 2
+<div class="denemecontainer" style="margin-bottom:0px">
+	<div class="deneme-left" >
+		<h3 id = "code-description" style="margin:8px 0px 8px 20px;"> Kodu buraya yazın </h3>
+	</div>
 
-eğer(no > 1)
-{
-	no = no + 3
-}
-değilse
-	no = no + 1
+	<div class="deneme-right">
+		<h3 style="margin:8px 0px 8px 20px;"> Değişken değerleri </h3>
+	</div>
+</div>
 
-yinele(no < 10)
-	no = no + 1
 
-yaz no
+<div class="denemecontainer" style="margin-top:4px">
 
-sayarakYinele(var t=0, t < 3, t = t+1)
-{
-	no = no+1
-	yaz t
-}
-yaz t
--->
-
-<textarea id="codemirror">değişken no = 3
+	<div id="column-left" class="deneme-left">
+		<textarea id="code">değişken no = 3
 
 eğer(no küçükeşit 3) // sembol de olur
 	no = no + 3
@@ -74,24 +61,34 @@ eğer(no > 5)
 
 yaz no</textarea>
 
-		</div>
 	</div>
 
-	<div id="column-right" class="column-right">
-		<div class="form-group">
-			<h3> Çıktılar </h3>
-			<textarea id="evaluate"></textarea>
-		</div>
+	<div id="column-right" class="deneme-right">
+		<textarea id="evaluate"></textarea>
 	</div>
-<br>
-	<button type="button" onclick="parse()" style="position:relative" class="btn btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Çalıştır</button>
-
-	<button type="button" class="btn btn-primary" style="float:right; margin-left:20px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span> Kaydet</button>
-
-	<button type="button" class="btn btn-lg btn-danger" style="float:right; margin-left:30px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span> Temizle</button>
-<h4><div id = "result"></div> </h4>
 
 </div>
+
+
+<div class="container subcontainer">
+<div class="column">
+<button type="button" onclick="parse()" style="position:relative" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Çalıştır</button>
+
+	<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:20px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span> Kaydet</button>
+
+	<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:30px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span> Temizle</button>
+</div>
+</div>
+
+
+<div class="container subcontainer" style = "padding: 10px 40px 20px 30px; margin-top: 50px;">
+	<h2 style="margin: 0em; padding-top:10px"> Kod örnekleri </h2>
+</div>
+
+<div class="container subcontainer" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 30px;  font-size: 115%;">
+		<div id="main-content" class="column">
+		</div>
+	</div>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

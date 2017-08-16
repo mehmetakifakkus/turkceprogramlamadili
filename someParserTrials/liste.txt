@@ -1,0 +1,75 @@
+/*
+* Can recognize languages like this:
+  
+  değişken akif = {1.1,2,3}
+  akif[2]
+*/
+
+start = statementList
+
+statementList = statement*
+
+statement = createArray / arrayAccess
+
+createArray = list:arrayDefinition nl {
+	return list
+    
+    array = []
+    for(var i=0; i < list.length; i++)
+		if(list[i].type == 'integer')
+			array.push(parseInt(list[i].text))
+        else    
+	        array.push(parseFloat(list[i].text))
+            
+    return array;        
+}
+
+arrayAccess 
+ = n:name '[' int:Integer ']' nl {
+ 	return window.eval(n + '['+ (parseInt(int.text)-1) + ']')
+ }
+
+
+arrayDefinition = 'değişken' _ n:name _ '=' _ '{' _ list: number_list _'}' 
+{
+	var first = list[0];
+    var second = list[1];
+
+	for(var i=0; i < second.length; i++) // make the returned thing flat, accumulate on first
+    	first.push(second[i][1]);
+      
+	var str = 'var ' +  n + ' = ['
+      
+	if(first[0] != undefined) str += first[0].text
+      
+	for(var i=1; i < first.length; i++)		
+		str += ', ' + first[i].text;
+           
+	str = str + ']'
+      
+	console.log(str);
+	window.eval(str);
+     
+	return {'name': n, 'content': first};
+}
+
+number_list = (Float / Integer )* ( ',' (Float / Integer))*
+
+name = l:letter i:Integer {return l+i}
+     / l:letter {return l;} 
+
+letter "letter" 
+  = [a-zA-Z_|ş|ğ|ç|ö|ü|ı|ü]+ {return text()} 
+
+Integer "integer"
+  = _ [0-9]+ { return {type: 'integer', text: text()}; }
+
+Float "float" 
+  = _ [0-9]* '.' [0-9]* { return {type: 'float', text: text()}; }
+
+_ "whitespace"
+  = [ \t\r]* {return null;} 
+  
+nl "newline"
+  = [\n]* {return null;}
+   

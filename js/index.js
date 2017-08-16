@@ -1,4 +1,4 @@
-var editor = CodeMirror.fromTextArea(document.getElementById('codemirror'), {
+var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
 //  mode: "javascript",
 	mode: "turkish",
   extraKeys: {"Ctrl-Space": "autocomplete"},
@@ -27,12 +27,12 @@ editor.on("gutterClick", function(cm, n) {
 function setEditorArea(){
 	editor.focus();
 
-	document.getElementById('mainContainer').style.height = 171 + editor.lineCount() * 24 + 'px';
-	document.getElementById('column-left').style.height = 76 + editor.lineCount() * 24 + 'px';
+//	document.getElementById('mainContainer').style.height = 130 + editor.lineCount() * 24 + 'px';
+	document.getElementById('column-left').style.height = 24 + editor.lineCount() * 24 + 'px';
 
 	$( "column-right" ).ready(function(){
 		evaluate.setValue('');
-		document.getElementById('column-right').style.height = 76 + editor.lineCount() * 24 + 'px';
+		document.getElementById('column-right').style.height = 24 + editor.lineCount() * 24 + 'px';
 	});
 
 	var len = editor.lineCount();
@@ -191,5 +191,19 @@ window.kaydet = function(){
 	saveAs(blob, "merhaba dünya.txt");
 }
 
-console.log(exampleCodes)
+window.loadExample = function(no){
+	document.getElementById('code-description').innerHTML = exampleCodes[no].name;
+	editor.setValue(exampleCodes[no].code);
+}
+loadExample(0);
+
+for(var i=1; i < exampleCodes.length; i++){
+	var str = '<h3 style = "margin: 0.75em 0 .75em 0; border-bottom: 2pt dotted silver;">' + exampleCodes[i].name + '</h3>' +
+			  '<p>' +
+		         	exampleCodes[i].description + ' Hemen incelemek isterseniz, ' +
+			  		'<a href="#" onclick = "loadExample('+ i +')"> kodları buradan yükleyin</a>.' +
+			  '</p> <br>';
+
+	document.getElementById('main-content').innerHTML += str;
+}
 
