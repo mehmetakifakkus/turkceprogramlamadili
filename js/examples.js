@@ -10,7 +10,7 @@ exampleCodes  = [
     },{
       "name": "Celcius sıcaklık birimini Fahrenheit'e çevirme",
       "description": 'Celcius sıcaklık birimini Fahrenheit sıcaklık birimine çeviren kodu yazalım.',
-	  "code": "değişken celcius = 30\n\nvar fahrenheit = celcius * 1.8 + 32\n\nyaz fahrenheit"
+	  "code": "değişken celcius = 30\n\ndeğişken fahrenheit = celcius * 1.8 + 32\n\nyaz fahrenheit"
     },{
       "name": "Arabanın ne yaktığını bulma",
       "description": 'Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım.',
