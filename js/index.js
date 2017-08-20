@@ -314,6 +314,8 @@ for(var i=1; i < beginner.length; i++){
 	document.getElementById('baslangic').innerHTML += str;
 }
 
+
+/*
 for(var i=0; i < ortaSeviye.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'ortaSeviyeSoru'+i+'\'))">' +
 			  '<h3 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt dotted silver;">' + (i+1) +'. '+ ortaSeviye[i].name + '</h3></a>' +
@@ -324,6 +326,7 @@ for(var i=0; i < ortaSeviye.length; i++){
 
 	document.getElementById('ortaSeviyeSorular').innerHTML += str;
 }
+*/
 
 
 /*
