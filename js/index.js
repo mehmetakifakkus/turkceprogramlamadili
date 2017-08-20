@@ -33,7 +33,6 @@ var parseResult = CodeMirror.fromTextArea(document.getElementById('parseResult')
 
 
 
-
 editor.on("gutterClick", function(cm, n) {
   var info = cm.lineInfo(n);
   cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
@@ -118,10 +117,9 @@ function drawLine(line, isLoop){
 
    setTimeout(function(){
 
-	var result = window.eval(line.text);
-
   	if(line.type == 'logical')
  	{
+		var result = window.eval(line.text);
 		console.log('[logical] line '+line.lineNumber +' is getting processed, result is: '+ result);
 		highlightLine(line, 'logical', result);
 		insertTextAtCursor(result, line.lineNumber, false);
@@ -132,8 +130,22 @@ function drawLine(line, isLoop){
 		highlightLine(line);
   		insertTextAtCursor(result, line.lineNumber, isLoop);
 	}
-	else
+	else if(line.type == 'print')
 	{
+		highlightLine(line);
+
+		if(line.subtype == 'string'){
+			insertText(line.text);
+
+			console.log('string yazdir')
+		}
+		else if(line.subtype == 'var'){
+			insertText(eval(line.text));
+			console.log('var yazdir')
+		}
+	}
+	else{
+		var result = window.eval(line.text);
 		highlightLine(line);
   		insertTextAtCursor(result, line.lineNumber, false);
 	}
@@ -163,7 +175,7 @@ function insertNewLines(number) {
 
 }
 
-window.insertTextAtCursor = function(text, number, isLoop) {
+function insertTextAtCursor(text, number, isLoop) {
     var doc = evaluate.getDoc();
 
 	if(typeof(text) == 'boolean')
@@ -182,13 +194,20 @@ window.insertTextAtCursor = function(text, number, isLoop) {
 
   }
 
-  console.log(isLoop)
-
   if(isLoop)
     doc.replaceRange(text+',', {line:number-1, ch:30});
   else
     doc.replaceRange(text+'', {line:number-1, ch:30});
 }
+
+function insertText(text) {
+    var doc = konsol.getDoc();
+
+
+    doc.replaceRange(text+' ', {line: 0, ch:30});
+}
+
+
 
 insertNewLines(editor.lineCount()-1);
 
@@ -197,7 +216,6 @@ var errorGrammer = null;
 
 $.get("grammer.pegjs", function(response) {
 	grammer = response;
-	//console.log(response)
 });
 
 $.get("hataAyikla.pegjs", function(response) {
@@ -257,9 +275,9 @@ function processOneItem(item){
 
 	if(item.type == 'print')
 	{
-		console.log('[print] line '+item.lineNumber +' is getting processed, result is: '+ eval(item.text));
+		console.log('[print] line '+item.lineNumber +' is getting processed, result is: '+ item.subtype == 'var' ? eval(item.text) : item.text);
+
 		drawLine(item);
-		//insertTextAtCursor(item.text, item.lineNumber, isLoop);
 	}
 }
 
@@ -300,15 +318,10 @@ window.parse = function() {
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 
 		recursivelyProcess(result);
-
-
 		parseStr = '//   '+'Kod hatasız, çalıştırma başarılı.';
 
-		//$("#run").style = 'display:none';
 		$("#run").css("display", "none");
 		$("#runJunk").css("display", "block");
-
-
 
 		setTimeout(function(){
 			$("#run").css("display", "block");
@@ -319,9 +332,6 @@ time++;
 
 
   }catch(err){
-  		//document.getElementById("result").textContent = err.toString();
-	  	console.log('asas'+err.message + 'ssdasd')
-
 		if(err.location)
 			parseStr = '//   '+"Satır "+err.location.start.line+' hata içeriyor. Lütfen kontrol edin.';
 	  	else{
@@ -338,6 +348,11 @@ time++;
 
 window.temizle = function(){
 	editor.setValue('');
+	konsol.setValue('');
+
+	console.clear();
+	time = 1;
+	logicals = [];
 }
 
 window.kaydet = function(){
@@ -363,8 +378,6 @@ for(var i=1; i < beginner.length; i++){
 	document.getElementById('baslangic').innerHTML += str;
 }
 
-
-
 for(var i=0; i < ortaSeviye.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'ortaSeviyeSoru'+i+'\'))">' +
 			  '<h3 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt dotted silver;">' + (i+1) +'. '+ ortaSeviye[i].name + '</h3></a>' +
@@ -375,10 +388,3 @@ for(var i=0; i < ortaSeviye.length; i++){
 
 	document.getElementById('ortaSeviyeSorular').innerHTML += str;
 }
-
-
-
-/*
-
-
-*/
