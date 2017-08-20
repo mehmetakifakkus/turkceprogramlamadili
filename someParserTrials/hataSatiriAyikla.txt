@@ -4,6 +4,7 @@
 // Line 1, column 23: Expected ")", "*", "+", "-", or "/" but "p" found.
 
 // ReferenceError: a is not defined
+// ReferenceError: no is not defined
 
 start = errorLineExpected
 

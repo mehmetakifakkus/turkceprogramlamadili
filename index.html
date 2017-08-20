@@ -49,17 +49,18 @@
 <div class="denemecontainer" style="margin-top:4px">
 
 	<div id="column-left" class="deneme-left">
-		<textarea id="code">değişken no = 3
+		<textarea id="code">değişken num1 = 12
+değişken num2 = 6
 
-eğer(no küçükeşit 3) // sembol de olur
-	no = no + 3
-değilse
-	no = no + 1
+yinele(num1 != num2)
+{
+  eğer(num1 > num2)
+    num1 = num1 - num2
+  değilse
+    num2 = num2 - num1
+}
 
-eğer(no > 5)
-	no = 99
-
-yaz no</textarea>
+yaz num1</textarea>
 
 	</div>
 
@@ -82,12 +83,19 @@ yaz no</textarea>
 
 
 <div class="container subcontainer" style = "padding: 10px 40px 20px 30px; margin-top: 50px;">
-	<h2 style="margin: 0em; padding-top:10px"> Kod örnekleri </h2>
+	<h2 style="margin: 0em; padding-top:10px"> Başlangıç Seviye Kod örnekleri </h2>
 </div>
 
 <div class="container subcontainer" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 30px;  font-size: 115%;">
-		<div id="main-content" class="column">
-		</div>
+		<div id="baslangic" class="column"></div>
+	</div>
+
+<div class="container subcontainer" style = "padding: 10px 40px 20px 30px; margin-top: 50px;">
+	<h2 style="margin: 0em; padding-top:10px"> Orta Seviye Kod örnekleri </h2>
+</div>
+
+<div class="container subcontainer" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 30px;  font-size: 115%;">
+		<div id="ortaSeviyeSorular" class="column"></div>
 	</div>
 
 <script>
@@ -133,4 +141,17 @@ yaz no</textarea>
 <script async="" src="https://cdn.rawgit.com/eligrey/FileSaver.js/e9d941381475b5df8b7d7691013401e171014e89/FileSaver.min.js"></script>
 
 </body>
+
+
+<script type="text/javascript">
+	function hideshow(which){
+		if (!document.getElementById)
+		return
+		if (which.style.display=="block")
+		which.style.display="none"
+		else
+		which.style.display="block"
+		}
+</script>
+
 </html>

@@ -10,8 +10,6 @@ var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
   gutters: ["CodeMirror-linenumbers", "breakpoints"]
 });
 
-
-
 var evaluate = CodeMirror.fromTextArea(document.getElementById('evaluate'), {
   mode: "simplemode",
   lineNumbers: false,
@@ -28,11 +26,11 @@ function setEditorArea(){
 	editor.focus();
 
 //	document.getElementById('mainContainer').style.height = 130 + editor.lineCount() * 24 + 'px';
-	document.getElementById('column-left').style.height = 24 + editor.lineCount() * 24 + 'px';
+	document.getElementById('column-left').style.height = 40 + editor.lineCount() * 22 + 'px';
 
 	$( "column-right" ).ready(function(){
 		evaluate.setValue('');
-		document.getElementById('column-right').style.height = 24 + editor.lineCount() * 24 + 'px';
+		document.getElementById('column-right').style.height = 40 + editor.lineCount() * 22 + 'px';
 	});
 
 	var len = editor.lineCount();
@@ -95,10 +93,39 @@ function highlightLine(line, type, result) { // type is used for logical,  resul
 
 	markedLines.push(markedLine);
 }
-
-window.highlightLine = highlightLine;
-
 //highlightLine(10);
+
+
+var time = 1
+function drawLine(line, isLoop){
+
+   setTimeout(function(){
+
+	var result = window.eval(line.text);
+
+  	if(line.type == 'logical')
+ 	{
+		console.log('[logical] line '+line.lineNumber +' is getting processed, result is: '+ result);
+		highlightLine(line, 'logical', result);
+		insertTextAtCursor(result, line.lineNumber, false);
+	}
+	else if(line.type == 'declaration' || line.type == 'assignment')
+	{
+		var result = eval(line.lhs);
+		highlightLine(line);
+  		insertTextAtCursor(result, line.lineNumber, isLoop);
+	}
+	else
+	{
+		highlightLine(line);
+  		insertTextAtCursor(result, line.lineNumber, false);
+	}
+	//insertTextAtCursor(item.text, item.lineNumber, isLoop);
+
+   }, 750 * time)
+
+time++;
+}
 
 function deleteLines(number){
 
@@ -138,10 +165,12 @@ window.insertTextAtCursor = function(text, number, isLoop) {
 
   }
 
+  console.log(isLoop)
+
   if(isLoop)
-    doc.replaceRange(text+',', {line:number-1, ch:20});
+    doc.replaceRange(text+',', {line:number-1, ch:30});
   else
-    doc.replaceRange(text+'', {line:number-1, ch:20});
+    doc.replaceRange(text+'', {line:number-1, ch:30});
 }
 
 insertNewLines(editor.lineCount()-1);
@@ -153,10 +182,82 @@ $.get("grammer.pegjs", function(response) {
 	//console.log(response)
 });
 
+function processOneItem(item){
+
+	if(item.type == 'logical')
+	{
+		console.log('[logical] line '+item.lineNumber +' is getting processed, text is: '+ item.text);
+
+		if(item.mainType == 'if')
+		{
+			drawLine(item, false);
+
+			if(eval(item.text))
+				recursivelyProcess(item.truePart)
+			else
+				if(item.falsePart)
+					recursivelyProcess(item.falsePart)
+		}
+		else if(item.mainType == 'while')
+		{
+			while(eval(item.text)){
+				drawLine(item, false);
+
+				if(eval(item.text))
+					recursivelyProcess(item.statements)
+			}
+			drawLine(item, false);
+		}
+		else if(item.mainType == 'for')
+		{
+			while(eval(item.text)){
+				if(eval(item.text))
+					recursivelyProcess(items.slice(1))
+				drawLine(item, eval(item.text));
+			}
+			drawLine(item, eval(item.text));
+		}
+	}
+
+	if(item.type == 'declaration' || item.type == 'assignment')
+	{
+		window.eval(item.text);
+		item['#evaluation']++;
+
+		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.lhs));
+
+		if(item.up == 'while')
+			drawLine(item, true);
+		else
+			drawLine(item, false);
+
+	}
+
+	if(item.type == 'print')
+	{
+		console.log('[print] line '+item.lineNumber +' is getting processed, result is: '+ eval(item.text));
+		drawLine(item);
+		//insertTextAtCursor(item.text, item.lineNumber, isLoop);
+	}
+}
+
+function recursivelyProcess(items){
+	if(items instanceof Array)
+	{
+		for(var i=0; i < items.length; i++)
+		{
+			var item = items[i];
+			processOneItem(item);
+		}
+	}
+	else
+		processOneItem(items);
+}
 
 window.parse = function() {
 
 	console.clear();
+	time = 1;
 
 	for(var i=0; i < markedLines.length; i++) // it removes markes lines
 		markedLines[i].clear();
@@ -170,12 +271,16 @@ window.parse = function() {
 
     	var text = editor.getValue();
     	var parser = PEG.buildParser(grammer);
-    	var result = parser.parse(text);
+    	result = parser.parse(text);
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
-		 console.log(result)
+
+		recursivelyProcess(result);
+		//console.log(result)
+
   }catch(err){
   		//document.getElementById("result").textContent = err.toString();
 	  	console.log(err)
+		alert(err)
 
 	  console.log(err.expected)
 		console.log(err.found)
@@ -191,19 +296,37 @@ window.kaydet = function(){
 	saveAs(blob, "merhaba dünya.txt");
 }
 
-window.loadExample = function(no){
-	document.getElementById('code-description').innerHTML = exampleCodes[no].name;
-	editor.setValue(exampleCodes[no].code);
+window.loadExample = function(from, no){
+	document.getElementById('code-description').innerHTML = eval(from+'['+no+'].name');
+	editor.setValue(eval(from+'['+no+'].code'));
 }
-loadExample(0);
 
-for(var i=1; i < exampleCodes.length; i++){
-	var str = '<h3 style = "margin: 0.75em 0 .75em 0; border-bottom: 2pt dotted silver;">' + exampleCodes[i].name + '</h3>' +
-			  '<p>' +
-		         	exampleCodes[i].description + ' Hemen incelemek isterseniz, ' +
-			  		'<a href="#" onclick = "loadExample('+ i +')"> kodları buradan yükleyin</a>.' +
+loadExample('beginner', 0);
+
+for(var i=1; i < beginner.length; i++){
+	var str = '<a href="javascript:hideshow(document.getElementById(\'baslangicSeviyeSoru'+i+'\'))">' +
+		      '<h3 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt dotted silver; ">' + i +'. '+ beginner[i].name + '</h3></a>' +
+			  '<p id="baslangicSeviyeSoru'+ i +'" style = "display: none;">' +
+		         	beginner[i].description + ' Hemen incelemek isterseniz, ' +
+			  		'<a href="#" onclick = "loadExample(\'beginner\', '+ i +')"> kodları buradan yükleyin</a>.' +
 			  '</p> <br>';
 
-	document.getElementById('main-content').innerHTML += str;
+	document.getElementById('baslangic').innerHTML += str;
 }
 
+for(var i=0; i < ortaSeviye.length; i++){
+	var str = '<a href="javascript:hideshow(document.getElementById(\'ortaSeviyeSoru'+i+'\'))">' +
+			  '<h3 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt dotted silver;">' + (i+1) +'. '+ ortaSeviye[i].name + '</h3></a>' +
+			  '<p id="ortaSeviyeSoru'+ i +'" style = "display: none;">' +
+					ortaSeviye[i].description + ' Hemen incelemek isterseniz, ' +
+					'<a href="#" onclick = "loadExample(\'ortaSeviye\', '+ i +')"> kodları buradan yükleyin</a>.' +
+			  '</p> <br>';
+
+	document.getElementById('ortaSeviyeSorular').innerHTML += str;
+}
+
+
+/*
+
+
+*/

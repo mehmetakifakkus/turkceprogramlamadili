@@ -19,67 +19,153 @@ degilse
 yinele(no < 20)
   no = no + 1
 
-yaz no
 
 */
 
-start = statement*
+{
+
+var time = 1;
+
+function drawLine(line, result, isLoop){
+	
+   setTimeout(function(){
+    
+    if(line.type == 'assignment')
+   	{
+		console.log('[assignment] '+ line.lhs +' line '+line.lineNumber +' is getting processed, result is: '+ result); 
+		highlightLine(line);
+		insertTextAtCursor(result, line.lineNumber, isLoop);
+	}
+  	else if(line.type == 'declaration')
+ 	{
+		console.log('[declaration] '+ line.lhs +' line '+line.lineNumber +' is getting processed, result is: '+ result);
+		highlightLine(line);
+		insertTextAtCursor(result, line.lineNumber);
+	}
+  	else if(line.type == 'logical')
+ 	{
+		console.log('[logical] line '+line.lineNumber +' is getting processed, result is: '+ result);
+		highlightLine(line, 'logical', result);
+		insertTextAtCursor(result, line.lineNumber);
+	}
+	else if(line.type == 'print')
+ 	{
+		console.log('[print] line '+line.lineNumber +' is getting processed, result is: '+ result); 
+		highlightLine(line);
+		insertTextAtCursor(result, line.lineNumber); 
+	}
+   }, 750 * time)	
+
+time++;
+}
+
+   function myEval(line, isLoop){
+        
+       if(line.type == 'logical')
+       		drawLine(line, window.eval(line.text), isLoop);
+       else if(line.type == 'print')
+	   		//drawLine(line, window.eval(line.text));
+			drawLine(line, line.subtype == 'string'? line.text : window.eval(line.text));
+	   else if(line.type == 'assignment' || line.type == 'declaration')
+	   {
+            window.eval(line.text);
+       		line['#evaluation']++;
+       
+       		drawLine(line, window.eval(line.lhs), isLoop);
+       }
+   }
+}
+
+
+start
+ = statement*
 
 statement 
   =	if_statement
   / while_statement
   / for_statement
-  / block_item
+  / item:block_item {
+ 
+ 
+        if(item.type == 'print')
+            drawLine(item, item.subtype == 'string'? item.text:window.eval(item.text));
+ 		else if(item.type == 'assignment' || item.type == 'declaration')
+		{
+			window.eval(item.text); 
+			item['#evaluation']++;
+			if( typeof(window.eval(item.lhs)) == 'boolean')
+		  		drawLine(item, window.eval(item.lhs) ? 'dogru':'yanlış');
+			else
+		 		drawLine(item, window.eval(item.lhs));
+		}
+        else if(item.type == 'logical')
+           drawLine(item, window.eval(item.text) ? 'dogru':'yanlış');
+        
+		console.log(item); 
+		
+	   return item;
+  }
   / comment
 
 if_statement
-  = _ 'eğer' + '(' _ los:logical_statement  _ ')' _ nl
+  = _ 'eğer(' _ los:logical_statement  _ ')' _ nl
   		_ lines1:(compound_statement / block_item) _ nl
   lines2:( _ 'değilse' _ nl 
   		_ (compound_statement / block_item) )? nl
-{      
-  los.mainType = 'if';
+  {    
+  
+  myEval(los);
   
   if(lines2 && typeof(lines2[5]) != "undefined")
      lines2 = lines2[5] 
-		
-	return {'type': 'logical', 
-			'mainType': 'if',
-		    'text': los.text,
-			'truePart':lines1,
-			'falsePart': lines2,
-			'lineNumber': los.lineNumber,
-			'start': los.start,
-			'end': los.end
-		   };	
+  
+     if(window.eval(los.text)){
+        if(lines1.constructor.name == "Array")
+         for(var i=0; i < lines1.length; i++)
+			myEval(lines1[i]);
+        else
+			myEval(lines1);
+            
+    	return [los, lines1];
+    }
+    else if(lines2 && typeof(lines2) != "undefined"){
+
+        if(lines2.constructor.name == "Array")
+         for(var i=0; i < lines2.length; i++)
+			myEval(lines2[i]);
+        else
+			myEval(lines2); 
+        
+    	return [los, lines2];
+    }
+    return 'false returned if statement'; 
 }
  
 while_statement
- = _ 'yinele' _ '(' los:logical_statement ')' _ nl 
+ = _ 'yinele(' los:logical_statement ')' _ nl 
  	_ lines:(compound_statement / block_item) _ nl
-{ 
-    if(lines instanceof Array)
-     for(var i=0; i < lines.length; i++)
-		lines[i].up = 'while';
-	else
-	    lines.up = 'while';
+ { 
+	while(window.eval(los.text)){
+   
+   		myEval(los);  // calculate the current value
+         
+      	if(lines.constructor.name == "Array")
+        	for(var k=0; k < lines.length; k++)
+				myEval(lines[k], true);
+       	else
+    	     myEval(lines, true);
+	}
 	
-	return {'type': 'logical', 
-		'mainType': 'while',
-		'text': los.text,
-		'statements': lines,
-		'lineNumber': los.lineNumber,
-		'start': los.start,
-		'end': los.end
-	   };	
+	myEval(los);  // calculate the value after loop
+	return [los, lines];    
 } 
  
 for_statement
- = _ 'sayarakYinele' _ '(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ nl
+ = _ 'sayarakYinele(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ nl
  	lines:(compound_statement / block_item) _ nl
  {
      console.log({'dec1': dec1, 'los': los, 'dec2':dec2})
-	 los.mainType = 'for';
+
 
 	window.eval(dec1.text);	 // initialization part
 		
@@ -97,11 +183,11 @@ for_statement
 	}
 	myEval(los);  // calculate the value after loop
 	
-    return [dec1, los, dec2, lines]; 
+    return lines; 
  }
  
 compound_statement
- = nl _'{' _ [ \n]* _ b:block_item_list _ '}' _ nl _{  // block itemlar yerine bos da olabilir
+ = nl _'{' _ nl _ b:block_item_list _ '}' _ nl _{
  	return b
  }
 
@@ -112,15 +198,8 @@ block_item
  / if_statement
  / while_statement
  / print_statement
- / math_functions
  / expression_statement
  / logical_statement
- / null_statement 
-
-null_statement
- = ';' _ comment? nl {
- 	return {'type': 'null', 'text': '', 'lineNumber': location().start.line};
- }
 
 declaration
  =  _ ('var' / 'değişken') _ dec:init_declarator_list {
@@ -135,7 +214,7 @@ init_declarator_list
  = 	init:init_declarator (',' _ init_declarator)* {return init;}
 
 init_declarator
-	= _ left:name _"="_ exp: (dogru / yanlis / math_functions / expression_statement) nl{
+	= _ left:name _"="_ exp: (dogru / yanlis / expression_statement) nl{
 
 	if( typeof(exp) == 'boolean')
     	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it       
@@ -144,17 +223,20 @@ init_declarator
 }   
 
 print_statement = _ "yaz" _ exp:(expression_statement / StringLiteral) _ comment? nl {
+
 	if(typeof(exp.value) == 'string')
 		return {'type':'print', 'subtype': 'string', 'text': exp.value, 'lineNumber': location().start.line}; // evaluate it, then return it       
 	return {'type':'print', 'subtype': 'var', 'text': exp.text, 'lineNumber': location().start.line}; // evaluate it, then return it       
 }
 
 expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* nl{  	    
+    // console.log(text() + ' = '+ eval(text()) + ' start:'+location().start.column+ ' end:'+(location().end.column-1));
+ 	// return {'type':'expression', '#evaluation': 0, 'text':text(), 'result': eval(text()), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
    	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
 Term
-  = head:Factor tail:(_ ("*" / "/" / "%") _ Factor)* 
+  = head:Factor tail:(_ ("*" / "/") _ Factor)* 
 
 Factor
   = "(" _ expr:expression_statement _ ")" { return expr; }
@@ -169,7 +251,7 @@ logical_statement = _ f1:factor2 f2:(_ operator _ factor2)* _ nl
     if(f2[0])
 	    text += f2[0][1] + ' ' + f2[0][3];
         
-    return {'type':'logical', 'text': text, 'lineNumber': location().end.line, 'start': location().start.column-1, 'end': location().end.column-1};
+    return {'type':'logical', 'text': text, 'lineNumber': location().end.line, 'start': location().start.column-1, 'end': location().end.column-1}; // evaluate it, then return it       
 }
 
 factor = "(" expr: expression_statement ")" {return expr;}
@@ -180,23 +262,6 @@ factor = "(" expr: expression_statement ")" {return expr;}
 factor2 = "(" logical_statement ")" 
 	   / name
        / integer
-
-
-//// math functions
-
-math_functions
- = taban / tavan/ karekok
-
-taban = 'taban' _ '(' _ exp:expression_statement _ ')'{
- 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.floor(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
-}
-tavan = 'tavan' _ '(' _ exp:expression_statement _ ')'{
- 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.ceil(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
-}
-karekok = 'karekök' _ '(' _ exp:expression_statement _ ')'{
- 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.sqrt(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
-}
-
 
 ///// Name = Variable
 

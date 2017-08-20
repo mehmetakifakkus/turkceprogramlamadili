@@ -1,0 +1,60 @@
+// Basit Programlama Dili (Alışveriş Tutarını Hesaplamak için)
+// ==========================
+// Şu tarz bir alışveriş listesini ayrıştırır (parse) ve tutarı hesaplar
+/*
+çilek 3.25 TL
+portakal 4.5 TL
+muz 7.99 TL
+
+200 gram muz
+1 kg portakal
+*/
+
+{
+   	var database = {isim:"urun bilgilerini tutan veri tabani"};
+}
+baslangic = liste
+
+liste = list:(fiyat / urun)*
+{
+	var toplamTutar = 0
+	
+    for(var i=0; i <list.length; i++)
+	{
+    	if(list[i].tip == 'tutarBilgisi') 
+            database[list[i].isim] = list[i].tutar;
+        else if(list[i].tip == 'miktarBilgisi')
+            toplamTutar += database[list[i].isim] * list[i].miktar / 1000;
+    }
+    
+   	return {'liste': list, 'toplam': toplamTutar};
+}
+
+fiyat 
+  = ad:isim _ tutar: (kayanNoktali / tamsayi) _ 'TL' nl {
+	return {'tip': 'tutarBilgisi', 'isim': ad, 'tutar': tutar}
+}
+
+urun
+  = gram:miktar _ ad:isim{  // (1 kg) (patates)
+	return {'tip': 'miktarBilgisi', 'isim': ad, 'miktar': gram}
+}
+
+miktar
+  = deger: (kayanNoktali / tamsayi) _ olcut:('gram' / 'kilogram' / 'kg')
+{
+ 	if(olcut == 'gram')
+	 	return deger; 
+    else if(olcut == 'kilogram' || olcut == 'kg')
+    	return 1000*deger;
+}
+
+isim "isim" = [a-zA-Z_|ş|ğ|ç|ö|ü|ı|ü]+ {return text(); }
+
+tamsayi "integer" = _ [0-9]+ { return parseInt(text(), 10); }
+
+kayanNoktali "float" = _ [0-9]+ '.' [0-9]* { return parseFloat(text()); }
+
+_ "whitespace"= [ \t\n\r]*
+  
+nl "newline" = [\n]* {return null;}
