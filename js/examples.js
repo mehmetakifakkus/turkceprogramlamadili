@@ -6,7 +6,7 @@ beginner  = [
     },{
       "name": "Yurt dışından yapılan alışverişin tutarı",
       "description": 'Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bulalım. Tabiki doların TL karşılığını değişken değeri olarak vereceğiz. Almak istediğimiz ürünlerin de dolar cinsinden tutarına sahibiz.',
-	  "code": "değişken dolarKuru = 3.45\ndeğişken saatFiyati = 60\ndeğişken telefonFiyati = 300\ndeğişken toplam = saatFiyati * dolarKuru + telefonFiyati * dolarKuru\n\nyaz toplam"
+	  "code": "değişken dolarKuru = 3.45\ndeğişken saatFiyati = 60\ndeğişken telefonFiyati = 300\ndeğişken toplam = (saatFiyati + telefonFiyati) dolarKuru\n\nyaz toplam"
     },{
       "name": "Celcius sıcaklık birimini Fahrenheit'e çevirme",
       "description": 'Celcius sıcaklık birimini Fahrenheit sıcaklık birimine çeviren kodu yazalım.',
