@@ -3,33 +3,16 @@ body {
   padding: 40px;
 }
 
-div.mycontainer {
-  padding: 20px 20px 10px 30px;
-  background-color: #fff;
-  border-radius: 8px;
-
-	width: 75%;
-	margin: auto;
-	height: auto;
-
-  	margin-left: 12.5%;
-
-
-
-  max-width: 1100px;
-  min-height: 200px;
-}
-
 .subcontainer {
   width: 75%;
 
-  margin-top: 5px;
-  margin-bottom: 15px;
+  margin-top: 3px;
+  margin-bottom: 10px;
 
   padding: 0px 5px 0px 5px;
 
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 0px;
   max-width: 1100px;
   min-height: 50px;
   height: auto;
@@ -40,8 +23,8 @@ div.mycontainer {
 	position: relative;
 	overflow: auto;
 	padding-top: 0px;
-	padding-bottom: 5px;
-	width: 76.5%;
+	padding-bottom: 2px;
+	width: 75%;
 
     max-width: 1100px;
 
@@ -54,12 +37,12 @@ div.mycontainer {
 	position: relative;
 	float:left;
 
-	margin-right: 1%;
+	margin-right: 0.5%;
 	padding-left: 0px;
 
 	width: 62%;
 	background-color: #fff;
-	border-radius: 8px;
+	border-radius: 0px;
 }
 
 .deneme-right{
@@ -69,9 +52,19 @@ div.mycontainer {
 
 	padding-left: 0px;
 
-	width: 35%;
+	width: 37.5%;
 	background-color: #fff;
-	border-radius: 8px;
+	border-radius: 0px;
+}
+
+.ust-donme{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.alt-donme{
+	border-bottom-left-radius: 12px;
+	border-bottom-right-radius: 12px;
 }
 
 

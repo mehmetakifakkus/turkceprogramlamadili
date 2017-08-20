@@ -17,15 +17,15 @@ errorLineExpected
  }
 
 referenceError
- = 'ReferenceError:' _ errorName:name _ 'is not defined'
+ = _ errorName:name _ 'is not defined' _ 
 {
-	return '//    Hey dostum! \''+errorName + '\' maalesef tanımlı değil. Tanımlar mısın?'
+	return 'Hey! \''+errorName + '\' maalesef tanımlı değil. Tanımlar mısın?'
 }
 
 
 ///// Name = Variable
 
-name = l:letter i:integer {return l+i}
+name = l:letter i:Integer {return l+i}
      / l:letter {return l;} 
 
 dogru = 'doğru' {return true;}

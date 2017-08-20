@@ -17,6 +17,23 @@ var evaluate = CodeMirror.fromTextArea(document.getElementById('evaluate'), {
   readOnly: true
 });
 
+var konsol = CodeMirror.fromTextArea(document.getElementById('konsol'), {
+  mode: "simplemode",
+  lineNumbers: false,
+  theme: '3024-night',
+  readOnly: true
+});
+
+var parseResult = CodeMirror.fromTextArea(document.getElementById('parseResult'), {
+  mode: "simplemode",
+  lineNumbers: false,
+  theme: 'eclipse',
+  readOnly: true
+});
+
+
+
+
 editor.on("gutterClick", function(cm, n) {
   var info = cm.lineInfo(n);
   cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
@@ -176,10 +193,15 @@ window.insertTextAtCursor = function(text, number, isLoop) {
 insertNewLines(editor.lineCount()-1);
 
 var grammer = null;
+var errorGrammer = null;
 
 $.get("grammer.pegjs", function(response) {
 	grammer = response;
 	//console.log(response)
+});
+
+$.get("hataAyikla.pegjs", function(response) {
+	errorGrammer = response;
 });
 
 function processOneItem(item){
@@ -254,6 +276,10 @@ function recursivelyProcess(items){
 		processOneItem(items);
 }
 
+
+var parseDoc = parseResult.getDoc();
+var parseStr = '//   ';
+
 window.parse = function() {
 
 	console.clear();
@@ -261,7 +287,6 @@ window.parse = function() {
 
 	for(var i=0; i < markedLines.length; i++) // it removes markes lines
 		markedLines[i].clear();
-
 
 	logicals = [];
 
@@ -275,16 +300,40 @@ window.parse = function() {
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 
 		recursivelyProcess(result);
-		//console.log(result)
+
+
+		parseStr = '//   '+'Kod hatasız, çalıştırma başarılı.';
+
+		//$("#run").style = 'display:none';
+		$("#run").css("display", "none");
+		$("#runJunk").css("display", "block");
+
+
+
+		setTimeout(function(){
+			$("#run").css("display", "block");
+			$("#runJunk").css("display", "none");
+   		}, 750 * (time-1))
+
+time++;
+
 
   }catch(err){
   		//document.getElementById("result").textContent = err.toString();
-	  	console.log(err)
-		alert(err)
+	  	console.log('asas'+err.message + 'ssdasd')
 
-	  console.log(err.expected)
-		console.log(err.found)
+		if(err.location)
+			parseStr = '//   '+"Satır "+err.location.start.line+' hata içeriyor. Lütfen kontrol edin.';
+	  	else{
+
+		 	var parser2 = PEG.buildParser(errorGrammer);
+    		result = parser2.parse(err.message);
+
+			parseStr = '//   '+result;
+		}
   }
+	parseDoc.setValue(parseStr)
+
 }
 
 window.temizle = function(){
@@ -315,7 +364,7 @@ for(var i=1; i < beginner.length; i++){
 }
 
 
-/*
+
 for(var i=0; i < ortaSeviye.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'ortaSeviyeSoru'+i+'\'))">' +
 			  '<h3 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt dotted silver;">' + (i+1) +'. '+ ortaSeviye[i].name + '</h3></a>' +
@@ -326,7 +375,7 @@ for(var i=0; i < ortaSeviye.length; i++){
 
 	document.getElementById('ortaSeviyeSorular').innerHTML += str;
 }
-*/
+
 
 
 /*
