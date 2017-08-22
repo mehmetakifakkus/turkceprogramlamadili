@@ -98,7 +98,7 @@ function highlightLine(line, type, result) { // type is used for logical,  resul
 			markedLine = editor.markText({line: logicals[i].line.lineNumber-1, ch: logicals[i].line.start}, {line: logicals[i].line.lineNumber-1, ch: logicals[i].line.end}, {className: "styled-background-logical-false"});
 	}
 
-	if(type == 'logical')
+	//if(type == 'logical')
 	{
 		if(result)
 			markedLine = editor.markText({line: lineNumber-1, ch: line.start}, {line: lineNumber-1, ch: line.end}, {className: "styled-background-logical-true"});
@@ -107,7 +107,7 @@ function highlightLine(line, type, result) { // type is used for logical,  resul
 
 		logicals.push({line: line, eval: result});
 	}
-	else
+	//else
   		markedLine = editor.markText({line: lineNumber-1, ch: 0}, {line: lineNumber-1, ch: 50}, {className: "styled-background-normal"});
 
 	markedLines.push(markedLine);
@@ -223,7 +223,7 @@ function processOneItem(item){
 
 		if(item.mainType == 'if')
 		{
-			drawLine(item, false);
+			drawLine(item, false, eval(item.text));
 
 			if(eval(item.text))
 				recursivelyProcess(item.truePart)

@@ -57,7 +57,8 @@ beginner  = [
     },
 	{
       "name": "10'dan 30'a 4'er 4'er",
-      "description": 'Yinele komutunu kullanarak 10 dan 30\'a kadar 4\'er 4\'er artırarak oluşan sayı dizisini üretmeye çalışalım.',
+      "description": 'Yinele komutunu kullanarak 10 dan 30\'a kadar 4\'er 4\'er artırarak oluşan sayı dizisini üretmeye çalışalım. Dizi şu şekilde olmalı:<br><br>'
+		+'10 14 18 22 26 30<br><br>',
 	  "code": "değişken no = 6\n"+
               "\n"+
               "yinele(no < 30)\n"+
@@ -77,7 +78,10 @@ ortaSeviye = [
 	{
 		"name": "Faktoriyel bulma",
         "description": 'Bize verilen bir sayının faktoriyelini bulalım.<br><br>'+
-		'Tanım olarak 1 den n\'e kadar olan doğal sayıların çarpımına <strong>n faktöriyel</strong> denir ve  n! şeklinde gösterilir.',
+		'Tanım olarak 1 den n\'e kadar olan doğal sayıların çarpımına <strong>n faktöriyel</strong> denir ve  n! şeklinde gösterilir.<br>'+
+		'Yani 5! dediğimizde şuna eşit olur:<br><br>'+
+		'5! = 5 x 4 x 3 x 2 x 1 = 120<br><br>',
+
 		"code": "değişken sayı = 4    // faktöriyeli bulunacak değer\ndeğişken sonuç = 1  // sonuç burada saklanacak\n\nyinele(sayı != 1)\n{\n  sonuç = sonuç * sayı\n  sayı = sayı - 1\n}\n\nyaz sonuç"
 	},
 	{
@@ -97,7 +101,16 @@ ortaSeviye = [
 	},
 	{
 		"name": "2 sayının Ebob'unu bulalım",
-        "description": "Bize verilen 2 sayının en büyük ortak bölenini yani EBOB'unu bulalım.",
+        "description": 'Verilen iki sayının en büyük ortak bölenini bulan kodu yazalım.' +
+	                   "Hatırlarsanız en büyük ortak böleni bulmak için 2 sayıyı birden bölebilmenin yollarını arıyoruz. En azından lisede böyle öğrendik. <br><br>"+
+	                   "Ama daha kolay bir yöntemi Euler şöyle önermiş:<br><br>"+
+	                   "2 sayıyı al birbirinden farklı olduğu sürece bunları birbrinden çıkar, ve güncelle. Nasıl mı? Örnek verelim:<br><br>"+
+	                   "14, 6 olsun sayılarımız<br>"+
+	                   "8, 6<br>"+
+	                   "2, 6<br>"+
+	                   "2, 4<br>"+
+	                   "2, 2<br><br>"+
+	                   "İşte son durum, yani sayıların eşitlendiği durum bizim en büyük ortak bölenimizi veriyor. <br>",
 		"code": "değişken num1 = 12\ndeğişken num2 = 6\n\nyinele(num1 != num2)\n{\n  eğer(num1 > num2)\n    num1 = num1 - num2\n  değilse\n    num2 = num2 - num1\n}\n\nyaz num1"
 	},
 	{
@@ -125,7 +138,18 @@ ortaSeviye = [
 adaySorular = [
 	{
       "name": "Ebob bulma",
-      "description": 'Verilen iki sayının en büyük ortak bölenini bulan kodu yazalım.',
+      "description": 'Verilen iki sayının en büyük ortak bölenini bulan kodu yazalım.' +
+	  "Hatırlarsanız en büyük ortak böleni bulmak için 2 sayıyı birden bölebilmenin yollarını arıyoruz. En azından lisede böyle öğrendik. \n\n"+
+	  "Ama daha kolay bir yöntemi Euler şöyle önermiş:\n"+
+	  "2 sayıyı al birbirinden farklı olduğu sürece bunları birbrinden çıkar, ve güncelle. Nasıl mı? Örnek verelim:\n"+
+	  "14, 6 olsun sayılarımız\n"+
+	  "8, 6\n"+
+	  "2, 6\n"+
+	  "2, 4\n"+
+	  "2, 2\n"+
+	  "İşte son durum, yani sayıların eşitlendiği durum bizim en büyük ortak bölenimizi veriyor.	\n",
+
+
 	  'code': 'değişken num1 = 12\ndeğişken num2 = 10\n\nyinele(num1 != num2){\n  eğer(num1 > num2)\n    num1 = num1 - num2\n  değilse\n    num2 = num2 - num1\n yaz num1}'
 	}
 ]
