@@ -132,7 +132,35 @@ ortaSeviye = [
                 "  sayı = taban(sayı / 2)\n"+
                 "  yaz kalan \n"+
                 "}\n"
+	},
+	{
+		"name": "Asal olma testi",
+        "description": 'Bir sayının asal olup olmaması onun bölenlerine bağlıdır. Yani bir sayı 1\'e ve yalnız kendisine bölünüyorsa bu asaldır.:<br><br>'+
+		'Örnek verecek olursak. 4 sayısı asal değildir. Çünkü böleni 2. Fakat 7 sayısı asaldır. Çünkü 7 ve 1 dan başka böleni yoktur. <br><br>'+
+		'Peki bunu kodlamaya nasıl dökeriz? Bir değişken oluşturur buna test etmek istediğimiz sayıyı koyarız. Sonra 1 i atlayıp 2 den başlayarak kendisine kadarki tüm sayılara bölünüyor mu tek tek bakarız. Eğer arada tek bir sayı bölerse asal değildir.<br><br>',
+
+		"code": "değişken sayı = 35\n"+
+				"değişken böl = 2\n"+
+				"değişken asalMı = doğru\n"+
+				"\n"+
+				"yinele(böl < sayı)\n"+
+				"{\n"+
+				"  değişken kalan = sayı % böl;\n"+
+				"  eğer(kalan == 0) // tam böldü\n"+
+				"    asalMı = yanlış\n"+
+				"\n"+
+				"  böl = böl + 1\n"+
+				"}\n"+
+				"\n"+
+				"yaz asalMı\n"
 	}
+
+
+
+
+
+
+
 ]
 
 
