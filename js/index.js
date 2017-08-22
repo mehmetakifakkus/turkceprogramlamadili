@@ -395,5 +395,26 @@ setTimeout(function(){
 	parse();
 }, 250);
 
+
+değişken sayı = 35
+değişken böl = 2
+değişken asalMi = yanlış
+
+yinele(böl < sayı)
+{
+  değişken kalan = sayı % böl;
+  eğer(kalan == 0)
+    asalMi = doğru
+
+	böl = böl + 1
+}
+
+yaz asalMı
+
+
+
+
+
+
 */
 
