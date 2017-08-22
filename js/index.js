@@ -320,13 +320,13 @@ function parse() {
 		$("#run").css("display", "none");
 		$("#runJunk").css("display", "block");
 
+		recursivelyProcess(result);
+
 		setTimeout(function(){
 			$("#run").css("display", "block");
 			$("#runJunk").css("display", "none");
    		}, speed * (time-1))
 		time++;
-
-		recursivelyProcess(result);
 
 
   }catch(err){
