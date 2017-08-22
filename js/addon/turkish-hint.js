@@ -56,7 +56,7 @@ function scriptHint(editor, keywords, getToken, options) {
 
 	///////////////////////////////////////////       here is the local variables    //////////////////////////////////////
 
-	var WORD = /[a-zA-Z|Ç|Ş|Ğ|Ç|Ö|I|Ü|ç|ş|ğ|ç|ö|ı|ü$]+/, RANGE = 500;
+	var WORD = /[a-zA-Z|\_|Ç|Ş|Ğ|Ç|Ö|I|Ü|ç|ş|ğ|ç|ö|ı|ü$]+/, RANGE = 500;
 	var word = options && options.word || WORD;
     var range = options && options.range || RANGE;
 	var curLine = editor.getLine(cur.line);

@@ -51,7 +51,7 @@
 
 <div class="denemecontainer" style="margin-top:4px;">
 
-	<div id="column-left" class="deneme-left">
+	<div id="column-left" class="deneme-left codeContent">
 		<textarea id="code">değişken num1 = 12
 değişken num2 = 6
 
@@ -67,7 +67,7 @@ yaz num1</textarea>
 
 	</div>
 
-	<div id="column-right" class="deneme-right">
+	<div id="column-right" class="deneme-right codeContent">
 		<textarea id="evaluate"></textarea>
 	</div>
 
@@ -80,15 +80,20 @@ yaz num1</textarea>
 
 	<button type="button" id="runJunk" onclick='' style="position:absolute; float:left; z-index:2; display:none" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Bekle..</button>
 
+	<div style="width:50px; height: auto; position:absolute; float:left; margin: -3px 0px 0px 90px; z-index:4">
+		<img id="redLight" src="images/redLight.png" style="border-radius: 8px; margin:0px 0px 20px 20px; display: none" alt="redLight" width="18px" height="40px">
+		<img id="greenLight" src="images/greenLight.png" style="border-radius: 8px; margin:0px 0px 20px 20px; display: block" alt="redLight" width="18px" height="40px">
+	</div>
 
-	<div style="width:600px; height: auto; position:absolute; float:left; margin: -10px 0px 0px 65px; z-index:1">
+
+	<div style="width:500px; height: auto; position:absolute; float:left; margin: -10px 0px 0px 65px; z-index:1">
 		<textarea id="parseResult"></textarea>
 	</div>
 
 
-	<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:20px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span> Kaydet</button>
+	<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:16px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
 
-	<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:30px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span> Temizle</button>
+	<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:30px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span></button>
 
 </div>
 </div>

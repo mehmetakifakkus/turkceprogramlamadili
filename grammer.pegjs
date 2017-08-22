@@ -123,7 +123,7 @@ null_statement
  }
 
 declaration
- =  _ ('var' / 'değişken') _ dec:init_declarator_list {
+ =  _ ('var' / 'değişken' / 'değ') _ dec:init_declarator_list _ nl{
 	return {'type': 'declaration', '#evaluation': 0, 'text':'var '+dec.lhs+' = ' + dec.rhs, 'lhs':dec.lhs, 'rhs': dec.rhs, 'lineNumber': location().start.line};
  }
  /

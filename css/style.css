@@ -67,6 +67,10 @@ body {
 	border-bottom-right-radius: 12px;
 }
 
+.codeContent{
+	min-height: 300px;
+}
+
 
 div.column {
   float: left;

@@ -19,7 +19,7 @@ errorLineExpected
 referenceError
  = _ errorName:name _ 'is not defined' _ 
 {
-	return 'Hey! \''+errorName + '\' maalesef tanımlı değil. Tanımlar mısın?'
+	return 'Hey! \''+errorName + '\' maalesef tanımlı değil.'
 }
 
 

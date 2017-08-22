@@ -12,6 +12,30 @@ beginner  = [
       "description": 'Celcius sıcaklık birimini Fahrenheit sıcaklık birimine çeviren kodu yazalım.',
 	  "code": "değişken celcius = 30\n\ndeğişken fahrenheit = celcius * 1.8 + 32\n\nyaz fahrenheit"
     },{
+      "name": "Dairenin çevresi ve alanı",
+      "description": 'Yarıçapı bilinen bir dairenin çevresini ve alanını hesaplayalım.',
+	  "code": "değişken r = 40\n"+
+		      "değişken pi = 3.14\n"+
+		      "\n"+
+		      "değişken daire_alanı = pi * r * r\n"+
+		      "değişken daire_çevresi = 2 * pi * r\n"+
+		      "\n"+
+		      "yaz daire_alanı\n"+
+		      "yaz daire_çevresi\n"
+    },{
+      "name": "Silindir alanı ve hacmi",
+      "description": 'Taban yarıçapı ve yüksekliği verilmiş olan silindirin alanını ve hacmini hesaplayınız.',
+	  "code": "değişken h = 5\n"+
+		      "değişken r = 40\n"+
+		      "değişken pi = 3.14\n"+
+		      "\n"+
+		      "değişken silindir_taban_alanı = pi * r * r\n"+
+		      "değişken silindir_hacmi = silindir_taban_alanı * h\n"+
+		      "\n"+
+		      "yaz silindir_hacmi \n"+
+		      "yaz silindir_taban_alanı\n"
+    }
+	,{
       "name": "Arabanın ne yaktığını bulma",
       "description": 'Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. <br>Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: <br>Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. <br><br> Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım.',
 	  "code": "değişken toplamYol = 236\ndeğişken toplamTutar = 75\ndeğişken fiyat = toplamTutar / toplamYol\n\nyaz fiyat"
@@ -30,6 +54,17 @@ beginner  = [
       "name": "3 sayıdan en büyüğünü bulalım",
       "description": 'Birbirlerine kıyasla başlangış değerlerini bilmediğimiz 3 sayı arasından en büyüğünü bulan programı geliştirelim.',
 	  "code": "değişken num1 = 12\ndeğişken num2 = 10\ndeğişken num3 = 15\n\ndeğişken no = 0\n\neğer(num1 > no)\n	no = num1\n\neğer(num2 > no)\n	no = num2\n\neğer(num3 > no)\n	no = num3\n\nyaz no"
+    },
+	{
+      "name": "10'dan 30'a 4'er 4'er",
+      "description": 'Yinele komutunu kullanarak 10 dan 30\'a kadar 4\'er 4\'er artırarak oluşan sayı dizisini üretmeye çalışalım.',
+	  "code": "değişken no = 6\n"+
+              "\n"+
+              "yinele(no < 30)\n"+
+              "{\n"+
+              "	no = no + 4\n"+
+              "	yaz no\n"+
+              "}\n"
     }
 ];
 

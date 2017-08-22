@@ -69,6 +69,9 @@ editor.on("keyup", function (cm, event) {
 	if (!editor.state.completionActive &&  event.keyCode != 13 && event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40 && event.keyCode != 27 && event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 9) {
             CodeMirror.commands.autocomplete(editor, null, {completeSingle: false});
      }
+
+	//if(event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40)
+		//parse();
 });
 
 
@@ -109,49 +112,42 @@ function highlightLine(line, type, result) { // type is used for logical,  resul
 
 	markedLines.push(markedLine);
 }
-//highlightLine(10);
 
 
-var time = 1
-function drawLine(line, isLoop){
+var time = 0.5, speed = 1000;
+function drawLine(line, isLoop, result){
 
-   setTimeout(function(){
+	var res = result;
 
-  	if(line.type == 'logical')
- 	{
-		var result = window.eval(line.text);
-		console.log('[logical] line '+line.lineNumber +' is getting processed, result is: '+ result);
-		highlightLine(line, 'logical', result);
-		insertTextAtCursor(result, line.lineNumber, false);
-	}
-	else if(line.type == 'declaration' || line.type == 'assignment')
+  setTimeout(function(){
+
+  	if(line.type == 'declaration' || line.type == 'assignment')
 	{
-		var result = eval(line.lhs);
 		highlightLine(line);
-  		insertTextAtCursor(result, line.lineNumber, isLoop);
+  		insertTextAtCursor(res, line.lineNumber, isLoop);
+	}
+	else if(line.type == 'logical')
+ 	{
+		//var result = window.eval(line.text);
+		highlightLine(line, 'logical', res);
+		insertTextAtCursor(res, line.lineNumber, false);
 	}
 	else if(line.type == 'print')
 	{
 		highlightLine(line);
 
-		if(line.subtype == 'string'){
+		if(line.subtype == 'string')
 			insertText(line.text);
-
-			console.log('string yazdir')
-		}
-		else if(line.subtype == 'var'){
-			insertText(eval(line.text));
-			console.log('var yazdir')
-		}
+		else if(line.subtype == 'var')
+			insertText(res);
 	}
 	else{
 		var result = window.eval(line.text);
 		highlightLine(line);
   		insertTextAtCursor(result, line.lineNumber, false);
 	}
-	//insertTextAtCursor(item.text, item.lineNumber, isLoop);
 
-   }, 750 * time)
+   }, speed * time)
 
 time++;
 }
@@ -195,31 +191,28 @@ function insertTextAtCursor(text, number, isLoop) {
   }
 
   if(isLoop)
-    doc.replaceRange(text+',', {line:number-1, ch:30});
+    doc.replaceRange(text+' ', {line:number-1, ch:1000});
   else
-    doc.replaceRange(text+'', {line:number-1, ch:30});
+    doc.replaceRange(text+'', {line:number-1, ch:1000});
 }
 
 function insertText(text) {
-    var doc = konsol.getDoc();
-
-
-    doc.replaceRange(text+' ', {line: 0, ch:30});
+    konsol.getDoc().replaceRange(text+' ', {line: 0, ch:500});
 }
-
-
 
 insertNewLines(editor.lineCount()-1);
 
-var grammer = null;
-var errorGrammer = null;
+var grammer = null, errorGrammer = null;
+var parser, parser2;
 
 $.get("grammer.pegjs", function(response) {
 	grammer = response;
+	parser = PEG.buildParser(grammer);
 });
 
 $.get("hataAyikla.pegjs", function(response) {
 	errorGrammer = response;
+	parser2 = PEG.buildParser(errorGrammer);
 });
 
 function processOneItem(item){
@@ -241,12 +234,12 @@ function processOneItem(item){
 		else if(item.mainType == 'while')
 		{
 			while(eval(item.text)){
-				drawLine(item, false);
+				drawLine(item, false, eval(item.text));
 
 				if(eval(item.text))
 					recursivelyProcess(item.statements)
 			}
-			drawLine(item, false);
+			drawLine(item, false, eval(item.text));
 		}
 		else if(item.mainType == 'for')
 		{
@@ -267,17 +260,17 @@ function processOneItem(item){
 		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.lhs));
 
 		if(item.up == 'while')
-			drawLine(item, true);
+			drawLine(item, true, eval(item.lhs));
 		else
-			drawLine(item, false);
-
+			drawLine(item, false, eval(item.lhs));
 	}
 
 	if(item.type == 'print')
 	{
-		console.log('[print] line '+item.lineNumber +' is getting processed, result is: '+ item.subtype == 'var' ? eval(item.text) : item.text);
+		var res = item.subtype == 'var' ? eval(item.text) : item.text;
+		console.log('[print] line '+item.lineNumber +' is getting processed, result is: '+ res);
 
-		drawLine(item);
+		drawLine(item, false, res);
 	}
 }
 
@@ -296,29 +289,33 @@ function recursivelyProcess(items){
 
 
 var parseDoc = parseResult.getDoc();
-var parseStr = '//   ';
+var parseStr = '';
 
-window.parse = function() {
+function parse() {
 
 	console.clear();
-	time = 1;
+	time = 0.25;
 
-	for(var i=0; i < markedLines.length; i++) // it removes markes lines
-		markedLines[i].clear();
+	//for(var i=0; i < markedLines.length; i++) // it removes markes lines
+		//markedLines[i].clear();
 
 	logicals = [];
 
 	try{
  		evaluate.setValue('');
+		konsol.setValue('');
+
     	insertNewLines(editor.lineCount()-1);
 
     	var text = editor.getValue();
-    	var parser = PEG.buildParser(grammer);
     	result = parser.parse(text);
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 
-		recursivelyProcess(result);
-		parseStr = '//   '+'Kod hatasız, çalıştırma başarılı.';
+		parseStr = '//     '+'Kod hatasız, çalıştırma başarılı.';
+
+		$("#redLight").css("display", "none");
+		$("#greenLight").css("display", "block");
+
 
 		$("#run").css("display", "none");
 		$("#runJunk").css("display", "block");
@@ -326,28 +323,30 @@ window.parse = function() {
 		setTimeout(function(){
 			$("#run").css("display", "block");
 			$("#runJunk").css("display", "none");
-   		}, 750 * (time-1))
+   		}, speed * (time-1))
+		time++;
 
-time++;
+		recursivelyProcess(result);
 
 
   }catch(err){
+
+  		$("#redLight").css("display", "block");
+		$("#greenLight").css("display", "none");
+
+
 		if(err.location)
-			parseStr = '//   '+"Satır "+err.location.start.line+' hata içeriyor. Lütfen kontrol edin.';
+			parseStr = '//     '+"Satır "+err.location.start.line+' hata içeriyor. Lütfen kontrol edin.';
 	  	else{
-
-		 	var parser2 = PEG.buildParser(errorGrammer);
     		result = parser2.parse(err.message);
-
-			parseStr = '//   '+result;
+			parseStr = '//     '+result;
 		}
   }
 	parseDoc.setValue(parseStr)
-
 }
 
 window.temizle = function(){
-	editor.setValue('');
+	evaluate.setValue('');
 	konsol.setValue('');
 
 	console.clear();
@@ -361,11 +360,12 @@ window.kaydet = function(){
 }
 
 window.loadExample = function(from, no){
+	window.temizle();
 	document.getElementById('code-description').innerHTML = eval(from+'['+no+'].name');
 	editor.setValue(eval(from+'['+no+'].code'));
 }
 
-loadExample('beginner', 0);
+loadExample('beginner', 9);
 
 for(var i=1; i < beginner.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'baslangicSeviyeSoru'+i+'\'))">' +
@@ -388,3 +388,12 @@ for(var i=0; i < ortaSeviye.length; i++){
 
 	document.getElementById('ortaSeviyeSorular').innerHTML += str;
 }
+
+/*
+
+setTimeout(function(){
+	parse();
+}, 250);
+
+*/
+
