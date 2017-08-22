@@ -365,7 +365,7 @@ window.loadExample = function(from, no){
 	editor.setValue(eval(from+'['+no+'].code'));
 }
 
-loadExample('beginner', 9);
+loadExample('beginner', 0);
 
 for(var i=1; i < beginner.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'baslangicSeviyeSoru'+i+'\'))">' +
