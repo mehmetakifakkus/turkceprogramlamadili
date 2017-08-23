@@ -115,23 +115,16 @@ ortaSeviye = [
 	},
 	{
 		"name": "10 luk -> 2 lik sayı sistemi",
-        "description": '10 luk sayı sistemini 2 lik sayı sistemine çeviren kodu yazınız<br><br>İkilik tabanda ise şu şekilde ifade edilir:<br><br>'+
-						'<pre>'+
-						'1   1   1   0<br>'+
-						'|   |   |   |<br>'+
-						'|   |   |   |<br>'+
-						'v   v   v   v<br>'+
-						'2^3 2^2 2^1 2^0 = 13</pre><br>'+
-						'Bizim kodumuz ise bunun tam tersini yapacak<br><br>',
+        "description":  "10 luk sayı sistemini 2 lik sayı sistemine çeviren kodu yazınız<br>",
 		"code": "değişken sayı = 5\n"+
 				"değişken kalan = 0\n"+
-                "\n"+
-                "yinele(sayı != 0)\n"+
-                "{\n"+
-                "  kalan = sayı % 2;\n"+
-                "  sayı = taban(sayı / 2)\n"+
-                "  yaz kalan \n"+
-                "}\n"
+				"\n"+
+				"yinele(sayı != 0)\n"+
+				"{\n"+
+				"  kalan = sayı % 2;\n"+
+				"  sayı = taban(sayı / 2)\n"+
+				"  yaz kalan \n"+
+				"}\n"
 	},
 	{
 		"name": "Asal olma testi",
@@ -166,7 +159,53 @@ ortaSeviye = [
 
 
 
+userSend = [
+	{
+		name: 'Dikdörtgen çevresi hesabı',
+		description: '-',
+		username: 'Hüseyin Cahit Kebapçıoğlu',
+		code: "değişken a = 5\n"+
+			  "değişken c = a+1\n"+
+			  "değişken b = 1\n"+
+			  "değişken faktöriyel = 1\n"+
+			  "yinele( c!= b)\n"+
+			  "{\n"+
+			  "faktöriyel = faktöriyel * b\n"+
+			  "b = b + 1\n"+
+			  "}\n"+
+			  "yaz faktöriyel\n",
+		date: '19.08.2017'
+	},
+	{
+		name: 'Aylık ev bütçesi hesabı',
+		description: '-',
+		username: 'Çağatay Özevim',
+		code:	"değişken aylıkgelir = 1400\n" +
+		"değişken harçlık = 10\n"+
+		"değişken elektirik = 100\n"+
+		"değişken su = 50\n"+
+		"değişken dogalgaz = 60\n"+
+		"değişken gıda = 400\n"+
+		"\n"+
+		"değişken kalanpara = aylıkgelir - (harçlık + elektirik + su + dogalgaz + gıda)\n"+
+		"\n"+
+		"yaz kalanpara\n",
+		date: '20.08.2017'
+	},
+	{
+		name: 'Dikdörtgen çevresi hesabı',
+		description: '-',
+		username: 'Sonat Türkan',
+		code: "değişken boy = 20\n"+
+			  "değişken en = 35\n"+
+			  "\n"+
+			  "değişken sonat = (boy + en) * 2\n"+
+			  "\n"+
+			  "yaz sonat\n",
+		date: '21.08.2017'
+	}
 
+]
 
 
 
@@ -188,3 +227,18 @@ adaySorular = [
 	  'code': 'değişken num1 = 12\ndeğişken num2 = 10\n\nyinele(num1 != num2){\n  eğer(num1 > num2)\n    num1 = num1 - num2\n  değilse\n    num2 = num2 - num1\n yaz num1}'
 	}
 ]
+
+
+/*
+
+'<br>İkilik tabanda ise şu şekilde ifade edilir:<br><br>'+
+						'<pre>'+
+						'1   1   1   0<br>'+
+						'|   |   |   |<br>'+
+						'|   |   |   |<br>'+
+						'v   v   v   v<br>'+
+						'2^3 2^2 2^1 2^0 = 13</pre><br>'+
+						'Bizim kodumuz ise bunun tam tersini yapacak<br><br>',
+
+
+*/

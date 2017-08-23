@@ -37,21 +37,20 @@
 	  <a href="hakkinda.html">Hakkında</a>
 </nav>
 
-
-<div class="denemecontainer ust-donme">
-	<div class="deneme-left">
+<div class="mycontainer ust-donme">
+	<div class="column-left">
 		<h3 id = "code-description" style="margin:8px 0px 8px 20px;"> Kodu buraya yazın </h3>
 	</div>
 
-	<div class="deneme-right">
+	<div class="column-right">
 		<h3 style="margin:8px 0px 8px 20px;"> Değişken değerleri </h3>
 	</div>
 </div>
 
 
-<div class="denemecontainer" style="margin-top:4px;">
+<div class="mycontainer" style="margin-top:4px;">
 
-	<div id="column-left" class="deneme-left codeContent">
+	<div id="column-left" class="column-left codeContent">
 		<textarea id="code">değişken num1 = 12
 değişken num2 = 6
 
@@ -67,15 +66,15 @@ yaz num1</textarea>
 
 	</div>
 
-	<div id="column-right" class="deneme-right codeContent">
+	<div id="column-right" class="column-right codeContent">
 		<textarea id="evaluate"></textarea>
 	</div>
 
 </div>
 
 
-<div class="container subcontainer alt-donme" style='z-index: 0;'>
-<div class="column">
+<div class="mycontainer" style='z-index: 0;'>
+<div class="row alt-donme">
 <button type="button" id="run" onclick="parse()" style="position:relative; float:left; z-index:3" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Çalıştır</button>
 
 	<button type="button" id="runJunk" onclick='' style="position:absolute; float:left; z-index:2; display:none" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Bekle..</button>
@@ -91,53 +90,73 @@ yaz num1</textarea>
 	</div>
 
 
-	<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:16px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+	<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:16px; margin-right:10px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
 
 	<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:30px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span></button>
 
-</div>
+<!--</div>-->
 </div>
 
 
-<div class="container subcontainer ust-donme" style = "padding: 6px 20px 7px 16px; margin-bottom: 0px; margin-top: 30px; min-height: 10px; ">
+<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-bottom: 0px; margin-top: 20px; min-height: 10px; ">
 	<h3 style="margin: 0em; padding: 0em; "> Konsol </h3>
 </div>
 
-<div class="container subcontainer alt-donme" style = "padding: 0px 5px 5px 5px; margin-top: 0px; background-color:#000000; min-height: 100px;">
+<div class="container row alt-donme" style = "padding: 0px 5px 5px 5px; margin-top: 0px; background-color:#000000; min-height: 100px;">
 	<textarea id="konsol"></textarea>
 </div>
 
 
+<!--  Kullanıcı Kodları -->
 
 
-<div class="container subcontainer" style = "padding: 10px 40px 16px 30px; margin-top: 50px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-	<h2 style="margin: 0em; padding-top:10px"> Başlangıç Seviye Kod örnekleri </h2>
+<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top:30px;">
+	<h3 style="margin: 0em; padding-top: 0px">Kullanıcıların Gönderdikleri</h3>
 </div>
 
-<div class="container subcontainer" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 30px;  font-size: 115%;  border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
-		<div id="baslangic" class="column"></div>
+<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%;">
+	<div id="userQuestions" class="column"></div>
+</div>
+
+
+<!--  Başlangıç Seviye Kod Örnekleri	-->
+<div class="codePart-left">
+
+	<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top: 40px;">
+		<h3 style="margin: 0em; padding-top: 0px">Başlangıç Seviye Örnekler</h3>
 	</div>
 
-
-
-
-
-<div class="container subcontainer ust-donme" style = "padding: 10px 40px 16px 30px; margin-top: 50px;">
-	<h2 style="margin: 0em; padding-top:10px"> Orta Seviye Kod örnekleri </h2>
+	<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%; ">
+		<div id="baslangic" class="column"></div>
+	</div>
 </div>
 
-<div class="container subcontainer alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 30px;  font-size: 115%;">
+
+<!--  Orta Seviye Kod Örnekleri	-->
+<div class="codePart-right">
+
+	<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top: 40px;">
+		<h3 style="margin: 0em; padding-top: 0px">Orta Seviye Örnekler</h3>
+	</div>
+
+	<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%;">
 		<div id="ortaSeviyeSorular" class="column"></div>
 	</div>
 
-
-<div class="container subcontainer ust-donme" style = "padding: 10px 40px 16px 30px; margin-top: 50px;">
-	<h2 style="margin: 0em; padding-top:10px"> İeri Seviye Kod örnekleri </h2>
 </div>
 
-<div class="container subcontainer alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 30px;  font-size: 115%;">
+<!--  İleri Seviye Kod Örnekleri	-->
+
+<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top: 40px;">
+	<h3 style="margin: 0em; padding-top: 0px"> İleri Seviye Örnekler </h3>
+</div>
+
+<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%;">
 		<div id="ileriSeviyeSorular" class="column"></div>
 	</div>
+
+
+
 
 
 

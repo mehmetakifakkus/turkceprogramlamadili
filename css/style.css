@@ -3,22 +3,7 @@ body {
   padding: 40px;
 }
 
-.subcontainer {
-  width: 75%;
-
-  margin-top: 3px;
-  margin-bottom: 10px;
-
-  padding: 0px 5px 0px 5px;
-
-  background-color: #fff;
-  border-radius: 0px;
-  max-width: 1100px;
-  min-height: 50px;
-  height: auto;
-}
-
-.denemecontainer {
+.mycontainer {
 	display: block;
 	position: relative;
 	overflow: auto;
@@ -26,13 +11,13 @@ body {
 	padding-bottom: 2px;
 	width: 75%;
 
-    max-width: 1100px;
+    max-width: 1800px;
 
   	margin-left: 12.5%;
 /*	margin-right: auto;*/
 }
 
-.deneme-left {
+.column-left {
 	display: block;
 	position: relative;
 	float:left;
@@ -45,7 +30,7 @@ body {
 	border-radius: 0px;
 }
 
-.deneme-right{
+.column-right{
 	display: block;
 	position: relative;
 	float:left;
@@ -71,19 +56,41 @@ body {
 	min-height: 250px;
 }
 
+.codePart-left{
 
-div.column {
+	display: block;
+	position: relative;
+	float:left;
+
+	margin-right: 1%;
+	padding-left: 0px;
+	width: 50%;
+}
+
+.codePart-right{
+
+	display: block;
+	position: relative;
+	float:left;
+
+	padding-left: 0px;
+	width: 48.7%;
+}
+
+
+div.row {
   float: left;
   width: 100%;
 
-/*  margin: 0px 15px 10px 0px;*/
+  margin: 4px 15px 10px 0px;
   border: 0px solid #d8d8d8;
 /*  height: auto;*/
 
+
   padding: 10px 0px 10px 10px;
   background-color: #fff;
-  border-radius: 8px;
-  max-width: 1000px;
+/*  border-radius: 8px;*/
+  max-width: 1800px;
 }
 
 
