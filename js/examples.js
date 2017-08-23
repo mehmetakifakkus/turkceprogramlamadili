@@ -161,7 +161,7 @@ ortaSeviye = [
 
 userSend = [
 	{
-		name: 'Faktoriyel hesabı hesabı',
+		name: 'Faktoriyel hesabı',
 		description: '-',
 		username: 'Hüseyin Cahit Kebapçıoğlu',
 		code: "değişken a = 5\n"+
