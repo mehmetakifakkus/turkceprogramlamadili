@@ -17,13 +17,6 @@ var evaluate = CodeMirror.fromTextArea(document.getElementById('evaluate'), {
   readOnly: true
 });
 
-var konsol = CodeMirror.fromTextArea(document.getElementById('konsol'), {
-  mode: "simplemode",
-  lineNumbers: false,
-  theme: '3024-night',
-  readOnly: true
-});
-
 var parseResult = CodeMirror.fromTextArea(document.getElementById('parseResult'), {
   mode: "simplemode",
   lineNumbers: false,
@@ -31,6 +24,12 @@ var parseResult = CodeMirror.fromTextArea(document.getElementById('parseResult')
   readOnly: true
 });
 
+var konsol = CodeMirror.fromTextArea(document.getElementById('konsol'), {
+  mode: "simplemode",
+  lineNumbers: false,
+  theme: '3024-night',
+  readOnly: true
+});
 
 
 editor.on("gutterClick", function(cm, n) {
@@ -128,7 +127,6 @@ function drawLine(line, isLoop, result){
 	}
 	else if(line.type == 'logical')
  	{
-		//var result = window.eval(line.text);
 		highlightLine(line, 'logical', res);
 		insertTextAtCursor(res, line.lineNumber, false);
 	}
@@ -327,6 +325,12 @@ function parse() {
 			$("#runJunk").css("display", "none");
    		}, speed * (time-1))
 		time++;
+
+		setTimeout(function(){
+			highlightLine({lineNumber: 100});
+		}, speed * (time-1))
+		time++;
+
 
 
   }catch(err){
