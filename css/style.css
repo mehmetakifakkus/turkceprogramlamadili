@@ -22,12 +22,15 @@ body {
 	position: relative;
 	float:left;
 
-	margin-right: 0.5%;
+	margin-right: 0.3%;
 	padding-left: 0px;
 
-	width: 62%;
+	width: 70%;
 	background-color: #fff;
 	border-radius: 0px;
+
+	min-width: 400px;
+	max-width: 90%;
 }
 
 .column-right{
@@ -37,7 +40,7 @@ body {
 
 	padding-left: 0px;
 
-	width: 37.5%;
+	width: 29.5%;
 	background-color: #fff;
 	border-radius: 0px;
 }

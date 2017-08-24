@@ -149,17 +149,57 @@ ortaSeviye = [
 	}
 
 
-
-
-
-
-
 ]
 
 
+'var not = 90\n\n'+
+'eğer(not > 89)\n'+
+'	yaz "AA"\n'+
+'değilse eğer(not > 84)\n'+
+'	yaz "BA"\n'+
+'değilse eğer(not > 79)\n'+
+'	yaz "BB"\n'+
+'değilse eğer(not > 74)\n'+
+'	yaz "CB"\n'+
+'değilse eğer(not > 64)\n'+
+'	yaz "CC"\n'+
+'değilse eğer(not > 57)\n'+
+'	yaz "DC"\n'+
+'değilse eğer(not > 49)\n'+
+'	yaz "DD"\n'+
+'değilse eğer(not > 39)\n'+
+'	yaz "FD"\n'+
+'değilse \n'+
+'	yaz "FF"\n',
 
 
 userSend = [
+	{
+		name: 'Öğrenci Notu Hesaplama (Üniversite)',
+		description: '-',
+		username: 'Ahmet Sarıcı',
+		code: 'var not = 90\n\n'+
+			  'eğer(not > 89)\n'+
+			  '	yaz "AA"\n'+
+			  'değilse eğer(not > 84)\n'+
+			  '	yaz "BA"\n'+
+			  'değilse eğer(not > 79)\n'+
+			  '	yaz "BB"\n'+
+			  'değilse eğer(not > 74)\n'+
+			  '	yaz "CB"\n'+
+			  'değilse eğer(not > 64)\n'+
+			  '	yaz "CC"\n'+
+			  'değilse eğer(not > 57)\n'+
+			  '	yaz "DC"\n'+
+			  'değilse eğer(not > 49)\n'+
+			  '	yaz "DD"\n'+
+			  'değilse eğer(not > 39)\n'+
+			  '	yaz "FD"\n'+
+			  'değilse \n'+
+			  '	yaz "FF"\n',
+
+		date: '7.08.2017'
+	},
 	{
 		name: 'Faktoriyel hesabı',
 		description: '-',
@@ -181,15 +221,15 @@ userSend = [
 		description: '-',
 		username: 'Çağatay Özevim',
 		code:	"değişken aylıkgelir = 1400\n" +
-		"değişken harçlık = 10\n"+
-		"değişken elektirik = 100\n"+
-		"değişken su = 50\n"+
-		"değişken dogalgaz = 60\n"+
-		"değişken gıda = 400\n"+
-		"\n"+
-		"değişken kalanpara = aylıkgelir - (harçlık + elektirik + su + dogalgaz + gıda)\n"+
-		"\n"+
-		"yaz kalanpara\n",
+				"değişken harçlık = 10\n"+
+				"değişken elektirik = 100\n"+
+				"değişken su = 50\n"+
+				"değişken dogalgaz = 60\n"+
+				"değişken gıda = 400\n"+
+				"\n"+
+				"değişken kalanpara = aylıkgelir - (harçlık + elektirik + su + dogalgaz + gıda)\n"+
+				"\n"+
+				"yaz kalanpara\n",
 		date: '20.08.2017'
 	},
 	{

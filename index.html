@@ -6,14 +6,20 @@
 
 <script src='https://github.com/pegjs/pegjs/releases/download/v0.9.0/peg-0.9.0.min.js'></script>
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<style>
+	#draggable { width: 150px; height: 150px; padding: 0em; }
+	</style>
+
 <!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>-->
 <link rel='stylesheet prefetch' href='css/codemirror.css'>
 
 	<link href="css/eclipse.css" rel="stylesheet">
-	<link href="https://codemirror.net/theme/3024-night.css
-" rel="stylesheet">
+	<link href="https://codemirror.net/theme/3024-night.css" rel="stylesheet">
 
 
 <link rel="shortcut icon" href="css/tr.ico">
@@ -38,17 +44,19 @@
 </nav>
 
 <div class="mycontainer ust-donme">
-	<div class="column-left">
-		<h3 id = "code-description" style="margin:8px 0px 8px 20px;"> Kodu buraya yazın </h3>
+	<div id="column-left-head" class="column-left">
+		<h3 id = "code-description" style="margin:8px 0px 8px 20px; white-space: nowrap;">
+			Kodu buraya yazın </h3>
 	</div>
 
-	<div class="column-right">
-		<h3 style="margin:8px 0px 8px 20px;"> Değişken değerleri </h3>
+	<div id="column-right-head" class="column-right">
+		<h3 style="margin:8px 0px 8px 20px;   white-space: nowrap;">
+			Değişken değeri </h3>
 	</div>
 </div>
 
 
-<div class="mycontainer" style="margin-top:4px;">
+<div id = "mycontainer" class="mycontainer" style="margin-top:4px;">
 
 	<div id="column-left" class="column-left codeContent">
 		<textarea id="code">değişken num1 = 12
@@ -71,6 +79,26 @@ yaz num1</textarea>
 	</div>
 
 </div>
+
+<script>
+	//$("#column-left").resizable();
+
+	$('#column-left').resize(function(){
+	  // $('#column-right').width($("#mycontainer").width() -
+	//					($("#column-left").width() + $("#mycontainer").width() * 0.003));
+
+	// $('#column-right').width($("#mycontainer").width() -
+					($("#column-left").width() + 5));
+
+
+	 ///  $('#column-left-head').width($("#mycontainer").width() -
+	//				($("#column-right").width() + $("#mycontainer").width() * 0.003));
+	 //  $('#column-right-head').width($("#mycontainer").width() -
+	//					($("#column-left").width() + $("#mycontainer").width() * 0.003));
+
+	   $('#column-right').height($("#column-left").height());
+	});
+</script>
 
 
 <div class="mycontainer" style='z-index: 0;'>
@@ -96,6 +124,7 @@ yaz num1</textarea>
 
 <!--</div>-->
 </div>
+
 
 
 <div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-bottom: 0px; margin-top: 20px; min-height: 10px; ">
@@ -139,7 +168,7 @@ yaz num1</textarea>
 		<h3 style="margin: 0em; padding-top: 0px">Orta Seviye Örnekler</h3>
 	</div>
 
-	<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%;">
+	<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px;">
 		<div id="ortaSeviyeSorular" class="column"></div>
 	</div>
 
@@ -151,7 +180,7 @@ yaz num1</textarea>
 	<h3 style="margin: 0em; padding-top: 0px"> İleri Seviye Örnekler </h3>
 </div>
 
-<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%;">
+<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; ">
 		<div id="ileriSeviyeSorular" class="column"></div>
 	</div>
 

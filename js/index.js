@@ -369,22 +369,21 @@ loadExample('beginner', 0);
 
 for(var i=0; i < userSend.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'userSend'+i+'\'))">' +
-		      '<h5 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[i].name + '  (' + userSend[i].date+ ' tarihinde, ' + userSend[i].username + ' tarafından)' + '</h5></a>' +
-			  '<p style = "font-size: 12px; display: none; "id="userSend'+ i +'">' +
+		      '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[i].name + '  (' + userSend[i].date+ ' tarihinde, ' + userSend[i].username + ' tarafından)' + '</h4></a>' +
+			  '<p style = "font-size: 14px; display: none; "id="userSend'+ i +'">' +
 		         	  ''+userSend[i].description + ' Hemen incelemek isterseniz, ' +
-			  		'<a href="#" onclick = "loadExample(\'userSend\', '+ i +')"> kodları buradan yükleyin</a>.' +
+			  		'<a href="#" onclick = "loadExample(\'userSend\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
 			  '</p>';
 
 	document.getElementById('userQuestions').innerHTML += str;
 }
 
-
 for(var i=1; i < beginner.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'baslangicSeviyeSoru'+i+'\'))">' +
-		      '<h5 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + i +'. '+ beginner[i].name + '</h5></a>' +
-			  '<p style = "font-size: 12px; display: none; "id="baslangicSeviyeSoru'+ i +'">' +
+		      '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + i +'. '+ beginner[i].name + '</h4></a>' +
+			  '<p style = "font-size: 14px; display: none; "id="baslangicSeviyeSoru'+ i +'">' +
 		         	beginner[i].description + ' Hemen incelemek isterseniz, ' +
-			  		'<a href="#" onclick = "loadExample(\'beginner\', '+ i +')"> kodları buradan yükleyin</a>.' +
+			  		'<a href="#" onclick = "loadExample(\'beginner\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
 			  '</p>';
 
 	document.getElementById('baslangic').innerHTML += str;
@@ -392,10 +391,10 @@ for(var i=1; i < beginner.length; i++){
 
 for(var i=0; i < ortaSeviye.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'ortaSeviyeSoru'+i+'\'))">' +
-			  '<h5 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver;">' + (i+1) +'. '+ ortaSeviye[i].name + '</h5></a>' +
-			  '<p style = "font-size: 12px; display: none;" id="ortaSeviyeSoru'+ i +'">' +
+			  '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver;">' + (i+1) +'. '+ ortaSeviye[i].name + '</h4></a>' +
+			  '<p style = "font-size: 14px; display: none;" id="ortaSeviyeSoru'+ i +'">' +
 					ortaSeviye[i].description + ' Hemen incelemek isterseniz, ' +
-					'<a href="#" onclick = "loadExample(\'ortaSeviye\', '+ i +')"> kodları buradan yükleyin</a>.' +
+					'<a href="#" onclick = "loadExample(\'ortaSeviye\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
 			  '</p>';
 
 	document.getElementById('ortaSeviyeSorular').innerHTML += str;
