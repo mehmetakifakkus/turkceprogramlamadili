@@ -2,7 +2,7 @@ beginner  = [
 	{
       "name": "3 sayının ortalamasını alma",
       "description": '3 kişinin sahip olduğu paranın ortalamasını bulalım.<br><br>',
-	  "code": "değişken para1 = 35\ndeğişken para2 = 45\ndeğişken para3 = 25\n\ndeğişken ort = (para1 + para2 + para3) / 3\n\nyaz ort"
+	  "code": "değişken para1 = 5\ndeğişken para2 = 7\ndeğişken para3 = 12\n\ndeğişken ort = (para1 + para2 + para3) / 3\n\nyaz ort"
     },{
       "name": "Yurt dışından yapılan alışverişin tutarı",
       "description": 'Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bulalım. Tabiki doların TL karşılığını değişken değeri olarak vereceğiz. Almak istediğimiz ürünlerin de dolar cinsinden tutarına sahibiz.<br><br>',

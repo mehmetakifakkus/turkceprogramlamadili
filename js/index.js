@@ -328,6 +328,7 @@ function parse() {
 
 		setTimeout(function(){
 			highlightLine({lineNumber: 100});
+			parseDoc.setValue("//     Bitti.");
 		}, speed * (time-1))
 		time++;
 
