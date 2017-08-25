@@ -31,6 +31,16 @@ var konsol = CodeMirror.fromTextArea(document.getElementById('konsol'), {
   readOnly: true
 });
 
+editor.setOption("extraKeys", {
+	"Ctrl-Enter": function(cm) {
+		console.log('enter');
+		parse();
+	},
+	"Cmd-Enter": function(cm) {
+		console.log('enter');
+		parse();
+	}
+});
 
 editor.on("gutterClick", function(cm, n) {
   var info = cm.lineInfo(n);
@@ -65,12 +75,26 @@ editor.on('cursorActivity', function(){
 
 editor.on("keyup", function (cm, event) {
 	/*Enter - do not open autocomplete list just after item has been selected in it*/
-	if (!editor.state.completionActive &&  event.keyCode != 13 && event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40 && event.keyCode != 27 && event.keyCode != 32 && event.keyCode != 8 && event.keyCode != 9) {
+	if (!editor.state.completionActive
+		&& event.keyCode != 13 // enter
+		&& event.keyCode != 37 // left
+		&& event.keyCode != 38 // up
+		&& event.keyCode != 39 // right
+		&& event.keyCode != 40 // down
+		&& event.keyCode != 27
+		&& event.keyCode != 32 // space
+		&& event.keyCode != 8 // tab
+		&& event.keyCode != 9
+		&& event.keyCode != 17 // ctrl
+		&& event.keyCode != 93 // cmd+enter
+	    ){
             CodeMirror.commands.autocomplete(editor, null, {completeSingle: false});
      }
 
 	//if(event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40)
 		//parse();
+
+	console.log(event.keyCode)
 });
 
 
@@ -374,7 +398,7 @@ loadExample('beginner', 0);
 
 for(var i=0; i < userSend.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'userSend'+i+'\'))">' +
-		      '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[i].name + '  (' + userSend[i].date+ ' tarihinde, ' + userSend[i].username + ' tarafından)' + '</h4></a>' +
+		      '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[i].name + '</a>  <span style=" font-size: 1.25rem;  color: #888;">  ' + userSend[i].date+ ' tarihinde, ' + userSend[i].username + ' tarafından)' + '</span></h4>' +
 			  '<p style = "font-size: 14px; display: none; "id="userSend'+ i +'">' +
 		         	  ''+userSend[i].description + ' Hemen incelemek isterseniz, ' +
 			  		'<a href="#" onclick = "loadExample(\'userSend\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
@@ -406,30 +430,6 @@ for(var i=0; i < ortaSeviye.length; i++){
 }
 
 /*
-
-setTimeout(function(){
-	parse();
-}, 250);
-
-
-değişken sayı = 35
-değişken böl = 2
-değişken asalMi = yanlış
-
-yinele(böl < sayı)
-{
-  değişken kalan = sayı % böl;
-  eğer(kalan == 0)
-    asalMi = doğru
-
-	böl = böl + 1
-}
-
-yaz asalMı
-
-
-
-
 
 
 */

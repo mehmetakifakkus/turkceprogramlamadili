@@ -81,22 +81,24 @@ yaz num1</textarea>
 </div>
 
 <script>
-	//$("#column-left").resizable();
+	$("#column-left").resizable();
+
+	function helper(){
+		$('#column-right').width($("#mycontainer").width() -
+					($("#column-left").width() + $("#mycontainer").width() * 0.004));
+   		$('#column-left-head').width($("#mycontainer").width() -
+					($("#column-right").width() + $("#mycontainer").width() * 0.004));
+	    $('#column-right-head').width($("#mycontainer").width() -
+					($("#column-left").width() + $("#mycontainer").width() * 0.004));
+	}
 
 	$('#column-left').resize(function(){
-	  // $('#column-right').width($("#mycontainer").width() -
-	//					($("#column-left").width() + $("#mycontainer").width() * 0.003));
-
-	// $('#column-right').width($("#mycontainer").width() -
-					($("#column-left").width() + 5));
-
-
-	 ///  $('#column-left-head').width($("#mycontainer").width() -
-	//				($("#column-right").width() + $("#mycontainer").width() * 0.003));
-	 //  $('#column-right-head').width($("#mycontainer").width() -
-	//					($("#column-left").width() + $("#mycontainer").width() * 0.003));
-
+	   helper();
 	   $('#column-right').height($("#column-left").height());
+	});
+
+	$(window).resize(function(){
+		helper();
 	});
 </script>
 
@@ -137,13 +139,11 @@ yaz num1</textarea>
 
 
 <!--  Kullanıcı Kodları -->
-
-
 <div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top:30px;">
 	<h3 style="margin: 0em; padding-top: 0px">Kullanıcıların Gönderdikleri</h3>
 </div>
 
-<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%;">
+<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 20px; margin-top: -7px; max-height:375px; overflow: scroll;">
 	<div id="userQuestions" class="column"></div>
 </div>
 

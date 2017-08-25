@@ -69,11 +69,6 @@ beginner  = [
     }
 ];
 
-
-
-
-
-
 ortaSeviye = [
 	{
 		"name": "Faktoriyel bulma",
@@ -152,25 +147,8 @@ ortaSeviye = [
 ]
 
 
-'var not = 90\n\n'+
-'eğer(not > 89)\n'+
-'	yaz "AA"\n'+
-'değilse eğer(not > 84)\n'+
-'	yaz "BA"\n'+
-'değilse eğer(not > 79)\n'+
-'	yaz "BB"\n'+
-'değilse eğer(not > 74)\n'+
-'	yaz "CB"\n'+
-'değilse eğer(not > 64)\n'+
-'	yaz "CC"\n'+
-'değilse eğer(not > 57)\n'+
-'	yaz "DC"\n'+
-'değilse eğer(not > 49)\n'+
-'	yaz "DD"\n'+
-'değilse eğer(not > 39)\n'+
-'	yaz "FD"\n'+
-'değilse \n'+
-'	yaz "FF"\n',
+
+
 
 
 userSend = [
@@ -199,6 +177,15 @@ userSend = [
 			  '	yaz "FF"\n',
 
 		date: '7.08.2017'
+	},
+	{
+		name: 'Fahrenheit\'ten celcius\'a çevirme',
+		description: '-',
+		username: 'Hüseyin Cahit Kebapçıoğlu',
+		code: "değişken fahrenheit = 120\n"+
+			  "değişken celcius= (fahrenheit-32) / 1.8\n"+
+			  "yaz celcius\n",
+		date: '17.08.2017'
 	},
 	{
 		name: 'Faktoriyel hesabı',
@@ -243,9 +230,36 @@ userSend = [
 			  "\n"+
 			  "yaz sonat\n",
 		date: '21.08.2017'
+	},
+	{
+		name: 'Öğrenci\'nin not durumu',
+		description: '-',
+		username: 'Berkay Çatak',
+		code: "değişken not1 = 60\n"+
+			  "değişken not2 = 90\n"+
+			  "değişken ort = (not1 + not2) / 2\n\n"+
+			  "eğer(ort >= 50)\n"+
+			  '	yaz "geçti"\n'+
+			  "değilse\n"+
+			  '	yaz "kaldı"\n'+
+			  "\n"+
+			  "yaz ort",
+		date: '24.08.2017'
+	},
+	{
+		name: 'Araç yakıtı hesaplama',
+		description: '-',
+		username: 'Osman Kalhan',
+		code: "değişken yapılankm = 70\n"+
+			  "değişken yakıttutar = 20\n\n"+
+			  "değişken sonuç = yakıttutar / yapılankm\n\n"+
+			  'yaz sonuç yaz "krş"\n',
+		date: '24.08.2017'
 	}
-
 ]
+
+
+
 
 
 
