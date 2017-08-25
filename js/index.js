@@ -105,35 +105,22 @@ function makeMarker() {
   return marker;
 }
 
-var markedLine, markedLines = [], logicals = [];
+var markedLine, markedLogic, logicals = [];
 function highlightLine(line, type, result) { // type is used for logical,  result is logical true or false
 
-  var lineNumber = line.lineNumber;
+  var ln = line.lineNumber-1;
 
   if(markedLine)
     markedLine.clear();
 
-	for(var i=0; i < logicals.length; i++)
-	{
-		if(logicals[i].eval)
-			markedLine = editor.markText({line: logicals[i].line.lineNumber-1, ch: logicals[i].line.start}, {line: logicals[i].line.lineNumber-1, ch: logicals[i].line.end}, {className: "styled-background-logical-true"});
-		else
-			markedLine = editor.markText({line: logicals[i].line.lineNumber-1, ch: logicals[i].line.start}, {line: logicals[i].line.lineNumber-1, ch: logicals[i].line.end}, {className: "styled-background-logical-false"});
-	}
+	if(result)
+		markedLogic = editor.markText({line: ln, ch: line.start}, {line: ln, ch: line.end}, {className: "styled-background-logical-true"});
+	else
+		markedLogic = editor.markText({line: ln, ch: line.start}, {line: ln, ch: line.end}, {className: "styled-background-logical-false"});
 
-	//if(type == 'logical')
-	{
-		if(result)
-			markedLine = editor.markText({line: lineNumber-1, ch: line.start}, {line: lineNumber-1, ch: line.end}, {className: "styled-background-logical-true"});
-		else
-			markedLine = editor.markText({line: lineNumber-1, ch: line.start}, {line: lineNumber-1, ch: line.end}, {className: "styled-background-logical-false"});
+	logicals.push(markedLogic);
 
-		logicals.push({line: line, eval: result});
-	}
-	//else
-  		markedLine = editor.markText({line: lineNumber-1, ch: 0}, {line: lineNumber-1, ch: 50}, {className: "styled-background-normal"});
-
-	markedLines.push(markedLine);
+	markedLine = editor.markText({line: ln, ch: 0}, {line: ln, ch: 50}, {className: "styled-background-normal"});
 }
 
 
@@ -318,10 +305,9 @@ function parse() {
 	console.clear();
 	time = 0.25;
 
-	//for(var i=0; i < markedLines.length; i++) // it removes markes lines
-		//markedLines[i].clear();
+	for(var i=0; i<logicals.length; i++)
+		logicals[i].clear();
 
-	logicals = [];
 
 	try{
  		evaluate.setValue('');
@@ -379,7 +365,11 @@ window.temizle = function(){
 	konsol.setValue('');
 
 	console.clear();
-	time = 1;
+	time = 0.25;
+
+	for(var i=0; i<logicals.length; i++)
+		logicals[i].clear();
+
 	logicals = [];
 }
 
