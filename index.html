@@ -9,6 +9,9 @@
 <script src='https://github.com/pegjs/pegjs/releases/download/v0.9.0/peg-0.9.0.min.js'></script>
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.min.js"></script>
+
+<link href="css/jquery-ui-1.10.0.custom.css" rel="stylesheet" type="text/css">
 
 
 <!--<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>-->
@@ -16,7 +19,8 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">  <!--Burası resize emek için gerekli	-->
 
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
 <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">-->
@@ -135,8 +139,39 @@ yaz num1</textarea>
 
 	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-left:3px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
 	<ul id = "settings" class="mydropdown-menu" style="position:relative;" role="menu">
-			<hr style="style1">
-			<p> Buraya bazı ayarlar gelecek </p>
+		<hr style="style1">
+
+<div style="margin-left:-12px">
+
+	<div class="col-md-4">
+		<p><strong>Çalıştırma Hızı</strong></p>
+		<div id="h-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
+			<div class="ui-slider-range ui-widget-header ui-corner-all" href="#" style="width: 0%;"></div>
+			<a class="ui-slider-handle ui-state-default ui-corner-all" style="left: 11.1%;"></a>
+		</div>
+		<br>
+		<p>Saniyede <input type="text" style = "width:27px; line-height: 15px;" onchange="" id="amount" value="1"> satır çalışacak.</p>
+	</div>
+	<div class="col-md-4">
+	</div>
+
+	<div class="col-md-2">
+	</div>
+</div>
+
+<script>
+
+$('#h-slider').slider({
+    range: "min", min: 5, max: 50, value: 10,
+    slide: function (event, ui) {
+        $("#amount").val(ui.value / 10);
+        refreshSpeed(ui.value / 10)
+		//refreshPointsandSeeds();
+    }
+});
+
+</script>
+
 	</ul>
 
 </div>

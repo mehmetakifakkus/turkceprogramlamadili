@@ -306,7 +306,7 @@ function temizle(){
 	evaluate.setValue('');
 	konsol.setValue('');
 
-	console.clear();
+	//console.clear();
 	time = 0.25;
 
 	for(var i=0; i<logicals.length; i++)
@@ -375,9 +375,13 @@ window.kaydet = function(){
 }
 
 window.loadExample = function(from, no){
-	window.temizle();
+	temizle();
 	document.getElementById('code-description').innerHTML = eval(from+'['+no+'].name');
 	editor.setValue(eval(from+'['+no+'].code'));
+}
+
+window.refreshSpeed = function(value){
+	speed = 1000 / value;
 }
 
 
