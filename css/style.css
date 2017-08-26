@@ -224,3 +224,144 @@ div.title {
   border-right: 1px solid #CC342D;
   color: #0d62be;
 }
+
+
+
+
+
+
+
+
+hr {
+	margin-top: -2px;
+	margin-bottom: 10px;
+	background: #5c4084;
+	border: 0;
+	height: 3px;
+	margin-left: -10px;
+}
+
+/* ---------- COLOR-PALETTE ---------- */
+
+.color-palette {
+	background: #fff;
+	border-radius: 5px;
+	margin: 10px auto;
+	padding: 10px;
+	position: relative;
+	width: 205px;
+	border: 1px solid #ccc;
+}
+
+.color-palette2 {
+	background: #fff;
+	border-radius: 5px;
+	margin: 6px auto;
+	padding: 6px;
+	position: relative;
+	width: 106px;
+	border: 1px solid #ccc;
+}
+
+/*ucgen kisim var*/
+.color-palette:before {
+	background: #ffffff;
+	content: "";
+	height: 12px;
+	left: 12%;
+	margin: -4px 0 0 -4px;
+	position: absolute;
+	border: 1px solid #ccc;
+
+	top: -2px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	transform: rotate(45deg);
+	width: 12px;
+}
+
+/*kare kisim var altta*/
+.color-palette:after {
+	background: #ffffff;
+	content: "";
+	height: 12px;
+	width: 22px;
+
+	left: 10%;
+	margin: -4px 0 0 -4px;
+	position: absolute;
+	border: 0px solid #ccc;
+
+	top: 4px;
+
+}
+
+.color-palette h2 {
+	color: #696969;
+	font-size: 16px;
+}
+
+.color-container {
+	margin: -4px 0;
+	width: 180px;
+}
+
+.color-container:first-child { margin-top: 0; }
+.color-container:last-child { margin-bottom: 0; }
+
+.color-container h3 {
+	color: #696969;
+	font-size: 14px;
+	margin-bottom: 3px;
+}
+
+.color-container .color:first-of-type {
+	border-radius: 3px 0 0 3px;
+}
+
+.color-container .color:last-of-type {
+	border-radius: 0 3px 3px 0;
+}
+
+/*.dropright:hover .dropdown-menu {*/
+/*	display: block;*/
+/*	margin-top: 0;*/
+/* }	*/
+
+.dropright .mydropdown-menu {
+	display: none;
+	margin-top: 5px;
+ }
+
+.dropdown-menu>li>img {
+	display: block;
+	top: 2px; bottom:15px; left: 0; right:0;
+	margin: auto;
+}
+
+.dropdown-menu>li>a {
+	display: block;
+	margin: 10px 10px 0px 10px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.verticalLine {
+  border-left: 1px solid #ccc;
+}
+
+	.show{
+		display: block;
+	}
+
+
+	.hide{
+		display: none;
+	}
+

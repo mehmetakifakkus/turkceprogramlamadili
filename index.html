@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>Türkçe Programlama Dili</title>
+  <meta name="description" content="Türkçe Programlama Dili. Yeni başlayanlar için kolay, pratik programlama öğrenme aracı.">
+  <meta name="author" content="Mehmet Akif AKKUŞ, Harun Kaya">
 
 <script src='https://github.com/pegjs/pegjs/releases/download/v0.9.0/peg-0.9.0.min.js'></script>
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<style>
-	#draggable { width: 150px; height: 150px; padding: 0em; }
-	</style>
+<!--<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>-->
+<link rel='stylesheet prefetch' href='css/bootstrap.css'>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!--<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">-->
 <link rel='stylesheet prefetch' href='css/codemirror.css'>
 
 	<link href="css/eclipse.css" rel="stylesheet">
@@ -58,7 +62,7 @@
 
 <div id = "mycontainer" class="mycontainer" style="margin-top:4px;">
 
-	<div id="column-left" class="column-left codeContent">
+	<div id="column-left" class="column-left codeContent" style="z-index:1">
 		<textarea id="code">değişken num1 = 12
 değişken num2 = 6
 
@@ -75,7 +79,10 @@ yaz num1</textarea>
 	</div>
 
 	<div id="column-right" class="column-right codeContent">
-		<textarea id="evaluate"></textarea>
+
+		<div style="position:absolute; float:left; margin: 0px 0px 0px 0px; z-index:0">
+			<textarea id="evaluate"></textarea>
+		</div>
 	</div>
 
 </div>
@@ -119,10 +126,21 @@ yaz num1</textarea>
 		<textarea id="parseResult"></textarea>
 	</div>
 
+	<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:10px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
 
-	<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:16px; margin-right:10px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+	<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:20px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span></button>
 
-	<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:30px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span></button>
+
+	<div class = "dropright">
+
+	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-left:3px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
+	<ul id = "settings" class="mydropdown-menu" style="position:relative;" role="menu">
+			<hr style="style1">
+			<p> Buraya bazı ayarlar gelecek </p>
+	</ul>
+
+</div>
+
 
 <!--</div>-->
 </div>
