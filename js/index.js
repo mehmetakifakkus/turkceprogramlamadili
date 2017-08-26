@@ -218,7 +218,6 @@ $.get("grammer.pegjs", function(response) {
 	grammer = response;
 	parser = PEG.buildParser(grammer);
 });
-
 $.get("hataAyikla.pegjs", function(response) {
 	errorGrammer = response;
 	parser2 = PEG.buildParser(errorGrammer);
@@ -297,10 +296,15 @@ function recursivelyProcess(items){
 }
 
 
-var parseDoc = parseResult.getDoc();
-var parseStr = '';
+/*
+*
+*		#######################      	User Interface   	  #######################
+*
+*/
 
-function parse() {
+function temizle(){
+	evaluate.setValue('');
+	konsol.setValue('');
 
 	console.clear();
 	time = 0.25;
@@ -308,16 +312,23 @@ function parse() {
 	for(var i=0; i<logicals.length; i++)
 		logicals[i].clear();
 
+	logicals = [];
+}
+
+var parseDoc = parseResult.getDoc(), parseStr = '';
+
+function parse() {
+
+	temizle();
 
 	try{
- 		evaluate.setValue('');
-		konsol.setValue('');
-
     	insertNewLines(editor.lineCount()-1);
 
     	var text = editor.getValue();
     	result = parser.parse(text);
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
+
+		console.log(result)
 
 		parseStr = '//     '+'Kod hatasız, çalıştırma başarılı.';
 
@@ -337,12 +348,10 @@ function parse() {
 		time++;
 
 		setTimeout(function(){
-			highlightLine({lineNumber: 100});
+			highlightLine({lineNumber: 1000});
 			parseDoc.setValue("//     Bitti.");
 		}, speed * (time-1))
 		time++;
-
-
 
   }catch(err){
 
@@ -360,19 +369,6 @@ function parse() {
 	parseDoc.setValue(parseStr)
 }
 
-window.temizle = function(){
-	evaluate.setValue('');
-	konsol.setValue('');
-
-	console.clear();
-	time = 0.25;
-
-	for(var i=0; i<logicals.length; i++)
-		logicals[i].clear();
-
-	logicals = [];
-}
-
 window.kaydet = function(){
 	var blob = new Blob([editor.getValue()], {type: "text/plain;charset=utf-8"});
 	saveAs(blob, "merhaba dünya.txt");
@@ -384,11 +380,10 @@ window.loadExample = function(from, no){
 	editor.setValue(eval(from+'['+no+'].code'));
 }
 
-loadExample('beginner', 0);
 
 for(var i=0; i < userSend.length; i++){
 	var str = '<a href="javascript:hideshow(document.getElementById(\'userSend'+i+'\'))">' +
-		      '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[i].name + '</a>  <span style=" font-size: 1.25rem;  color: #888;">  ' + userSend[i].date+ ' tarihinde, ' + userSend[i].username + ' tarafından)' + '</span></h4>' +
+		      '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[i].name + '</a>  <span style=" font-size: 1.25rem;  color: #888;">  ' + userSend[i].date+ ' tarihinde, ' + userSend[i].username + ' tarafından' + '</span></h4>' +
 			  '<p style = "font-size: 14px; display: none; "id="userSend'+ i +'">' +
 		         	  ''+userSend[i].description + ' Hemen incelemek isterseniz, ' +
 			  		'<a href="#" onclick = "loadExample(\'userSend\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
@@ -419,8 +414,10 @@ for(var i=0; i < ortaSeviye.length; i++){
 	document.getElementById('ortaSeviyeSorular').innerHTML += str;
 }
 
-/*
+loadExample('beginner', 0);
 
+
+/*
 
 */
 
