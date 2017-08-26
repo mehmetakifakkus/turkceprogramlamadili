@@ -255,8 +255,23 @@ userSend = [
 			  "değişken sonuç = yakıttutar / yapılankm\n\n"+
 			  'yaz sonuç yaz "krş"\n',
 		date: '24.08.2017'
+	},
+	{
+		name: 'Kenar uzunluklarından üçgen alanı',
+		description: '-',
+		username: 'Harun Kaya',
+		code: "//Heron yöntemi ile üçgen alanı hesaplama. \n\n"+
+			  "değişken a = 3 // birinci kenar\n"+
+			  "değişken b = 4 // ikinci kenar\n"+
+			  "değişken c = 5 // üçüncü kenar\n"+
+			  "değişken u =(a+b+c) / 2 // çevre uzunluğunun yarısı\n"+
+			  "değişken alan = karekök(u * (u-a) * (u-b) * (u-c))\n"+
+			  "yaz alan \n",
+		date: '26.08.2017'
 	}
 ]
+
+
 
 
 

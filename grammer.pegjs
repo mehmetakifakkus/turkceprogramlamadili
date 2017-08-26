@@ -267,7 +267,7 @@ nl "newline"
   = comment? [\n]* {return null;}
   
 comment 
-   = _ "//" _ [ a-zA-Z0-9|\=|(|)|+|\-|\+|* ]* _ nl {return {type: 'comment', value: text()}; }
+   = _ "//" _ (.)* _ nl {return {type: 'comment', value: text()}; }
   
 operator
   = operator_text / operator_symbol
