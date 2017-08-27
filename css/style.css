@@ -11,7 +11,7 @@ body {
 	padding-bottom: 2px;
 	width: 75%;
 
-    max-width: 1800px;
+/*    max-width: 1800px;*/
 
   	margin-left: 12.5%;
 /*	margin-right: auto;*/
@@ -140,7 +140,7 @@ div.row {
   border-color: #684895;
 }
 .btn.btn-primary .fa {
-  padding-right: 4px;
+  padding-right: 2px;
 }
 
 .list-group {

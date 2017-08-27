@@ -130,11 +130,17 @@ yaz num1</textarea>
 		<textarea id="parseResult"></textarea>
 	</div>
 
-	<div class = "dropright">
 
-	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-right:12px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
+
+	<button type="button" id="fullScreenB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px; " onclick="makeFullScreen()"><i class="fa fa-expand"></i></button>
+
+	<button type="button" id="compactB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px; display: none" onclick="makeCompact()"><i class="fa fa-compress"></i></button>
+
+	<div class = "dropright">
+	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
 	<ul id = "settings" class="mydropdown-menu" style="position:relative;" role="menu">
-		<hr style="style1">
+
+	<hr style="style1">
 
 <div style="margin-left:-12px">
 
@@ -151,8 +157,7 @@ yaz num1</textarea>
 	</div>
 
 	<div class="col-md-3">
-<!--		fa fa-expand-->
-<!--		fa fa-compress-->
+
 	</div>
 
 	<div class="col-md-3">

@@ -47,15 +47,16 @@ editor.on("gutterClick", function(cm, n) {
   cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
+var lineHeight = 23;
 function setEditorArea(){
 	editor.focus();
 
 //	document.getElementById('mainContainer').style.height = 130 + editor.lineCount() * 24 + 'px';
-	document.getElementById('column-left').style.height = 40 + editor.lineCount() * 22 + 'px';
+	document.getElementById('column-left').style.height = 40 + editor.lineCount() * lineHeight + 'px';
 
 	$( "column-right" ).ready(function(){
 		evaluate.setValue('');
-		document.getElementById('column-right').style.height = 40 + editor.lineCount() * 22 + 'px';
+		document.getElementById('column-right').style.height = 40 + editor.lineCount() * lineHeight + 'px';
 	});
 
 	var len = editor.lineCount();
@@ -97,6 +98,11 @@ editor.on("keyup", function (cm, event) {
 	console.log(event.keyCode)
 });
 
+/*
+*
+*	#######################      	Editor Functions   	  #######################
+*
+*/
 
 function makeMarker() {
   var marker = document.createElement("div");
@@ -298,7 +304,7 @@ function recursivelyProcess(items){
 
 /*
 *
-*		#######################      	User Interface   	  #######################
+*	#######################      	User Interface   	  #######################
 *
 */
 
@@ -420,6 +426,45 @@ for(var i=0; i < ortaSeviye.length; i++){
 
 loadExample('beginner', 0);
 
+
+/*
+*
+*	#######################      	Change User Style     #######################
+*
+*/
+
+function makeFullScreen(){
+
+	$('body').css('padding-left', '0px');
+	$('body').css('padding-right', '0px');
+
+	$('.mycontainer').css('width', '95%');
+	$('.mycontainer').css('margin-left', '2.5%');
+
+	$('.CodeMirror').css('font-size', '20px');
+
+	$('#fullScreenB').css('display', 'none');
+	$('#compactB').css('display', 'inline-block');
+
+	helper();
+	lineHeight = 28;
+}
+
+function makeCompact(){
+
+	$('body').css('padding', '40px');
+
+	$('.mycontainer').css('width', '75%');
+	$('.mycontainer').css('margin-left', '12.5%');
+
+	$('.CodeMirror').css('font-size', '16px');
+
+	$('#fullScreenB').css('display', 'inline-block');
+	$('#compactB').css('display', 'none');
+
+	helper();
+	lineHeight = 23;
+}
 
 /*
 
