@@ -143,7 +143,7 @@ init_declarator
         return {'lhs': left, 'rhs': exp.text};        
 }   
 
-print_statement = _ "yaz" _ exp:(expression_statement / StringLiteral) _ comment? nl {
+print_statement = _ ("yaz" / "print") _ exp:(expression_statement / StringLiteral) _ comment? nl {
 	if(typeof(exp.value) == 'string')
 		return {'type':'print', 'subtype': 'string', 'text': exp.value, 'lineNumber': location().start.line}; // evaluate it, then return it       
 	return {'type':'print', 'subtype': 'var', 'text': exp.text, 'lineNumber': location().start.line}; // evaluate it, then return it       
@@ -182,13 +182,16 @@ logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_opera
 	return {'type':'logical', 'text': text, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
 }
 
+// bu kullilmiyor simdi
 factor = "(" expr: expression_statement ")" {return expr;}
 	   / name
+	   / Float
        / integer 
 	  
 
 factor2 = "(" logical_statement ")" 
 	   / name
+	   / Float
        / integer
 
 

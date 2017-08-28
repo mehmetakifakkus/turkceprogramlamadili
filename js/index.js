@@ -47,7 +47,7 @@ editor.on("gutterClick", function(cm, n) {
   cm.setGutterMarker(n, "breakpoints", info.gutterMarkers ? null : makeMarker());
 });
 
-var lineHeight = 23;
+var lineHeight = 22;
 function setEditorArea(){
 	editor.focus();
 
@@ -482,3 +482,14 @@ function makeCompact(){
 	helper();
 	lineHeight = 23;
 }
+
+/*
+
+değişken ort = 6
+eğer(ort > 5 ve ort < 10)
+  yaz "merhaba"
+
+yaz ort
+
+
+*/

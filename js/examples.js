@@ -268,6 +268,27 @@ userSend = [
 			  "değişken alan = karekök(u * (u-a) * (u-b) * (u-c))\n"+
 			  "yaz alan \n",
 		date: '26.08.2017'
+	},
+	{
+		name: 'Vücut kitle endeksi hesapmala',
+		description: '-',
+		username: 'Mehmet Akif AKKUŞ',
+		code: 'değişken kilo = 70   // kg cinsinden\n'+
+			  'değişken boy = 1.72  // metre cinsinden\n'+
+			  '\n'+
+			  'değişken BMI = kilo / (boy * boy)\n'+
+			  '\n'+
+			  'eğer(BMI < 19)\n'+
+			  '  yaz "zayıf"\n'+
+			  'değilse eğer(BMI >= 19 ve BMI < 25)\n'+
+			  '  yaz "ideal kilo"\n'+
+			  'değilse eğer(BMI >= 25 ve BMI < 30)\n'+
+			  '  yaz "şişman"\n'+
+			  'değilse eğer(BMI >= 30 ve BMI < 35)\n'+
+			  '  yaz "aşırı şişman"\n'+
+  			  'değilse\n'+
+              '  yaz "müthiş obez"\n',
+		date: '28.08.2017'
 	}
 ]
 
