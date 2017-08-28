@@ -352,7 +352,7 @@ function parse() {
 
 		parseStr = '//     '+'Kod hatasız, çalıştırma başarılı.';
 
-		$("#redLight").css("display", "none");
+		$("#redLight").css("display", "none");       // bekle butonunu aç
 		$("#greenLight").css("display", "block");
 
 
@@ -362,7 +362,7 @@ function parse() {
 		recursivelyProcess(result);
 
 		setTimeout(function(){
-			$("#run").css("display", "block");
+			$("#run").css("display", "block");      // tekrar calıştırmak için çalşıtır butonunu aç
 			$("#runJunk").css("display", "none");
    		}, speed * (time-1))
 		time++;
@@ -385,6 +385,9 @@ function parse() {
     		result = parser2.parse(err.message);
 			parseStr = '//     '+result;
 		}
+
+	  	$("#run").css("display", "block");  // tekrar calıştırmak için çalşıtır butonunu aç
+		$("#runJunk").css("display", "none");
   }
 	parseDoc.setValue(parseStr)
 }
