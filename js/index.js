@@ -279,6 +279,20 @@ function processOneItem(item){
 			drawLine(item, false, eval(item.lhs));
 	}
 
+	if(item.type == 'expression')
+	{
+		window.eval(item.text);
+		item['#evaluation']++;
+
+		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.text));
+
+		if(item.up == 'while')
+			drawLine(item, true, eval(item.text));
+		else
+			drawLine(item, false, eval(item.text));
+		console.error(item)
+	}
+
 	if(item.type == 'print')
 	{
 		var res = item.subtype == 'var' ? eval(item.text) : item.text;

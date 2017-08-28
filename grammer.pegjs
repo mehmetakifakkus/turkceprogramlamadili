@@ -150,7 +150,7 @@ print_statement = _ "yaz" _ exp:(expression_statement / StringLiteral) _ comment
 }
 
 expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* nl{  	    
-   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
 Term
@@ -208,7 +208,7 @@ yanlis = 'yanlış' {return false;}
 
 
 letter "letter" 
-  = [a-zA-Z_|ş|ğ|ç|ö|ü|ı|ü]+ {return text()} 
+  = [a-zA-Z_|ş|ğ|ç|ö|ü|ı|ü|Ş|Ğ|Ç|Ö|Ü|I|Ü]+ {return text()} 
 
 StringLiteral "string"
   = '"' chars:DoubleStringCharacter* '"' {
