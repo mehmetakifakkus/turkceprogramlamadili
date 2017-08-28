@@ -163,13 +163,23 @@ Factor
   / name
   
 
-logical_statement = _ f1:factor2 f2:(_ operator _ factor2)* _ nl
+logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_operator _ logical_statement)* _ nl
 {
 	var text = f1+' ';
-    if(f2[0])
-	    text += f2[0][1] + ' ' + f2[0][3];
+    
+    if(f2)
+	    text += op + ' ' + f2; 
         
-    return {'type':'logical', 'text': text, 'lineNumber': location().end.line, 'start': location().start.column-1, 'end': location().end.column-1};
+    if(log[0])
+    {	
+    	log = log[0];
+//    	console.log(log)
+    
+    	text += ' '+ log[1];
+        text += ' '+ log[3].text;
+    }
+    
+	return {'type':'logical', 'text': text, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
 }
 
 factor = "(" expr: expression_statement ")" {return expr;}
@@ -272,20 +282,27 @@ comment
 operator
   = operator_text / operator_symbol
   
-operator_text
+logical_operator
+  = logical_operator_text / logical_operator_symbol
+  
+logical_operator_text
   = "ve"					{ return "&&"; }
 	/ "veya"				{ return "||"; }
-	/ "büyükeşit" 			{ return ">="; }
+    
+logical_operator_symbol
+  = "&&"					{ return text(); }
+	/ "||"					{ return text(); }    
+
+operator_text
+  =  "büyükeşit" 			{ return ">="; }
 	/ "küçükeşit"			{ return "<="; }
 	/ "küçük"				{ return "<"; }
 	/ "büyük"	 			{ return ">"; }
-	/ "eşit"				{ return "=="; }
 	/ "eşitdeğil"			{ return "!="; }  
+	/ "eşit"				{ return "=="; }
   
 operator_symbol
-  = "&&"					{ return text(); }
-	/ "||"					{ return text(); }
-	/ "<="					{ return text(); }
+  = "<="					{ return text(); }
 	/ "<"					{ return text(); }
 	/ ">="					{ return text(); }
 	/ ">"					{ return text(); }
