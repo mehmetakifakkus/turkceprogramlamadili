@@ -208,6 +208,7 @@ userSend = [
 	{
 		name: 'Aylık ev bütçesi hesabı',
 		description: '-',
+		shortlink: 'evbutcesihesplama',
 		username: 'Çağatay Özevim',
 		code:	"değişken aylıkgelir = 1400\n" +
 				"değişken harçlık = 10\n"+
