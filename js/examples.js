@@ -181,6 +181,7 @@ userSend = [
 	{
 		name: 'Fahrenheit\'ten celcius\'a çevirme',
 		description: '-',
+		shortlink: 'fahrenheitdencelciusacevirme',
 		username: 'Hüseyin Cahit Kebapçıoğlu',
 		code: "değişken fahrenheit = 120\n"+
 			  "değişken celcius= (fahrenheit-32) / 1.8\n"+
@@ -190,6 +191,7 @@ userSend = [
 	{
 		name: 'Faktoriyel hesabı',
 		description: '-',
+		shortlink: 'huseyinfaktoriyel',
 		username: 'Hüseyin Cahit Kebapçıoğlu',
 		code: "değişken a = 5\n"+
 			  "değişken c = a+1\n"+
@@ -222,6 +224,7 @@ userSend = [
 	{
 		name: 'Dikdörtgen çevresi hesabı',
 		description: '-',
+		shortlink: 'dikdortgencevresi',
 		username: 'Sonat Türkan',
 		code: "değişken boy = 20\n"+
 			  "değişken en = 35\n"+
@@ -234,6 +237,7 @@ userSend = [
 	{
 		name: 'Öğrenci\'nin not durumu',
 		description: '-',
+		shortlink: 'universiteogrencinotu',
 		username: 'Berkay Çatak',
 		code: "değişken not1 = 60\n"+
 			  "değişken not2 = 90\n"+
@@ -249,6 +253,7 @@ userSend = [
 	{
 		name: 'Araç yakıtı hesaplama',
 		description: '-',
+		shortlink: 'aracyakithesaplama',
 		username: 'Osman Kalhan',
 		code: "değişken yapılankm = 70\n"+
 			  "değişken yakıttutar = 20\n\n"+
@@ -259,6 +264,7 @@ userSend = [
 	{
 		name: 'Kenar uzunluklarından üçgen alanı',
 		description: '-',
+		shortlink: 'uzunluktanucgenalani',
 		username: 'Harun Kaya',
 		code: "//Heron yöntemi ile üçgen alanı hesaplama. \n\n"+
 			  "değişken a = 3 // birinci kenar\n"+
@@ -272,6 +278,7 @@ userSend = [
 	{
 		name: 'Vücut kitle endeksi hesapmala',
 		description: '-',
+		shortlink: 'vucutkitleendeksi',
 		username: 'Mehmet Akif AKKUŞ',
 		code: 'değişken kilo = 70   // kg cinsinden\n'+
 			  'değişken boy = 1.72  // metre cinsinden\n'+
@@ -292,7 +299,8 @@ userSend = [
 	},
 		{
 		name: 'Koordinat düzleminde bölge tespiti',
-		description: '-',
+		description: '<img src="images/koordinat-sistemi-bolgeler.jpg" style="border-radius: 5px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240"><br><br>',
+		shortlink: 'koordinatduzlemi',
 		username: 'Hüseyin Kebapçıoğlu',
 		code: 'değişken x = 5\n'+
 			  'değişken y = 0\n'+
@@ -315,6 +323,7 @@ userSend = [
 	}
 ]
 
+http://www.matematikciler.com/images/7/koordinat-sistemi-bolgeler.jpg
 
 
 adaySorular = [
