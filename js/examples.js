@@ -324,6 +324,37 @@ userSend = [
 	}
 ]
 
+
+/*
+
+değişken x = 5
+değişken y = 0
+
+eğer(x > 0)
+{
+  	eğer(y > 0)
+  		yaz "Birinci Bölge"
+	değilse
+ 		yaz "Dördüncü Bölge"
+}
+değilse eğer(x < 0)
+{
+	eğer(y > 0)
+		yaz "İkinci Bölge"
+	değilse
+		yaz "Üçüncü Bölge"
+}
+değilse eğer(y != 0)
+  yaz "y ekseni üzerinde"
+değilse
+  yaz "Origin"
+
+eğer(y == 0 ve x != 0)
+  yaz "x ekseni üzerinde"
+
+
+*/
+
 http://www.matematikciler.com/images/7/koordinat-sistemi-bolgeler.jpg
 
 

@@ -142,7 +142,7 @@ init_declarator
         return {'lhs': left, 'rhs': exp.text};        
 }   
 
-print_statement = _ ("yaz" / "print") _ exp:(expression_statement / StringLiteral) _ comment? nl {
+print_statement = _ ("yaz" / "print") _ exp:(math_functions / expression_statement / StringLiteral) _ comment? nl {
 	if(typeof(exp.value) == 'string')
 		return {'type':'print', 'subtype': 'string', 'text': exp.value, 'lineNumber': location().start.line}; // evaluate it, then return it       
 	return {'type':'print', 'subtype': 'var', 'text': exp.text, 'lineNumber': location().start.line}; // evaluate it, then return it       
@@ -194,7 +194,7 @@ factor2 = "(" logical_statement ")"
 //// math functions
 
 math_functions
- = taban / tavan/ karekok
+ = taban / tavan/ karekok / mutlakDeger
 
 taban = 'taban' _ '(' _ exp:expression_statement _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.floor(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
@@ -205,6 +205,10 @@ tavan = 'tavan' _ '(' _ exp:expression_statement _ ')'{
 karekok = 'karekök' _ '(' _ exp:expression_statement _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.sqrt(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
+mutlakDeger = 'mutlak' _ '(' _ exp:expression_statement _ ')'{
+ 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.abs(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+}
+
 
 
 ///// Name = Variable
@@ -275,7 +279,7 @@ _ "whitespace"
   
 nl "newline"
   = comment? [\n]* {return null;}
-  
+
 comment 
    = _ "//" _ [ a-zA-Z0-9|\=|(|)|+|\-|\+|*|\._|ş|ğ|ç|ö|ü|ı|Ş|Ğ|Ç|Ö|Ü|I|Ü]* nl {return {type: 'comment', value: text()}; }
   
