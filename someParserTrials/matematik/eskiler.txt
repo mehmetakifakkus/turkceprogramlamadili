@@ -1,0 +1,17 @@
+// Bunun sıkıntısı number ve [, number] gelecek sekilde eklemeli gidiyor, agac yapisinda tutamiyor
+
+expression_statement2 = head:Term tail:(_ ("+" / "-") _ Term)* [\n] _
+{  	    
+	var dd = Array(head[0])
+    
+    for(var i=0; i < tail.length; i++)
+    {
+	    dd.push({'type':'operator', 'text': tail[i][1]})
+    	dd.push(tail[i][3][0])
+	}
+    
+	console.log(dd)
+    console.log(tail)
+    
+   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+}

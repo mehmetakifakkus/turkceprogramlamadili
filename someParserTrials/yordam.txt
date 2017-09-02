@@ -1,0 +1,214 @@
+/*
+* Can recognize languages like this:
+  
+yordam topla(a,b)
+{
+   4+5
+   dön a+b
+}
+
+topla(2,4) 
+
+2 - ( 3 + 4 - (1 + 1))
+
+*/
+
+start = statementList
+
+statementList = statement*
+
+statement 
+ = functionDefinition
+ / functionCall
+ / b:block_item { 
+ //console.log(b);
+ return b;}
+ 
+
+
+
+functionDefinition
+ = 'yordam' _ n:name _ t:nameTuple _ nl
+ _'{' _ [ \n]* _ 
+    _ b:block_item_list 
+    _ r:(don)?
+ _ '}' _ nl
+{ 
+    console.log(n + '(' + t + ') function declaration')
+
+	for(var i=0; i < b.length; i++) // make the returned thing flat, accumulate on first
+    	console.log(b[i]); 
+   
+    var obj = {'type':'functionDefinition', 'name': n, 'items': b, 'args': t, 'return':r};
+    window['function_'+ n] = obj;
+	return obj;
+} 
+
+don 
+ = _ 'dön' _ exp: expression_statement{ return exp; }
+
+
+
+functionCall
+ = n:name _ t:numberTuple _ nl
+ {
+    var str = n + '(' 
+      
+	if(t[0] != undefined) str += t[0].text
+      
+	for(var i=1; i < t.length; i++)		
+		str += ',' + t[i].text;
+    
+    var def = eval('function_'+ n);
+	console.log(def);
+	console.log(t);
+
+	for(var i=0; i < def.args.length; i++)		
+    {
+    	console.log('var ' + n + '__' + def.args[i] + ' = ' + t[i].text)
+    	window.eval('var ' + n + '__' + def.args[i] + ' = ' + t[i].text)
+    }
+    
+    
+    
+    
+    
+    var obj = {'type':'functionCall', 'name': n, 'args': t, 'text': str+')'};
+	return obj;   // 'str': text() de olabilir
+ }
+ 
+ 
+ 
+/*
+*      				Name and Number Tuples (a,b,c), (1,2,3)
+*/
+ 
+nameTuple
+ = '(' _  list: name_list _ ')'
+ {
+  	var first = Array(list[0]);
+    var second = list[1];
+
+	for(var i=0; i < second.length; i++) // make the returned thing flat, accumulate on first
+    	first.push(second[i][2]);
+        
+     return first;   
+ } 
+
+numberTuple
+ = '(' _  list: number_list _ ')'
+ {
+ 	var first = list[0];
+    var second = list[1];
+
+	for(var i=0; i < second.length; i++) // make the returned thing flat, accumulate on first
+    	first.push(second[i][1]);
+        
+     return first;   
+ }
+
+
+
+
+
+/*
+*      				Block Item List
+*/
+
+compound_statement
+ = nl _'{' _ [ \n]* _ b:block_item_list _ '}' _ nl _{  // block itemlar yerine bos da olabilir
+    return b; 
+ }
+
+block_item_list = block_item* 
+
+block_item
+ = exp: expression_statement{ 
+ 	if(exp.type == 'expression')
+    	return exp;
+    else
+ 		return {'type': 'expression', 'tree': exp}
+ }
+ 
+
+
+/*
+*      				Expression 
+*/
+
+expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* [\n]* _
+{  	    
+    if(head && tail == null){ 
+   		if(head[0].length > 0)  // here is the expression with paranthesis
+    		return {'type': 'expression', 'tree': head[0]};    	
+	    else
+	    	return {'type': head[0].type, 'text':head[0].text};    
+    }
+    else if(head && tail.length == 0) 
+    { 
+        return head; 
+	}  
+    else if(head && tail.length >= 1) 
+    { 
+        tail = tail[0];
+    	var arr = Array(head);
+        arr.push({'type': 'operator', 'text': tail[1]}) // add operator
+		arr.push(tail[3]) 								// add the other operand
+        return arr;
+	} 
+}
+
+Term
+  = head:Factor tail:(_ ("*" / "/" / "%") _ Factor)* 
+  {
+    if(head && ( tail == null || tail.length == 0))
+    {
+   		if(Array.isArray(head) && head[0].length > 0)  // here is the expression with paranthesis
+    		return {'type': 'expression', 'tree': head[0]};    	
+	    else
+	    	return head;    
+    }
+    else if(head && tail) 
+	{
+        tail = tail[0];
+        console.log(tail);
+    	var arr = Array(head);
+        arr.push({'type': 'operator', 'text': tail[1]}) // add operator
+		arr.push(tail[3]) 								// add the other operand
+        return arr;
+	} 
+  }
+  
+
+Factor
+  = "(" _ expr:expression_statement _ ")" { return expr; }
+  / f:Float { return {'type': 'float', 'text': f.text}}
+  / i:Integer { return {'type': 'integer', 'text': i.text}}
+  / n:name {return {'type': 'variable', 'text': n}}
+
+/*
+*      				Primitives
+*/
+
+name_list = name ( ',' _ name)*
+
+number_list = (Float / Integer )* ( ',' (Float / Integer))*
+
+name = l:Letter i:Integer {return l+i}
+     / l:Letter {return l;} 
+
+Letter "letter" 
+  = [a-zA-Z|\_|ş|ğ|ç|ö|ü|ı|ü|Ş|Ğ|Ç|Ö|Ü|İ|Ü]+ {return text()} 
+
+Integer "integer"
+  = [0-9]+ { return {type: 'integer', text: text()}; }
+
+Float "float" 
+  = [0-9]* '.' [0-9]* { return {type: 'float', text: text()}; }
+
+_ "whitespace"
+  = [ \t\r]* {return null;} 
+  
+nl "newline"
+  = [\n]* {return null;}
+   

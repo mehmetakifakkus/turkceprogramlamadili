@@ -26,11 +26,9 @@ yaz no
 start = statement*
 
 statement 
-  =	if_statement
-  / while_statement
+  =	block_item
   / for_statement
-  / block_item
-  / comment
+  
 
 if_statement
   = _ 'eğer' + '(' _ los:logical_statement  _ ')' _ nl
@@ -56,7 +54,7 @@ if_statement
  
 while_statement
  = _ 'yinele' _ '(' los:logical_statement ')' _ nl 
- 	_ lines:(compound_statement / block_item) _ nl
+   _ lines:(compound_statement / block_item) _ nl
 { 
     if(lines instanceof Array)
      for(var i=0; i < lines.length; i++)
@@ -115,7 +113,8 @@ block_item
  / math_functions
  / expression_statement
  / logical_statement
- / null_statement 
+ / null_statement
+ / comment
 
 null_statement
  = ';' _ comment? nl {
@@ -264,12 +263,13 @@ SingleEscapeCharacter
   / "t"  { return "\t"; }
   / "v"  { return "\v"; } 
   
+  
 Float "float" 
-  = _ [0-9]+ '.' [0-9]* { return {type: 'float', text: text()}; }
+  = _ '-'? [0-9]+ '.' [0-9]* { return {type: 'float', text: text()}; }
 
 Integer "integer"
-  = _ [0-9]+ { return {type: 'integer', text: text()}; }
-    
+  = _ '-'? [0-9]+ { return {type: 'integer', text: text()}; }
+   
 integer "integer"
   = [0-9]+ { return parseInt(text(), 10); }
 

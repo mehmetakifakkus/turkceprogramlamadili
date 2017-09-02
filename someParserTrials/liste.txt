@@ -1,15 +1,22 @@
 /*
 * Can recognize languages like this:
   
-  değişken akif = {1.1,2,3}
+  değişken akif = [1.1, 2, 3]
   akif[2]
+  akif.uzunluk
+  akif.ekle(4)
+
 */
 
 start = statementList
 
 statementList = statement*
 
-statement = createArray / arrayAccess
+statement 
+ = createArray 
+ / arrayAccess
+ / function
+ / property
 
 createArray = list:arrayDefinition nl {
 	return list
@@ -26,11 +33,11 @@ createArray = list:arrayDefinition nl {
 
 arrayAccess 
  = n:name '[' int:Integer ']' nl {
- 	return window.eval(n + '['+ (parseInt(int.text)-1) + ']')
+ 	return window.eval(n + '['+ (parseInt(int.text)) + ']')
  }
 
 
-arrayDefinition = 'değişken' _ n:name _ '=' _ '{' _ list: number_list _'}' 
+arrayDefinition = 'değişken' _ n:name _ '=' _ '[' _ list: number_list _']' 
 {
 	var first = list[0];
     var second = list[1];
@@ -38,6 +45,7 @@ arrayDefinition = 'değişken' _ n:name _ '=' _ '{' _ list: number_list _'}'
 	for(var i=0; i < second.length; i++) // make the returned thing flat, accumulate on first
     	first.push(second[i][1]);
       
+    // var a = [1,2,3]  (this will be created in str)
 	var str = 'var ' +  n + ' = ['
       
 	if(first[0] != undefined) str += first[0].text
@@ -50,8 +58,28 @@ arrayDefinition = 'değişken' _ n:name _ '=' _ '{' _ list: number_list _'}'
 	console.log(str);
 	window.eval(str);
      
-	return {'name': n, 'content': first};
+	return {'name': n, 'content': first, 'array': eval(n)};
 }
+
+property
+ = n:name '.' prop:name _ nl
+ {
+ 	if(prop == 'uzunluk')
+    	return eval(n +'.length')    
+ }
+
+function
+ = n:name '.' func:name '(' arg:(name / Float / Integer) ')' _ nl
+ {
+  	if(func == 'ekle')
+    	eval(n + '.push('+ arg.text +')')
+    else if(func == 'çıkar')
+    	eval(n + '.pop()')
+    else if(func == 'birleştir')
+        eval(n + '.pop()')
+        
+    return eval(n)    
+ }
 
 number_list = (Float / Integer )* ( ',' (Float / Integer))*
 

@@ -1,0 +1,19 @@
+declaration
+ =  _ ('var' / 'değişken' / 'değ') _ dec: init_assignment_list _ nl{
+	return {'type': 'declaration', '#evaluation': 0, 'text':'var '+dec.lhs+' = ' + dec.rhs, 'lhs':dec.lhs, 'rhs': dec.rhs, 'lineNumber': location().start.line};
+ }
+ /
+  _ ass:init_assignment_list  {
+	return {'type': 'assignment', '#evaluation': 0, 'text': ass.lhs+' = '+ass.rhs, 'lhs':ass.lhs, 'rhs': ass.rhs, 'lineNumber': location().start.line};
+ }
+
+init_assignment_list
+ = 	init:init_assignment init2:(',' _ init_assignment)* 
+ {
+ 	var first = Array(init); 
+
+	for(var i=0; i < init2.length; i++) // make the returned thing flat, accumulate on first
+       	first.push(init2[i][2]);
+    
+    return first;
+ }
