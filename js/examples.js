@@ -289,13 +289,31 @@ userSend = [
   			  'değilse\n'+
               '  yaz "müthiş obez"\n',
 		date: '28.08.2017'
+	},
+		{
+		name: 'Koordinat düzleminde bölge tespiti',
+		description: '-',
+		username: 'Hüseyin Kebapçıoğlu',
+		code: 'değişken x = 5\n'+
+			  'değişken y = 0\n'+
+			  '\n'+
+			  'eğer(x > 0 ve y > 0)\n'+
+			  '  yaz "Birinci Bölge"\n'+
+			  'değilse eğer(x < 0 ve y > 0)\n'+
+			  '  yaz "İkinci Bölge"\n'+
+			  'değilse eğer(x < 0 ve y < 0)\n'+
+			  '  yaz "Üçüncü Bölge"\n'+
+			  'değilse eğer(x > 0 ve y < 0)\n'+
+			  '  yaz "Dördüncü Bölge"\n'+
+			  'değilse eğer(x == 0 ve y != 0)\n'+
+			  '  yaz "y ekseni üzerinde"\n'+
+			  'değilse eğer(x != 0 ve y == 0)\n'+
+			  '  yaz "x ekseni üzerinde"\n'+
+			  'değilse \n'+
+			  '  yaz "Origin"\n',
+		date: '31.08.2017'
 	}
 ]
-
-
-
-
-
 
 
 

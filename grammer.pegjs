@@ -107,12 +107,12 @@ block_item_list = (block_item)*
 
 block_item
  = declaration
+ / logical_statement
  / if_statement
  / while_statement
  / print_statement
  / math_functions
  / expression_statement
- / logical_statement
  / null_statement
  / comment
 
@@ -165,14 +165,11 @@ Factor
 logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_operator _ logical_statement)* _ nl
 {
 	var text = f1+' ';
-    
-    if(f2)
-	    text += op + ' ' + f2; 
+    text += op + ' ' + f2; 
         
-    if(log[0])
+    if(log[0] != undefined)  
     {	
     	log = log[0];
-//    	console.log(log)
     
     	text += ' '+ log[1];
         text += ' '+ log[3].text;

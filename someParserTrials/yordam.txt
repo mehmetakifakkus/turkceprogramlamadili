@@ -171,7 +171,6 @@ Term
     else if(head && tail) 
 	{
         tail = tail[0];
-        console.log(tail);
     	var arr = Array(head);
         arr.push({'type': 'operator', 'text': tail[1]}) // add operator
 		arr.push(tail[3]) 								// add the other operand
