@@ -6,7 +6,7 @@ beginner  = [
     },{
       "name": "Yurt dışından yapılan alışverişin tutarı",
       "description": 'Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bulalım. Tabiki doların TL karşılığını değişken değeri olarak vereceğiz. Almak istediğimiz ürünlerin de dolar cinsinden tutarına sahibiz.<br><br>',
-	  "code": "değişken dolarKuru = 3.45\ndeğişken saatFiyati = 60\ndeğişken telefonFiyati = 300\ndeğişken toplam = (saatFiyati + telefonFiyati) dolarKuru\n\nyaz toplam"
+	  "code": "değişken dolarKuru = 3.45\ndeğişken saatFiyati = 60\ndeğişken telefonFiyati = 300\ndeğişken toplam = (saatFiyati + telefonFiyati) * dolarKuru\n\nyaz toplam"
     },{
       "name": "Celcius sıcaklık birimini Fahrenheit'e çevirme",
       "description": 'Celcius sıcaklık birimini Fahrenheit sıcaklık birimine çeviren kodu yazalım.<br><br>',
@@ -53,7 +53,11 @@ beginner  = [
 	{
       "name": "3 sayıdan en büyüğünü bulalım",
       "description": 'Birbirlerine kıyasla başlangış değerlerini bilmediğimiz 3 sayı arasından en büyüğünü bulan programı geliştirelim.<br><br>',
-	  "code": "değişken num1 = 12\ndeğişken num2 = 10\ndeğişken num3 = 15\n\ndeğişken no = 0\n\neğer(num1 > no)\n	no = num1\n\neğer(num2 > no)\n	no = num2\n\neğer(num3 > no)\n	no = num3\n\nyaz no"
+	  "code": "değişken num1 = 12\n" +
+			  "değişken num2 = 10\n" +
+			  "değişken num3 = 15\n\n" +
+			  "değişken no = num1\n\n" +
+			  "eğer(num2 > no)\n	no = num2\n\neğer(num3 > no)\n	no = num3\n\nyaz no"
     },
 	{
       "name": "10'dan 30'a 4'er 4'er",
@@ -355,8 +359,9 @@ eğer(y == 0 ve x != 0)
 
 */
 
+/*
 http://www.matematikciler.com/images/7/koordinat-sistemi-bolgeler.jpg
-
+*/
 
 adaySorular = [
 	{

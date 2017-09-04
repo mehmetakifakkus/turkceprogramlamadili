@@ -150,11 +150,19 @@ function drawLine(line, isLoop, result){
 	else if(line.type == 'print')
 	{
 		highlightLine(line);
+		console.log(line)
 
-		if(line.subtype == 'string')
-			insertText(line.text);
-		else if(line.subtype == 'var')
+		var res = '';
+		for(var i=0; i < line.list.length; i++)
+		{
+			res += line.list[i].subtype == 'var' ? eval(line.list[i].text) : line.list[i].text;
+			//console.log('[print] line '+item.list[i].lineNumber +' is getting processed, result is: '+ res);
+		}
+		console.log(res)
+		//if(line.subtype == 'string')
 			insertText(res);
+		//else if(line.subtype == 'var')
+		//	insertText(res);
 	}
 	else{
 		var result = window.eval(line.text);
@@ -295,10 +303,7 @@ function processOneItem(item){
 
 	if(item.type == 'print')
 	{
-		var res = item.subtype == 'var' ? eval(item.text) : item.text;
-		console.log('[print] line '+item.lineNumber +' is getting processed, result is: '+ res);
-
-		drawLine(item, false, res);
+		drawLine(item, false);
 	}
 }
 

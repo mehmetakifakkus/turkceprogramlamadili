@@ -142,10 +142,19 @@ init_declarator
         return {'lhs': left, 'rhs': exp.text};        
 }   
 
-print_statement = _ ("yaz" / "print") _ exp:(math_functions / expression_statement / StringLiteral) _ comment? nl {
-	if(typeof(exp.value) == 'string')
-		return {'type':'print', 'subtype': 'string', 'text': exp.value, 'lineNumber': location().start.line}; // evaluate it, then return it       
-	return {'type':'print', 'subtype': 'var', 'text': exp.text, 'lineNumber': location().start.line}; // evaluate it, then return it       
+print_statement = _ ("yaz" / "print") _ exp:( _  '+'? _ (StringLiteral / expression_statement))+ _ comment? nl {
+	//console.log(exp)
+    var list = []
+    
+    for(var i=0; i < exp.length; i++)
+	{
+      if(exp[i][3].type == 'Literal')
+          list.push( {'subtype': 'string', 'text': exp[i][3].value, 'lineNumber': location().start.line}); 
+      else
+          list.push({ 'subtype': 'var', 'text': exp[i][3].text, 'lineNumber': location().start.line});        
+    }
+	
+    return {'type':'print', 'list': list, 'lineNumber': location().start.line}
 }
 
 expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* nl{  	    
@@ -193,6 +202,15 @@ factor2 = "(" logical_statement ")"
 
 //// math functions
 
+function_combination
+ = head:math_functions _ tail:('+' _ math_functions)*
+ {
+ 	console.log(tail[0]);
+    for(var i=0; i<tail.length; i++)
+    	head.text += tail[i][0] + tail[i][2].text; 
+    return head
+ }
+
 math_functions
  = taban / tavan/ karekok / mutlakDeger
 
@@ -208,6 +226,7 @@ karekok = 'karekök' _ '(' _ exp:expression_statement _ ')'{
 mutlakDeger = 'mutlak' _ '(' _ exp:expression_statement _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.abs(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
+
 
 
 
