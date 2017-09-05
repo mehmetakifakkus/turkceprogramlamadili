@@ -153,13 +153,13 @@ function drawLine(line, isLoop, result){
 		console.log(line)
 		highlightLine(line);
 
-		var resu = '';
-		for(var i=0; i < line.list.length; i++)
-			resu += line.list[i].subtype == 'var' ? eval(line.list[i].text) : line.list[i].text;
+//		var resu = '';
+//		for(var i=0; i < line.list.length; i++)
+//			resu += line.list[i].subtype == 'var' ? eval(line.list[i].text) : line.list[i].text;
 
-		console.log(resu)
+		//console.log(resu)
 		//console.log(eval(line.list[i].text))
-		insertText(resu);
+		insertText(res);
 	}
 	else{
 		var result = window.eval(line.text);
@@ -296,7 +296,13 @@ function processOneItem(item){
 		console.error(item)
 	}
 	if(item.type == 'print')
-		drawLine(item, false);
+	{
+		var resu = '';
+		for(var i=0; i < item.list.length; i++)
+			resu += item.list[i].subtype == 'var' ? eval(item.list[i].text) : item.list[i].text;
+
+		drawLine(item, false, resu);
+	}
 }
 
 function recursivelyProcess(items){
