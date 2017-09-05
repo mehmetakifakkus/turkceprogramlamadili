@@ -21,6 +21,7 @@ var parseResult = CodeMirror.fromTextArea(document.getElementById('parseResult')
   mode: "simplemode",
   lineNumbers: false,
   theme: 'eclipse',
+  scrollbarStyle: "null",
   readOnly: true
 });
 
@@ -157,6 +158,7 @@ function drawLine(line, isLoop, result){
 			resu += line.list[i].subtype == 'var' ? eval(line.list[i].text) : line.list[i].text;
 
 		console.log(resu)
+		//console.log(eval(line.list[i].text))
 		insertText(resu);
 	}
 	else{

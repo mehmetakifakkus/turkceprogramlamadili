@@ -142,7 +142,7 @@ init_declarator
         return {'lhs': left, 'rhs': exp.text};        
 }   
 
-print_statement = _ ("yaz" / "print") _ exp:( _  '+'? _ (math_functions / StringLiteral / expression_statement))+ _ comment? nl {
+print_statement = _ ("yaz" / "print") _ exp:( _  '+'? _ (math_functions / StringLiteral / expression_statement))+ _ comment? _ nl {
 	//console.log(exp)
     var list = []
     
@@ -186,14 +186,7 @@ logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_opera
     
 	return {'type':'logical', 'text': text, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
 }
-
-// bu kullilmiyor simdi
-factor = "(" expr: expression_statement ")" {return expr;}
-	   / name
-	   / Float
-       / integer 
 	  
-
 factor2 = "(" logical_statement ")" 
 	   / name
 	   / Float
@@ -232,8 +225,8 @@ mutlakDeger = 'mutlak' _ '(' _ exp:expression_statement _ ')'{
 
 ///// Name = Variable
 
-name = l:letter i:integer 
-     / l:letter 
+name = l:letter i:integer {return l+i}
+     / l:letter {return l;} 
 
 dogru = 'doğru' {return true;}
 yanlis = 'yanlış' {return false;}
