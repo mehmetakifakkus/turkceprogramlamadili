@@ -21,7 +21,7 @@ CodeMirror.defineSimpleMode("simplemode", {
     // indent and dedent properties guide autoindentation
     {regex: /[\{\[\(]/, indent: true},
     {regex: /[\}\]\)]/, dedent: true},
-    {regex: /[a-zA-Z|ç|ş|ğ|ç|ö|ü|ı$][\w$]*/, token: "variable"},
+    {regex: /[a-zA-Z|ç|ş|ğ|ö|ü|ı|Ç|Ş|Ğ|Ç|Ö|Ü|İ$][\w$]*/, token: "variable"},
     // You can embed other modes with the mode property. This rule
     // causes all code between << and >> to be highlighted with the XML
     // mode.

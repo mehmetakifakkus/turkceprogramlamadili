@@ -142,7 +142,7 @@ init_declarator
         return {'lhs': left, 'rhs': exp.text};        
 }   
 
-print_statement = _ ("yaz" / "print") _ exp:( _  '+'? _ (StringLiteral / expression_statement))+ _ comment? nl {
+print_statement = _ ("yaz" / "print") _ exp:( _  '+'? _ (math_functions / StringLiteral / expression_statement))+ _ comment? nl {
 	//console.log(exp)
     var list = []
     

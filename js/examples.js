@@ -328,8 +328,8 @@ userSend = [
 	},
 	{
 		name: 'Koordinat düzleminde simetriler',
-		description: '<img src="images/koordinat-sistemi-bolgeler.jpg" style="border-radius: 5px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240"><br><br>',
-		shortlink: 'koordinatduzlemi',
+		description: '-',
+		shortlink: 'koordinatduzlemindesimetriler',
 		username: 'Osman Yusuf Akkuş',
 		code: 'değişken x = 4\n'+
 			  'değişken y = 5\n'+
@@ -338,8 +338,26 @@ userSend = [
 			  'yaz "y eksenine göre simetri: " x * -1  "," y\n'+
 			  'yaz "orjine göre simetriği: " x * -1 "," y * -1\n',
 		date: '02.09.2017'
+	},
+	{
+		name: 'Üçgen Eşitsizliği',
+		description: '-',
+		shortlink: 'ucgenesitsizligi',
+		username: 'Osman Yusuf Akkuş',
+		code: 'değişken x = 5\n'+
+			  'değişken y = 4\n'+
+			  ' \n'+
+			  'yaz "İki kenarından biri " x " biri " y " olan üçgenin üçüncü kenarı "\n'+
+			  'yaz mutlak(x-y) " < z < "(x+y) " aralığındadır."\n',
+		date: '03.09.2017'
 	}
 ]
+
+'değişken x = 5\n'+
+'değişken y = 4\n'+
+' \n'+
+'yaz "İki kenarından biri " x " biri " y " olan üçgenin üçüncü kenarı "\n'+
+'yaz mutlak(x-y) " < z < "(x+y) " aralığındadır."\n',
 
 /*
 değişken x = 4
