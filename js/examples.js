@@ -38,12 +38,19 @@ beginner  = [
 	,{
       "name": "Arabanın ne yaktığını bulma",
       "description": 'Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. <br><br>Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: <br>Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. <br><br> Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım.<br><br>',
-	  "code": "değişken toplamYol = 236\ndeğişken toplamTutar = 75\ndeğişken fiyat = toplamTutar / toplamYol\n\nyaz fiyat"
+	  "code": 'değişken toplamYol = 236\n'+
+			  'değişken toplamTutar = 75\n'+
+			  'değişken fiyat = toplamTutar / toplamYol\n\n'
+			  +'yaz fiyat'
     },
 	{
       "name": "Ehliyet almaya yeterli misin?",
       "description": 'Ehliyet kursu yönetiyoruz. Öğrenciler bize ehliyet alabilmek için başvuruyor. Kodumuz ehliyet başvuru sisteminde çalışıyor varsayalım. Kişinin yaş bilgisine göre, "ehliyet alabilirsiniz" ya da "yaşınız ehliyet almaya yeterli değildir" gibi durum mesajlarını yazdırmak istiyoruz.<br><br>',
-	  "code": 'değişken yaş = 19\n\neğer(yaş > 18)\n	yaz "Ehliyet alabilirsiniz"\ndeğilse\n	yaz "Yaşınız ehliyet almaya yeterli değildir"'
+	  "code": 'değişken yaş = 19\n\n'+
+			  'eğer(yaş > 18)\n'+
+			  '	yaz "Ehliyet alabilirsiniz"\n'+
+			  'değilse\n'+
+			  '	yaz "Yaşınız ehliyet almaya yeterli değildir"'
     },
 	{
       "name": "Öğrencinin notunu hesaplama",
@@ -81,7 +88,14 @@ ortaSeviye = [
 		'Yani 5! dediğimizde şuna eşit olur:<br><br>'+
 		'5! = 5 x 4 x 3 x 2 x 1 = 120<br><br>',
 
-		"code": "değişken sayı = 4    // faktöriyeli bulunacak değer\ndeğişken sonuç = 1  // sonuç burada saklanacak\n\nyinele(sayı != 1)\n{\n  sonuç = sonuç * sayı\n  sayı = sayı - 1\n}\n\nyaz sonuç"
+		"code": 'değişken sayı = 4   // faktöriyeli bulunacak değer\n'+
+				'değişken sonuç = 1  // sonuç burada saklanacak\n\n'+
+				'yinele(sayı != 1)\n'+
+				'{\n'+
+				'  sonuç = sonuç * sayı\n'+
+				'  sayı = sayı - 1\n'+
+				'}\n\n'+
+				'yaz sonuç'
 	},
 	{
 		"name": "Faktoriyel bulma 2",
@@ -110,7 +124,16 @@ ortaSeviye = [
 	                   "2, 4<br>"+
 	                   "2, 2<br><br>"+
 	                   "İşte son durum, yani sayıların eşitlendiği durum bizim en büyük ortak bölenimizi veriyor. <br><br>",
-		"code": "değişken num1 = 12\ndeğişken num2 = 6\n\nyinele(num1 != num2)\n{\n  eğer(num1 > num2)\n    num1 = num1 - num2\n  değilse\n    num2 = num2 - num1\n}\n\nyaz num1"
+		"code": 'değişken sayı1 = 12\n'+
+				'değişken sayı2 = 6\n\n'+
+				'yinele(sayı1 != sayı2)\n'+
+				'{\n'+
+				'  eğer(sayı1 > sayı2)\n'+
+				'    sayı1 = sayı1 - sayı2\n'+
+				'  değilse\n'+
+				'    sayı2 = sayı2 - sayı1\n'+
+				'}\n\n'+
+				'yaz sayı1'
 	},
 	{
 		"name": "10 luk -> 2 lik sayı sistemi",
@@ -155,7 +178,7 @@ userSend = [
 		name: 'Öğrenci Notu Hesaplama (Üniversite)',
 		description: '-',
 		username: 'Ahmet Sarıcı',
-		code: 'var not = 90\n\n'+
+		code: 'değişken not = 90\n\n'+
 			  'eğer(not > 89)\n'+
 			  '	yaz "AA"\n'+
 			  'değilse eğer(not > 84)\n'+
