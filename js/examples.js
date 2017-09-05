@@ -302,7 +302,7 @@ userSend = [
               '  yaz "müthiş obez"\n',
 		date: '28.08.2017'
 	},
-		{
+	{
 		name: 'Koordinat düzleminde bölge tespiti',
 		description: '<img src="images/koordinat-sistemi-bolgeler.jpg" style="border-radius: 5px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240"><br><br>',
 		shortlink: 'koordinatduzlemi',
@@ -325,10 +325,44 @@ userSend = [
 			  'değilse \n'+
 			  '  yaz "Origin"\n',
 		date: '31.08.2017'
+	},
+	{
+		name: 'Koordinat düzleminde simetriler',
+		description: '<img src="images/koordinat-sistemi-bolgeler.jpg" style="border-radius: 5px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240"><br><br>',
+		shortlink: 'koordinatduzlemi',
+		username: 'Osman Yusuf Akkuş',
+		code: 'değişken x = 4\n'+
+			  'değişken y = 5\n'+
+			  '\n'+
+			  'yaz "x eksenine göre simetri: " x  "," y * -1\n'+
+			  'yaz "y eksenine göre simetri: " x * -1  "," y\n'+
+			  'yaz "orjine göre simetriği: " x * -1 "," y * -1\n',
+		date: '02.09.2017'
 	}
 ]
 
+/*
+değişken x = 4
+değişken y = 5
 
+yaz "x eksenine göre simetri"
+yaz x
+yaz y * -1
+
+yaz "y eksenine göre simetri"
+yaz x * -1
+yaz y
+
+yaz "x ve y eksenine göre siketriği"
+yaz x * -1
+yaz y * -1
+
+
+////
+
+
+
+*/
 /*
 
 değişken x = 5

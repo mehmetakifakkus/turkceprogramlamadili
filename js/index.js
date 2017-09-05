@@ -149,20 +149,15 @@ function drawLine(line, isLoop, result){
 	}
 	else if(line.type == 'print')
 	{
-		highlightLine(line);
 		console.log(line)
+		highlightLine(line);
 
-		var res = '';
+		var resu = '';
 		for(var i=0; i < line.list.length; i++)
-		{
-			res += line.list[i].subtype == 'var' ? eval(line.list[i].text) : line.list[i].text;
-			//console.log('[print] line '+item.list[i].lineNumber +' is getting processed, result is: '+ res);
-		}
-		console.log(res)
-		//if(line.subtype == 'string')
-			insertText(res);
-		//else if(line.subtype == 'var')
-		//	insertText(res);
+			resu += line.list[i].subtype == 'var' ? eval(line.list[i].text) : line.list[i].text;
+
+		console.log(resu)
+		insertText(resu);
 	}
 	else{
 		var result = window.eval(line.text);
@@ -273,7 +268,6 @@ function processOneItem(item){
 			drawLine(item, eval(item.text));
 		}
 	}
-
 	if(item.type == 'declaration' || item.type == 'assignment')
 	{
 		window.eval(item.text);
@@ -286,7 +280,6 @@ function processOneItem(item){
 		else
 			drawLine(item, false, eval(item.lhs));
 	}
-
 	if(item.type == 'expression')
 	{
 		window.eval(item.text);
@@ -300,11 +293,8 @@ function processOneItem(item){
 			drawLine(item, false, eval(item.text));
 		console.error(item)
 	}
-
 	if(item.type == 'print')
-	{
 		drawLine(item, false);
-	}
 }
 
 function recursivelyProcess(items){

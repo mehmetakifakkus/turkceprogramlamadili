@@ -157,7 +157,7 @@ print_statement = _ ("yaz" / "print") _ exp:( _  '+'? _ (StringLiteral / express
     return {'type':'print', 'list': list, 'lineNumber': location().start.line}
 }
 
-expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* nl{  	    
+expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* {  	    
    	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
@@ -168,7 +168,7 @@ Factor
   = "(" _ expr:expression_statement _ ")" { return expr; }
   / f:Float { return f.text;}
   / i:Integer { return i.text;}
-  / name
+  / n:name {return n.text}
   
 
 logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_operator _ logical_statement)* _ nl
@@ -232,8 +232,8 @@ mutlakDeger = 'mutlak' _ '(' _ exp:expression_statement _ ')'{
 
 ///// Name = Variable
 
-name = l:letter i:integer {return l+i}
-     / l:letter {return l;} 
+name = l:letter i:integer 
+     / l:letter 
 
 dogru = 'doğru' {return true;}
 yanlis = 'yanlış' {return false;}
