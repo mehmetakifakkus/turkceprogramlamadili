@@ -3,15 +3,57 @@
   
 yordam topla(a,b)
 {
-   4+5
-   dön a+b
+   //x = y + z
+   dön karekök(a * a + b * b)
 }
 
-topla(2,4) 
+yordam çıkar(a,b)
+{
+   dön a * a - b * b
+}
+
+topla(3, 4)
+çıkar(4,3)
+
+karekök(a) + karekök(a)
 
 2 - ( 3 + 4 - (1 + 1))
 
 */
+
+{
+
+	function evaluate(func_name, tree){
+    
+    	if(tree.type == 'variable')
+            	return func_name + '__' + tree.text;
+			else if(tree.type == 'math_func')
+            {
+				if(tree.exp.type == 'variable')
+                	return tree.func +'('+ func_name + '__' + tree.exp.text + ')';    
+				else
+            		return tree.func +'('+ evaluate(func_name, tree.exp) + ')';    
+            }
+	        else if(tree.type == 'operator')
+       			return ' ' + tree.text + ' ';
+            else
+                return '(' + renameVariables(func_name, tree) + ')'
+    
+    }
+
+	function renameVariables(func_name, tree){
+    
+    	var str = ''
+
+		if(!Array.isArray(tree))
+			str += evaluate(func_name, tree)
+		else
+			for(var i=0; i < tree.length; i++) 
+    	      	str += evaluate(func_name, tree[i])
+
+        return str;    	
+    }
+}
 
 start = statementList
 
@@ -23,8 +65,6 @@ statement
  / b:block_item { 
  //console.log(b);
  return b;}
- 
-
 
 
 functionDefinition
@@ -39,7 +79,7 @@ functionDefinition
 	for(var i=0; i < b.length; i++) // make the returned thing flat, accumulate on first
     	console.log(b[i]); 
    
-    var obj = {'type':'functionDefinition', 'name': n, 'items': b, 'args': t, 'return':r};
+    var obj = {'type':'functionDefinition', 'name': n, 'items': b, 'args': t, 'return': renameVariables(n, r), 'tree': r};
     window['function_'+ n] = obj;
 	return obj;
 } 
@@ -65,11 +105,11 @@ functionCall
 
 	for(var i=0; i < def.args.length; i++)		
     {
-    	console.log('var ' + n + '__' + def.args[i] + ' = ' + t[i].text)
-    	window.eval('var ' + n + '__' + def.args[i] + ' = ' + t[i].text)
+    	console.log('var ' + n + '__' + def.args[i] + ' = ' + t[i].text);
+    	window.eval('var ' + n + '__' + def.args[i] + ' = ' + t[i].text);
     }
     
-    
+    console.log(eval(def.return))
     
     
     
@@ -102,7 +142,7 @@ numberTuple
     var second = list[1];
 
 	for(var i=0; i < second.length; i++) // make the returned thing flat, accumulate on first
-    	first.push(second[i][1]);
+    	first.push(second[i][2]);
         
      return first;   
  }
@@ -123,20 +163,22 @@ compound_statement
 block_item_list = block_item* 
 
 block_item
- = exp: expression_statement{ 
+ =  (!don) exp:expression_statement{ 
  	if(exp.type == 'expression')
     	return exp;
     else
  		return {'type': 'expression', 'tree': exp}
  }
- 
+ / math_functions
+ / comment
 
 
 /*
 *      				Expression 
 */
 
-expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* [\n]* _
+expression_statement "çarpılan"
+ = head:Term tail:(_ ("+" / "-") _ Term)* [\n]* _
 {  	    
     if(head && tail == null){ 
    		if(head[0].length > 0)  // here is the expression with paranthesis
@@ -158,7 +200,7 @@ expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* [\n]* _
 	} 
 }
 
-Term
+Term "çarpan"
   = head:Factor tail:(_ ("*" / "/" / "%") _ Factor)* 
   {
     if(head && ( tail == null || tail.length == 0))
@@ -180,10 +222,51 @@ Term
   
 
 Factor
-  = "(" _ expr:expression_statement _ ")" { return expr; }
+  = math: math_functions { 
+  	console.log(math);
+    return math;
+   }
+  / "(" _ expr:expression_statement _ ")" { return expr; }
   / f:Float { return {'type': 'float', 'text': f.text}}
   / i:Integer { return {'type': 'integer', 'text': i.text}}
   / n:name {return {'type': 'variable', 'text': n}}
+
+
+/*
+*      				Math Functions
+*/
+
+function_combination
+ = head:math_functions _ tail:('+' _ math_functions)*
+ {
+ 	console.log(tail[0]);
+    for(var i=0; i<tail.length; i++)
+    	head.text += tail[i][0] + tail[i][2].text; 
+    return head
+ }
+
+math_functions "matematik_fonksiyonlari"
+ = taban / tavan / karekok / mutlakDeger
+
+taban = 'taban' _ '(' _ exp:expression_statement _ ')'{
+ 	return {'type':'math_func', '#evaluation': 0, 'func': 'Math.floor', 'exp': exp, 'text': 'Math.floor(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+}
+tavan = 'tavan' _ '(' _ exp:expression_statement _ ')'{
+ 	return {'type':'math_func', '#evaluation': 0, 'func': 'Math.ceil', 'exp': exp, 'text': 'Math.ceil(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+}
+karekok = 'karekök' _ '(' _ exp:expression_statement _ ')'{
+ 	return {'type':'math_func', '#evaluation': 0, 'func': 'Math.sqrt', 'exp': exp, 'text': 'Math.sqrt(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+}
+mutlakDeger = 'mutlak' _ '(' _ exp:expression_statement _ ')'{
+ 	return {'type':'math_func', '#evaluation': 0, 'func': 'Math.abs', 'exp': exp, 'text': 'Math.abs(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+}
+
+/*
+*      				Misc
+*/
+comment "comment"
+   = _ "//" _ value:[ a-zA-Z0-9|\=|(|)|+|\-|\+|*|\._|ş|ğ|ç|ö|ü|ı|Ş|Ğ|Ç|Ö|Ü|I|Ü]* nl {return {type: 'comment', value: value.join("")}; }
+  
 
 /*
 *      				Primitives
@@ -191,7 +274,7 @@ Factor
 
 name_list = name ( ',' _ name)*
 
-number_list = (Float / Integer )* ( ',' (Float / Integer))*
+number_list = (Float / Integer )* ( ',' _ (Float / Integer))*
 
 name = l:Letter i:Integer {return l+i}
      / l:Letter {return l;} 

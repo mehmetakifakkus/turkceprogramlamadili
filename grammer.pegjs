@@ -293,7 +293,7 @@ nl "newline"
   = comment? [\n]* {return null;}
 
 comment 
-   = _ "//" _ [ a-zA-Z0-9|\=|(|)|+|\-|\+|*|\._|ş|ğ|ç|ö|ü|ı|Ş|Ğ|Ç|Ö|Ü|I|Ü]* nl {return {type: 'comment', value: text()}; }
+   = _ "//" _ value:[ a-zA-Z0-9|\=|(|)|+|\-|\+|*|\._|ş|ğ|ç|ö|ü|ı|Ş|Ğ|Ç|Ö|Ü|I|Ü]* nl {return {type: 'comment', value: value.join("")}; }
   
 operator
   = operator_text / operator_symbol

@@ -60,11 +60,11 @@ beginner  = [
 	{
       "name": "3 sayıdan en büyüğünü bulalım",
       "description": 'Birbirlerine kıyasla başlangış değerlerini bilmediğimiz 3 sayı arasından en büyüğünü bulan programı geliştirelim.<br><br>',
-	  "code": "değişken num1 = 12\n" +
-			  "değişken num2 = 10\n" +
-			  "değişken num3 = 15\n\n" +
-			  "değişken no = num1\n\n" +
-			  "eğer(num2 > no)\n	no = num2\n\neğer(num3 > no)\n	no = num3\n\nyaz no"
+	  "code": "değişken sayı1 = 12\n" +
+			  "değişken sayı2 = 10\n" +
+			  "değişken sayı3 = 15\n\n" +
+			  "değişken no = sayı1\n\n" +
+			  "eğer(sayı2 > no)\n	no = sayı2\n\neğer(sayı3 > no)\n	no = sayı3\n\nyaz no"
     },
 	{
       "name": "10'dan 30'a 4'er 4'er",
@@ -365,7 +365,7 @@ userSend = [
 		code: 'değişken x = 5\n'+
 			  'değişken y = 4\n'+
 			  ' \n'+
-			  'yaz "İki kenarından biri " x " biri " y " olan üçgenin üçüncü kenarı "\n'+
+			  'yaz "İki kenarından biri " x ", diğeri " y " olan üçgenin üçüncü kenarı "\n'+
 			  'yaz mutlak(x-y) " < z < "(x+y) " aralığındadır."\n',
 		date: '03.09.2017'
 	}
