@@ -173,8 +173,8 @@ Factor
 
 logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_operator _ logical_statement)* _ nl
 {
-	var text = f1+' ';
-    text += op + ' ' + f2; 
+	var text = f1.text+' ';
+    text += op + ' ' + f2.text; 
         
     if(log[0] != undefined)  
     {	
@@ -188,9 +188,7 @@ logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_opera
 }
 	  
 factor2 = "(" logical_statement ")" 
-	   / name
-	   / Float
-       / integer
+	   / expression_statement
 
 
 //// math functions

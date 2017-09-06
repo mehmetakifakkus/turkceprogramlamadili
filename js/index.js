@@ -274,6 +274,17 @@ for(var i=0; i < ortaSeviye.length; i++){
 	document.getElementById('ortaSeviyeSorular').innerHTML += str;
 }
 
+for(var i=0; i < ileriSeviye.length; i++){
+	var str = '<a href="javascript:hideshow(document.getElementById(\'ileriSeviyeSoru'+i+'\'))">' +
+			  '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver;">' + (i+1) +'. '+ ileriSeviye[i].name + '</h4></a>' +
+			  '<p style = "font-size: 14px; display: none;" id="ileriSeviyeSoru'+ i +'">' +
+					ileriSeviye[i].description + ' Hemen incelemek isterseniz, ' +
+					'<a href="#" onclick = "loadExample(\'ileriSeviye\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
+			  '</p>';
+
+	document.getElementById('ileriSeviyeSorular').innerHTML += str;
+}
+
 window.loadExample('beginner', 0);
 
 
