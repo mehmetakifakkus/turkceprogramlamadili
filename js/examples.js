@@ -210,7 +210,7 @@ userSend = [
 			  'değişken b = pay1 * payda2 \n'+
 			  'değişken c = pay2 * payda1\n'+
 			  '\n'+
-		  	  'yaz b+c "/" a\n',
+		  	  'yaz pay1"/"payda1 " + "pay2"/"payda2 " = " b+c "/" a\n',
 	   date: '09.09.2017'
 	}
 ]
