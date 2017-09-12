@@ -195,14 +195,33 @@ userSend = [
 			  'yaz "İki kenarından biri " x ", diğeri " y " olan üçgenin üçüncü kenarı "\n'+
 			  'yaz mutlak(x-y) " < z < "(x+y) " aralığındadır."\n',
 		date: '03.09.2017'
+	},
+	{
+	  name: "İki rasyonel sayının toplamı",
+      description: 'Pay ve payda bilgisini bildiğimiz iki rasyonel sayıyı toplayalım. İlk rasyonel sayının pay1 ve payda1 adlı, ikinci rasyonel sayının ise pay2 ve payda adlı değşikeni bulunmaktadır.<br><br>',
+      shortlink: 'rasyonelsayilarintoplanmasi',
+	  username: 'Osman Yusuf Akkuş',
+	  code: 'değişken pay1 = 2\n'+
+			  'değişken payda1 = 3\n'+
+			  'değişken pay2 = 5\n'+
+			  'değişken payda2 = 2\n'+
+			  '\n'+
+			  'değişken a = payda1 * payda2\n'+
+			  'değişken b = pay1 * payda2 \n'+
+			  'değişken c = pay2 * payda1\n'+
+			  '\n'+
+		  	  'yaz b+c "/" a\n',
+	   date: '09.09.2017'
 	}
 ]
+
+
 
 beginner  = [
 	{
       "name": "3 sayının ortalamasını alma",
       "description": '3 kişinin sahip olduğu paranın ortalamasını bulalım.<br><br>',
-	  "code": 'değişken para1 = 5\ndeğişken para2 = 7\ndeğişken para3 = 12\n\ndeğişken ort = (para1 + para2 + para3) / 3\n\nyaz "ortalama: " ort'
+	  "code": 'değişken sayı1 = 5\ndeğişken sayı2 = 7\ndeğişken sayı3 = 12\n\ndeğişken ort = (sayı1 + sayı2 + sayı3) / 3\n\nyaz "ortalama: " ort'
     },
 	{
       "name": "Yurt dışından yapılan alışverişin tutarı",
@@ -251,7 +270,10 @@ beginner  = [
 			  +'yaz fiyat'
     },
 	getExample('koordinatduzlemindesimetriler'),
-	getExample('ucgenesitsizligi'),
+	getExample('ucgenesitsizligi')
+];
+
+ortaSeviye = [
 	{
       "name": "Ehliyet almaya yeterli misin?",
       "description": 'Ehliyet kursu yönetiyoruz. Öğrenciler bize ehliyet alabilmek için başvuruyor. Kodumuz ehliyet başvuru sisteminde çalışıyor varsayalım. Kişinin yaş bilgisine göre, "ehliyet alabilirsiniz" ya da "yaşınız ehliyet almaya yeterli değildir" gibi durum mesajlarını yazdırmak istiyoruz.<br><br>',
@@ -260,16 +282,14 @@ beginner  = [
 			  '	yaz "Ehliyet alabilirsiniz"\n'+
 			  'değilse\n'+
 			  '	yaz "Yaşınız ehliyet almaya yeterli değildir"'
-    }
-];
-
-ortaSeviye = [
+    },
 	{
       "name": "Öğrencinin notunu hesaplama",
       "description": 'Öğretmeniz bize bir sınav yapsın. Sınavdan önce şöyle bir şey desin: <br><br>"80 den fazla not alanları ödüllendireceğim ve 10 puan ekstra vereceğim, altında alan her kişiden ise ceza amaçlı 5 puan kıracağım." Kişinin son puan durumunu hesaplayan kodu yazalım.<br><br>',
 	  "code": "değişken puan = 75\n\neğer(puan > 80)\n	puan = puan + 10\ndeğilse\n	puan = puan - 5\n\nyaz puan"
     },
 	getExample('ogrencidersigecipgecmedigi'),
+	getExample('rasyonelsayilarintoplanmasi'),
 	{
       "name": "3 sayıdan en büyüğünü bulalım",
       "description": 'Birbirlerine kıyasla başlangış değerlerini bilmediğimiz 3 sayı arasından en büyüğünü bulan programı geliştirelim.<br><br>',
@@ -292,19 +312,6 @@ ortaSeviye = [
               "	yaz no\n"+
               "}\n"
     },
-	{
-		"name": "1'den 50'ye kadar 7'ye bölünen sayılar",
-        "description": '1 sayısı ile 50 sayısı arasında bulunup, 7\'ye kalansız olarak bölünebilen sayıları bulan kodu yazalım.<br>',
-		"code": 'değişken sayı = 1\n'+
-				'\n'+
-				'yinele(sayı <= 50)\n'+
-				'{\n'+
-				'    eğer(sayı % 7 == 0)\n'+
-				'      yaz sayı\n'+
-				'\n'+
-				'    sayı = sayı + 1\n'+
-				'}\n'
-	},
 	{
 		"name": "Faktoriyel bulma",
         "description": 'Bize verilen bir sayının faktoriyelini bulalım.<br><br>'+
@@ -339,6 +346,19 @@ ortaSeviye = [
 ]
 
 ileriSeviye = [
+	{
+		"name": "1'den 50'ye kadar 7'ye bölünen sayılar",
+        "description": '1 sayısı ile 50 sayısı arasında bulunup, 7\'ye kalansız olarak bölünebilen sayıları bulan kodu yazalım.<br>',
+		"code": 'değişken sayı = 1\n'+
+				'\n'+
+				'yinele(sayı <= 50)\n'+
+				'{\n'+
+				'    eğer(sayı % 7 == 0)\n'+
+				'      yaz sayı\n'+
+				'\n'+
+				'    sayı = sayı + 1\n'+
+				'}\n'
+	},
 	{
 		"name": "2 sayının Ebob'unu bulalım",
         "description": 'Verilen iki sayının en büyük ortak bölenini bulan kodu yazalım.' +

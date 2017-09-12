@@ -221,3 +221,6 @@ function makeCompact(){
 	helper();
 	lineHeight = 23;
 }
+
+
+

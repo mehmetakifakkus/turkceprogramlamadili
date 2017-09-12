@@ -242,10 +242,11 @@ window.refreshSpeed = function(value){
 
 
 for(var i=0; i < userSend.length; i++){
+	var ind = userSend.length-1-i;
 	var str = '<a href="javascript:hideshow(document.getElementById(\'userSend'+i+'\'))">' +
-		      '<h4 id="'+userSend[i].shortlink+'"style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[i].name + '</a>  <span style=" font-size: 1.25rem;  color: #888;">  ' + userSend[i].date+ ' tarihinde, ' + userSend[i].username + ' tarafından' + '</span></h4>' +
+		      '<h4 id="'+userSend[ind].shortlink+'"style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + (i+1) +'. '+ userSend[ind].name + '</a>  <span style=" font-size: 1.25rem;  color: #888;">  ' + userSend[ind].date+ ' tarihinde, ' + userSend[ind].username + ' tarafından' + '</span></h4>' +
 			  '<p style = "font-size: 14px; display: none; "id="userSend'+ i +'">' +
-		         	  ''+userSend[i].description + ' Hemen incelemek isterseniz, ' +
+		         	  ''+userSend[ind].description + ' Hemen incelemek isterseniz, ' +
 			  		'<a href="#" onclick = "loadExample(\'userSend\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
 			  '</p>';
 
