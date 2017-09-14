@@ -41,6 +41,11 @@ function drawLine(line, isLoop, result){
 		//console.log(eval(line.list[i].text))
 		insertText(res);
 	}
+	else if(line.type == 'expression')
+	{
+		highlightLine(line, false, true);
+  		insertTextAtCursor(res, line.lineNumber, false);
+	}
 	else{
 		var result = window.eval(line.text);
 		highlightLine(line);
@@ -99,6 +104,8 @@ function processOneItem(item){
 			}
 			drawLine(item, eval(item.text));
 		}
+		else
+			drawLine(item, false, eval(item.text));
 	}
 	if(item.type == 'declaration' || item.type == 'assignment')
 	{

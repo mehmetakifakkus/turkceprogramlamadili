@@ -157,8 +157,8 @@ print_statement = _ ("yaz" / "print") _ exp:( _  '+'? _ (math_functions / String
     return {'type':'print', 'list': list, 'lineNumber': location().start.line}
 }
 
-expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* {  	    
-   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column, 'end':location().end.column-1}; // evaluate it, then return it    
+expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* _ nl{  	    
+   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column-1, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
 Term
