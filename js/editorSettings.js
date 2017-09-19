@@ -98,8 +98,6 @@ editor.on("keyup", function (cm, event) {
 
 	console.log(event.keyCode)
 });
-
-
 /*
 *
 *	#######################      	Editor Functions   	  #######################

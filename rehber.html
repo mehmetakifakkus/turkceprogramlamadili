@@ -44,6 +44,8 @@
       <div id="content">
         <h1>Kodlama Rehberi</h1>
 
+		Programlamaya Giriş Kitabı için <a href="https://mehmetakifakkus.gitbooks.io/turkce-programlama-diline-giris" target="_blank"> tıklayın.</a>
+
 <h2 id="table-of-contents">İçerik Listesi</h2>
 
 <div style="width: 40%; float: left;">
@@ -193,31 +195,186 @@ yaz fiyat</textarea>
 		  bölme işlemini yapıp <variable>fiyat</variable> değişkeninde saklamaktadır. Her zamanki gibi bunu da <keyword>yaz</keyword> komutu ile yazdırmaktayız.</p>
 
 
-<h3 id="comperativeOperations">İlişkisel İşleçler (eşit, küçük, büyük) </h3>
+<h2 id="comperativeOperations">İlişkisel İşleçler (eşit, küçük, büyük) </h2>
 
-		<p>Aslında ortaokuldan beri aşina olduğumuz bir konudur ilişkisel işleçler. Öncelikle, 6. sınıftan itibaren denklem çözmeyi öğrenmeye başlarız. Denklem çözerken denklemin 2 tarafın (eşitlik <code>=</code> ifadesininin sağı ve solu) birbirine eşit olduğunu kabul ederiz, denklemimizin bilinmeyenlerini bulmaya çalışırız. Sonrasında 7. ve 8. sınıfta da eşitsizlikler konusunu öğreniriz. <code><</code>, <code>></code>, <code>>=</code> sembollerle de eşitsizlik denklemlerini çözmeye çalışırız. Denklemlerin çözüm yolları benzerlik gösterse de, denklemler ve eşitsizlikler farklı yorumlanır.</p>
+		<p>Aslında ortaokuldan beri aşina olduğumuz bir konudur ilişkisel işleçler. Öncelikle, 6. sınıftan itibaren denklem çözmeyi öğrenmeye başlarız. Denklem çözerken denklemin 2 tarafın (eşitlik <strong>=</strong> ifadesininin sağı ve solu) birbirine eşit olduğunu kabul ederiz, denklemimizin bilinmeyenlerini bulmaya çalışırız. Sonrasında 7. ve 8. sınıfta da eşitsizlikler konusunu öğreniriz. <strong> &lt </strong>, <strong>&gt</strong>, <strong>&gt= </strong> sembollerle de eşitsizlik denklemlerini çözmeye çalışırız. Denklemlerin çözüm yolları benzerlik gösterse de, denklemler ve eşitsizlikler farklı yorumlanır. Ortaokul yıllarına kısa bir gezinti yaptıktan sonra bu ifadelerin kodlama açısından neler ifade ettiğine bakalım.</p>
 
-		<p>Ortaokul yıllarına kısa bir gezinti yaptıktan sonra bu ifadelerin kodlama açısından neler ifade ettiğine bakalım. Öncelikle kodlama da bu semboller çok farklı bir mana ifade ediyor. <code>X</code> leri bir tarafta burakıp <code>X</code>'in değerini bulmak gibi bir durum kodlamada söz konusu değil! Programlamaya yeni başlayanlar bu yanılgıya maalesef çok düşüyorlar. </p>
+<div class="isa_info">
+    <i class="fa fa-info-circle"></i>
+Kodlamada <strong>=</strong> sembolü çok farklı bir mana ifade ediyor. <strong>x</strong> leri bir tarafta bırakıp <strong>x</strong> 'in değerini bulmak gibi bir durum kodlamada söz konusu değil! Programlamaya yeni başlayanlar bu yanılgıya maalesef çok düşüyorlar.
+</div>
 
-		<p>Kodlamadaki bütün ilişkisel işleçler doğru ya da yanlış sonucunu vermeye yönelik düşünülmüştür. </p>
+<h3> Eşit &quot==&quot </h3>
 
-		<p>Aşağıdaki kod nasıl çalıştığı hakkında bilgi verir:</p>
+		<p>İlişkisel eşitlik sembolü, sağındaki ve solundaki ifadelerin eşitliğini kontrol eder. Eğer eşitlik varsa <em>doğru</em> döndürür.</p>
+
+		<p>Şimdi bununla alakalı olarak bir kodlama denemesi yapalım.</p>
+
+<textarea class="deneme">
+değişken yaş = 18
+yaş == 18 </textarea>
+
+		Bir <strong>yaş</strong>strong> değişkeni oluşturalım ve şu komutu deneyelim. Çalıştırdığımızda değişken değeri kısmında _doğru_ veya _yanlış_ şeklinde ibareler göreceğiz. Eğer <strong>yaş</strong> değeri 18'e eşit ise doğru diğer durumda ise yanlış yazdığını göreceğiz. Farklı değerlerle deneyelim ve bu işlecin nasıl çalıştığını anlayalım.
+
+<div class="isa_warning">
+     <i class="fa fa-warning"></i>
+İlişkisel eşitlik ise programlamada farklı bir gösterimle yapılıyor. Tek eşitlik olan = sembölü değer ataması ya da değişken tanımlamasında kullanılırken ilişkisel eşitlik için çift eşittir sembolü kullanılıyor. Yani == olarak.
+</div>
+
+<h3> Eşit değil "!=" </h3>
+
+<p>Bazende iki ifadenin birbirine eşit olmadığını sorgulamak isteyebiliriz. Bu durumda eşittir sembolünün sol tarafında bir "!" işareti koyarız.
+</p>
+<p>Sırada ilişkisel küçük var. Burada da bir karşılaştırma söz konusu.
+</p>
+
+<h3> Küçük &quot; &lt; &quot; </h3>
+<p>Soldaki ifadenin sağdakinden küçük olup olmadığını kontrol eder. Doğru ya da yanlış değerini döndürür.
+</p>
+<textarea class="deneme">
+değişken yaş = 18
+yaş < 18 </textarea>
+
+<h3> Büyük &quot; &gt; &quot; </h3>
+<p>Soldaki ifadenin sağdakinden büyük olup olmadığını kontrol eder. Doğru ya da yanlış
+değerini döndürür.</p>
+
+<textarea class="deneme">
+değişken yaş = 18
+yaş > 18 </textarea>
 
 
+<h3> İlişkisel Büyük Eşit &quot; &gt;= &quot; ve Küçük Eşit &quot;&lt;=&quot; </h3>
 
-<textarea class="deneme">değişken no = 21
+	<p>Bazı durumlarda hem büyüklük hem de eşitlik önemli olabilir. Örneğin bir kişinin yaşının 18'den büyük ya da eşit olduğunu kontrol etmek istersek bunu önce küçük sonra eşittir işareti ile yapabiliriz. Şöyle:</p>
+
+<textarea class="deneme">
+değişken yaş = 18
+yaş >= 18</textarea>
+
+<h3> İlişkisel ifadelerin Seçme Komutları'nda kullanımı </h3>
+İlişkisel komutlar tek başına doğru ya da yanlış değerini döndürür. Bu bilgi seçme ya da döngü komutlarında daha işe yarar hale bürünür. Nasıl mı? O zaman aşağıdaki örnek koda bakalım. Bu nasıl çalıştığı hakkında az bir bilgi verecektir. Bununla alakalı detaylı bilgiyi [5. Seçme Komutları](secme-komutlari.md) 'nda görüyor olacağız.
+
+
+<textarea class="deneme">
+değişken no = 21
 eğer(no > 10) // burası büyüklüğü kontrol eder
 	no = no + 3
 değilse
-	no = no + 1
-</textarea>
+	no = no + 1</textarea>
+
+<div class="isa_info">
+    <i class="fa fa-info-circle"></i>
+Kodlamadaki bütün ilişkisel işleçler doğru ya da yanlış sonucunu verirler.
+</div>
+
+Özetleyecek olursak:
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x130;&#x15F;le&#xE7;</th>
+<th style="text-align:left">Anlam&#x131;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">&lt;</td>
+<td style="text-align:left">k&#xFC;&#xE7;&#xFC;k</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;</td>
+<td style="text-align:left">b&#xFC;y&#xFC;k</td>
+</tr>
+<tr>
+<td style="text-align:center">==</td>
+<td style="text-align:left">e&#x15F;it</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;=</td>
+<td style="text-align:left">b&#xFC;y&#xFC;k e&#x15F;it</td>
+</tr>
+<tr>
+<td style="text-align:center">&gt;=</td>
+<td style="text-align:left">k&#xFC;&#xE7;&#xFC;k e&#x15F;it</td>
+</tr>
+<tr>
+<td style="text-align:center">!=</td>
+<td style="text-align:left">e&#x15F;it de&#x11F;il</td>
+</tr>
+</tbody>
+</table>
 
 
-<h3 id="logicalOperations">Mantıksal İşleçler (ve, veya, değil)</h3>
+<h2 id="mant&#x131;ksal-i&#x307;&#x15F;le&#xE7;ler-ve-veya-de&#x11F;il">Mant&#x131;ksal &#x130;&#x15F;le&#xE7;ler (ve, veya, de&#x11F;il)</h2>
+<p>&#x130;li&#x15F;kisel ifadeleri  mant&#x131;k i&#x15F;le&#xE7;leri ile birbirine ba&#x11F;layabiliriz. &#x130;sterseniz &#xF6;ncelikle basit mant&#x131;k kurallar&#x131;n&#x131; bir hat&#x131;rlayal&#x131;m:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x130;&#x15F;le&#xE7;</th>
+<th style="text-align:center">Sembol&#xFC;</th>
+<th style="text-align:left">Anlam&#x131;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ve</td>
+<td style="text-align:center"><img src="../assets/veya.gif" alt=""></td>
+<td style="text-align:left">Her iki ifade birlikte do&#x11F;ru olunca do&#x11F;ru olur</td>
+</tr>
+<tr>
+<td style="text-align:center">veya</td>
+<td style="text-align:center"><img src="../assets/ve.gif" alt=""></td>
+<td style="text-align:left">&#x130;ki ifadeden birisinin do&#x11F;ru olmas&#x131; yeterli</td>
+</tr>
+<tr>
+<td style="text-align:center">de&#x11F;il</td>
+<td style="text-align:center"><img src="../assets/degil.gif" alt=""></td>
+<td style="text-align:left">Do&#x11F;ruysa yanl&#x131;&#x15F;, yanl&#x131;&#x15F;sa do&#x11F;ruya d&#xF6;n&#xFC;&#x15F;&#xFC;r</td>
+</tr>
+</tbody>
+</table>
+<p>Bir de kod &#xF6;rnekleri ve bunlar&#x131;n anlam&#x131;na bakal&#x131;m:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x130;&#x15F;le&#xE7;</th>
+<th style="text-align:center">&#xD6;rnek kullan&#x131;m&#x131;</th>
+<th style="text-align:left">Anlam&#x131;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">ve</td>
+<td style="text-align:center">ya&#x15F; &gt;= 18 <strong>ve</strong> para &gt;= 2000</td>
+<td style="text-align:left">Ya&#x15F; en az 18 <strong>ve</strong> en az 2000 TL para</td>
+</tr>
+<tr>
+<td style="text-align:center">veya</td>
+<td style="text-align:center">ya&#x15F; &gt;= 18 <strong>veya</strong> &#xF6;&#x11F;renim_t&#xFC;r&#xFC; &gt;= 3</td>
+<td style="text-align:left">Ya&#x15F; en az 18 <strong>veya</strong> en az lise mezunu</td>
+</tr>
+<tr>
+<td style="text-align:center">de&#x11F;il</td>
+<td style="text-align:center"><strong>!</strong>(ya&#x15F; &gt;= 18)</td>
+<td style="text-align:left">Ya&#x15F; 18&apos;den k&#xFC;&#xE7;&#xFC;k</td>
+</tr>
+</tbody>
+</table>
+<p>Kodlar&#x131;m&#x131;z&#x131; <a href="http://turkceprogramlamadili.org" target="_blank">TPD edit&#xF6;r&#xFC;</a> &#xFC;zerinde a&#x15F;a&#x11F;&#x131;daki kod b&#xF6;l&#xFC;t&#xFC;n&#xFC; kopyala yap&#x131;&#x15F;t&#x131;r yaparak deneyebiliriz:</p>
+<textarea class="deneme">
+de&#x11F;i&#x15F;ken ya&#x15F; = 20
+de&#x11F;i&#x15F;ken para = 2500
+ya&#x15F; &gt;= 18 ve para &gt;= 2000</textarea>
 
-		Bu kısda
+<p>Edit&#xF6;r&#xFC;n son sat&#x131;rdaki ifade i&#xE7;in <em>do&#x11F;ru</em> ya da <em>yanl&#x131;&#x15F;</em> de&#x11F;erleri &#xFC;retti&#x11F;ine dikkat edelim. <strong>Ya&#x15F;</strong> ya da <strong>para</strong> de&#x11F;erleri &#xFC;zerinde de&#x11F;i&#x15F;iklik yapabilir, sonu&#xE7;lar&#x131; g&#xF6;zlemleyebiliriz.</p>
+<p>Di&#x11F;er bir &#xF6;rnek: Ki&#x15F;inin ya&#x15F;&#x131;n&#x131;n 20 ile 30 aras&#x131;nda olup olmad&#x131;&#x11F;&#x131;n&#x131; anlayan program&#x131; geli&#x15F;tirelim:</p>
+<textarea id="sorunlu" class="deneme">
+de&#x11F;i&#x15F;ken ya&#x15F; = 20
+yaş >= 20 ve yaş <= 30</textarea>
 
-		<p>Bu kısım geliştirme aşamasındadır. </p>
+<p>Burada 2. sat&#x131;rda <strong>ve</strong> mant&#x131;ksal i&#x15F;lecini kullanarak bunu ba&#x15F;arabiliriz. Bu i&#x15F;le&#xE7; sa&#x11F;daki ve soldaki iki ifadenin de birden do&#x11F;ru olmas&#x131; durumunda <em>do&#x11F;ru</em> sonucunu &#xFC;retecektir. Aksi durumda, yani en az birisinin hatal&#x131; olmas&#x131; (ya&#x15F;&#x131;n 10, ya da 40 olmas&#x131; gibi) durumunda <em>yanl&#x131;&#x15F;</em> sonucunu al&#x131;yor olaca&#x11F;&#x131;z.</p>
+
 
 
 <h2 id="inputOutputCommand">2. Girdi ve Çıktı Komutları</h2>
@@ -277,10 +434,7 @@ değilse
 değişken num2 = 10
 değişken num3 = 15
 
-değişken no = 0
-
-eğer(num1 > no)
-	no = num1
+değişken no = num1
 
 eğer(num2 > no)
 	no = num2
