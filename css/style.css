@@ -168,29 +168,18 @@ div.row {
 }
 
 .CodeMirror {
-  padding: 16px 0px;
+  padding: 2px 0px;
   padding-left: 2px;
   font-size: 16px;
   text-align: left;
-  position: relative;
-  z-index: 0;
   height: auto;
   border-radius: 8px;
+
+  line-height: 1.45;
 }
 
-.CodeMirror pre {
-  padding: 0 8px;
-}
-
-.breakpoints {
-    padding-right: 0.3em;
- }
-
-.breakpoint { color: #0f2; }
-
-div .CodeMirror-linenumber .CodeMirror-gutter-elt{
-  left:20px;
-  width:21px;
+.CodeMirror-lines {
+    padding: 12px 0;
 }
 
 .styled-background-normal {
