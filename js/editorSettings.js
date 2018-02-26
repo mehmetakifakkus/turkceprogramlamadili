@@ -6,8 +6,7 @@ var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
   lineNumbers: true,
   lineWrapping: true,
   autoCloseBrackets: true,
-  theme: 'eclipse',
-  gutters: ["CodeMirror-linenumbers", "breakpoints"]
+  theme: 'eclipse'
 });
 
 var evaluate = CodeMirror.fromTextArea(document.getElementById('evaluate'), {
