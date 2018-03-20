@@ -27,7 +27,6 @@ start = statement*
 
 statement 
   =	block_item
-  / for_statement
   
 
 if_statement
@@ -71,7 +70,8 @@ while_statement
 		'end': los.end
 	   };	
 } 
- 
+
+/*
 for_statement
  = _ 'sayarakYinele' _ '(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ nl
  	lines:(compound_statement / block_item) _ nl
@@ -97,6 +97,32 @@ for_statement
 	
     return [dec1, los, dec2, lines]; 
  }
+ */
+ 
+for_statement
+ = _ 'sayarakYinele' _ '(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ nl
+ 	lines:(compound_statement / block_item) _ nl
+ {
+     //console.log({'dec1': dec1, 'los': los, 'dec2':dec2})
+	 los.mainType = 'for';
+	
+	if(lines instanceof Array)
+     for(var i=0; i < lines.length; i++)
+		lines[i].up = 'for';
+	else
+	    lines.up = 'for';
+	
+	return {'type': 'logical', 
+		'mainType': 'for',
+		'initialize' : dec1,
+		'increment' : dec2,
+		'text': los.text,
+		'statements': lines,
+		'lineNumber': los.lineNumber,
+		'start': los.start,
+		'end': los.end
+	   };
+ } 
  
 compound_statement
  = nl _'{' _ [ \n]* _ b:block_item_list _ '}' _ nl _{  // block itemlar yerine bos da olabilir
@@ -110,6 +136,7 @@ block_item
  / logical_statement
  / if_statement
  / while_statement
+ / for_statement
  / print_statement
  / math_functions
  / expression_statement

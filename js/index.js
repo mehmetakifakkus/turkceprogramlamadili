@@ -97,12 +97,18 @@ function processOneItem(item){
 		}
 		else if(item.mainType == 'for')
 		{
+			window.eval(item.initialize.text)
+
 			while(eval(item.text)){
+				drawLine(item, false, eval(item.text));
+
+
 				if(eval(item.text))
-					recursivelyProcess(items.slice(1))
-				drawLine(item, eval(item.text));
+					recursivelyProcess(item.statements)
+
+				eval(item.increment.text)
 			}
-			drawLine(item, eval(item.text));
+			drawLine(item, false, eval(item.text));
 		}
 		else
 			drawLine(item, false, eval(item.text));
@@ -175,6 +181,100 @@ function temizle(){
 	logicals = [];
 }
 
+function translatePython(items, level){
+
+	//debugger
+	var resultText = '';
+
+	items.forEach(function(el){
+		if(el.type == 'logical')
+		{
+			if(el.mainType == 'if')
+			{
+				resultText += 'if(' + el.text + '):\n';
+
+				if(el.truePart)
+					resultText += translatePython([el.truePart], level+1)
+				if(el.falsePart)
+				{
+					debugger
+					if(el.falsePart.mainType == 'if')
+					{
+						resultText += 'el';
+						resultText += translatePython([el.falsePart], level)
+					}
+					else
+					{
+						resultText += 'else:\n';
+						resultText += translatePython([el.falsePart], level+1)
+					}
+				}
+				resultText += '\n';
+			}
+			else if(el.mainType == 'while')
+			{
+//				while(eval(item.text)){
+//					drawLine(item, false, eval(item.text));
+//
+//					if(eval(item.text))
+//						recursivelyProcess(item.statements)
+//				}
+//				drawLine(item, false, eval(item.text));
+			}
+			else if(el.mainType == 'for')
+			{
+//				while(eval(item.text)){
+//					if(eval(item.text))
+//						recursivelyProcess(items.slice(1))
+//					drawLine(item, eval(item.text));
+//				}
+//				drawLine(item, eval(item.text));
+			}
+//			else
+//				drawLine(item, false, eval(item.text));
+		}
+		if(el.type == 'declaration' || el.type == 'assignment')
+		{
+			resultText += el.lhs + ' = '+el.rhs;
+		}
+		if(el.type == 'expression')
+		{
+			resultText += el.lhs + ' = '+el.rhs;
+
+//			window.eval(item.text);
+//			item['#evaluation']++;
+//
+//			console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.text));
+//
+//			if(item.up == 'while')
+//				drawLine(item, true, eval(item.text));
+//			else
+//				drawLine(item, false, eval(item.text));
+			console.error(el.text)
+		}
+		if(el.type == 'print')
+		{
+			var resu = '';
+			var tabSpace = '';
+
+			for(var i=0; i < el.list.length-1; i++)
+			{
+				resu += el.list[i].subtype == 'var' ? el.list[i].text : '\"'+el.list[i].text + '\"';
+				resu += ',';
+			}
+			resu += el.list[i].subtype == 'var' ? el.list[i].text : '\"'+el.list[i].text + '\"';
+
+
+			for(var i=0; i<level;i++)
+				tabSpace += '\t';
+
+			resultText += tabSpace + 'print ' + resu + '\n';
+			//drawLine(item, false, resu);
+		}
+	});
+	return resultText;
+}
+
 var parseDoc = parseResult.getDoc(), parseStr = '';
 
 function parse() {
@@ -189,6 +289,7 @@ function parse() {
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 
 		console.log(result)
+		console.log(translatePython(result, 0))
 
 		parseStr = '//     '+'Kod hatasız, çalıştırma başarılı.';
 
@@ -226,6 +327,7 @@ function parse() {
 			parseStr = '//     '+result;
 		}
 
+	  	console.error(err)
 	  	$("#run").css("display", "block");  // tekrar calıştırmak için çalşıtır butonunu aç
 		$("#runJunk").css("display", "none");
   }
@@ -293,7 +395,7 @@ for(var i=0; i < ileriSeviye.length; i++){
 	document.getElementById('ileriSeviyeSorular').innerHTML += str;
 }
 
-window.loadExample('beginner', 0);
+window.loadExample('ortaSeviye', 2);
 
 
 /*
