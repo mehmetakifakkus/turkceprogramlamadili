@@ -197,7 +197,7 @@ function translatePython(items, level){
 					resultText += translatePython([el.truePart], level+1)
 				if(el.falsePart)
 				{
-					debugger
+					//debugger
 					if(el.falsePart.mainType == 'if')
 					{
 						resultText += 'el';

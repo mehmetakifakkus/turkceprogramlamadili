@@ -86,7 +86,7 @@ userSend = [
 	},
 	{
 		name: 'Öğrenci\'nin dersi geçip geçmediği',
-		description: '-',
+		description: 'Bir öğrencinin ortalamasının 50 puanı aşması durumunda geçti, diğer durumda ise kaldı yazan kod uygulaması.',
 		shortlink: 'ogrencidersigecipgecmedigi',
 		username: 'Berkay Çatak',
 		code: "değişken not1 = 60\n"+
@@ -113,7 +113,7 @@ userSend = [
 	},
 	{
 		name: 'Kenar uzunluklarından üçgen alanı',
-		description: '-',
+		description: 'Heron yöntemi adı verilen yöntemi kullanarak üçgen alanı hesaplamak mümkündür.',
 		shortlink: 'uzunluktanucgenalani',
 		username: 'Harun Kaya',
 		code: "//Heron yöntemi ile üçgen alanı hesaplama. \n\n"+
@@ -127,7 +127,7 @@ userSend = [
 	},
 	{
 		name: 'Vücut kitle endeksi hesapmala',
-		description: '-',
+		description: 'Vücut kitle endeksi bir bireyin boy ve kilosunun ortalaması ile elde edilen bir hesaplamadır. Bu hesaplama ile bir kişinin kabaca kilo yönünden ne durumda olduğu hakkında kabaca bilgi edinebiliriz.',
 		shortlink: 'vucutkitleendeksi',
 		username: 'Mehmet Akif AKKUŞ',
 		code: 'değişken kilo = 70   // kg cinsinden\n'+
@@ -149,7 +149,8 @@ userSend = [
 	},
 	{
 		name: 'Koordinat düzleminde bölge tespiti',
-		description: '<img src="images/koordinat-sistemi-bolgeler.jpg" style="border-radius: 5px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240"><br><br>',
+		description: '<img src="images/koordinat-sistemi-bolgeler.jpg" style="border-radius: 5px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240"><br><br>' +
+		'Kodumuzda x ve y değerlerini değişken olarak tanımlarız ve bunların değerine göre kodumuzun bize konsol çıktısı olarak hangi bölgede olduğumuzu bulmasını bekleriz. Ha şunu da belirtelim: Noktamız koordinat bölgelerinin yanı sıra koordinat eksenleri üzerinde de yer alabilir, hatta orjin noktasında da bulunabilir.<br><br>',
 		shortlink: 'koordinatduzlemi',
 		username: 'Hüseyin Kebapçıoğlu',
 		code: 'değişken x = 5\n'+
@@ -173,20 +174,20 @@ userSend = [
 	},
 	{
 		name: 'Koordinat düzleminde simetriler',
-		description: '-',
+		description: 'Koordinat düzleminde herhangi bir noktanın koordinat eksenlerine göre simetrisini bulabilmekteyiz. X eksenine göre simetri alırken y koordinatı eksi ile çarpılır, Y eksenine göre simetri alınırken x koordinatı eksi ile çarpılır.<br><br> Örneğin 3,4 noktasının x eksenine göre simetrisi 3,-4 olur. <br><br>' ,
 		shortlink: 'koordinatduzlemindesimetriler',
 		username: 'Osman Yusuf Akkuş',
 		code: 'değişken x = 4\n'+
 			  'değişken y = 5\n'+
 			  '\n'+
-			  'yaz "x eksenine göre simetri: " x  "," y * -1\n'+
-			  'yaz "y eksenine göre simetri: " x * -1  "," y\n'+
+			  'yaz "x eksenine göre simetri: " x "," y * -1\n'+
+			  'yaz "y eksenine göre simetri: " x * -1 "," y\n'+
 			  'yaz "orjine göre simetriği: " x * -1 "," y * -1\n',
 		date: '02.09.2017'
 	},
 	{
 		name: 'Üçgen Eşitsizliği',
-		description: '-',
+		description: 'Bildiğiniz gibi her kenar uzunluğundan üçgen elde edemeyiz. Örneğin kenar uzunlukları 3,4,5 olan bir üçgen geçerli bir üçgen iken, 2,4,7 kenar uzunluklarına sahip bir üçgen ise elde edilememektedir. <br><br>Bu kod verilen iki kenar uzunluğunda üçüncü kenar hangi değer aralığında olursa tanımlı bir üçgen elde edebilir bunu bulmaktadır.<br><br>',
 		shortlink: 'ucgenesitsizligi',
 		username: 'Osman Yusuf Akkuş',
 		code: 'değişken x = 5\n'+
