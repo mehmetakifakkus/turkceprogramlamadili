@@ -16,6 +16,14 @@ var evaluate = CodeMirror.fromTextArea(document.getElementById('evaluate'), {
   readOnly: true
 });
 
+var translate = CodeMirror.fromTextArea(document.getElementById('translateCoutput'), {
+  mode: "simplemode",
+//	mode: "turkish",
+  lineNumbers: true,
+  theme: 'eclipse',
+  readOnly: true
+});
+
 var parseResult = CodeMirror.fromTextArea(document.getElementById('parseResult'), {
   mode: "simplemode",
   lineNumbers: false,
@@ -96,7 +104,18 @@ editor.on("keyup", function (cm, event) {
 		//parse();
 
 	console.log(event.keyCode)
+
+	try{
+		var text = editor.getValue();
+    	result = parser.parse(text);
+		translate.getDoc().setValue(translateCHelper(result, 0))
+
+	}catch(err){
+		console.error(err)
+	}
+    	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 });
+
 /*
 *
 *	#######################      	Editor Functions   	  #######################
@@ -172,13 +191,12 @@ function insertTextAtCursor(text, number, isLoop) {
     doc.replaceRange(text+'', {line:number-1, ch:1000});
 }
 
+var konsolLine = 0
 function insertText(text) {
-    konsol.getDoc().replaceRange(text+' ', {line: 0, ch:500});
+    konsol.getDoc().replaceRange(text, {line: konsolLine++, ch:500});
 }
 
 insertNewLines(editor.lineCount()-1);
-
-
 
 /*
 *

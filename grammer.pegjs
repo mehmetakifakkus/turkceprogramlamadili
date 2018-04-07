@@ -70,34 +70,6 @@ while_statement
 		'end': los.end
 	   };	
 } 
-
-/*
-for_statement
- = _ 'sayarakYinele' _ '(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ nl
- 	lines:(compound_statement / block_item) _ nl
- {
-     console.log({'dec1': dec1, 'los': los, 'dec2':dec2})
-	 los.mainType = 'for';
-
-	window.eval(dec1.text);	 // initialization part
-		
-	while(window.eval(los.text)){
-   
-      	myEval(los);  // calculate the current value
-		      	
-		if(lines.constructor.name == "Array")
-        	for(var k=0; k < lines.length; k++)
-				myEval(lines[k], true);
-       	else
-    	     myEval(lines, true);
-			 
-		window.eval(dec2.text); // increment part
-	}
-	myEval(los);  // calculate the value after loop
-	
-    return [dec1, los, dec2, lines]; 
- }
- */
  
 for_statement
  = _ 'sayarakYinele' _ '(' _ dec1:declaration _ ',' _ los:logical_statement _ ',' _ dec2:declaration ')' _ nl
@@ -161,7 +133,7 @@ init_declarator_list
  = 	init:init_declarator (',' _ init_declarator)* {return init;}
 
 init_declarator
-	= _ left:name _"="_ exp: (dogru / yanlis / math_functions / expression_statement) nl{
+	= _ left:name _"="_ exp: (dogru / yanlis / math_functions / expression_statement_no_nl) nl{
 
 	if( typeof(exp) == 'boolean')
     	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it       
@@ -188,7 +160,7 @@ expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* _ nl{
    	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column-1, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
-expression_statement_no_nl = head:Term tail:(_ ("+" / "-") _ Term)* _ {  	    
+expression_statement_no_nl = head:Term tail:(_ ("+" / "-") _ Term)* {  	    
    	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column-1, 'end':location().end.column-1}; // evaluate it, then return it    
 }
 
@@ -204,7 +176,7 @@ Factor
 
 logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_operator _ logical_statement)* _ nl
 {
-	var text = f1.text+' ';
+	var text = f1.text+'';
     text += op + ' ' + f2.text; 
         
     if(log[0] != undefined)  
@@ -234,19 +206,22 @@ function_combination
  }
 
 math_functions
- = taban / tavan/ karekok / mutlakDeger
+ = taban / tavan/ karekok / mutlakDeger / ustel
 
 taban = 'taban' _ '(' _ exp:expression_statement _ ')'{
- 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.floor(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+ 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.floor(' + exp.text + ')', 'C': 'floor(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
 tavan = 'tavan' _ '(' _ exp:expression_statement _ ')'{
- 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.ceil(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+ 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.ceil(' + exp.text + ')', 'C': 'ceil(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
 karekok = 'karekök' _ '(' _ exp:expression_statement _ ')'{
- 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.sqrt(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+ 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.sqrt(' + exp.text + ')', 'C': 'sqrt(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
 mutlakDeger = 'mutlak' _ '(' _ exp:expression_statement _ ')'{
- 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.abs(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+ 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.abs(' + exp.text + ')', 'C': 'fabs(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
+}
+ustel = 'üstel' _ '(' _ exp1:expression_statement _ ',' _ exp2:expression_statement _ ')'{
+ 	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.pow(' + exp1.text + ','  + exp2.text + ')', 'C': 'pow(' + exp1.text + ','  + exp2.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
 
 
@@ -262,7 +237,7 @@ yanlis = 'yanlış' {return false;}
 
 
 letter "letter" 
-  = [a-zA-Z_|ş|ğ|ç|ö|ü|ı|ü|Ş|Ğ|Ç|Ö|Ü|I|Ü]+ {return text()} 
+  = [a-zA-Z|_|ş|ğ|ç|ö|ü|ı|ü|Ş|Ğ|Ç|Ö|Ü|I|Ü]+ {return text()} 
 
 StringLiteral "string"
   = '"' chars:DoubleStringCharacter* '"' {

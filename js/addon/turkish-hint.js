@@ -113,7 +113,7 @@ CodeMirror.registerHelper("hint", "turkish", javascriptHint);
 
   var funcProps = "prototype apply call bind".split(" ");
 
-  var javascriptKeywords = ("mutlak karekök taban tavan değişken değ eğer değilse yinele sayarakYinele yordam yaz terket devamet yakala sil doğru yanlış" +
+  var javascriptKeywords = ("mutlak karekök taban tavan üstel değişken değ eğer değilse yinele sayarakYinele yordam yaz terket devamet yakala sil doğru yanlış" +
 						   " ve veya eşit eşitdeğil küçük küçükeşit büyük büyükeşit").split(" ");
 
 

@@ -135,7 +135,8 @@ yaz num1</textarea>
 
 	<button type="button" id="compactB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px; display: none" onclick="makeCompact()"><i class="fa fa-compress"></i></button>
 
-	<div class = "dropright">
+
+<div class = "dropright">
 	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
 	<ul id = "settings" class="mydropdown-menu" style="position:relative;" role="menu">
 
@@ -144,7 +145,6 @@ yaz num1</textarea>
 <div style="margin-left:-12px">
 
 	<div class="col-md-3">
-
 	</div>
 	<div class="col-md-3">
 	</div>
@@ -157,7 +157,7 @@ yaz num1</textarea>
 
 	<div class="col-md-3">
 
-<p><strong>Çalıştırma Hızı</strong></p>
+		<p><strong>Çalıştırma Hızı</strong></p>
 		<div id="h-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
 			<div class="ui-slider-range ui-widget-header ui-corner-all" href="#" style="width: 0%;"></div>
 			<a class="ui-slider-handle ui-state-default ui-corner-all" style="left: 11.1%;"></a>
@@ -169,7 +169,6 @@ yaz num1</textarea>
 </div>
 
 <script>
-
 $('#h-slider').slider({
     range: "min", min: 5, max: 50, value: 10,
     slide: function (event, ui) {
@@ -177,11 +176,27 @@ $('#h-slider').slider({
         refreshSpeed(ui.value / 10)
     }
 });
-
 </script>
-
 	</ul>
 
+</div>
+
+
+<div class = "dropright">
+	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('translate'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-terminal"></i></button>
+	<ul id = "translate" class="mydropdown-menu" style="position:relative;" role="menu">
+		<hr style="style1">
+
+		<div style="margin-left:6px">
+
+			<div class="col-md-10">
+				<h3><strong>Türkçe kodun C dilinde karşılığı (deneme sürümü):</strong></h3>
+				<textarea id="translateCoutput"></textarea>
+			</div>
+
+			<div class="col-md-2"></div>
+		</div>
+	</ul>
 </div>
 
 

@@ -39,7 +39,8 @@ userSend = [
 	},
 	{
 		name: 'Faktoriyel hesabı',
-		description: '-',
+		description: "Bize verilen bir sayının faktoriyelini bulalım.<br><br>Tanım olarak 1 den n'e kadar olan doğal sayıların çarpımına n faktöriyel denir ve n! şeklinde gösterilir. Yani 5! dediğimizde şuna eşit olur:<br><br>"+
+		"5! = 5 x 4 x 3 x 2 x 1 = 120<br>",
 		shortlink: 'huseyinfaktoriyel',
 		username: 'Hüseyin Cahit Kebapçıoğlu',
 		code: "değişken a = 5\n"+
@@ -56,7 +57,7 @@ userSend = [
 	},
 	{
 		name: 'Aylık ev bütçesi hesabı',
-		description: '-',
+		description: 'Gelirleri ve giderleri belirli olan birisinin aylık harcamaları sonrasında ne kadar parasının kaldığını bulan kod.<br><br>',
 		shortlink: 'evbutcesihesaplama',
 		username: 'Çağatay Özevim',
 		code:	"değişken aylıkgelir = 1400\n" +
@@ -73,7 +74,7 @@ userSend = [
 	},
 	{
 		name: 'Dikdörtgen çevresi hesabı',
-		description: '-',
+		description: 'Eni ve boyu bilinen bir dikdörtgenin çevresini bulalım.<br><br>',
 		shortlink: 'dikdortgencevresi',
 		username: 'Sonat Türkan',
 		code: "değişken boy = 20\n"+
@@ -102,7 +103,7 @@ userSend = [
 	},
 	{
 		name: 'Araç yakıtı hesaplama',
-		description: '-',
+		description: 'Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım.',
 		shortlink: 'aracyakithesaplama',
 		username: 'Osman Kalhan',
 		code: "değişken yapılankm = 70\n"+
@@ -127,7 +128,7 @@ userSend = [
 	},
 	{
 		name: 'Vücut kitle endeksi hesapmala',
-		description: 'Vücut kitle endeksi bir bireyin boy ve kilosunun ortalaması ile elde edilen bir hesaplamadır. Bu hesaplama ile bir kişinin kabaca kilo yönünden ne durumda olduğu hakkında kabaca bilgi edinebiliriz.',
+		description: 'Vücut kitle endeksi bir bireyin boy ve kilosunun ortalaması ile elde edilen bir hesaplamadır. Bu hesaplama ile bir kişinin kabaca kilo yönünden ne durumda olduğu hakkında kabaca bilgi edinebiliriz. Bu bilgiler kısaca zayıf, ideal kilo, şişman ve aşırı şişman şeklinde olacaktır.',
 		shortlink: 'vucutkitleendeksi',
 		username: 'Mehmet Akif AKKUŞ',
 		code: 'değişken kilo = 70   // kg cinsinden\n'+
@@ -182,7 +183,7 @@ userSend = [
 			  '\n'+
 			  'yaz "x eksenine göre simetri: " x "," y * -1\n'+
 			  'yaz "y eksenine göre simetri: " x * -1 "," y\n'+
-			  'yaz "orjine göre simetriği: " x * -1 "," y * -1\n',
+			  'yaz "orjine göre simetriği  : " x * -1 "," y * -1\n',
 		date: '02.09.2017'
 	},
 	{
@@ -500,6 +501,21 @@ adaySorular = [
 
 
 	  'code': 'değişken num1 = 12\ndeğişken num2 = 10\n\nyinele(num1 != num2){\n  eğer(num1 > num2)\n    num1 = num1 - num2\n  değilse\n    num2 = num2 - num1\n yaz num1}'
+	},
+	{
+	"name": "soru",
+	"description": '-',
+	"code": '// 15 5 100 2\n'+
+			'// 30 10 90 4\n'+
+			'// 45 15 80 8\n'+
+			'// 60 20 70 16\n'+
+			'// 75 25 60 32\n'+
+			'// 90 30 50 64\n'+
+			'\n'+
+			'sayarakYinele(değişken no=1, no <= 6, no=no+1)\n'+
+			'{\n'+
+			' yaz 15*no + " " + 5*no + " " + 100 - 10*(no-1) + " " + üstel(2, no) \n'+
+			'}\n'
 	}
 ]
 

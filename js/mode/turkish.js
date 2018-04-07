@@ -37,7 +37,7 @@ CodeMirror.defineMode("turkish", function(config, parserConfig) {
       "dön": C, "terket": C, "devam": C, "new": kw("new"), "delete": C, "throw": C, "debugger": C,
 
       "değişken": kw("var"), "değ": kw("var"), "sabit": kw("var"), "let": kw("var"),
-      "function": kw("function"), "mutlak": kw("function"), "karekök": kw("function"), "taban": kw("function"), "tavan": kw("function"),  "yordam": kw("function"), "catch": kw("catch"),
+      "function": kw("function"), "mutlak": kw("function"), "üstel": kw("function"), "karekök": kw("function"), "taban": kw("function"), "tavan": kw("function"),  "yordam": kw("function"), "catch": kw("catch"),
       "sayarakYinele": kw("for"), "switch": kw("switch"), "case": kw("case"), "default": kw("default"),
 	  "yaz": kw("yaz"),
 	  "var": kw("var"),
