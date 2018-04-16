@@ -201,8 +201,6 @@ function insertTextAtCursor(text, number, isLoop) {
 	else if(isFloat(text))
 		text = toFixed(text, 2);
 
-	console.log(text)
-
 	var pos = { // create a new object to avoid mutation of the original selection
         line: number-1,
         ch: 1 // set the character position to the end of the line
@@ -226,12 +224,6 @@ function insertTextAtCursor(text, number, isLoop) {
 
 var konsolLine = 0
 function outputConsole(text) {
-
-	if(typeof(text) == 'boolean')
-		 text = text ? 'doğru':'yanlış'
-	else if(isFloat(text))
-		text = toFixed(eval(text), 6);
-
     konsol.getDoc().replaceRange(text, {line: konsolLine++, ch:500});
 }
 

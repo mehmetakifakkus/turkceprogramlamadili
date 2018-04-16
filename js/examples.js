@@ -362,6 +362,34 @@ ileriSeviye = [
 				'}\n'
 	},
 	{
+		"name": "Kareler toplamı",
+        "description": "1'den başlayarak n sayısını kadar olan sayıların karelerini toplamak istiyoruz. Yani 1^2 + 2^2 + 3^2 + .... + n^2 <br><br>Bunu yinele döngüsü kullanarak yazabiliriz.<br>",
+		"code": 'değişken sayı = 1\n'+
+				'değişken n = 10\n'+
+				'değişken toplam = 0\n'+
+				'\n'+
+				'yinele(sayı <= 10)\n'+
+				'{\n'+
+				'	toplam = toplam + sayı * sayı\n'+
+				'    sayı = sayı + 1\n'+
+				'}\n'+
+				'yaz toplam\n'
+	},
+	{
+		"name": "Çarpmaya göre tersler toplamı",
+        "description": "1'den başlayarak n sayısını kadar olan sayıların çarpmaya göre terslerini toplamak istiyoruz. Yani 1 + 1/2 + 1/3 + .... + 1/n <br><br>Bunu yinele döngüsü kullanarak yazabiliriz.<br>",
+		"code": 'değişken sayı = 1\n'+
+				'değişken n = 10\n'+
+				'değişken toplam = 0\n'+
+				'\n'+
+				'yinele(sayı <= 10)\n'+
+				'{\n'+
+				'	toplam = toplam + 1/sayı\n'+
+				'    sayı = sayı + 1\n'+
+				'}\n'+
+				'yaz toplam\n'
+	},
+	{
 		"name": "2 sayının Ebob'unu bulalım",
         "description": 'Verilen iki sayının en büyük ortak bölenini bulan kodu yazalım.' +
 	                   "Hatırlarsanız en büyük ortak böleni bulmak için 2 sayıyı birden bölebilmenin yollarını arıyoruz. En azından lisede böyle öğrendik. <br><br>"+
