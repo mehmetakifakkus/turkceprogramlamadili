@@ -1,3 +1,16 @@
+//var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+////  mode: "javascript",
+//	mode: "turkish",
+//  extraKeys: {"Ctrl-Space": "autocomplete"},
+//  styleActiveLine: true,
+//  lineNumbers: true,
+//  lineWrapping: true,
+//  autoCloseBrackets: true,
+//  theme: 'eclipse',
+//  gutters: ["CodeMirror-linenumbers", "breakpoints"]
+//});
+//
+
 var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
 //  mode: "javascript",
 	mode: "turkish",
@@ -166,11 +179,29 @@ function insertNewLines(number) {
 
 }
 
+
+function toFixed(value, precision) {
+    var power = Math.pow(10, precision || 0);
+    return String(Math.round(value * power) / power);
+}
+
+function isInt(n) {
+   return n % 1 === 0;
+}
+
+function isFloat(n){
+    return Number(n) === n && n % 1 !== 0;
+}
+
 function insertTextAtCursor(text, number, isLoop) {
     var doc = evaluate.getDoc();
 
 	if(typeof(text) == 'boolean')
 		 text = text ? 'doğru':'yanlış'
+	else if(isFloat(text))
+		text = toFixed(text, 2);
+
+	console.log(text)
 
 	var pos = { // create a new object to avoid mutation of the original selection
         line: number-1,
@@ -185,6 +216,8 @@ function insertTextAtCursor(text, number, isLoop) {
 
   }
 
+
+
   if(isLoop)
     doc.replaceRange(text+' ', {line:number-1, ch:1000});
   else
@@ -192,7 +225,13 @@ function insertTextAtCursor(text, number, isLoop) {
 }
 
 var konsolLine = 0
-function insertText(text) {
+function outputConsole(text) {
+
+	if(typeof(text) == 'boolean')
+		 text = text ? 'doğru':'yanlış'
+	else if(isFloat(text))
+		text = toFixed(eval(text), 6);
+
     konsol.getDoc().replaceRange(text, {line: konsolLine++, ch:500});
 }
 

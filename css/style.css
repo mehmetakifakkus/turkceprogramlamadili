@@ -183,21 +183,61 @@ div.row {
 }
 
 .styled-background-normal {
-  background-color: yellow;
   color: #000;
+  -webkit-animation-name: highlight; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1.5s; /* Safari 4.0 - 8.0 */
+  animation-name: highlight;
+  animation-duration: 1.5s;
+	transition-timing-function: ease-in;
 }
 
 .styled-background-logical-true {
-  background-color: #62fd46;
   color: #000;
+  -webkit-animation-name: true_output; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
+  animation-name: true_output;
+  animation-duration: 2s;
 }
 
 
 .styled-background-logical-false {
-  background-color: #eb847f;
+/*  background-color: #eb847f;*/
   color: #000;
+  -webkit-animation-name: false_output; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
+  animation-name: false_output;
+  animation-duration: 2s;
 }
 
+@-webkit-keyframes true_output {
+    from {background-color: #62fd46}
+    to {background-color: white;}
+}
+
+@-webkit-keyframes false_output {
+    from {background-color: red;}
+    to {background-color: white;}
+}
+
+@-webkit-keyframes highlight {
+    from {background-color: yellow;}
+    to {background-color: white;}
+}
+
+@keyframes true_output {
+    from {background-color: #62fd46}
+    to {background-color: white;}
+}
+
+@keyframes false_output {
+    from {background-color: red;}
+    to {background-color: white;}
+}
+
+@keyframes highlight {
+    from {background-color: yellow;}
+    to {background-color: white;}
+}
 
 div.title {
   padding: 0.4em 16px;
