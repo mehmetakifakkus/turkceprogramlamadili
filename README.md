@@ -11,7 +11,8 @@ Sadece dil terimlerini Türkçe'leştirmeden ziyade onları görselleştirmeye �
 
 Geliştirilmekte olan bu dille irtibatta kalmak veya katkıda bulunmak isterseniz aktif facebook sayfasını veya alakalı grubu buradan takip edebilirsiniz.
 
-Link: [https://www.facebook.com/turkceprogramlamadili](https://www.facebook.com/turkceprogramlamadili)
+Çevirimiçi   : [Türkçe Programlama Dili Çevrimiçi](http://turkceprogramlamadili.org/)
+Facebook Link: [https://www.facebook.com/turkceprogramlamadili](https://www.facebook.com/turkceprogramlamadili)
 
 ## Dilin söz dizimsel özellikleri nedir?
 
