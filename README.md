@@ -1,6 +1,6 @@
 # Online Türkçe Programlama Öğrenme Aracı
 
-<img float="left" src="https://scontent.fist1-1.fna.fbcdn.net/v/t1.0-9/29597481_724189051303609_4723848531689655402_n.png?_nc_cat=0&oh=c832407b2a10f31661a58f5c65673209&oe=5B93BCCD" width="800"/>
+<img float="left" src="https://scontent.fbtz1-7.fna.fbcdn.net/v/t1.0-9/30743913_732215103834337_3686709187112337408_n.png?_nc_cat=101&_nc_oc=AQlFHFesiqdcBRFdBiggQLFjArJ9zBW-RoWwkQ1u2b7E0b4uYKznsUHZzIVQpMRjN2Y&_nc_ht=scontent.fbtz1-7.fna&oh=054bc1e7eb07318fd9ef72c66bde8757&oe=5E66D37D" width="800"/>
 
 ## Nedir?
 Yürütülen bu proje; bir programlama dili **Türkçe** olabilir mi, hiç bilmeyenlerin ya da deneyim sahibi olmayanların öğrenmesine katkı sağlayabilir mi gibi sorulara cevap aranması amacıyla her hangi ticari bir amaç gütmeden ortaya konmuştur.
