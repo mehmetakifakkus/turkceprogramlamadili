@@ -217,6 +217,14 @@ userSend = [
 			  '\n'+
 		  	  'pay1"/"payda1 " + "pay2"/"payda2 " = " b+c "/" a yaz\n',
 	   date: '09.09.2017'
+	},
+	{
+	  name: "Haydi Çocuklar Çizim Yapalım",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    'çiz dikdörtgen 10 30\n',
+	   date: '08.02.2020'
 	}
 ]
 

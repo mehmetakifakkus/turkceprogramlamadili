@@ -1,5 +1,23 @@
 var time = 0.5, speed = 1000;
 
+paper.install(window)    
+paper.setup('canvas-1')
+var scene_height = view.size.height;
+var shape_last_x = 0;
+var shape_last_y = 0;
+
+var grammer = null, errorGrammer = null;
+var parser, parser2;
+
+$.get("grammer.pegjs", function(response) {
+	grammer = response;
+	parser = PEG.buildParser(grammer);
+});
+$.get("hataAyikla.pegjs", function(response) {
+	errorGrammer = response;
+	parser2 = PEG.buildParser(errorGrammer);
+});
+
 function drawLine(line, isLoop, result){
   var res = result;
 
@@ -27,8 +45,30 @@ function drawLine(line, isLoop, result){
 	}
 	else if(line.type == "draw")
     {
-        window.createPaths();
         highlightLine(line);
+        
+        if(line.shape == "rastgele")
+        {            
+            window.createPaths();
+        }
+        if(line.shape == "dikdörtgen")
+        {
+            console.log(line)
+            //window.createRectangle(30, 60);
+            var rect = new Path.Rectangle(0, 0, parseInt(line.vars[0].text), parseInt(line.vars[1].text))
+            rect.style = {
+                fillColor:  new Color(1, 0, 0),
+                strokeColor: 'black',
+                strokeWidth: 1
+            };
+            
+        }
+        if(line.shape == "daire")
+        {        
+            drawLine(item, false, "");
+            new Path.Circle(30,60, 60, 60)
+        }
+        
     }
     else{
 		var result = window.eval(line.text);
@@ -40,17 +80,6 @@ function drawLine(line, isLoop, result){
 time++;
 }
 
-var grammer = null, errorGrammer = null;
-var parser, parser2;
-
-$.get("grammer.pegjs", function(response) {
-	grammer = response;
-	parser = PEG.buildParser(grammer);
-});
-$.get("hataAyikla.pegjs", function(response) {
-	errorGrammer = response;
-	parser2 = PEG.buildParser(errorGrammer);
-});
 
 function processOneItem(item){
 
@@ -132,21 +161,22 @@ function processOneItem(item){
 	}
     if(item.type == 'draw')
     {
-        console.log(item)
+        //console.log(item)
         if(item.shape == "rastgele")
         {            
             //window.createPaths();
             drawLine(item, false, "");
         }
-        if(item.shape == "dikdortgen")
+        if(item.shape == "dikdörtgen")
         {
-            
-            
+            drawLine(item, false, "");
+            //new Path.Circle(130,160, 60, 60)
         }
         if(item.shape == "daire")
         {
             
-            
+            drawLine(item, false, "");
+            new Path.Circle(30,60, 60, 60)
         }
         
     }
@@ -307,7 +337,7 @@ for(var i=0; i < ileriSeviye.length; i++){
 }
 
 
-window.loadExample('ortaSeviye', 2);
+window.loadExample('userSend', 13);
 //window.loadExample('adaySorular', 1);
 
 

@@ -1,7 +1,7 @@
 paper.install(window);
 
 var values = {
-	paths: 3,
+	paths: 1,
 	minPoints: 5,
 	maxPoints: 15,
 	minRadius: 10,
@@ -22,7 +22,8 @@ window.createPaths = function() {
 	for (var i = 0; i < values.paths; i++) {
 		var radius = values.minRadius + Math.random() * radiusDelta;
 		var points = values.minPoints + Math.floor(Math.random() * pointsDelta);
-		var path = createBlob(view.size * Point.random(), radius, points);
+		var path = createBlob(new Point(view.size.width * Point.random().x, view.size.height * Point.random().y * 0.4), radius, points);
+                
 		var lightness = (Math.random() - 0.5) * 0.4 + 0.4;
 		var hue = Math.random() * 360;
 		path.fillColor = { hue: hue, saturation: 1, lightness: lightness };
