@@ -29,14 +29,6 @@ var evaluate = CodeMirror.fromTextArea(document.getElementById('evaluate'), {
   readOnly: true
 });
 
-var translate = CodeMirror.fromTextArea(document.getElementById('translateCoutput'), {
-  mode: "simplemode",
-//	mode: "turkish",
-  lineNumbers: true,
-  theme: 'eclipse',
-  readOnly: true
-});
-
 var parseResult = CodeMirror.fromTextArea(document.getElementById('parseResult'), {
   mode: "simplemode",
   lineNumbers: false,
@@ -121,8 +113,6 @@ editor.on("keyup", function (cm, event) {
 	try{
 		var text = editor.getValue();
     	result = parser.parse(text);
-		translate.getDoc().setValue(translateCHelper(result, 0))
-
 	}catch(err){
 		console.error(err)
 	}

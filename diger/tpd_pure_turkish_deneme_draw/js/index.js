@@ -55,9 +55,15 @@ function drawLine(line, isLoop, result){
         {
             console.log(line)
             //window.createRectangle(30, 60);
-            var rect = new Path.Rectangle(0, 0, parseInt(line.vars[0].text), parseInt(line.vars[1].text))
+            //var rect = new Path.Rectangle(0, 0, parseInt(line.vars[0].text), parseInt(line.vars[1].text))
+            var rect = new Path.Rectangle({
+                                            point: [40, 50],
+                                            size: [parseInt(line.vars[0].text), parseInt(line.vars[1].text)]
+                //,matrix: new Matrix(1,0,0,-1, 0, 10)
+                                          });
+
             rect.style = {
-                fillColor:  new Color(1, 0, 0),
+                //fillColor:  new Color(1, 0, 0),
                 strokeColor: 'black',
                 strokeWidth: 1
             };
@@ -65,8 +71,16 @@ function drawLine(line, isLoop, result){
         }
         if(line.shape == "daire")
         {        
-            drawLine(item, false, "");
-            new Path.Circle(30,60, 60, 60)
+            console.log(line)
+            
+            var circ = new Path.Circle(new Point(100, 70), parseInt(line.vars[0].text));
+                                                                                                  
+            circ.style = {
+                //fillColor:  new Color(1, 0, 0),
+                strokeColor: 'black',
+                strokeWidth: 1
+            };
+            
         }
         
     }
@@ -174,9 +188,7 @@ function processOneItem(item){
         }
         if(item.shape == "daire")
         {
-            
             drawLine(item, false, "");
-            new Path.Circle(30,60, 60, 60)
         }
         
     }
@@ -230,7 +242,6 @@ function parse() {
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 
 		console.log(result)
-		//console.log(translateCHelper(result, 0))
 
 		parseStr = '//     '+'Kod hatasız, çalıştırma başarılı.';
 
@@ -302,40 +313,6 @@ for(var i=0; i < userSend.length; i++){
 
 	document.getElementById('userQuestions').innerHTML += str;
 }
-
-for(var i=1; i < beginner.length; i++){
-	var str = '<a href="javascript:hideshow(document.getElementById(\'baslangicSeviyeSoru'+i+'\'))">' +
-		      '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver; ">' + i +'. '+ beginner[i].name + '</h4></a>' +
-			  '<p style = "font-size: 14px; display: none; "id="baslangicSeviyeSoru'+ i +'">' +
-		         	beginner[i].description + ' Hemen incelemek isterseniz, ' +
-			  		'<a href="#" onclick = "loadExample(\'beginner\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
-			  '</p>';
-
-	document.getElementById('baslangic').innerHTML += str;
-}
-
-for(var i=0; i < ortaSeviye.length; i++){
-	var str = '<a href="javascript:hideshow(document.getElementById(\'ortaSeviyeSoru'+i+'\'))">' +
-			  '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver;">' + (i+1) +'. '+ ortaSeviye[i].name + '</h4></a>' +
-			  '<p style = "font-size: 14px; display: none;" id="ortaSeviyeSoru'+ i +'">' +
-					ortaSeviye[i].description + ' Hemen incelemek isterseniz, ' +
-					'<a href="#" onclick = "loadExample(\'ortaSeviye\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
-			  '</p>';
-
-	document.getElementById('ortaSeviyeSorular').innerHTML += str;
-}
-
-for(var i=0; i < ileriSeviye.length; i++){
-	var str = '<a href="javascript:hideshow(document.getElementById(\'ileriSeviyeSoru'+i+'\'))">' +
-			  '<h4 style = "margin: 0.25em 0 .75em 0; border-bottom: 2pt silver;">' + (i+1) +'. '+ ileriSeviye[i].name + '</h4></a>' +
-			  '<p style = "font-size: 14px; display: none;" id="ileriSeviyeSoru'+ i +'">' +
-					ileriSeviye[i].description + ' Hemen incelemek isterseniz, ' +
-					'<a href="#" onclick = "loadExample(\'ileriSeviye\', '+ i +')"> kodları buradan yükleyin</a>.<br><br>' +
-			  '</p>';
-
-	document.getElementById('ileriSeviyeSorular').innerHTML += str;
-}
-
 
 window.loadExample('userSend', 13);
 //window.loadExample('adaySorular', 1);
