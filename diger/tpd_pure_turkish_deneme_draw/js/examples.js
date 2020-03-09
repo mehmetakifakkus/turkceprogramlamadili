@@ -152,31 +152,6 @@ userSend = [
 		date: '28.08.2017'
 	},
 	{
-		name: 'Koordinat düzleminde bölge tespiti',
-		description: '<img src="images/koordinat-sistemi-bolgeler.jpg" style="border-radius: 5px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240"><br><br>' +
-		'Kodumuzda x ve y değerlerini değişken olarak tanımlarız ve bunların değerine göre kodumuzun bize konsol çıktısı olarak hangi bölgede olduğumuzu bulmasını bekleriz. Ha şunu da belirtelim: Noktamız koordinat bölgelerinin yanı sıra koordinat eksenleri üzerinde de yer alabilir, hatta orjin noktasında da bulunabilir.<br><br>',
-		shortlink: 'koordinatduzlemi',
-		username: 'Hüseyin Kebapçıoğlu',
-		code: 'değişken x = 5\n'+
-			  'değişken y = 0\n'+
-			  '\n'+
-			  'eğer(x > 0 ve y > 0)\n'+
-			  '  yaz "Birinci Bölge"\n'+
-			  'değilse eğer(x < 0 ve y > 0)\n'+
-			  '  yaz "İkinci Bölge"\n'+
-			  'değilse eğer(x < 0 ve y < 0)\n'+
-			  '  yaz "Üçüncü Bölge"\n'+
-			  'değilse eğer(x > 0 ve y < 0)\n'+
-			  '  yaz "Dördüncü Bölge"\n'+
-			  'değilse eğer(x == 0 ve y != 0)\n'+
-			  '  yaz "y ekseni üzerinde"\n'+
-			  'değilse eğer(x != 0 ve y == 0)\n'+
-			  '  yaz "x ekseni üzerinde"\n'+
-			  'değilse \n'+
-			  '  yaz "Origin"\n',
-		date: '31.08.2017'
-	},
-	{
 		name: 'Koordinat düzleminde simetriler',
 		description: 'Koordinat düzleminde herhangi bir noktanın koordinat eksenlerine göre simetrisini bulabilmekteyiz. X eksenine göre simetri alırken y koordinatı eksi ile çarpılır, Y eksenine göre simetri alınırken x koordinatı eksi ile çarpılır.<br><br> Örneğin 3,4 noktasının x eksenine göre simetrisi 3,-4 olur. <br><br>' ,
 		shortlink: 'koordinatduzlemindesimetriler',
@@ -225,11 +200,30 @@ userSend = [
 	  username: 'Mehmet Akif Akkuş',
 	  code:    'çiz dikdörtgen 40 50\nçiz daire 20\nçiz daire 30\nçiz daire 50',
 	   date: '08.02.2020'
+	},
+	{
+	  name: "Haydi Çocuklar Çizim Yapalım",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    'çiz kırmızı daire 20\nçiz daire 30\nçiz mavi daire 50\nçiz turuncu dikdörtgen 80 30',
+	   date: '08.02.2020'
+	},
+	{
+	  name: "Haydi Çocuklar Çizim Yapalım-2",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    "yükseklik 100 olsun\n"+
+                "\n"+
+                "(yükseklik < 160) olduğu_sürece\n"+
+                "{\n"+
+                "  çiz dikdörtgen 80 yükseklik\n"+
+                "  yükseklik (yükseklik+20) olsun\n"+
+                "}",
+	   date: '08.02.2020'
 	}
 ]
-
-
-
 
 
 function getExample(str)
@@ -240,28 +234,6 @@ function getExample(str)
 	return userSend[0];
 }
 
-/*
-değişken x = 4
-değişken y = 5
-
-yaz "x eksenine göre simetri"
-yaz x
-yaz y * -1
-
-yaz "y eksenine göre simetri"
-yaz x * -1
-yaz y
-
-yaz "x ve y eksenine göre simetriği"
-yaz x * -1
-yaz y * -1
-
-
-////
-
-
-
-*/
 /*
 
 değişken x = 5

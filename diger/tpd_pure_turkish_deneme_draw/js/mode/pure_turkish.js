@@ -32,7 +32,7 @@ CodeMirror.defineMode("turkish", function(config, parserConfig) {
     var operator = kw("operator"), atom = {type: "atom", style: "atom"};
 
     var jsKeywords = {
-      "ise": kw("if"), "olduğu sürece": A, "with": A, "değilse": B, "yap": B,
+      "ise": kw("if"), "olduğu_sürece": A, "with": A, "değilse": B, "yap": B,
 	  "try": B, "finally": B,
       "dön": C, "terket": C, "devam": C, "new": kw("new"), "delete": C, "throw": C, "debugger": C,
 

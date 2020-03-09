@@ -88,7 +88,7 @@ yaz num1</textarea>
 		</div>
         
         <div class="canvas">
-            <canvas id="canvas-1" width="600px" height="250px"></canvas>
+            <canvas id="canvas-1" width="1200px" height="250px"></canvas>
         </div>
 
 	</div>
@@ -164,18 +164,18 @@ yaz num1</textarea>
 
 		<p><strong>Çalıştırma Hızı</strong></p>
 		<div id="h-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
-			<div class="ui-slider-range ui-widget-header ui-corner-all" href="#" style="width: 0%;"></div>
+			<div class="ui-slider-range ui-widget-header ui-corner-all" href="#" style="width: 30%;"></div>
 			<a class="ui-slider-handle ui-state-default ui-corner-all" style="left: 11.1%;"></a>
 		</div>
 		<br>
-		<p>Saniyede <input type="text" style = "width:27px; line-height: 15px;" onchange="" id="amount" value="1"> satır çalışacak.</p>
+		<p>Saniyede <input type="text" style = "width:40px; line-height: 15px;" onchange="" id="amount" value="1"> satır çalışacak.</p>
 
 	</div>
 </div>
 
 <script>
 $('#h-slider').slider({
-    range: "min", min: 5, max: 50, value: 10,
+    range: "min", min: 5, max: 5000, value: 10,
     slide: function (event, ui) {
         $("#amount").val(ui.value / 10);
         refreshSpeed(ui.value / 10)

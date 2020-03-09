@@ -38,7 +38,7 @@ if_statement
 }
  
 while_statement
- =  _ '(' los:logical_statement ')' _ 'olduğu sürece' _  nl 
+ =  _ '(' los:logical_statement ')' _ 'olduğu_sürece' _  nl 
    _ lines:(compound_statement / block_item) _ nl
 { 
     if(lines instanceof Array)
@@ -179,7 +179,7 @@ factor2 = "(" logical_statement ")"
 	   / expression_statement
 
 draw_statement 
- = "çiz" _ left:("dikdörtgen" / "daire" / "rastgele") _ vars:(expression_statement_no_nl _)* _ nl
+ = "çiz" _ clr:color? _ left:("dikdörtgen" / "daire" / "rastgele") _ vars:(expression_statement_no_nl _)* _ nl
  {
    //return {'type':'draw', 'shape': left.toString(), 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
    var items = []
@@ -189,7 +189,7 @@ draw_statement
        		items.push(temp[0]);
        }
    
-   return {'type':'draw', 'shape': left.toString(), 'vars': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+   return {'type':'draw', 'shape': left.toString(), 'color': clr , 'vars': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
  }
 
 //// math functions
@@ -326,3 +326,14 @@ operator_symbol
 	/ ">"					{ return text(); }
 	/ "=="					{ return text(); }
 	/ "!="					{ return text(); }
+    
+color
+  =  "kırmızı" 			{ return "#FF0000"; }
+	/ "yeşil"			{ return "#00FF00"; }
+	/ "mavi"			{ return "#0000FF"; }
+	/ "sarı"			{ return "#FFFF00"; }
+    / "turuncu"	 		{ return "#FF7500"; }
+	/ "lacivert"		{ return "#390082"; }  
+	/ "mor"				{ return "#FF00FF"; }
+    / "majenta"			{ return "#00FFFF"; }
+    / "kahverengi"		{ return "#AD6900"; }

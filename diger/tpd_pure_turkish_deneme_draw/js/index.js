@@ -2,8 +2,9 @@ var time = 0.5, speed = 1000;
 
 paper.install(window)    
 paper.setup('canvas-1')
+
 var scene_height = view.size.height;
-var shape_last_x = 0;
+var shape_last_x = 7;
 var shape_last_y = 0;
 
 var grammer = null, errorGrammer = null;
@@ -18,7 +19,7 @@ $.get("hataAyikla.pegjs", function(response) {
 	parser2 = PEG.buildParser(errorGrammer);
 });
 
-function drawLine(line, isLoop, result){
+function drawLine(line, isLoop, result, result2, color){
   var res = result;
 
   setTimeout(function(){
@@ -53,34 +54,42 @@ function drawLine(line, isLoop, result){
         }
         if(line.shape == "dikdörtgen")
         {
-            console.log(line)
-            //window.createRectangle(30, 60);
-            //var rect = new Path.Rectangle(0, 0, parseInt(line.vars[0].text), parseInt(line.vars[1].text))
             var rect = new Path.Rectangle({
-                                            point: [40, 50],
-                                            size: [parseInt(line.vars[0].text), parseInt(line.vars[1].text)]
-                //,matrix: new Matrix(1,0,0,-1, 0, 10)
+                                            point: [shape_last_x, 70 - result2/2],
+                                            size: [res, result2]
+               // ,matrix: new Matrix(1,0,0,-1, 200, 250)
                                           });
-
+            
             rect.style = {
-                //fillColor:  new Color(1, 0, 0),
+                fillColor: color,
                 strokeColor: 'black',
                 strokeWidth: 1
             };
-            
+            shape_last_x += rect.bounds.width;
+            console.log(shape_last_x)
         }
         if(line.shape == "daire")
-        {        
-            console.log(line)
-            
-            var circ = new Path.Circle(new Point(100, 70), parseInt(line.vars[0].text));
+        {           
+            var circ = new Path.Circle(new Point(shape_last_x + res, 70), res);
                                                                                                   
             circ.style = {
-                //fillColor:  new Color(1, 0, 0),
+                fillColor:  color,
                 strokeColor: 'black',
                 strokeWidth: 1
             };
-            
+            shape_last_x += 2*res;
+            console.log(shape_last_x)
+        }
+        if(line.shape == "üçgen")
+        {
+            var triangle = new Path.RegularPolygon({
+                center: [50, 50],
+                sides: 3,
+                radius: 40,
+                fillColor: color
+            });
+            shape_last_x += rect.bounds.width;
+            console.log(shape_last_x)
         }
         
     }
@@ -178,17 +187,20 @@ function processOneItem(item){
         //console.log(item)
         if(item.shape == "rastgele")
         {            
-            //window.createPaths();
-            drawLine(item, false, "");
+            drawLine(item, false, "", item.color);
         }
         if(item.shape == "dikdörtgen")
         {
-            drawLine(item, false, "");
+            //console.log('['+ item.type + '] shape:'+ item.shape +' line '+item.lineNumber +' is getting processed, result1 is: '+ eval(item.vars[0].text) + ', result2 is: '+ eval(item.vars[1].text));
+            
+            drawLine(item, false, eval(item.vars[0].text), eval(item.vars[1].text), item.color);
             //new Path.Circle(130,160, 60, 60)
         }
         if(item.shape == "daire")
         {
-            drawLine(item, false, "");
+            //console.log('['+ item.type + '] shape:'+ item.shape +' line '+item.lineNumber +' is getting processed, result1 is: '+ eval(item.vars[0].text));
+                
+            drawLine(item, false, eval(item.vars[0].text), "", item.color);
         }
         
     }
@@ -235,19 +247,18 @@ function parse() {
 	temizle();
 
 	try{
-    	insertNewLines(editor.lineCount()-1);
-
+    	insertNewLines(editor.lineCount()+3);
     	var text = editor.getValue();
-    	result = parser.parse(text);
+
+        result = parser.parse(text);
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 
-		console.log(result)
+        console.log(result)
 
 		parseStr = '//     '+'Kod hatasız, çalıştırma başarılı.';
 
 		$("#redLight").css("display", "none");       // bekle butonunu aç
 		$("#greenLight").css("display", "block");
-
 
 		$("#run").css("display", "none");
 		$("#runJunk").css("display", "block");
