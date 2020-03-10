@@ -299,7 +299,7 @@ function parse() {
 
 window.kaydet = function(){
 	var blob = new Blob([editor.getValue()], {type: "text/plain;charset=utf-8"});
-	saveAs(blob, "merhaba dünya.txt");
+	saveAs(blob, "benimResmim.txt");
 }
 
 window.loadExample = function(from, no){
@@ -312,6 +312,11 @@ window.refreshSpeed = function(value){
 	speed = 1000 / value;
 }
 
+window.trashImageArea = function(){
+    paper.setup('canvas-1');
+    shape_last_x = 7;
+    view.update();
+}
 
 for(var i=0; i < userSend.length; i++){
 	var ind = userSend.length-1-i;
@@ -326,6 +331,5 @@ for(var i=0; i < userSend.length; i++){
 }
 
 window.loadExample('userSend', 13);
-//window.loadExample('adaySorular', 1);
 
 

@@ -8,7 +8,7 @@
 
 <script src='https://github.com/pegjs/pegjs/releases/download/v0.9.0/peg-0.9.0.min.js'></script>
 <!--<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>-->
-<script src='http://paperjs.org/assets/js/jquery.js'></script>
+<script src='js/jquery.js'></script>
     
 <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
@@ -136,13 +136,13 @@ yaz num1</textarea>
 
 
 
-	<button type="button" id="fullScreenB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px; display: none" onclick="makeFullScreen()"><i class="fa fa-expand"></i></button>
+	<button type="button" id="fullScreenB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px; display: none" onclick="makeFullScreen()"><i class="fa fa-expand"> Genişlet</i></button>
 
-	<button type="button" id="compactB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px;" onclick="makeCompact()"><i class="fa fa-compress"></i></button>
+	<button type="button" id="compactB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px;" onclick="makeCompact()"><i class="fa fa-compress"> Daralt</i></button>
 
 
 <div class = "dropright">
-	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
+	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:16px;"><i class="fa fa-gear"> Ayarlar</i></button>
 	<ul id = "settings" class="mydropdown-menu" style="position:relative;" role="menu">
 
 	<hr style="style1">
@@ -155,9 +155,12 @@ yaz num1</textarea>
 	</div>
 
 	<div class="col-md-3">
-			<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:-2px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
+			<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:-2px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"> Kodu Kaydet</span></button>
 
-			<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:20px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span></button>
+<!--        <button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:10px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"> Resmi kaydet</span></button>-->
+
+        
+			<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:20px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
 	</div>
 
 	<div class="col-md-3">
@@ -186,24 +189,7 @@ $('#h-slider').slider({
 
 </div>
 
-
-<div class = "dropright">
-	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('translate'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-terminal"></i></button>
-	<ul id = "translate" class="mydropdown-menu" style="position:relative;" role="menu">
-		<hr style="style1">
-
-		<div style="margin-left:6px">
-
-			<div class="col-md-10">
-				<h3><strong>Türkçe kodun C dilinde karşılığı (deneme sürümü):</strong></h3>
-				<textarea id="translateCoutput"></textarea>
-			</div>
-
-			<div class="col-md-2"></div>
-		</div>
-	</ul>
-</div>
-
+<button type="button" id="clearImages" class="btn btn-md btn-primary" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:16px;" onclick="trashImageArea()"><i class="fa fa-trash"> Resmi Sil</i></button>
 
 <!--</div>-->
 </div>
