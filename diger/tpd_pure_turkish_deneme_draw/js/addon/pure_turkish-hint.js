@@ -115,6 +115,7 @@ CodeMirror.registerHelper("hint", "turkish", javascriptHint);
 
   var javascriptKeywords = ("mutlak karekök taban tavan üstel değişken değ eğer değilse yinele sayarakYinele yordam yaz " +                           "terket devamet yakala sil doğru yanlış "  +
 						    "ve veya eşit eşitdeğil küçük küçükeşit büyük büyükeşit " + 
+                            "çiz yana_çiz üste_çiz "+
                             "kırmızı yeşil sarı mor mavi lacivert kahverengi turuncu mor majenta").split(" ");
 
 

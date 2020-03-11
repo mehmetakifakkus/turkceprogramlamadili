@@ -6,6 +6,7 @@ paper.setup('canvas-1')
 var scene_height = view.size.height;
 var shape_last_x = 7;
 var shape_last_y = 0;
+var drawings = [];
 
 var grammer = null, errorGrammer = null;
 var parser, parser2;
@@ -44,9 +45,10 @@ function drawLine(line, isLoop, result, result2, color){
 		highlightLine(line, false, true);
   		insertTextAtCursor(res, line.lineNumber, false);
 	}
-	else if(line.type == "draw")
+	else if(line.type == "drawing")
     {
         highlightLine(line);
+        var myShape;
         
         if(line.shape == "rastgele")
         {            
@@ -54,25 +56,25 @@ function drawLine(line, isLoop, result, result2, color){
         }
         if(line.shape == "dikdörtgen")
         {
-            var rect = new Path.Rectangle({
+            myShape = new Path.Rectangle({
                                             point: [shape_last_x, 70 - result2/2],
                                             size: [res, result2]
                // ,matrix: new Matrix(1,0,0,-1, 200, 250)
                                           });
             
-            rect.style = {
+            myShape.style = {
                 fillColor: color,
                 strokeColor: 'black',
                 strokeWidth: 1
             };
-            shape_last_x += rect.bounds.width;
+            shape_last_x += myShape.bounds.width;
             console.log(shape_last_x)
         }
         if(line.shape == "daire")
         {           
-            var circ = new Path.Circle(new Point(shape_last_x + res, 70), res);
+            myShape = new Path.Circle(new Point(shape_last_x + res, 70), res);
                                                                                                   
-            circ.style = {
+            myShape.style = {
                 fillColor:  color,
                 strokeColor: 'black',
                 strokeWidth: 1
@@ -82,16 +84,19 @@ function drawLine(line, isLoop, result, result2, color){
         }
         if(line.shape == "üçgen")
         {
-            var triangle = new Path.RegularPolygon({
-                center: [50, 50],
+            myShape = new Path.RegularPolygon({
+                center: [shape_last_x + res/2, 70],
                 sides: 3,
-                radius: 40,
-                fillColor: color
+                radius: res / 1.732,
+                fillColor: color,
+                strokeColor: 'black',
+                strokeWidth: 1
             });
-            shape_last_x += rect.bounds.width;
+            shape_last_x += myShape.bounds.width;
             console.log(shape_last_x)
         }
         
+        drawings.push(myShape)
     }
     else{
 		var result = window.eval(line.text);
@@ -104,8 +109,14 @@ time++;
 }
 
 
-function processOneItem(item){
-
+function processOneItem(obj){
+    
+    var item;
+    if(typeof obj.draw_type != "undefined")
+        item = obj.shape_object[0];
+    else
+        item = obj;
+    
 	if(item.type == 'logical')
 	{
 		console.log('[logical] line '+item.lineNumber +' is getting processed, text is: '+ item.text);
@@ -182,7 +193,7 @@ function processOneItem(item){
 		resu += '\n';
 		drawLine(item, false, resu);
 	}
-    if(item.type == 'draw')
+    if(item.type == 'drawing')
     {
         //console.log(item)
         if(item.shape == "rastgele")
@@ -198,7 +209,13 @@ function processOneItem(item){
         }
         if(item.shape == "daire")
         {
-            //console.log('['+ item.type + '] shape:'+ item.shape +' line '+item.lineNumber +' is getting processed, result1 is: '+ eval(item.vars[0].text));
+            console.log('['+ item.type + '] shape:'+ item.shape +' line '+item.lineNumber +' is getting processed, result1 is: '+ eval(item.vars[0].text));
+                
+            drawLine(item, false, eval(item.vars[0].text), "", item.color);
+        }
+        if(item.shape == "üçgen")
+        {
+            console.log('['+ item.type + '] shape:'+ item.shape +' line '+item.lineNumber +' is getting processed, result1 is: '+ eval(item.vars[0].text));
                 
             drawLine(item, false, eval(item.vars[0].text), "", item.color);
         }
@@ -207,7 +224,10 @@ function processOneItem(item){
 }
 
 function recursivelyProcess(items){
-	if(items instanceof Array)
+    
+    console.info("akif recursive");
+	
+    if(items instanceof Array)
 	{
 		for(var i=0; i < items.length; i++)
 		{
@@ -313,7 +333,13 @@ window.refreshSpeed = function(value){
 }
 
 window.trashImageArea = function(){
-    paper.setup('canvas-1');
+    var len = drawings.length;
+    
+    for(var i = 0; i < len; i++)
+		drawings[i].remove(); // remove drawings
+    
+    console.info(drawings.length)
+    
     shape_last_x = 7;
     view.update();
 }
@@ -330,6 +356,6 @@ for(var i=0; i < userSend.length; i++){
 	document.getElementById('userQuestions').innerHTML += str;
 }
 
-window.loadExample('userSend', 13);
+window.loadExample('userSend', 5);
 
 

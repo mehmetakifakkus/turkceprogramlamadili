@@ -7,6 +7,8 @@ a 20 olsun
 çiz daire 99 a
 çiz rastgele
 
+üste_çiz dikdörtgen 40 30
+         üçgen 40
 */
 
 start = statement*
@@ -93,6 +95,7 @@ block_item
  = print_statement
  / declaration
  / draw_statement
+ / shape_object
  / logical_statement
  / if_statement
  / while_statement
@@ -179,18 +182,31 @@ factor2 = "(" logical_statement ")"
 	   / expression_statement
 
 draw_statement 
- = "çiz" _ clr:color? _ left:("dikdörtgen" / "daire" / "rastgele") _ vars:(expression_statement_no_nl _)* _ nl
+ = dt:("çiz" / "yana_çiz" / "üste_çiz") sos:(_ shape_object _ nl)*
  {
    //return {'type':'draw', 'shape': left.toString(), 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
    var items = []
+       for(var i=0; i < sos.length; i++)
+       {
+       		var temp = sos[i];
+       		items.push(temp[1]);
+       }
+   
+   return {'draw_type': dt, 'shape_object': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+ }
+
+shape_object
+  = clr:color? _ left:("dikdörtgen" / "daire" / "üçgen" / "rastgele") _ vars:(expression_statement_no_nl _)*
+  {
+	   var items = []
        for(var i=0; i < vars.length; i++)
        {
        		var temp = vars[i];
        		items.push(temp[0]);
        }
    
-   return {'type':'draw', 'shape': left.toString(), 'color': clr , 'vars': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
- }
+   return {'type':'drawing', 'shape': left.toString(), 'color': clr , 'vars': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+  }
 
 //// math functions
 
