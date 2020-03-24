@@ -1,4 +1,4 @@
-paper.install(window);
+//paper.install(window);
 
 var values = {
 	paths: 1,

@@ -95,7 +95,6 @@ block_item
  = print_statement
  / declaration
  / draw_statement
- / shape_object
  / logical_statement
  / if_statement
  / while_statement
@@ -123,10 +122,14 @@ init_declarator_list
  = 	init:init_declarator (',' _ init_declarator)* {return init;}
 
 init_declarator
-	= _ left:name _ exp: (dogru / yanlis / math_functions / expression_statement_no_nl) _ "olsun" {
+	= _ left:name _ exp: (dogru / yanlis / shape_object_with_pr / math_functions / expression_statement_no_nl) _ "olsun" {
+
+	//console.log(exp)
 
 	if( typeof(exp) == 'boolean')
     	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it       
+    else if(exp.type == 'shape')
+    	return {'lhs': left, 'rhs': exp.shape}; // evaluate it, then return it       
     else 
         return {'lhs': left, 'rhs': exp.text};        
 }   
@@ -182,21 +185,27 @@ factor2 = "(" logical_statement ")"
 	   / expression_statement
 
 draw_statement 
- = dt:("çiz" / "yana_çiz" / "üste_çiz") sos:(_ shape_object _ nl)*
+ = dt:("çiz" / "yana_çiz" / "üste_çiz") sos: ( _ (name / shape_object_with_pr ) _ ) nl
  {
    //return {'type':'draw', 'shape': left.toString(), 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
-   var items = []
-       for(var i=0; i < sos.length; i++)
-       {
-       		var temp = sos[i];
-       		items.push(temp[1]);
-       }
+//   var items = []
+//   console.log(sos)
+//       for(var i=0; i < sos.length; i++)
+//       {
+//       		var temp = sos[i];
+//       		items.push(temp[1]);
+//       }
    
-   return {'draw_type': dt, 'shape_object': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+   return {'type': dt, 'shape_object': sos[1], 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+ }
+
+shape_object_with_pr
+ = '(' _ shp:shape_object _ ')'{
+ 	return {'type':'shape', 'shape': shp, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
  }
 
 shape_object
-  = clr:color? _ left:("dikdörtgen" / "daire" / "üçgen" / "rastgele") _ vars:(expression_statement_no_nl _)*
+  = clr:color? _ left:("dikdörtgen"/"daire"/"üçgen"/"rastgele"/"elips"/"boşluk") _ vars:(expression_statement_no_nl _)*
   {
 	   var items = []
        for(var i=0; i < vars.length; i++)
@@ -205,7 +214,7 @@ shape_object
        		items.push(temp[0]);
        }
    
-   return {'type':'drawing', 'shape': left.toString(), 'color': clr , 'vars': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+   return {'type':'drawing', 'name': left.toString(), 'color': clr , 'vars': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
   }
 
 //// math functions
@@ -353,3 +362,4 @@ color
 	/ "mor"				{ return "#FF00FF"; }
     / "majenta"			{ return "#00FFFF"; }
     / "kahverengi"		{ return "#AD6900"; }
+    / "siyah"		    { return "#000000"; }

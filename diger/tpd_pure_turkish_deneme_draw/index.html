@@ -14,6 +14,9 @@
 <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.2/paper-full.min.js"></script>
+    
+<script src="js/scripts.js"></script>    
+    
 <link href="css/jquery-ui-1.10.0.custom.css" rel="stylesheet" type="text/css">
 
 
@@ -40,18 +43,18 @@
 <body>
 
 <div class="heading">
-  <h1>Çevrimiçi Türkçe Programlama Dili</h1>
-  <h4>Yeni başlayanlar için kolay, pratik programlama öğrenme aracı</h4>
+  <h1>Eğitim için Türkçe Programlama Dili</h1>
+  <h4>Çizim yaparak programlamayı ve algoritma geliştirmeyi öğrenin</h4>
 </div>
 
-	<nav id="menu" class = "mycontainer" style = "padding: 10px; margin-top: 20px; margin-bottom: 40px;">
+	<nav id="menu" class = "mycontainer" style = "padding: 10px; margin-top: 10px; margin-bottom: 10px; max-height: 10px;">
 <!--	<a href="http://turkceprogramlamadili.org">Ana Sayfa</a>-->
 
 	 
 </nav>
 
-<div class="mycontainer ust-donme">
-	<div id="column-left-head" class="column-left">
+<div class="mycontainer ust-donme" style="min-height: fit-content;">
+	<div id="column-left-head" class="column-left" >
 		<h3 id = "code-description" style="margin:8px 0px 8px 20px; white-space: nowrap;">
 			Çizim Kodu </h3>
 	</div>
@@ -63,9 +66,9 @@
 </div>
 
 
-<div id = "mycontainer" class="mycontainer" style="margin-top:4px;">
+<div id = "mycontainer" class="mycontainer" style="margin-top:4px; min-height: 400px;">
 
-	<div id="column-left" class="column-left codeContent" style="z-index:1">
+	<div id="column-left" class="column-left codeContent" style="z-index:1; max-width: 600px;">
 		<textarea id="code">değişken num1 = 12
 değişken num2 = 6
 
@@ -88,7 +91,7 @@ yaz num1</textarea>
 		</div>
         
         <div class="canvas">
-            <canvas id="canvas-1" width="1200px" height="300px"></canvas>
+            <canvas id="canvas-1" width="960px" height="400px"></canvas>
         </div>
 
 	</div>
@@ -150,35 +153,36 @@ yaz num1</textarea>
 <div style="margin-left:-12px">
 
 	<div class="col-md-3">
-	</div>
-	<div class="col-md-3">
-	</div>
-
-	<div class="col-md-3">
-			<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:-2px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"> Kodu Kaydet</span></button>
+			<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:-2px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"> Kaydet</span></button>
 
 <!--        <button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:10px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"> Resmi kaydet</span></button>-->
-
         
 			<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:20px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
 	</div>
 
+        <div class="col-md-3">
+                merhaba
+	</div>
+    
+            <div class="col-md-3">
+          
+	</div>
 	<div class="col-md-3">
 
 		<p><strong>Çalıştırma Hızı</strong></p>
 		<div id="h-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
-			<div class="ui-slider-range ui-widget-header ui-corner-all" href="#" style="width: 30%;"></div>
+			<div class="ui-slider-range ui-widget-header ui-corner-all" href="#" style="width: 0%;"></div>
 			<a class="ui-slider-handle ui-state-default ui-corner-all" style="left: 11.1%;"></a>
 		</div>
 		<br>
-		<p>Saniyede <input type="text" style = "width:40px; line-height: 15px;" onchange="" id="amount" value="1"> satır çalışacak.</p>
+		<p>Saniyede <input type="text" style = "width:40px; line-height: 15px;" onchange="" id="amount" value="100"> satır çalışacak.</p>
 
 	</div>
 </div>
 
 <script>
 $('#h-slider').slider({
-    range: "min", min: 5, max: 5000, value: 10,
+    range: "min", min: 5, max: 5000, value: 1000,
     slide: function (event, ui) {
         $("#amount").val(ui.value / 10);
         refreshSpeed(ui.value / 10)
@@ -207,7 +211,7 @@ $('#h-slider').slider({
 
 <!--  Kullanıcı Kodları -->
 <div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top:30px;">
-	<h3 style="margin: 0em; padding-top: 0px">Kullanıcıların Gönderdikleri</h3>
+	<h3 style="margin: 0em; padding-top: 0px">Örnek Çizim Kodları</h3>
 </div>
 
 <div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 20px; margin-top: -7px; max-height:475px; overflow: scroll;">
@@ -255,8 +259,8 @@ $('#h-slider').slider({
 <script src="js/editorSettings.js"></script>
 <!--<script src="js/translate.js"></script>-->
 
-<script type="text/paperscript" src="js/draw.js" canvas="canvas-1"></script>
-<script src="js/index.js"></script>
+<!--<script type="text/paperscript" src="js/draw.js" canvas="canvas-1"></script>-->
+<script src="js/index4.js" ></script>
     
 <!--<script src="http://paperjs.org/assets/js/scripts.js"></script>-->
     

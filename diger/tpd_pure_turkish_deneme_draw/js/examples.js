@@ -1,4 +1,23 @@
-userSend = [
+userSend = [ 
+    {
+	  name: "Haydi Çocuklar Çizim Yapalım-7",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:  "yükseklik 1 olsun\n"+
+             "\n"+
+             "(yükseklik < 11) olduğu_sürece\n"+
+             "{\n"+
+             "  çiz mavi dikdörtgen 6 (yükseklik * yükseklik)\n"+
+             "  yükseklik (yükseklik+1) olsun\n"+
+             "}\n"+
+             "(yükseklik > 0) olduğu_sürece\n"+
+             "{\n"+
+             "  çiz kırmızı dikdörtgen 8 (yükseklik * yükseklik)\n"+
+             "  yükseklik (yükseklik-1) olsun\n"+
+             "}\n",
+	   date: '08.02.2020'
+	},    
     {
 	  name: "Haydi Çocuklar Çizim Yapalım-6",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
@@ -51,7 +70,15 @@ userSend = [
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
       shortlink: 'cizimyapalim',
 	  username: 'Mehmet Akif Akkuş',
-	  code:    'çiz kırmızı daire 20\nçiz daire 30\nçiz mavi daire 50\nçiz turuncu dikdörtgen 80 30',
+	  code:    "sd (siyah dikdörtgen 40 20) olsun\nkü (kırmızı üçgen 40) olsun\nçiz sd\nçiz kü",
+	   date: '08.02.2020'
+	},
+    {
+	  name: "Haydi Çocuklar Çizim Yapalım-2",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    "kd (kırmızı daire 20) olsun\nyd (yeşil daire 20) olsun\nçiz yd\nçiz kd",//'çiz kırmızı daire 20\nçiz daire 30\nçiz mavi daire 50\nçiz boşluk 10\nçiz turuncu dikdörtgen 70 30',
 	   date: '08.02.2020'
 	},
 	{
@@ -64,6 +91,25 @@ userSend = [
 	}
 ]
 
+//ahmet (kırmızı daire 20) olsun
+//çiz (kırmızı daire 20)
+//
+//yy 0 olsun
+//
+//(yy < 5) olduğu_sürece
+//{
+//  çiz ahmet
+//  yy yy+1 olsun 
+//}
+
+
+//kd (kırmızı daire 20) olsun
+//yd (yeşil daire 20) olsun
+
+//çiz yd
+//çiz kd
+//çiz (mavi dikdörtgen 10 20)
+//çiz kd
 
 function getExample(str)
 {

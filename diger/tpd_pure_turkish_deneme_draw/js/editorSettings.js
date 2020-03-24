@@ -108,14 +108,32 @@ editor.on("keyup", function (cm, event) {
 	//if(event.keyCode != 37 && event.keyCode != 38 && event.keyCode != 39 && event.keyCode != 40)
 		//parse();
 
-	console.log(event.keyCode)
+	console.log('keyboard pressed: ' + event.keyCode)
+    
+    if (event.keyCode != 37 // left
+        &&
+        event.keyCode != 38 // up
+        &&
+        event.keyCode != 39 // right
+        &&
+        event.keyCode != 40 // down
+        &&
+        event.keyCode != 27
+    ) {
+        try {
+            var text = editor.getValue();
 
-	try{
-		var text = editor.getValue();
-    	result = parser.parse(text);
-	}catch(err){
-		console.error(err)
-	}
+            result = parser.parse(text);
+
+            window.trashImageArea();
+            window.parse();
+
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+
     	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 });
 

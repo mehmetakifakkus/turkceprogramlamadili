@@ -1,8 +1,11 @@
 var time = 0.5, speed = 1000;
-// matrix: new Matrix(1,0,0,-1, 200, 250) // gerekirse eklenecek
 
 paper.install(window)    
 paper.setup('canvas-1')
+
+paper.settings.applyMatrix = false;
+project.activeLayer.transform( new Matrix(1,0,0,-1, 0, view.size.height));
+
 
 var scene_height = view.size.height;
 var shape_last_x = 7;
@@ -24,66 +27,61 @@ $.get("hataAyikla.pegjs", function(response) {
 function drawLine(line, isLoop, result, result2, color){
   var res = result;
 
-  setTimeout(function(){
-
+    //console.info(line)
+    //console.info(res + ' ' + color)
+    
   	if(line.type == 'declaration' || line.type == 'assignment')
 	{
-		highlightLine(line);
-  		insertTextAtCursor(res, line.lineNumber, isLoop);
+  		//insertTextAtCursor(res, line.lineNumber, isLoop);
 	}
 	else if(line.type == 'logical')
  	{
-		highlightLine(line, 'logical', res);
-		insertTextAtCursor(res, line.lineNumber, false);
+		//insertTextAtCursor(res, line.lineNumber, false);
 	}
 	else if(line.type == 'print')
 	{
-		highlightLine(line);
-		outputConsole(res);
+		//outputConsole(res);
 	}
 	else if(line.type == 'expression')
 	{
-		highlightLine(line, false, true);
-  		insertTextAtCursor(res, line.lineNumber, false);
+  		//insertTextAtCursor(res, line.lineNumber, false);
 	}
 	else if(line.type == "drawing")
     {
-        highlightLine(line);
-        var myShape;
+        var myShape = new Path.Rectangle(0,0,1,1);
         
-        if(line.shape == "rastgele")
+        if(line.name == "rastgele")
         {            
             window.createPaths();
         }
-        if(line.shape == "dikdörtgen")
+        if(line.name == "dikdörtgen")
         {
 //            myShape = new Path.Rectangle({
 //                point: [shape_last_x, 70 - result2 / 2],
 //                size: [res, result2]
 //            });
             
-            myShape = new Path.Rectangle([shape_last_x, 70 - result2 / 2], [res, result2]);
+            myShape = new Path.Rectangle([70 - res/2, shape_last_y], [res, result2]);
             
-            shape_last_x += myShape.bounds.width;
+            shape_last_y += myShape.strokeBounds.height;
         }
-        if(line.shape == "daire")
+        if(line.name == "daire")
         {           
-            myShape = new Path.Circle([shape_last_x + res, 70], res);
-                                                                                                  
-            shape_last_x += 2*res;
+            myShape = new Path.Circle([70, shape_last_y + res], res);                                                                       
+            shape_last_y += myShape.strokeBounds.height; //2*res;
         }
-        if(line.shape == "üçgen")
+        if(line.name == "üçgen")
         {
             myShape = new Path.RegularPolygon({
-                center: [shape_last_x + res / 2, 70],
+                center: [70, res / 2],
                 sides: 3,
                 radius: res / 1.732
             });
             
-            shape_last_x += myShape.bounds.width;
+            shape_last_y += myShape.strokeBounds.height;
         }
-        if(line.shape == "boşluk")
-            shape_last_x += res;
+        if(line.name == "boşluk")
+            shape_last_y += res;
         
         myShape.style = {
                 fillColor:  color,
@@ -93,24 +91,16 @@ function drawLine(line, isLoop, result, result2, color){
         
         drawings.push(myShape)
     }
-    else{
-		var result = window.eval(line.text);
-		highlightLine(line);
-  		insertTextAtCursor(result, line.lineNumber, false);
-	}
-   }, speed * time)
-
-time++;
 }
 
-
-function processOneItem(obj){
+function processOneItem(item){
     
-    var item;
-    if(typeof obj.draw_type != "undefined")
-        item = obj.shape_object[0];
-    else
-        item = obj;
+//    var item;
+//    if(typeof obj.draw_type != "undefined")
+//        item = obj.shape_object[0];
+//    else
+//        item = obj;
+    
     
 	if(item.type == 'logical')
 	{
@@ -156,15 +146,20 @@ function processOneItem(obj){
 	}
 	if(item.type == 'declaration' || item.type == 'assignment')
 	{
-		window.eval(item.text);
-		item['#evaluation']++;
+        if(item.rhs.type != 'undefined')
+            window.eval(item.lhs + "=" + JSON.stringify(item.rhs));
+        else{
+            window.eval(item.text);
+            item['#evaluation']++;
 
-		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.lhs));
+            console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.lhs));
 
-		if(item.up == 'while')
-			drawLine(item, true, eval(item.lhs));
-		else
-			drawLine(item, false, eval(item.lhs));
+            if(item.up == 'while')
+                drawLine(item, true, eval(item.lhs));
+            else
+                drawLine(item, false, eval(item.lhs));
+        }
+
 	}
 	if(item.type == 'expression')
 	{
@@ -188,30 +183,43 @@ function processOneItem(obj){
 		resu += '\n';
 		drawLine(item, false, resu);
 	}
-    if(item.type == 'drawing')
+    if(item.type == 'çiz') // that means "çiz"
     {
-        //console.log(item)
-        if(item.shape == "rastgele")
-        {            
-            drawLine(item, false, "", item.color);
+        //console.log(item.shape_object[0])
+        
+        if(typeof item.shape_object == "string")
+        {
+            var dd = window.eval(item.shape_object);
+            //console.log(dd)
+            drawLine(dd, false, eval(dd.vars[0].text), "", dd.color);
+            return;
         }
-        if(item.shape == "dikdörtgen")
+        else{
+//            console.log(typeof item.shape_object)
+//            return
+        }
+        
+        if(item.shape_object.shape.name == "rastgele")
+        {            
+            drawLine(item.shape_object, false, "", item.shape_object.color);
+        }
+        if(item.shape_object.shape.name == "dikdörtgen")
         {
             //console.log('['+ item.type + '] shape:'+ item.shape +' line '+item.lineNumber +' is getting processed, result1 is: '+ eval(item.vars[0].text) + ', result2 is: '+ eval(item.vars[1].text));
             
-            drawLine(item, false, eval(item.vars[0].text), eval(item.vars[1].text), item.color);
+            drawLine(item.shape_object.shape, false, eval(item.shape_object.shape.vars[0].text), eval(item.shape_object.shape.vars[1].text), item.shape_object.shape.color);
         }
-        if(item.shape == "daire")
+        if(item.shape_object.shape.name == "daire")
         {
-            drawLine(item, false, eval(item.vars[0].text), "", item.color);
+            drawLine(item.shape_object.shape, false, eval(item.shape_object.shape.vars[0].text), "", item.shape_object.shape.color);
         }
-        if(item.shape == "üçgen")
+        if(item.shape_object.shape == "üçgen")
         {
-            drawLine(item, false, eval(item.vars[0].text), "", item.color);
+            drawLine(item.shape_object, false, eval(item.shape_object.vars[0].text), "", item.shape_object.color);
         }
-        if(item.shape == "boşluk")
+        if(item.shape_object.shape.name == "boşluk")
         {       
-            drawLine(item, false, eval(item.vars[0].text), "", "");
+            drawLine(item.shape_object.shape, false, eval(item.shape_object.shape.vars[0].text), "", "");
         }
         
     }
@@ -250,12 +258,11 @@ function temizle(){
 
 var parseDoc = parseResult.getDoc(), parseStr = '';
 
-function parse() {
+window.parse = function() {
 
 	temizle();
 
 	try{
-    	insertNewLines(editor.lineCount()+3);
     	var text = editor.getValue();
 
         result = parser.parse(text);
@@ -272,19 +279,7 @@ function parse() {
 		$("#runJunk").css("display", "block");
 
 		recursivelyProcess(result);
-
-		setTimeout(function(){
-			$("#run").css("display", "block");      // tekrar calıştırmak için çalşıtır butonunu aç
-			$("#runJunk").css("display", "none");
-   		}, speed * (time-1))
-		time++;
-
-		setTimeout(function(){
-			highlightLine({lineNumber: 1000});
-			parseDoc.setValue("//     Bitti.");
-		}, speed * (time-1))
-		time++;
-
+        
   }catch(err){
 
   		$("#redLight").css("display", "block");
@@ -326,9 +321,10 @@ window.trashImageArea = function(){
     for(var i = 0; i < len; i++)
 		drawings[i].remove(); // remove drawings
     
-    console.info(drawings.length)
+    //console.info(drawings.length)
     
     shape_last_x = 7;
+    shape_last_y = 2;
     view.update();
 }
 
