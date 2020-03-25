@@ -344,6 +344,6 @@ for(var i=0; i < userSend.length; i++){
 	document.getElementById('userQuestions').innerHTML += str;
 }
 
-window.loadExample('userSend', 5);
+window.loadExample('userSend', 0);
 window.refreshSpeed(100);
 

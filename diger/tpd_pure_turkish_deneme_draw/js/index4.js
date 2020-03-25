@@ -54,6 +54,29 @@ function drawLine(line, isLoop, result, result2, color){
 
 function processOneItem(item){
     
+    function myRect(item){
+        var x = eval(item.vars[0].text);
+        var y = eval(item.vars[1].text); 
+
+        myShape = new Path.Rectangle([shape_last_x - x/2, shape_last_y], [x, y]);
+    }
+    function myCircle(item){
+        var radius = eval(item.vars[0].text);
+        myShape = new Path.Circle([shape_last_x, shape_last_y + radius], radius);
+    }
+    function myTriangle(item){
+        var width = eval(item.vars[0].text);
+
+        myShape = new Path.RegularPolygon({
+            center: [shape_last_x, shape_last_y + (width / 1.732) / 2],
+            sides: 3,
+            radius: width / 1.732
+        });
+
+        myShape.rotate(60, [shape_last_x, shape_last_y + (width / 1.732) / 2]);
+    }
+    
+    
 	if(item.type == 'logical')
 	{
 		console.log('[logical] line '+item.lineNumber +' is getting processed, text is: '+ item.text);
@@ -135,82 +158,47 @@ function processOneItem(item){
 		resu += '\n';
 		drawLine(item, false, resu);
 	}
-    if(item.type == 'çiz') // that means "çiz"
+    if(item.type == 'üste_çiz') // that means "çiz"
     {
+        console.log(item)
         var myShape = new Path.Rectangle(0,0,1,1);
         var color = '';
         
         if(typeof item.shape_object == "string")
             item = window.eval(item.shape_object);
+        else if(typeof item.shape_object == "object")
+        {
+            function myModifier(str)
+            {
+              return {'type': "üste_çiz", 'shape_object': str, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end}  
+            }
+            //item.shape_object.forEach(element => console.error(myModifier(element)));
+            item.shape_object.forEach(element => processOneItem(myModifier(element)));
+        }
         else
+        {
             item = item.shape_object.shape;
+        }
         
         if(item.name == "rastgele")
         {            
-            //drawLine(item.shape_object, false, "", item.shape_object.color);
-            console.log('deneme')
-            function createBlob(center, maxRadius, points) {
-                var path = new Path();
-                path.closed = true;
-                for (var i = 0; i < points; i++) {
-                    var delta = new Point({
-                        length: (maxRadius * 0.5) + (Math.random() * maxRadius * 0.5),
-                        angle: (360 / points) * i
-                    });
-                    path.add(center + delta);
-                }
-                path.smooth();
-                view.update();
-                return path;
-            }
-            
-            var radiusDelta = values.maxRadius - values.minRadius;
-            var pointsDelta = values.maxPoints - values.minPoints;
-            for (var i = 0; i < values.paths; i++) {
-                console.log('dsds')
-                var radius = values.minRadius + Math.random() * radiusDelta;
-                var points = values.minPoints + Math.floor(Math.random() * pointsDelta);
-                var path = createBlob(new Point(view.size.width * Point.random().x, view.size.height * Point.random().y * 0.4), radius, points);
-
-                var lightness = (Math.random() - 0.5) * 0.4 + 0.4;
-                var hue = Math.random() * 360;
-                path.fillColor = { hue: hue, saturation: 1, lightness: lightness };
-                path.strokeColor = 'black';
-                view.update();
-
-            }
-            console.log('deneme')
+            drawLine(item.shape_object, false, "", item.shape_object.color);
         }
         if(item.name == "dikdörtgen")
         {
-            var x = eval(item.vars[0].text);
-            var y = eval(item.vars[1].text); 
-            
+            myRect(item)
             color = item.color;
-            
-            myShape = new Path.Rectangle([70 - x/2, shape_last_y], [x, y]);
             shape_last_y += myShape.strokeBounds.height;
         }
         if(item.name == "daire")
         {
-            var radius = eval(item.vars[0].text);
+            myCircle(item);
             color = item.color;
-            
-            myShape = new Path.Circle([70, shape_last_y + radius], radius);
             shape_last_y += myShape.strokeBounds.height; //2*res;
         }
         if(item.name == "üçgen")
         {
-            var width = eval(item.vars[0].text);
-            
-            myShape = new Path.RegularPolygon({
-                center: [70, shape_last_y + (width / 1.732) / 2],
-                sides: 3,
-                radius: width / 1.732
-            });
-            
-            myShape.rotate(60, [70, shape_last_y + (width / 1.732) / 2]);
-            //myShape.rotate(60, myShape.center);
+            myTriangle(item);
             
             color = item.color;
             shape_last_y += myShape.strokeBounds.height;
@@ -224,8 +212,89 @@ function processOneItem(item){
             strokeWidth: 1
         };
         
+        view.update();
+        
         drawings.push(myShape)        
     }
+    if(item.type == 'yana_çiz') // that means "çiz"
+    {
+        console.log(item)
+        var myShape = new Path.Rectangle(0,0,1,1);
+        var color = '';
+              
+        function myModifier(it)
+        {
+            if(typeof it == 'string')
+                return {'type': "yana_çiz", 'shape_object': it, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end}     
+            if((typeof it.type) != 'undefined')
+            {
+                console.log('ozel burasi')
+                return {'type': "yana_çiz", 'shape_object': it, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end} 
+            } 
+        }
+        
+        if(typeof item.shape_object == "string")
+        {
+            item = window.eval(item.shape_object);
+            //console.log("hey!")
+            //console.log(item)
+        }
+        else if(Array.isArray(item.shape_object))
+        {
+            //item.shape_object.forEach(element => console.log(myModifier(element)));
+            item.shape_object.forEach(element => processOneItem(myModifier(element)));
+        }
+        else
+        {
+            item = item.shape_object.shape;
+        }
+        
+        if(Array.isArray(item)){
+            console.log('iste bu array')
+            console.log(item)
+            item.forEach(element => processOneItem(myModifier(element)));
+        }
+        
+        if(item.name == "rastgele")
+        {            
+            drawLine(item.shape_object, false, "", item.shape_object.color);
+        }
+        if(item.name == "dikdörtgen")
+        {
+            myRect(item)
+            color = item.color;
+            shape_last_x += myShape.strokeBounds.width;
+            //shape_last_y += myShape.strokeBounds.height;
+        }
+        if(item.name == "daire")
+        {
+            myCircle(item);
+            color = item.color;
+            shape_last_x += myShape.strokeBounds.height; //2*res;
+            //shape_last_y += myShape.strokeBounds.height; //2*res;
+        }
+        if(item.name == "üçgen")
+        {
+            myTriangle(item);
+            
+            color = item.color;
+            shape_last_x += myShape.strokeBounds.width;
+            //shape_last_y += myShape.strokeBounds.height;
+        }
+        if(item.name == "boşluk")    
+            shape_last_x += eval(item.vars[0].text);
+        
+        myShape.style = {
+            fillColor:  color,
+            strokeColor: 'black',
+            strokeWidth: 1
+        };
+        
+        view.update();
+        
+        drawings.push(myShape)        
+    }
+        
 }
 
 function recursivelyProcess(items){
@@ -343,6 +412,6 @@ for(var i=0; i < userSend.length; i++){
 	document.getElementById('userQuestions').innerHTML += str;
 }
 
-window.loadExample('userSend', 5);
+window.loadExample('userSend', 0);
 window.refreshSpeed(300);
 

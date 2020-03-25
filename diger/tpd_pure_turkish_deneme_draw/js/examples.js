@@ -1,4 +1,39 @@
-userSend = [ 
+userSend = [	
+    {
+	  name: "Haydi Çocuklar Çizim Yapalım-2",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    "sd (siyah dikdörtgen 40 20) olsun\nkü (kırmızı üçgen 40) olsun\nyana_çiz (sd kü)",
+	   date: '08.02.2020'
+	}, 
+	{
+	  name: "Haydi Çocuklar Çizim Yapalım-2",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    "sd (siyah dikdörtgen 40 20) olsun\nkü (kırmızı üçgen 40) olsun\nçiz sd\nçiz kü",
+	   date: '08.02.2020'
+	},
+    {
+	  name: "Haydi Çocuklar Çizim Yapalım-2",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    "kd (kırmızı daire 20) olsun\nyd (yeşil daire 20) olsun\nçiz yd\nçiz kd",//'çiz kırmızı daire 20\nçiz daire 30\nçiz mavi daire 50\nçiz boşluk 10\nçiz turuncu dikdörtgen 70 30',
+	   date: '08.02.2020'
+	},
+	{
+	  name: "Haydi Çocuklar Çizim Yapalım-1",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:    'çiz dikdörtgen 40 50\nçiz üçgen 20\nçiz daire 30\nçiz daire 50',
+	   date: '08.02.2020'
+	}
+]
+
+userSend_part2 = [ 
     {
 	  name: "Haydi Çocuklar Çizim Yapalım-7",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',

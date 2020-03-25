@@ -94,7 +94,8 @@ block_item_list = (block_item)*
 block_item
  = print_statement
  / declaration
- / draw_statement
+ / draw_statement1
+ / draw_statement2
  / logical_statement
  / if_statement
  / while_statement
@@ -122,12 +123,14 @@ init_declarator_list
  = 	init:init_declarator (',' _ init_declarator)* {return init;}
 
 init_declarator
-	= _ left:name _ exp: (dogru / yanlis / shape_object_with_pr / math_functions / expression_statement_no_nl) _ "olsun" {
+	= _ left:name _ exp: (dogru / yanlis / shape_object_with_pr / name_with_pr / math_functions / expression_statement_no_nl) _ "olsun" {
 
 	//console.log(exp)
 
 	if( typeof(exp) == 'boolean')
-    	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it       
+    	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it   
+    else if(typeof exp.vars != 'undefined')
+		 return {'lhs': left, 'rhs': exp.vars}; // evaluate it, then return it       
     else if(exp.type == 'shape')
     	return {'lhs': left, 'rhs': exp.shape}; // evaluate it, then return it       
     else 
@@ -135,8 +138,7 @@ init_declarator
 }   
 
 print_statement = _ exp: (math_functions / StringLiteral / expression_statement_no_nl) _ ('yaz' / 'print') _ nl {
-	console.log(exp)
-    
+
     var list = []
     
     if(exp.type == 'Literal')
@@ -184,19 +186,24 @@ logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_opera
 factor2 = "(" logical_statement ")" 
 	   / expression_statement
 
-draw_statement 
- = dt:("çiz" / "yana_çiz" / "üste_çiz") sos: ( _ (name / shape_object_with_pr ) _ ) nl
+draw_statement1 
+ = dt:"çiz" sos: ( _ (name / shape_object_with_pr ) _ ) nl{
+ 	return {'type': dt, 'shape_object': sos[1], 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+ }
+ 
+ draw_statement2 
+ = dt:("yana_çiz" / "üste_çiz") _ sos: name_with_pr _ nl{
+	return {'type': dt, 'shape_object': sos.vars, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+ }
+name_with_pr
+ = '(' sos: (_ (name / shape_object_with_pr) )* ')'
  {
-   //return {'type':'draw', 'shape': left.toString(), 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
-//   var items = []
-//   console.log(sos)
-//       for(var i=0; i < sos.length; i++)
-//       {
-//       		var temp = sos[i];
-//       		items.push(temp[1]);
-//       }
-   
-   return {'type': dt, 'shape_object': sos[1], 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+   var items = []
+
+  for(var i=0; i < sos.length; i++)
+	  items.push(sos[i][1]);
+     
+	 return {'vars': items, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
  }
 
 shape_object_with_pr
@@ -363,3 +370,4 @@ color
     / "majenta"			{ return "#00FFFF"; }
     / "kahverengi"		{ return "#AD6900"; }
     / "siyah"		    { return "#000000"; }
+    
