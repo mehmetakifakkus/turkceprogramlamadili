@@ -1,4 +1,21 @@
 userSend = [	
+    
+        {
+	  name: "Haydi Çocuklar Çizim Yapalım-2",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code: "sd (siyah dikdörtgen 50 25) olsun\n"+
+            "kü (kırmızı üçgen 50) olsun\n"+
+            "b1 (boşluk 8) olsun\n"+
+            "b2 (boşluk 30) olsun\n"+
+            "aaa (sd b1 sd b1(siyah dikdörtgen 50 25) kü) olsun\n"+
+            "\n"+
+            "yana_çiz(b2)\n"+
+            "üste_çiz (aaa yana_çiz (kü (yeşil daire 25) kü))\n"+
+            "yana_çiz(üste_çiz(aaa) b1 üste_çiz(aaa))\n",
+	   date: '08.02.2020'
+	},    
     {
 	  name: "Haydi Çocuklar Çizim Yapalım-2",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
@@ -224,25 +241,7 @@ yana_çiz(bb bb bb bb)
 üste_çiz (aaa üste_çiz (kü (yeşil daire 30)) aaa)
 */
 
-/*
-sd (siyah dikdörtgen 40 40) olsun
-sd (siyah dikdörtgen 40 20) olsun
-kü (kırmızı üçgen 40) olsun
-b1 (boşluk 8) olsun
-b2 (boşluk 30) olsun
-aaa (sd bb sd bb (siyah dikdörtgen 40 20) kü) olsun
-
-yana_çiz(b2)
-üste_çiz (aaa yana_çiz (kü (yeşil daire 30) kü))
-yana_çiz(aaa aaa)
-*/
-
-
-
-
-/*
-
-iç içe çizdirme yapabiliyor muyuz?
+/* iç içe çizdirme yapabiliyor muyuz?
 
 sd (siyah dikdörtgen 40 40) olsun
 kü (kırmızı üçgen 40 40) olsun
@@ -250,5 +249,30 @@ md (mavi daire 20) olsun
 aa (sd kü) olsun
 
 yana_çiz ((boşluk 100) sd kü üste_çiz (aa aa) md md md md md)
+*/
+
+/* satranc tahtası çizebilir miyim?
+boyut 40 olsun
+SD (siyah dikdörtgen boyut boyut) olsun
+BD (beyaz dikdörtgen boyut boyut) olsun
+bos (boşluk 40) olsun
+
+ikili (SD BD) olsun 
+sekizli (ikili ikili ikili ikili) olsun
+üste_çiz(yana_çiz(bos sekizli) bos yana_çiz(sekizli))
+*/
+
+
+/* ust uste ve yan yana testleri*/
+
+/* yan yana evler
+
+sd (siyah dikdörtgen 50 60) olsun
+kü (kırmızı üçgen 50) olsun
+b2 (boşluk 30) olsun
+ev (sd kü) olsun
+
+yana_çiz(b2 üste_çiz(ev) b2 b2 b2 b2 üste_çiz(ev))
+
 
 */

@@ -176,19 +176,12 @@ function processOneItem(item){
         
         
         if(Array.isArray(item.shape_object))
-        {
-            //item.shape_object.forEach(element => console.log(myModifier(element)));
             item.shape_object.forEach(element => processOneItem(myModifier(element)));
-        }
         else
             item = item.shape_object;
         
-        if(Array.isArray(item)){
-            console.log('iste bu array')
-            console.log(item)
+        if(Array.isArray(item))
             item.forEach(element => processOneItem(myModifier(element)));
-        }
-        
         
         
         if(item.name == "rastgele")
@@ -198,27 +191,26 @@ function processOneItem(item){
         if(item.name == "dikdörtgen")
         {
             myRect(item)
-            color = item.color;
             shape_last_y += myShape.strokeBounds.height;
         }
         if(item.name == "daire")
         {
             myCircle(item);
-            color = item.color;
             shape_last_y += myShape.strokeBounds.height; //2*res;
         }
         if(item.name == "üçgen")
         {
             myTriangle(item);
-            
-            color = item.color;
             shape_last_y += myShape.strokeBounds.height;
         }
         if(item.name == "boşluk")    
             shape_last_y += eval(item.vars[0].text);
         
+        //if(item.name == "dikdörtgen" || item.name == "üçgen" || item.name == "daire")
+          //  color = item.color;
+        
         myShape.style = {
-            fillColor:  color,
+            fillColor:  item.color,
             strokeColor: 'black',
             strokeWidth: 1
         };
@@ -245,18 +237,12 @@ function processOneItem(item){
         
 
         if(Array.isArray(item.shape_object))
-        {
-            //item.shape_object.forEach(element => console.log(myModifier(element)));
-            item.shape_object.forEach(element => processOneItem(myModifier(element)));
-        }
+           item.shape_object.forEach(element => processOneItem(myModifier(element)));
         else
             item = item.shape_object;
         
-        if(Array.isArray(item)){
-            console.log('iste bu array')
-            console.log(item)
+        if(Array.isArray(item))
             item.forEach(element => processOneItem(myModifier(element)));
-        }
         
         if(item.name == "rastgele")
         {            
@@ -265,35 +251,26 @@ function processOneItem(item){
         if(item.name == "dikdörtgen")
         {
             myRect(item)
-            color = item.color;
             shape_last_x += myShape.strokeBounds.width;
-            //shape_last_y += myShape.strokeBounds.height;
         }
         if(item.name == "daire")
         {
             myCircle(item);
-            color = item.color;
             shape_last_x += myShape.strokeBounds.height; //2*res;
-            //shape_last_y += myShape.strokeBounds.height; //2*res;
         }
         if(item.name == "üçgen")
         {
             myTriangle(item);
-            
-            color = item.color;
             shape_last_x += myShape.strokeBounds.width;
-            //shape_last_y += myShape.strokeBounds.height;
         }
         if(item.name == "boşluk")    
             shape_last_x += eval(item.vars[0].text);
         
         myShape.style = {
-            fillColor:  color,
+            fillColor:  item.color,
             strokeColor: 'black',
             strokeWidth: 1
         };
-        
-        view.update();
         
         drawings.push(myShape)        
     }

@@ -370,4 +370,4 @@ color
     / "majenta"			{ return "#00FFFF"; }
     / "kahverengi"		{ return "#AD6900"; }
     / "siyah"		    { return "#000000"; }
-    
+    / "beyaz"		    { return "#FFFFFF"; }
