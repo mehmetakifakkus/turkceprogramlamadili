@@ -164,21 +164,32 @@ function processOneItem(item){
         var myShape = new Path.Rectangle(0,0,1,1);
         var color = '';
         
-        if(typeof item.shape_object == "string")
-            item = window.eval(item.shape_object);
-        else if(typeof item.shape_object == "object")
-        {
-            function myModifier(str)
+            function myModifier(it)
             {
-              return {'type': "üste_çiz", 'shape_object': str, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end}  
+                if(typeof it == 'string')
+                    return {'type': "üste_çiz", 'shape_object': window.eval(it), 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end} 
+                else if((typeof it.type) && (it.type == "üste_çiz" || it.type == "yana_çiz"))
+                    return it;
+                else if((typeof it.shape))
+                    return {'type': "üste_çiz", 'shape_object': it, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end}
             }
-            //item.shape_object.forEach(element => console.error(myModifier(element)));
+        
+        
+        if(Array.isArray(item.shape_object))
+        {
+            //item.shape_object.forEach(element => console.log(myModifier(element)));
             item.shape_object.forEach(element => processOneItem(myModifier(element)));
         }
         else
-        {
-            item = item.shape_object.shape;
+            item = item.shape_object;
+        
+        if(Array.isArray(item)){
+            console.log('iste bu array')
+            console.log(item)
+            item.forEach(element => processOneItem(myModifier(element)));
         }
+        
+        
         
         if(item.name == "rastgele")
         {            
@@ -222,32 +233,24 @@ function processOneItem(item){
         var myShape = new Path.Rectangle(0,0,1,1);
         var color = '';
               
-        function myModifier(it)
-        {
-            if(typeof it == 'string')
-                return {'type': "yana_çiz", 'shape_object': it, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end}     
-            if((typeof it.type) != 'undefined')
+            function myModifier(it)
             {
-                console.log('ozel burasi')
-                return {'type': "yana_çiz", 'shape_object': it, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end} 
-            } 
-        }
+                if(typeof it == 'string')
+                    return {'type': "yana_çiz", 'shape_object': window.eval(it), 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end}
+                else if((typeof it.type) && (it.type == "üste_çiz" || it.type == "yana_çiz"))
+                    return it;
+                else if((typeof it.type) != 'undefined')
+                    return {'type': "yana_çiz", 'shape_object': it, 'lineNumber': item.lineNumber, 'start': item.start, 'end': item.end} 
+            }
         
-        if(typeof item.shape_object == "string")
-        {
-            item = window.eval(item.shape_object);
-            //console.log("hey!")
-            //console.log(item)
-        }
-        else if(Array.isArray(item.shape_object))
+
+        if(Array.isArray(item.shape_object))
         {
             //item.shape_object.forEach(element => console.log(myModifier(element)));
             item.shape_object.forEach(element => processOneItem(myModifier(element)));
         }
         else
-        {
-            item = item.shape_object.shape;
-        }
+            item = item.shape_object;
         
         if(Array.isArray(item)){
             console.log('iste bu array')

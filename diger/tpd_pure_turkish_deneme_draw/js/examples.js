@@ -180,3 +180,75 @@ değilse
 eğer(y == 0 ve x != 0)
   yaz "x ekseni üzerinde"
 */
+
+
+
+
+/*  1. aşama
+sd (siyah dikdörtgen 40 20) olsun
+kü (kırmızı üçgen 40) olsun
+yana_çiz ((kırmızı üçgen 40))
+//yana_çiz (sd kü)
+*/
+
+/* 2. aşama tanımlar aynı
+yana_çiz (sd (boşluk 100)(siyah dikdörtgen 40 20) kü) 
+*/
+
+/* 3. aşama tanımlar aynı
+aaa ((boşluk 50) sd (boşluk 10) sd (boşluk 10) (siyah dikdörtgen 40 20) kü) olsun
+yana_çiz (aaa kü aaa)
+*/
+
+/* 4. aşama tanımlar aynı
+bb (boşluk 50) olsun
+aaa (bb sd bb sd bb (siyah dikdörtgen 40 20) kü) olsun
+yana_çiz (aaa kü aaa)
+*/
+
+/* 5. aşama 
+bb (boşluk 50) olsun
+aaa (bb sd bb yana_çiz(sd sd sd sd sd) (siyah dikdörtgen 40 20) kü) olsun
+
+yana_çiz (aaa kü aaa)
+*/
+
+/* 5. aşama-2
+sd (siyah dikdörtgen 40 20) olsun
+kü (kırmızı üçgen 40) olsun
+
+bb (boşluk 8) olsun
+aaa (sd bb sd bb (siyah dikdörtgen 40 20) kü) olsun
+
+yana_çiz(bb bb bb bb)
+üste_çiz (aaa üste_çiz (kü (yeşil daire 30)) aaa)
+*/
+
+/*
+sd (siyah dikdörtgen 40 40) olsun
+sd (siyah dikdörtgen 40 20) olsun
+kü (kırmızı üçgen 40) olsun
+b1 (boşluk 8) olsun
+b2 (boşluk 30) olsun
+aaa (sd bb sd bb (siyah dikdörtgen 40 20) kü) olsun
+
+yana_çiz(b2)
+üste_çiz (aaa yana_çiz (kü (yeşil daire 30) kü))
+yana_çiz(aaa aaa)
+*/
+
+
+
+
+/*
+
+iç içe çizdirme yapabiliyor muyuz?
+
+sd (siyah dikdörtgen 40 40) olsun
+kü (kırmızı üçgen 40 40) olsun
+md (mavi daire 20) olsun
+aa (sd kü) olsun
+
+yana_çiz ((boşluk 100) sd kü üste_çiz (aa aa) md md md md md)
+
+*/

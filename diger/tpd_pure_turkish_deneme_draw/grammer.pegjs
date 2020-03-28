@@ -125,14 +125,14 @@ init_declarator_list
 init_declarator
 	= _ left:name _ exp: (dogru / yanlis / shape_object_with_pr / name_with_pr / math_functions / expression_statement_no_nl) _ "olsun" {
 
-	//console.log(exp)
+	//console.log(exp) 
 
 	if( typeof(exp) == 'boolean')
     	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it   
+    else if(exp.type == 'drawing')
+    	return {'lhs': left, 'rhs': exp}; // evaluate it, then return it 
     else if(typeof exp.vars != 'undefined')
-		 return {'lhs': left, 'rhs': exp.vars}; // evaluate it, then return it       
-    else if(exp.type == 'shape')
-    	return {'lhs': left, 'rhs': exp.shape}; // evaluate it, then return it       
+		 return {'lhs': left, 'rhs': exp.vars}; // evaluate it, then return it             
     else 
         return {'lhs': left, 'rhs': exp.text};        
 }   
@@ -196,7 +196,7 @@ draw_statement1
 	return {'type': dt, 'shape_object': sos.vars, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
  }
 name_with_pr
- = '(' sos: (_ (name / shape_object_with_pr) )* ')'
+ = '(' sos: (_ (draw_statement2 / name / shape_object_with_pr) )* ')'
  {
    var items = []
 
@@ -208,7 +208,7 @@ name_with_pr
 
 shape_object_with_pr
  = '(' _ shp:shape_object _ ')'{
- 	return {'type':'shape', 'shape': shp, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+ 	return shp;
  }
 
 shape_object
