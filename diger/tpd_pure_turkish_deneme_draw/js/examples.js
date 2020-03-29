@@ -251,6 +251,19 @@ aa (sd kü) olsun
 yana_çiz ((boşluk 100) sd kü üste_çiz (aa aa) md md md md md)
 */
 
+/*
+
+boyut 40 olsun
+SD (siyah dikdörtgen boyut boyut) olsun
+BD (beyaz dikdörtgen boyut boyut) olsun
+bos (boşluk 40) olsun
+
+ikili (SD BD) olsun 
+sekizli (ikili ikili ikili ikili) olsun
+
+yana_çiz(bos ikili)
+
+*/
 /* satranc tahtası çizebilir miyim?
 boyut 40 olsun
 SD (siyah dikdörtgen boyut boyut) olsun
@@ -276,3 +289,5 @@ yana_çiz(b2 üste_çiz(ev) b2 b2 b2 b2 üste_çiz(ev))
 
 
 */
+
+

@@ -1,6 +1,55 @@
 
 userSend = [
+    {
+		name: 'Kedilerin mama tüketimini bulan kod',
+		description: '-',
+		shortlink: 'kedilerinmamatuketimi',
+		username: 'Sena Arslan',
+		code:         
+            "değişken kedisayısı = 4\n"+
+            "değişken mamamiktarı = 80\n"+
+            "değişken günsayısı = 30\n"+
+            "değişken tüketilenmama = kedisayısı * mamamiktarı * günsayısı\n"+
+            "\n"+
+            "yaz tüketilenmama\n",
+		date: '29.03.2020'
+	},
+    {
+		name: 'Ardışık sayıların toplamını bulan kod',
+		description: '-',
+		shortlink: 'ardisiksayilartop',
+		username: 'Eren Zeren',
+		code:         
+              "değişken ilkterim = 4\n"+
+              "değişken sonterim = 7\n"+
+              "değişken artışmiktarı = 1\n"+
+              "\n"+
+              "değişken terimsayısı = (sonterim - ilkterim) / artışmiktarı + 1\n"+
+              "değişken ortanca = (sonterim + ilkterim) / 2\n"+
+              "değişken toplam = ortanca * terimsayısı\n"+
+              "\n"+
+              "yaz toplam\n",
+		date: '28.03.2020'
+	},
 	{
+		name: 'Diyabette karbonhidrat sayımı',
+		description: '-',
+		shortlink: 'diyabetkarbonhidrat',
+		username: 'İrem Sayındı',
+		code:         
+            "değişken insulinkarbonhidratoranı = 500 / 42\n"+
+            "değişken insulinduyarlılıkfaktoru = 1700 / 42\n"+
+            "değişken karbonhidratmiktarı = 100\n"+
+            "değişken yemekbolusu = (karbonhidratmiktarı / insulinkarbonhidratoranı)\n"+
+            "\n"+
+            "değişken kanşekeri = 280\n"+
+            "değişken hedefkanşekeri = 150\n"+
+            "değişken düzeltmebolusu = (kanşekeri - hedefkanşekeri) / insulinduyarlılıkfaktoru \n"+
+            "\n"+
+            "değişken hızlıetkiliinsülin = (yemekbolusu + düzeltmebolusu)\n",
+		date: '27.03.2020'
+	},
+    {
 		name: 'Öğrenci Notu Hesaplama (Üniversite)',
 		description: '-',
 		shortlink: 'universiteogrencinotu',
