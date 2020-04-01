@@ -1,6 +1,7 @@
 body {
   background-color: #5c4084;
   padding: 40px;
+  
 }
 
 .mycontainer {
@@ -10,6 +11,7 @@ body {
 	padding-top: 0px;
 	padding-bottom: 2px;
 	width: 96%;
+    overflow: hidden;
 
 /*    max-width: 1800px;*/
 
@@ -30,6 +32,7 @@ body {
 	border-radius: 0px;
 
 	min-width: 400px;
+    max-width: 720px;
 	max-width: 90%;
 }
 
@@ -40,9 +43,10 @@ body {
 
 	padding-left: 0px;
 
-	width: 59.7%;
+	width: 58%;
 	background-color: #fff;
 	border-radius: 0px;
+    overflow: hidden;
 }
 
 .ust-donme{

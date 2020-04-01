@@ -68,19 +68,16 @@
 
 <div id = "mycontainer" class="mycontainer" style="margin-top:4px; min-height: 400px;">
 
-	<div id="column-left" class="column-left codeContent" style="z-index:1; max-width: 600px;">
-		<textarea id="code">değişken num1 = 12
-değişken num2 = 6
+	<div id="column-left" class="column-left codeContent" style="z-index:1;">
+		<textarea id="code">sd (siyah dikdörtgen 50 25) olsun
+kü (kırmızı üçgen 50) olsun
+b1 (boşluk 8) olsun
+b2 (boşluk 30) olsun
+aaa (sd b1 sd b1(siyah dikdörtgen 50 25) kü) olsun 
+bbb üste_çiz(aaa) olsun
 
-yinele(num1 != num2)
-{
-  eğer(num1 > num2)
-    num1 = num1 - num2
-  değilse
-    num2 = num2 - num1
-}
-
-yaz num1</textarea>
+yana_çiz(b2)
+yana_çiz(üste_çiz(aaa) b1 bbb)</textarea>
 
 	</div>
     
@@ -260,7 +257,13 @@ $('#h-slider').slider({
 <!--<script src="js/translate.js"></script>-->
 
 <!--<script type="text/paperscript" src="js/draw.js" canvas="canvas-1"></script>-->
-<script src="js/index5.js" ></script>
+<script type="text/paperscript" canvas="canvas-1">
+    
+    console.log([1,1] + [2,3])
+
+    </script>
+
+<script type="text/javascript" src="js/index6.js" ></script>
     
 <!--<script src="http://paperjs.org/assets/js/scripts.js"></script>-->
     

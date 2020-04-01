@@ -38,13 +38,18 @@ CodeMirror.defineMode("turkish", function(config, parserConfig) {
 
       "olsun": kw("var"), "sabit": kw("var"), 
       "çiz": kw("var"), "yana_çiz": kw("var"), "üste_çiz": kw("var"),
-      "function": kw("function"), "mutlak": kw("function"), "üstel": kw("function"), "karekök": kw("function"), "taban": kw("function"), "tavan": kw("function"),  "yordam": kw("function"), "catch": kw("catch"),
-      "sayarakYinele": kw("for"), "switch": kw("switch"), "case": kw("case"), "default": kw("default"),
+      
+      "function": kw("function"), "mutlak": kw("function"), "üstel": kw("function"), "karekök": kw("function"), "taban": kw("function"), "tavan": kw("function"),  "yordam": kw("function"),
+        
+      "yakala": kw("catch"),
+      "sayarakYinele": kw("for"), "switch": kw("switch"), "case": kw("case"), "varsayılan": kw("default"),
 	  "yaz": kw("yaz"),
 
       "in": operator, "typeof": operator, "instanceof": operator,
 	  "ve": operator, "veya": operator, "eşit": operator, "eşitdeğil": operator, "küçük": operator, "küçükeşit": operator, "büyük": operator, "büyükeşit": operator,
-
+      
+      "üçgen": atom, "daire": atom, "dikdörtgen": atom, "boşluk": atom,  
+      
       "true": atom, "false": atom, "null": atom, "undefined": atom, "NaN": atom, "Infinity": atom,
       "this": kw("this"), "class": kw("class"), "super": kw("atom"),
       "await": C

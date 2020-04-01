@@ -1,4 +1,5 @@
 // CodeMirror, copyright (c) by Marijn Haverbeke and others
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
 // Distributed under an MIT license: http://codemirror.net/LICENSE
 
 (function(mod) {
@@ -113,10 +114,11 @@ CodeMirror.registerHelper("hint", "turkish", javascriptHint);
 
   var funcProps = "prototype apply call bind".split(" ");
 
-  var javascriptKeywords = ("mutlak karekök taban tavan üstel değişken değ eğer değilse yinele sayarakYinele yordam yaz " +                           "terket devamet yakala sil doğru yanlış "  +
+  var javascriptKeywords = ("mutlak karekök taban tavan üstel ise olduğu_sürece değilse yinele yordam yaz ise olsun olduğu_sürece " +                                                     "terket devamet yakala sil doğru yanlış "  +
 						    "ve veya eşit eşitdeğil küçük küçükeşit büyük büyükeşit " + 
-                            "çiz yana_çiz üste_çiz "+
-                            "kırmızı yeşil sarı mor mavi lacivert kahverengi turuncu mor majenta").split(" ");
+                            "yana_çiz üste_çiz "+
+                            "daire dikdörtgen üçgen rastgele boşluk " +
+                            "beyaz siyah kırmızı yeşil sarı mor mavi lacivert kahverengi turuncu mor majenta").split(" ");
 
 
 function forAllProps(obj, callback) {

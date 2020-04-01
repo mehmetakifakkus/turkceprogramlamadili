@@ -21,9 +21,31 @@ userSend = [
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
       shortlink: 'cizimyapalim',
 	  username: 'Mehmet Akif Akkuş',
-	  code:    "sd (siyah dikdörtgen 40 20) olsun\nkü (kırmızı üçgen 40) olsun\nyana_çiz (sd kü)",
+	  code:    "sd (siyah dikdörtgen 100 50) olsun\n" + 
+               "kü (kırmızı üçgen 50) olsun\n"+
+               ""+
+               "çatı yana_çiz(kü kü) olsun\n\n"+
+               "yana_çiz (üste_çiz(sd çatı))\n",
 	   date: '08.02.2020'
-	}, 
+	},
+    {
+	  name: "Haydi Çocuklar Çizim Yapalım-2",
+      description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code:   "sd (siyah dikdörtgen 100 50) olsun\n"+
+              "kü (kırmızı üçgen 50) olsun\n"+
+              "çatı yana_çiz(kü kü) olsun\n"+
+              "\n"+
+              "çubuk (kahverengi dikdörtgen 10 50) olsun\n"+
+              "ağaç_üst (yeşil daire 50) olsun\n"+
+              "\n"+
+              "ağaç üste_çiz(çubuk ağaç_üst) olsun \n"+
+              "\n"+
+              "ev üste_çiz(sd çatı) olsun\n"+
+              "yana_çiz (ev (boşluk 50) ev (boşluk 50) ağaç)\n",
+	   date: '08.02.2020'
+	},
 	{
 	  name: "Haydi Çocuklar Çizim Yapalım-2",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
@@ -271,8 +293,10 @@ BD (beyaz dikdörtgen boyut boyut) olsun
 bos (boşluk 40) olsun
 
 ikili (SD BD) olsun 
-sekizli (ikili ikili ikili ikili) olsun
-üste_çiz(yana_çiz(bos sekizli) bos yana_çiz(sekizli))
+sekizli yana_çiz(ikili ikili ikili ikili) olsun
+
+yana_çiz(bos)
+üste_çiz(sekizli bos sekizli bos sekizli)
 */
 
 
@@ -287,7 +311,20 @@ ev (sd kü) olsun
 
 yana_çiz(b2 üste_çiz(ev) b2 b2 b2 b2 üste_çiz(ev))
 
+*/
+
+/* yan yana evler2
+
+sd (siyah dikdörtgen 50 60) olsun
+kü (kırmızı üçgen 50) olsun
+b2 (boşluk 30) olsun
+ev1 (sd kü) olsun
+ev2 üste_çiz(sd kü) olsun
+
+yana_çiz(b2 b2 üste_çiz(ev1) b2 b2 ev2 b2 ev2)
 
 */
+
+
 
 

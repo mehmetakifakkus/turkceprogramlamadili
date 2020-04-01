@@ -11,7 +11,11 @@ a 20 olsun
          üçgen 40
 */
 
-start = statement*
+start = s:statement*
+{
+	console.log(s)
+	return s;
+}
 
 statement 
   =	block_item
@@ -123,14 +127,14 @@ init_declarator_list
  = 	init:init_declarator (',' _ init_declarator)* {return init;}
 
 init_declarator
-	= _ left:name _ exp: (dogru / yanlis / shape_object_with_pr / name_with_pr / math_functions / expression_statement_no_nl) _ "olsun" {
+	= _ left:name _ exp: (dogru / yanlis / draw_statement2 / shape_object_with_pr / name_with_pr / math_functions / expression_statement_no_nl) _ "olsun" {
 
 	//console.log(exp) 
 
 	if( typeof(exp) == 'boolean')
     	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it   
-    else if(exp.type == 'drawing')
-    	return {'lhs': left, 'rhs': exp}; // evaluate it, then return it 
+    else if(exp.type == 'drawing' || exp.type == 'yana_çiz' || exp.type == 'üste_çiz')
+    	return {'lhs': left, 'rhs': exp}; 
     else if(typeof exp.vars != 'undefined')
 		 return {'lhs': left, 'rhs': exp.vars}; // evaluate it, then return it             
     else 

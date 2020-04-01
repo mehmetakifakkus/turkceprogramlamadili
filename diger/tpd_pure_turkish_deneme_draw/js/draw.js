@@ -1,4 +1,6 @@
-//paper.install(window);
+paper.install(window);
+
+console.log([1,1] + [2,3])
 
 var values = {
 	paths: 1,

@@ -1,4 +1,6 @@
 var time = 0.5, speed = 1000;
+//document.getElementById("myCanvas").height = height*60+10;
+
 
 paper.install(window)    
 paper.setup('canvas-1')
@@ -58,7 +60,7 @@ function processOneItem(item, topleft, downright){
         var x = eval(item.vars[0].text);
         var y = eval(item.vars[1].text); 
 
-        myShape = new Path.Rectangle([shape_last_x - x/2, shape_last_y], [x, y]);
+        myShape = new Path.Rectangle([downright.x, topleft.y], [x, y]);
             myShape.style = {
                 fillColor:  item.color,
                 strokeColor: 'black',
@@ -71,7 +73,7 @@ function processOneItem(item, topleft, downright){
     
     function myCircle(item){
         var radius = eval(item.vars[0].text);
-        myShape = new Path.Circle([shape_last_x, shape_last_y + radius], radius);
+        myShape = new Path.Circle([downright.x, topleft.y + radius], radius);
             myShape.style = {
                 fillColor:  item.color,
                 strokeColor: 'black',
@@ -86,19 +88,19 @@ function processOneItem(item, topleft, downright){
         var width = eval(item.vars[0].text);
 
         myShape = new Path.RegularPolygon({
-            center: [shape_last_x, shape_last_y + (width / 1.732) / 2],
+            center: [downright.x + width/2, topleft.y + (width / 1.732) / 2],
             sides: 3,
             radius: width / 1.732
         });
 
-        myShape.rotate(60, [shape_last_x, shape_last_y + (width / 1.732) / 2]);
+        myShape.rotate(60, [downright.x + width/2, topleft.y + (width / 1.732) / 2]);
         myShape.style = {
                 fillColor:  item.color,
                 strokeColor: 'black',
                 strokeWidth: 1
             };
         drawings.push(myShape)
-        return myShape.strokeBounds;
+        return myShape.bounds;
     }
        
 	if(item.type == 'logical')
@@ -203,16 +205,16 @@ function processOneItem(item, topleft, downright){
                 drawLine(item.shape_object, false, "", item.shape_object.color);
             }
             if(item.name == "dikdörtgen"){
-                shape_last_y += myRect(item).height;
+                topleft.y += myRect(item).height;
             }
             if(item.name == "daire"){
-                shape_last_y += myCircle(item);        
+                topleft.y += myCircle(item);        
             }
             if(item.name == "üçgen"){
-                shape_last_y += myTriangle(item).height;
+                topleft.y += myTriangle(item).height;
             }
             if(item.name == "boşluk")    
-                shape_last_y += eval(item.vars[0].text);
+                topleft.y += eval(item.vars[0].text);
         }
 
         function main(item)
@@ -245,6 +247,7 @@ function processOneItem(item, topleft, downright){
     if(item.type == 'yana_çiz') // that means "çiz"
     {
         console.log(item)
+        
         var myShape = new Path.Rectangle(0,0,1,1);
               
             function myModifier(it)
@@ -263,18 +266,17 @@ function processOneItem(item, topleft, downright){
                 drawLine(item.shape_object, false, "", item.shape_object.color);
             }
             if(item.name == "dikdörtgen"){
-                shape_last_x += myRect(item).width;
+                downright.x += myRect(item).width;
             }
             if(item.name == "daire"){
-                shape_last_x += myCircle(item);        
+                downright.x += myCircle(item);        
             }
             if(item.name == "üçgen"){
-                shape_last_x += myTriangle(item).width;
+                downright.x += myTriangle(item).width;
             }
             if(item.name == "boşluk")    
-                shape_last_x += eval(item.vars[0].text);
+                downright.x += eval(item.vars[0].text);
         }
-
         
         function main(item)
         {
@@ -311,10 +313,10 @@ function recursivelyProcess(items){
     if(items instanceof Array)
 	{
 		for(var i=0; i < items.length; i++)
-			processOneItem(items[i], 0, 7);
+			processOneItem(items[i],  {x:0, y:0}, {x:30, y:0});
 	}
 	else
-		processOneItem(items, 0, 7);
+		processOneItem(items, {x:30, y:0}, {x:30, y:0});
 }
 
 
