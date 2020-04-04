@@ -22,7 +22,7 @@ var drawings = [];
 var grammer = null, errorGrammer = null;
 var parser, parser2;
 
-$.get("grammer2.pegjs", function(response) {
+$.get("grammer.pegjs", function(response) {
 	grammer = response;
 	parser = PEG.buildParser(grammer);
 });
@@ -58,13 +58,12 @@ function processOneItem(item, last_x, last_y){
     function myRect(item, x, y){
         var x_ = eval(item.vars[0].text);
         var y_ = eval(item.vars[1].text); 
-        var strkW = 1;
 
-        myShape = new Path.Rectangle([x, y], [x_ - strkW, y_ - strkW]);
+        myShape = new Path.Rectangle([x, y], [x_, y_]);
             myShape.style = {
                 fillColor:  item.color,
                 strokeColor: 'black',
-                strokeWidth: strkW
+                strokeWidth: 1
             };
 
             drawings.push(myShape)
@@ -73,11 +72,11 @@ function processOneItem(item, last_x, last_y){
     
     function myCircle(item, x, y){
         var radius = eval(item.vars[0].text);
-        myShape = new Path.Circle([x+radius, y + radius], radius);
+        myShape = new Path.Circle([x, y + radius], radius);
             myShape.style = {
-                fillColor:  item.color
-                //,strokeColor: 'black'
-                //,strokeWidth: 1
+                fillColor:  item.color,
+                strokeColor: 'black',
+                strokeWidth: 1
             };
 
             drawings.push(myShape)
@@ -88,16 +87,16 @@ function processOneItem(item, last_x, last_y){
         var width = eval(item.vars[0].text);
 
         myShape = new Path.RegularPolygon({
-            center: [x + width/2 - 0.5, y + (width / 1.73205) / 2 - 0.5],
+            center: [x + width/2, y + (width / 1.732) / 2],
             sides: 3,
-            radius: width / 1.73205
+            radius: width / 1.732
         });
 
-        myShape.rotate(60, [x + width/2 - 0.5, y + (width / 1.73205) / 2 - 0.5]);
+        myShape.rotate(60, [x + width/2, y + (width / 1.732) / 2]);
         myShape.style = {
-                fillColor:  item.color
-                //,strokeColor: 'black',
-                //,strokeWidth: 1
+                fillColor:  item.color,
+                strokeColor: 'black',
+                strokeWidth: 1
             };
         drawings.push(myShape)
         return myShape.bounds;
@@ -190,7 +189,6 @@ function processOneItem(item, last_x, last_y){
         var myShape = new Path.Rectangle(0,0,1,1);
         var tmp_x = last_x;
         var tmp_y = last_y;
-        var delta_x = 0;
         
         function myModifier(it)
             {
@@ -208,19 +206,19 @@ function processOneItem(item, last_x, last_y){
                 drawLine(item.shape_object, false, "", item.shape_object.color);
             }
             if(item.name == "dikdörtgen"){
-                var tmpShape = myRect(item, last_x, tmp_y)
+                var tmpShape = myRect(item, tmp_x, tmp_y)
                 tmp_y += tmpShape.height;
-                delta_x = Math.max(tmpShape.width, delta_x);
+                tmp_x = Math.max(tmpShape.width, last_x);
             }
             if(item.name == "daire"){
-                var length = myCircle(item, last_x, tmp_y); 
+                var length = myCircle(item, tmp_x, tmp_y); 
                 tmp_y += length;
-                delta_x = Math.max(length, delta_x);
+                tmp_x = Math.max(length, last_x);
             }
             if(item.name == "üçgen"){
-                var tmpShape = myTriangle(item, last_x, tmp_y);
+                var tmpShape = myTriangle(item, tmp_x, tmp_y);
                 tmp_y += tmpShape.height;
-                delta_x = Math.max(tmpShape.width, delta_x);
+                tmp_x = Math.max(tmpShape.width, last_x);
             }
             if(item.name == "boşluk")    
                 tmp_y += eval(item.vars[0].text);
@@ -234,26 +232,33 @@ function processOneItem(item, last_x, last_y){
                 {
                     var el = item.shape_object[i];
                     if(typeof el == 'string')
-                        el = window.eval(el);
-
-                    if(el.type == "yana_çiz")
-                        [tmp_x, tmp_y] = processOneItem(el, last_x, tmp_y) 
-                    else if(el.type == "üste_çiz")
-                        [tmp_x, tmp_y] = processOneItem(el, last_x, tmp_y)  
-                    else if((typeof el.type) != 'undefined')
-                        myPro(el)
-                }
+                    {
+                        var tmp = window.eval(el);
+                        if(tmp.type == "yana_çiz")
+                            [last_x, tmpo] = processOneItem(tmp, last_x, tmp_y)
+                        else if(tmp.type == "üste_çiz")
+                            [tmpo, last_y] = processOneItem(tmp, last_x, tmp_y)
+                        else
+                            myPro(tmp);
+                    }
+                    else if(typeof el.type)
+                    {
+                        if(el.type == "yana_çiz")
+                            [last_x, last_y] = processOneItem(el, last_x, tmp_y) 
+                        else if(el.type == "üste_çiz")
+                            [last_x, tmpo] = processOneItem(el, last_x, tmp_y)  
+                        else if((typeof el.type) != 'undefined')
+                            myPro(el)
+                    }
                     
+                }
             }
             else
                 myPro(item.shape_object);
         }
         main(item);
-        
-        last_x = Math.round(tmp_x); //  + delta_x ?
-        last_y = Math.round(tmp_y);
-        console.log("üste_çiz return: x:"+last_x + ", y:"+last_y);
-        
+        last_x = tmp_x;
+        last_y = tmp_y;
         return [last_x, last_y];
     }
     if(item.type == 'yana_çiz') // that means "çiz"
@@ -261,7 +266,6 @@ function processOneItem(item, last_x, last_y){
         console.log(item)
         var tmp_x = last_x;
         var tmp_y = last_y;
-        var delta_y = 0;
         
         var myShape = new Path.Rectangle(0,0,1,1);
               
@@ -281,20 +285,20 @@ function processOneItem(item, last_x, last_y){
                 drawLine(item.shape_object, false, "", item.shape_object.color);
             }
             if(item.name == "dikdörtgen"){
-                var tmpShape = myRect(item, tmp_x, last_y)
+                var tmpShape = myRect(item, tmp_x, tmp_y)
 
                 tmp_x += tmpShape.width;
-                delta_y = Math.max(tmpShape.height, delta_y);
+                tmp_y = Math.max(tmpShape.height, last_y);
             }
             if(item.name == "daire"){
-                var length = myCircle(item, tmp_x, last_y); 
+                var length = myCircle(item, tmp_x, tmp_y); 
                 tmp_x += length;
-                delta_y = Math.max(length, delta_y);
+                tmp_y = Math.max(length, last_y);
             }
             if(item.name == "üçgen"){
-                var tmpShape = myTriangle(item, tmp_x, last_y);
+                var tmpShape = myTriangle(item, tmp_x, tmp_y);
                 tmp_x += tmpShape.width;
-                delta_y = Math.max(tmpShape.height, delta_y);
+                tmp_y = Math.max(tmpShape.height, last_y);
             }
             if(item.name == "boşluk")    
                 tmp_x += eval(item.vars[0].text);
@@ -308,29 +312,34 @@ function processOneItem(item, last_x, last_y){
                 {
                     var el = item.shape_object[i];
                     if(typeof el == 'string')
-                        el = window.eval(el);
-                    
-                    if(el.type == "yana_çiz")
-                        [tmp_x, tmp_y] = processOneItem(el, tmp_x, last_y)  
-                    else if(el.type == "üste_çiz")
-                        [tmp_x, tmp_y] = processOneItem(el, tmp_x, last_y) 
-                    else if((typeof el.type) != 'undefined')
-                        myPro(el)
+                    {
+                        var tmp = window.eval(el);
+                        if(tmp.type == "yana_çiz")
+                            [tmpo, tmp_y] = processOneItem(tmp, tmp_x, last_y)
+                        else if(tmp.type == "üste_çiz")
+                            [tmp_x, tmpo] = processOneItem(tmp, last_x, tmp_y)
+                        else
+                            myPro(tmp);
+                    }
+                    else if(typeof el.type)
+                    {
+                        if(el.type == "yana_çiz")
+                            [tmpo, tmp_y] = processOneItem(el, tmp_x, last_y)  
+                        else if(el.type == "üste_çiz")
+                            [tmp_x, tmpo] = processOneItem(el, last_x, tmp_y) 
+                        else if((typeof el.type) != 'undefined')
+                            myPro(el)
+                    }
                 }
             }
             else
                 myPro(item.shape_object);
         }
         main(item)
-        
-        last_x = Math.round(tmp_x);
-        last_y = Math.round(tmp_y) + delta_y;  // Math.round(last_y) + delta_y;
-
-        console.log("yana_çiz return: x:"+last_x + ", y:"+ last_y);
-    
-        return [last_x, last_y];
     }
-
+    last_x = tmp_x;
+    last_y = tmp_y;
+    return [last_x, last_y];
 }
 
 function recursivelyProcess(items){

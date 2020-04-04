@@ -23,9 +23,11 @@ userSend = [
 	  username: 'Mehmet Akif Akkuş',
 	  code:    "sd (siyah dikdörtgen 100 50) olsun\n" + 
                "kü (kırmızı üçgen 50) olsun\n"+
-               ""+
-               "çatı yana_çiz(kü kü) olsun\n\n"+
-               "yana_çiz (üste_çiz(sd çatı))\n",
+               "çatı yana_çiz(kü kü) olsun\n"+
+               "ev üste_çiz(sd çatı) olsun\n\n"+
+               "yana_çiz (ev (boşluk 10) ev)\n"+
+               "//yana_çiz (üste_çiz(sd çatı))\n"+
+               "//yana_çiz (çatı (boşluk 10) ev (boşluk 10) ev)\n",
 	   date: '08.02.2020'
 	},
     {
@@ -228,6 +230,25 @@ sd (siyah dikdörtgen 40 20) olsun
 kü (kırmızı üçgen 40) olsun
 yana_çiz ((kırmızı üçgen 40))
 //yana_çiz (sd kü)
+
+****
+sd (siyah dikdörtgen 40 20) olsun
+kü (kırmızı üçgen 40) olsun
+yana_çiz (kü sd kü sd kü sd kü sd sd)
+
+*****
+kd (siyah dikdörtgen 100 50) olsun
+bd (siyah dikdörtgen 50 50) olsun
+çatı yana_çiz(kd bd) olsun
+
+yana_çiz (kd bd) 
+
+***
+sd (siyah dikdörtgen 100 50) olsun
+kü (kırmızı üçgen 50) olsun
+çatı yana_çiz(kü kü) olsun
+
+üste_çiz(sd çatı sd çatı sd)
 */
 
 /* 2. aşama tanımlar aynı
@@ -287,16 +308,17 @@ yana_çiz(bos ikili)
 
 */
 /* satranc tahtası çizebilir miyim?
-boyut 40 olsun
+boyut 20 olsun
 SD (siyah dikdörtgen boyut boyut) olsun
 BD (beyaz dikdörtgen boyut boyut) olsun
-bos (boşluk 40) olsun
+bos (boşluk boyut) olsun
 
-ikili (SD BD) olsun 
-sekizli yana_çiz(ikili ikili ikili ikili) olsun
+ik1 yana_çiz(SD BD) olsun 
+ik2 yana_çiz(BD SD) olsun 
+s1 yana_çiz(ik1 ik1 ik1 ik1) olsun
+s2 yana_çiz(ik2 ik2 ik2 ik2) olsun
 
-yana_çiz(bos)
-üste_çiz(sekizli bos sekizli bos sekizli)
+üste_çiz(s2 s1 s2 s1 s2 s1 s2 s1)
 */
 
 

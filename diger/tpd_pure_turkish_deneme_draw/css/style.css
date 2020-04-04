@@ -34,6 +34,8 @@ body {
 	min-width: 400px;
     max-width: 720px;
 	max-width: 90%;
+        overflow: hidden;
+
 }
 
 .column-right{
