@@ -2,6 +2,28 @@ var time = 0.5, speed = 1000;
 //document.getElementById("myCanvas").height = height*60+10;
 
 
+/*
+        // Load from Server:
+        var raster = new Raster('http://assets.paperjs.org/images/marilyn.jpg');
+        // Load from DOM image:
+        // var raster = new Raster('marilyn');
+        raster.onLoad = function() {
+            console.log('Successfully loaded image!');
+        };
+        var lastScale = 1;
+        var center = view.center;
+        function onFrame(event) {
+            var scale = (Math.sin(event.time * 2) + 1) / 2;
+            raster.scale(scale / lastScale);
+            lastScale = scale;
+            raster.position = center + [
+                Math.sin(event.time * 3) * 256,
+                Math.sin(event.time * 2.5) * 256
+            ];
+            raster.rotate(event.delta * 120);
+        }
+    */
+
 paper.install(window)    
 paper.setup('canvas-1')
 
@@ -22,7 +44,7 @@ var drawings = [];
 var grammer = null, errorGrammer = null;
 var parser, parser2;
 
-$.get("grammer2.pegjs", function(response) {
+$.get("grammer.pegjs", function(response) {
 	grammer = response;
 	parser = PEG.buildParser(grammer);
 });

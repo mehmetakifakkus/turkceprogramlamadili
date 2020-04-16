@@ -319,6 +319,18 @@ s1 yana_çiz(ik1 ik1 ik1 ik1) olsun
 s2 yana_çiz(ik2 ik2 ik2 ik2) olsun
 
 üste_çiz(s2 s1 s2 s1 s2 s1 s2 s1)
+
+****
+
+boyut 35 olsun
+SD (siyah dikdörtgen boyut boyut) olsun
+BD (beyaz dikdörtgen boyut boyut) olsun
+
+ik1 yana_çiz(SD BD) olsun 
+ik2 yana_çiz(BD SD) olsun
+
+abd üste_çiz( yana_çiz(ik1 ik1 ik1 ik1) yana_çiz(ik2 ik2 ik2 ik2)) olsun
+üste_çiz(abd abd abd abd)
 */
 
 
