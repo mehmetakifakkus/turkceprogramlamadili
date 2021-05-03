@@ -1,5 +1,25 @@
 
 userSend = [
+	{
+		name: 'Kedilerin mama tüketimini bulan kod',
+		description: '-',
+		shortlink: 'padisahinbugdaylari',
+		username: 'Süer Eker',
+		code: 
+		"değişken kat = 1\n"+
+		"değişken toplam = 0\n"+
+		"değişken kere = 1\n"+
+		"\n"+
+		"yinele(kere < 32) // satranc tahtasinda kutu sayisi\n"+
+		"{\n"+
+		"	kat = kat * 2\n"+
+		"	toplam = toplam + kat\n"+
+		"	kere = kere + 1\n"+
+		"}\n"+
+		"\n"+
+		"yaz toplam\n",
+		date: '02.05.2021'
+	},
     {
 		name: 'Kedilerin mama tüketimini bulan kod',
 		description: '-',
