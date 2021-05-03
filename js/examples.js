@@ -1,7 +1,7 @@
 
 userSend = [
 	{
-		name: 'Kedilerin mama tüketimini bulan kod',
+		name: 'Padişahın borçlu olduğu buğday miktarı',
 		description: '-',
 		shortlink: 'padisahinbugdaylari',
 		username: 'Süer Eker',
