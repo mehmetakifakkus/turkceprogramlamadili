@@ -2,7 +2,7 @@
 userSend = [
 	{
 		name: 'Padişahın borçlu olduğu buğday miktarı',
-		description: '-',
+		description: 'Sorunun hikayesine şuradan göz atabilirsiniz:\n http://www.satrancokulu.com/yazilar/satranc-hikayeleri/satranc-ve-bugday-hikayesi/\n\n',
 		shortlink: 'padisahinbugdaylari',
 		username: 'Süer Eker',
 		code: 
