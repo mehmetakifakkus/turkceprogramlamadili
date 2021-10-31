@@ -55,7 +55,7 @@ userSend = [
 		name: 'Diyabette karbonhidrat sayımı',
 		description: '-',
 		shortlink: 'diyabetkarbonhidrat',
-		username: 'İrem Sayındı',
+		username: 'Üniversite Öğrencisi',
 		code:         
             "değişken insulinkarbonhidratoranı = 500 / 42\n"+
             "değişken insulinduyarlılıkfaktoru = 1700 / 42\n"+
