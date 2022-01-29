@@ -1,7 +1,32 @@
 userSend = [	
     
+	
+
+
+
+
+
+
+	
         {
-	  name: "Haydi Çocuklar Çizim Yapalım-2",
+	  name: "Haydi Çocuklar Çizim Yapalım-Satranç Tahtası",
+      description: 'Aynı boyutta siyah ve beyaz kutuları yan yana ve üst üste koyarak satranç tahtası oluşturabilir miyiz?.<br><br>',
+      shortlink: 'cizimyapalim',
+	  username: 'Mehmet Akif Akkuş',
+	  code: "boyut 20 olsun\n"+
+            "SD (siyah dikdörtgen boyut boyut) olsun\n"+
+            "BD (beyaz dikdörtgen boyut boyut) olsun\n"+
+            "bos (boşluk boyut) olsun\n"+
+            "\n"+
+            "ik1 yana_çiz(SD BD) olsun\n"+
+            "ik2 yana_çiz(BD SD) olsun\n"+
+	    "s1 yana_çiz(ik1 ik1 ik1 ik1) olsun\n"+
+	    "s2 yana_çiz(ik2 ik2 ik2 ik2) olsun\n"+
+            "üste_çiz(s2 s1 s2 s1 s2 s1 s2 s1)\n",
+	   date: '18.02.2021'
+	},
+        {
+	  name: "Haydi Çocuklar Çizim Yapalım-6",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
       shortlink: 'cizimyapalim',
 	  username: 'Mehmet Akif Akkuş',
@@ -17,7 +42,7 @@ userSend = [
 	   date: '08.02.2020'
 	},    
     {
-	  name: "Haydi Çocuklar Çizim Yapalım-2",
+	  name: "Haydi Çocuklar Çizim Yapalım-5",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
       shortlink: 'cizimyapalim',
 	  username: 'Mehmet Akif Akkuş',
@@ -31,7 +56,7 @@ userSend = [
 	   date: '08.02.2020'
 	},
     {
-	  name: "Haydi Çocuklar Çizim Yapalım-2",
+	  name: "Haydi Çocuklar Çizim Yapalım-4",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
       shortlink: 'cizimyapalim',
 	  username: 'Mehmet Akif Akkuş',
@@ -49,7 +74,7 @@ userSend = [
 	   date: '08.02.2020'
 	},
 	{
-	  name: "Haydi Çocuklar Çizim Yapalım-2",
+	  name: "Haydi Çocuklar Çizim Yapalım-3",
       description: 'Daire, dikdörtgenlerden ve üçgenden oluşan bir resim yapalım.<br><br>',
       shortlink: 'cizimyapalim',
 	  username: 'Mehmet Akif Akkuş',
