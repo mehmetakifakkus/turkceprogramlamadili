@@ -1,4 +1,4 @@
-# Eğitim için Türkçe Programlama-Sürüm 2
+# Eğitim için Türkçe Programlama-Çizim Yaparak Öğrenme
 
 <img float="left" src="https://raw.githubusercontent.com/mehmetakifakkus/turkceprogramlamadili/master/diger/tpd_pure_turkish_deneme_draw/images/turkce-cizim.png" style="border-radius: 30px;" width="800"/>
 
