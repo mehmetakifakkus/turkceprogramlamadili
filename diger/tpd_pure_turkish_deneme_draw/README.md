@@ -1,6 +1,6 @@
 # Eğitim için Türkçe Programlama-Sürüm 2
 
-<img float="left" src="https://github.com/mehmetakifakkus/turkceprogramlamadili/blob/master/images/turkce-cizim.png?raw=true" style="border-radius: 30px;" width="800"/>
+<img float="left" src="https://raw.githubusercontent.com/mehmetakifakkus/turkceprogramlamadili/master/diger/tpd_pure_turkish_deneme_draw/images/turkce-cizim.png" style="border-radius: 30px;" width="800"/>
 
 ## Nedir?
 Yürütülen bu proje; bir programlama dili **Türkçe** olabilir mi, hiç bilmeyenlerin ya da deneyim sahibi olmayanların öğrenmesine katkı sağlayabilir mi gibi sorulara cevap aranması amacıyla her hangi ticari bir amaç gütmeden ortaya konmuştur.
