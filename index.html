@@ -136,6 +136,8 @@ yaz num1</textarea>
 
 <div class = "dropright">
 	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
+	<!-- Çeviri butonu da burada olmalı: aşağıdaki panelin yanında olursa ayarlar açıkken panelin altına kayar -->
+	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('translate'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-terminal"></i></button>
 	<ul id = "settings" class="mydropdown-menu" style="position:relative;" role="menu">
 
 	<hr style="style1">
@@ -181,7 +183,6 @@ $('#h-slider').slider({
 
 
 <div class = "dropright">
-	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('translate'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-terminal"></i></button>
 	<ul id = "translate" class="mydropdown-menu" style="position:relative;" role="menu">
 		<hr style="style1">
 
@@ -319,7 +320,11 @@ $('#h-slider').slider({
 		if (which.style.display=="block")
 		which.style.display="none"
 		else
+		{
 		which.style.display="block"
+		// Gizliyken doldurulan CodeMirror editörleri görünür olunca yeniden çizilmeli
+		$(which).find('.CodeMirror').each(function(){ this.CodeMirror.refresh(); });
+		}
 		}
 </script>
 

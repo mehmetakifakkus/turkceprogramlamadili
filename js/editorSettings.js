@@ -118,16 +118,19 @@ editor.on("keyup", function (cm, event) {
 
 	console.log(event.keyCode)
 
-	try{
-		var text = editor.getValue();
-    	result = parser.parse(text);
-		translate.getDoc().setValue(translateCHelper(result, 0))
-
-	}catch(err){
-		console.error(err)
-	}
-    	//document.getElementById("result").textContent = JSON.stringify(result, null, 2);
 });
+
+// C çevirisi paneli: kod her değiştiğinde (yazarken, örnek yüklenince) güncellenir.
+// Kodda sözdizimi hatası varsa son geçerli çeviri kalır.
+function ceviriyiGuncelle(){
+	if(typeof parser == 'undefined' || !parser)
+		return;	// gramer henüz yüklenmedi; yüklenince çağrılır
+	try{
+		translate.getDoc().setValue(translateCHelper(parser.parse(editor.getValue()), 0));
+	}catch(err){
+	}
+}
+editor.on("change", ceviriyiGuncelle);
 
 /*
 *
