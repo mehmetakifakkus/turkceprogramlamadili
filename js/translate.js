@@ -154,7 +154,9 @@ function translateC(items, level){
 		if(el.type == 'declaration')
 		{
 			window.eval(el.text);
-			if(isInt(eval(el.rhs)))
+			if(typeof eval(el.rhs) == 'string')
+				resultText += tabSpace + 'char *'+el.lhs.turkishToEnglish() + ' = '+el.rhs.turkishToEnglish()+';\n';
+			else if(isInt(eval(el.rhs)))
 				resultText += tabSpace + 'int '+el.lhs.turkishToEnglish() + ' = '+el.rhs.turkishToEnglish()+';\n';
 			else
 				resultText += tabSpace + 'float '+el.lhs.turkishToEnglish() + ' = '+el.rhs.turkishToEnglish()+';\n';
@@ -176,7 +178,9 @@ function translateC(items, level){
 			{
 				if(el.list[i].subtype == 'var')
 				{
-					if(isInt(eval(el.list[i].text)))
+					if(typeof eval(el.list[i].text) == 'string')
+						leftPart += "%s";
+					else if(isInt(eval(el.list[i].text)))
 						leftPart += "%d";
 					else
 						leftPart += "%f";

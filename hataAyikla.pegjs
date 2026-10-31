@@ -25,15 +25,7 @@ referenceError
 
 ///// Name = Variable
 
-name = l:letter i:Integer {return l+i}
-     / l:letter {return l;} 
-
-dogru = 'doğru' {return true;}
-yanlis = 'yanlış' {return false;}
-
-
-letter "letter" 
-  = [a-zA-Z_|ş|ğ|ç|ö|ü|ı|ü]+ {return text()} 
+name = $([a-zA-Z_çğıöşüâîûÇĞİÖŞÜÂÎÛ] [a-zA-Z0-9_çğıöşüâîûÇĞİÖŞÜÂÎÛ]*)
 
 
 
