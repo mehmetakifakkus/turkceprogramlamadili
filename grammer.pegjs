@@ -32,11 +32,20 @@ yaz ad + " " + no   // yorum satırı
     'değişken', 'değ', 'var', 'eğer', 'değilse', 'yinele', 'sayarakYinele',
     'yaz', 'print', 'doğru', 'yanlış', 've', 'veya',
     'büyük', 'küçük', 'büyükeşit', 'küçükeşit', 'eşit', 'eşitdeğil',
-    'taban', 'tavan', 'karekök', 'mutlak', 'üstel'
+    'taban', 'tavan', 'karekök', 'mutlak', 'üstel', 'değil'
   ];
+
+  // head (op operand)* dizisinden JavaScript metni kurar
+  function ikiliMetin(head, tail, opIndex, operandIndex) {
+    var metin = head;
+    for (var i = 0; i < tail.length; i++)
+      metin += ' ' + tail[i][opIndex] + ' ' + tail[i][operandIndex];
+    return metin;
+  }
 }
 
-start = statement*
+// Baştaki boş satırlar atlanır
+start = [ \t\r\n]* s:statement* { return s; }
 
 statement 
   =	block_item
@@ -121,15 +130,28 @@ block_item_list = (block_item)*
 
 block_item
  = declaration
- / logical_statement
  / if_statement
  / while_statement
  / for_statement
  / print_statement
- / math_functions
- / expression_statement
+ / ifade_satiri
  / null_statement
  / comment
+
+// Tek başına bir ifade ya da koşul satırı: değerini gösterir.
+// Satır sonu zorunlu, böylece `yazz x` gibi yazım hataları iki ayrı
+// ifadeye bölünmek yerine sözdizimi hatası verir.
+ifade_satiri
+ = _ k:kosul bitis:sutun _ satirSonu {
+	return {'type': k.mantiksal ? 'logical' : 'expression', '#evaluation': 0, 'text': k.text, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': bitis};
+ }
+
+satirSonu
+ = comment / "\n" nl / !.
+
+// Bulunulan sütun (0'dan başlar), hiçbir şey tüketmez
+sutun
+ = "" { return location().start.column - 1; }
 
 null_statement
  = ';' _ comment? nl {
@@ -149,17 +171,15 @@ init_declarator_list
  = 	init:init_declarator (',' _ init_declarator)* {return init;}
 
 init_declarator
-	= _ left:name _"="_ exp: (dogru / yanlis / StringLiteral / math_functions / expression_statement_no_nl) nl{
+	= _ left:name _"="_ exp: (StringLiteral / kosul) nl{
 
-	if( typeof(exp) == 'boolean')
-    	return {'lhs': left, 'rhs': exp.toString()}; // evaluate it, then return it       
-    else if(exp.type == 'Literal')
+	if(exp.type == 'Literal')
         return {'lhs': left, 'rhs': JSON.stringify(exp.value)};
     else 
         return {'lhs': left, 'rhs': exp.text};        
 }   
 
-print_statement = _ ("yaz" !harfRakam / "print" !harfRakam) _ exp:( _  '+'? _ (math_functions / StringLiteral / expression_statement_no_nl))+ _ comment? _ nl {
+print_statement = _ ("yaz" !harfRakam / "print" !harfRakam) _ exp:( _  '+'? _ (StringLiteral / expression_statement_no_nl))+ _ comment? _ nl {
 	//console.log(exp)
     var list = []
     
@@ -174,43 +194,50 @@ print_statement = _ ("yaz" !harfRakam / "print" !harfRakam) _ exp:( _  '+'? _ (m
     return {'type':'print', 'list': list, 'lineNumber': location().start.line}
 }
 
-expression_statement = head:Term tail:(_ ("+" / "-") _ Term)* _ nl{  	    
-   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column-1, 'end':location().end.column-1}; // evaluate it, then return it    
+expression_statement_no_nl = head:Term tail:(_ ("+" / "-") _ Term)* {
+   	return {'type':'expression', '#evaluation': 0, 'text': ikiliMetin(head, tail, 1, 3), 'lineNumber': location().start.line, 'start':location().start.column-1, 'end':location().end.column-1};
 }
 
-expression_statement_no_nl = head:Term tail:(_ ("+" / "-") _ Term)* {  	    
-   	return {'type':'expression', '#evaluation': 0, 'text':text(), 'lineNumber': location().start.line, 'start':location().start.column-1, 'end':location().end.column-1}; // evaluate it, then return it    
-}
-
+// Term ve Factor, ifadenin JavaScript metnini döndürür
 Term
-  = head:Factor tail:(_ ("*" / "/" / "%") _ Factor)* 
+  = head:Factor tail:(_ ("*" / "/" / "%") _ Factor)* { return ikiliMetin(head, tail, 1, 3); }
 
 Factor
-  = "(" _ expr:expression_statement _ ")" { return expr; }
-  / f:Float { return f.text;}
-  / i:Integer { return i.text;}
-  / n:name {return n;}
-  / "-" _ f:Factor { return f; }
+  = "(" _ expr:expression_statement_no_nl _ ")" { return '(' + expr.text + ')'; }
+  / m:math_functions { return m.text; }
+  / f:Float { return f.text.trim(); }
+  / i:Integer { return i.text.trim(); }
+  / dogru { return 'true'; }
+  / yanlis { return 'false'; }
+  / n:name { return n; }
+  / "-" _ f:Factor { return '-' + f; }
   
 
-logical_statement = _ f1:factor2 _ op:operator _ f2:factor2 log:(_ logical_operator _ logical_statement)* _ nl
+logical_statement = _ k:kosul _ nl
 {
-	var text = f1.text+'';
-    text += op + ' ' + f2.text; 
-        
-    if(log[0] != undefined)  
-    {	
-    	log = log[0];
-    
-    	text += ' '+ log[1];
-        text += ' '+ log[3].text;
-    }
-    
-	return {'type':'logical', 'text': text, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
+	return {'type':'logical', 'text': k.text, 'lineNumber': location().start.line, 'start': location().start.column-1, 'end': location().end.column-1};
 }
-	  
-factor2 = "(" logical_statement ")" 
-	   / expression_statement
+
+// Koşullar. Öncelik: veya < ve < değil < karşılaştırma.
+// Her biri {text: JavaScript metni, mantiksal: sonuç doğru/yanlış mı} döndürür.
+kosul
+  = head:kosulVe tail:(_ veya_operatoru _ kosulVe)* {
+	if (tail.length == 0) return head;
+	return {text: ikiliMetin(head.text, tail.map(function(t){ return [t[0], t[1], t[2], t[3].text]; }), 1, 3), mantiksal: true};
+  }
+
+kosulVe
+  = head:kosulTekil tail:(_ ve_operatoru _ kosulTekil)* {
+	if (tail.length == 0) return head;
+	return {text: ikiliMetin(head.text, tail.map(function(t){ return [t[0], t[1], t[2], t[3].text]; }), 1, 3), mantiksal: true};
+  }
+
+kosulTekil
+  = degil_operatoru _ k:kosulTekil { return {text: '!(' + k.text + ')', mantiksal: true}; }
+  / a:expression_statement_no_nl _ op:operator _ b:expression_statement_no_nl { return {text: a.text + ' ' + op + ' ' + b.text, mantiksal: true}; }
+  / e:expression_statement_no_nl { return {text: e.text, mantiksal: /^(true|false)$/.test(e.text)}; }
+  // Düz ifadeden sonra gelmeli: "(a + b) / 2" ifade olarak okunmalı
+  / "(" _ k:kosul _ ")" { return {text: '(' + k.text + ')', mantiksal: k.mantiksal}; }
 
 
 //// math functions
@@ -218,19 +245,19 @@ factor2 = "(" logical_statement ")"
 math_functions
  = taban / tavan/ karekok / mutlakDeger / ustel
 
-taban = 'taban' !harfRakam _ '(' _ exp:expression_statement _ ')'{
+taban = 'taban' !harfRakam _ '(' _ exp:expression_statement_no_nl _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.floor(' + exp.text + ')', 'C': 'floor(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
-tavan = 'tavan' !harfRakam _ '(' _ exp:expression_statement _ ')'{
+tavan = 'tavan' !harfRakam _ '(' _ exp:expression_statement_no_nl _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.ceil(' + exp.text + ')', 'C': 'ceil(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
-karekok = 'karekök' !harfRakam _ '(' _ exp:expression_statement _ ')'{
+karekok = 'karekök' !harfRakam _ '(' _ exp:expression_statement_no_nl _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.sqrt(' + exp.text + ')', 'C': 'sqrt(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
-mutlakDeger = 'mutlak' !harfRakam _ '(' _ exp:expression_statement _ ')'{
+mutlakDeger = 'mutlak' !harfRakam _ '(' _ exp:expression_statement_no_nl _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.abs(' + exp.text + ')', 'C': 'fabs(' + exp.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
-ustel = 'üstel' !harfRakam _ '(' _ exp1:expression_statement _ ',' _ exp2:expression_statement _ ')'{
+ustel = 'üstel' !harfRakam _ '(' _ exp1:expression_statement_no_nl _ ',' _ exp2:expression_statement_no_nl _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.pow(' + exp1.text + ','  + exp2.text + ')', 'C': 'pow(' + exp1.text + ','  + exp2.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
 
@@ -312,16 +339,17 @@ comment
 operator
   = operator_text / operator_symbol
   
-logical_operator
-  = logical_operator_text / logical_operator_symbol
-  
-logical_operator_text
+veya_operatoru
   = "veya" !harfRakam		{ return "||"; }
-	/ "ve" !harfRakam		{ return "&&"; }
-    
-logical_operator_symbol
-  = "&&"					{ return text(); }
-	/ "||"					{ return text(); }    
+	/ "||"					{ return "||"; }
+
+ve_operatoru
+  = "ve" !harfRakam			{ return "&&"; }
+	/ "&&"					{ return "&&"; }
+
+degil_operatoru
+  = "değil" !harfRakam
+	/ "!" !"="
 
 operator_text
   =  "büyükeşit" !harfRakam	{ return ">="; }
