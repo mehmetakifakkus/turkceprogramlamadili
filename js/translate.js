@@ -138,14 +138,14 @@ function translateC(items, level){
 			{
 				resultText += 'while(' + el.text.turkishToEnglish() + ')\n';
 				resultText += '{\n';
-				resultText += translateC(el.statements, level+1);
+				resultText += translateC([].concat(el.statements), level+1);
 				resultText += '}\n';
 			}
 			else if(el.mainType == 'for')
 			{
 				resultText += 'for(int ' + el.initialize.lhs + '=' + el.initialize.rhs + '; ' + el.text + '; ' + el.increment.text + ')\n';
 				resultText += '{\n';
-				resultText += translateC(el.statements, level+1);
+				resultText += translateC([].concat(el.statements), level+1);
 				resultText += '}\n';
 			}
 //			else
@@ -154,9 +154,9 @@ function translateC(items, level){
 		if(el.type == 'declaration')
 		{
 			window.eval(el.text);
-			if(typeof eval(el.rhs) == 'string')
+			if(typeof window.eval(el.rhs) == 'string')
 				resultText += tabSpace + 'char *'+el.lhs.turkishToEnglish() + ' = '+el.rhs.turkishToEnglish()+';\n';
-			else if(isInt(eval(el.rhs)))
+			else if(isInt(window.eval(el.rhs)))
 				resultText += tabSpace + 'int '+el.lhs.turkishToEnglish() + ' = '+el.rhs.turkishToEnglish()+';\n';
 			else
 				resultText += tabSpace + 'float '+el.lhs.turkishToEnglish() + ' = '+el.rhs.turkishToEnglish()+';\n';
@@ -167,7 +167,7 @@ function translateC(items, level){
 		}
 		if(el.type == 'expression')
 		{
-			resultText += el.lhs.turkishToEnglish() + ' = '+el.rhs.turkishToEnglish();
+			resultText += tabSpace + el.text.turkishToEnglish() + ';\n';
 		}
 		if(el.type == 'print')
 		{
@@ -178,9 +178,9 @@ function translateC(items, level){
 			{
 				if(el.list[i].subtype == 'var')
 				{
-					if(typeof eval(el.list[i].text) == 'string')
+					if(typeof window.eval(el.list[i].text) == 'string')
 						leftPart += "%s";
-					else if(isInt(eval(el.list[i].text)))
+					else if(isInt(window.eval(el.list[i].text)))
 						leftPart += "%d";
 					else
 						leftPart += "%f";

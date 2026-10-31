@@ -47,6 +47,9 @@ $.get("hataAyikla.pegjs", function(response) {
 	parser2 = PEG.buildParser(errorGrammer);
 });
 
+// Kullanıcı kodu window.eval ile (global kapsamda) çalıştırılır. Doğrudan
+// eval bu fonksiyonun yerel değişkenlerini (ör. i) görür ve kullanıcının
+// aynı adlı değişkenlerini gölgeler.
 function processOneItem(item){
 
 	if(item.type == 'logical')
@@ -55,9 +58,9 @@ function processOneItem(item){
 
 		if(item.mainType == 'if')
 		{
-			drawLine(item, false, eval(item.text));
+			drawLine(item, false, window.eval(item.text));
 
-			if(eval(item.text))
+			if(window.eval(item.text))
 				recursivelyProcess(item.truePart)
 			else
 				if(item.falsePart)
@@ -65,62 +68,62 @@ function processOneItem(item){
 		}
 		else if(item.mainType == 'while')
 		{
-			while(eval(item.text)){
-				drawLine(item, false, eval(item.text));
+			while(window.eval(item.text)){
+				drawLine(item, false, window.eval(item.text));
 
-				if(eval(item.text))
+				if(window.eval(item.text))
 					recursivelyProcess(item.statements)
 			}
-			drawLine(item, false, eval(item.text));
+			drawLine(item, false, window.eval(item.text));
 		}
 		else if(item.mainType == 'for')
 		{
 			window.eval(item.initialize.text)
 
-			while(eval(item.text)){
-				drawLine(item, false, eval(item.text));
+			while(window.eval(item.text)){
+				drawLine(item, false, window.eval(item.text));
 
 
-				if(eval(item.text))
+				if(window.eval(item.text))
 					recursivelyProcess(item.statements)
 
-				eval(item.increment.text)
+				window.eval(item.increment.text)
 			}
-			drawLine(item, false, eval(item.text));
+			drawLine(item, false, window.eval(item.text));
 		}
 		else
-			drawLine(item, false, eval(item.text));
+			drawLine(item, false, window.eval(item.text));
 	}
 	if(item.type == 'declaration' || item.type == 'assignment')
 	{
 		window.eval(item.text);
 		item['#evaluation']++;
 
-		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.lhs));
+		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ window.eval(item.lhs));
 
 		if(item.up == 'while')
-			drawLine(item, true, eval(item.lhs));
+			drawLine(item, true, window.eval(item.lhs));
 		else
-			drawLine(item, false, eval(item.lhs));
+			drawLine(item, false, window.eval(item.lhs));
 	}
 	if(item.type == 'expression')
 	{
 		window.eval(item.text);
 		item['#evaluation']++;
 
-		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ eval(item.text));
+		console.log('['+ item.type + '] text:'+ item.text +' line '+item.lineNumber +' is getting processed, result is: '+ window.eval(item.text));
 
 		if(item.up == 'while')
-			drawLine(item, true, eval(item.text));
+			drawLine(item, true, window.eval(item.text));
 		else
-			drawLine(item, false, eval(item.text));
+			drawLine(item, false, window.eval(item.text));
 		console.error(item)
 	}
 	if(item.type == 'print')
 	{
 		var resu = '';
 		for(var i=0; i < item.list.length; i++)
-			resu += item.list[i].subtype == 'var' ? eval(item.list[i].text) : item.list[i].text;
+			resu += item.list[i].subtype == 'var' ? window.eval(item.list[i].text) : item.list[i].text;
 
 		resu += '\n';
 		drawLine(item, false, resu);
