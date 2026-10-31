@@ -41,6 +41,7 @@ var parser, parser2;
 $.get("grammer.pegjs", function(response) {
 	grammer = response;
 	parser = PEG.buildParser(grammer);
+	ceviriyiGuncelle();
 });
 $.get("hataAyikla.pegjs", function(response) {
 	errorGrammer = response;
