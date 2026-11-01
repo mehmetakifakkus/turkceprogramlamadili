@@ -1,415 +1,359 @@
 <!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Rehber » Türkçe Programlama Dili</title>
+	<meta name="description" content="Türkçe Programlama Dili kodlama rehberi: değişkenler, işleçler, girdi-çıktı, seçme ve döngü komutları.">
+	<meta name="author" content="Mehmet Akif AKKUŞ">
+	<link rel="icon" href="css/tr.ico">
 
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script>
+		try { if(localStorage.getItem('tema') == 'gece') document.documentElement.setAttribute('data-tema', 'gece'); } catch(e) {}
+	</script>
 
-    <meta name="author" content="Mehmet Akif AKKUŞ (mehmetakifakkus@gmail.com)">
-    <meta name="copyright" content="Copyright © 2017 Mehmet Akif AKKUŞ">
-    <meta name="keywords" content="parser generator, PEG, JavaScript">
-    <meta name="description" content="Türkçe Programlama Dili Türk Dilinde Çevirimiçi kodlamaya imkan sağlayan bir dil.">
+	<link rel="stylesheet" href="css/codemirror.css?v=20261102">
+	<link rel="stylesheet" href="css/ogrenme.css?v=20261102">
+	<link rel="stylesheet" href="css/icerik.css?v=20261102">
+</head>
 
-    <title>Rehber » Türkçe Programlama Dili</title>
+<body>
 
-	    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.css" rel="stylesheet">
+<header class="ust">
+	<a class="logo" href="index.html"><span>T</span> Türkçe Programlama</a>
+	<nav class="menu">
+		<a href="index.html">Kodlama</a>
+		<a class="secili" href="rehber.html">Rehber</a>
+		<a href="hakkinda.html">Hakkında</a>
+	</nav>
+	<div class="bosluk"></div>
+	<a class="dugme ana" href="index.html">▶ Kodlamaya başla</a>
+	<button class="dugme ikon" id="temaDugmesi" title="Gece modu" aria-label="Gece modu">☾</button>
+</header>
 
+<main class="rehber">
 
-	<link rel="stylesheet" href="./documentation/common.css">
-    <link rel="stylesheet" href="./documentation/layout-default.css">
-    <link rel="stylesheet" href="./documentation/content.css">
-	<link rel="shortcut icon" href="css/tr.ico">
-
-    <link href="css/eclipse.css" rel="stylesheet">
-
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/codemirror.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/mode/javascript/javascript.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.2/addon/edit/closetag.js"></script>
-
-  </head>
-
-	<body>
-    <div id="main">
-      <header id="header">
-        <h1><a href="http://turkceprogramlamadili.org">Çevrimiçi Türkçe Programlama Dili</a></h1>
-        <h2>Yeni başlayanlar için kolay, pratik programlama öğrenme aracı</h2>
-      </header>
-
-<!--      <nav id="menu">-->
-		  <nav id="menu" style="width: 100%; margin-top: 40px; margin-bottom: 40px; padding: 10px">
-
-<!--        <a href="http://turkceprogramlamadili.org">Ana Sayfa</a>-->
-		<a href="index.html">Kodlama Sayfası</a>
-        <a class="current" href="rehber.html">Kodlama Rehberi</a>
-        <a href="hakkinda.html">Hakkında</a>
+	<nav class="kart icindekiler" id="icindekiler" aria-label="İçindekiler">
+		<h2>İçindekiler</h2>
+		<ol>
+			<li><a href="#intro">Programlamaya Giriş</a></li>
+			<li><a href="#variables">1. Değişkenler</a>
+				<ol>
+					<li><a href="#variableOperations">Değişken İşlemleri</a></li>
+					<li><a href="#assignmentOperations">Atama Komutları</a></li>
+				</ol>
+			</li>
+			<li><a href="#operations">2. İşleçler</a>
+				<ol>
+					<li><a href="#mathematicalOperations">Matematik İşleçleri</a></li>
+					<li><a href="#comperativeOperations">İlişkisel İşleçler</a></li>
+					<li><a href="#logicalOperations">Mantıksal İşleçler</a></li>
+				</ol>
+			</li>
+			<li><a href="#inputOutputCommand">3. Girdi ve Çıktı Komutları</a></li>
+			<li><a href="#selectionCommand">4. Seçme Komutları</a></li>
+			<li><a href="#repetitionCommand">5. Döngü Komutları</a>
+				<ol>
+					<li><a href="#yineleKomutu">yinele Komutu</a></li>
+					<li><a href="#sayarakYineleKomutu">sayarakYinele Komutu</a></li>
+				</ol>
+			</li>
+		</ol>
+		<div class="ilerleme"><span id="ilerlemeYazisi">Bölüm 1 / 6</span><div class="cubuk"><i id="ilerlemeCubugu"></i></div></div>
+		<p class="kitap">📘 <a href="https://mehmetakifakkus.gitbooks.io/turkce-programlama-diline-giris" target="_blank" rel="noopener">Programlamaya Giriş kitabı</a></p>
 	</nav>
 
-      <div id="content">
-        <h1>Kodlama Rehberi</h1>
+	<article class="kart makale metin">
 
-		Programlamaya Giriş Kitabı için <a href="https://mehmetakifakkus.gitbooks.io/turkce-programlama-diline-giris" target="_blank"> tıklayın.</a>
+		<!-- ================= Giriş ================= -->
+		<section id="intro">
+			<div class="ust-yazi">Kodlama Rehberi</div>
+			<h1>Programlamaya Giriş</h1>
+			<p class="ozet">Programlamanın mantığını Türkçe ve görerek öğrenmek için ilk adım.</p>
 
-<h2 id="table-of-contents">İçerik Listesi</h2>
+			<div class="gorsel-satir">
+				<div>
+					<p>Bu sayfayı ziyaret ettiğinize göre <strong>programlama</strong> işine meraklısınız demektir. Bu platform, diğerlerinden farklı olarak programlamanın mantığını <strong>Türk</strong>'lerin ana dili olan <strong>Türkçe</strong> ile anlatmayı amaçlamaktadır.</p>
+				</div>
+				<img src="images/intro.png" alt="Programlamaya giriş" width="520" height="440">
+			</div>
 
-<div style="width: 40%; float: left;">
-<ul>
-  <li><a href="#intro">Programlamaya Giriş</a></li>
-  <li><a href="#variables">1. Değişkenler</a>
-  	<ul>
-		<li><a href="#variableOperations">Değişken İşlemleri</a></li>
-		<li><a href="#assignmentOperations">Atama Komutları</a></li>
-    </ul>
-  </li>
-  <li><a href="#operations">2. İşleçler (Operatörler)</a>
-	  <ul>
-		  <li><a href="#mathematicalOperations">Matematik İşleçleri (+, -, *, /)</a></li>
-		  <li><a href="#comperativeOperations">İlişkisel İşleçler (küçük, büyük, eşit)</a></li>
-		  <li><a href="#logicalOperations">Mantıksal İşleçler (ve, veya, değil)</a></li>
+			<p>Öncelikle bir bilgisayar programını çalıştırmak için programı bir yazı editöründe yazmış olmamız gerekmektedir (burada editör web sayfasıdır). Sonrasında ise, program derleyiciler ya da yorumlayıcılar ile çalıştırılabilir hale dönüşür. Bu site çalıştırılabilir dosya üretmekten daha çok <strong>programın çalışma mantığını</strong> görselleştirerek anlatmaya yönelik olarak hazırlanmıştır.</p>
 
-	  </ul>
-		</li>
-  <li><a href="#inputOutputCommand">2. Girdi ve Çıktı Komutları</a></li>
-  <li><a href="#selectionCommand">3. Seçme Komutları</a></li>
-  <li><a href="#repetitionCommand">4. Döngü Komutları</a>
-	<ul>
-      <li><a href="#yineleKomutu">yinele Komutu</a></li>
-      <li><a href="#sayarakYineleKomutu">sayarakYinele Komutu</a></li>
-    </ul>
-	</li>
-</ul>
-</div>
+			<p>Aşağıdaki konuları okuyup uygulayarak ilk programlarınızı geliştirebilirsiniz. Burada yer alan tüm programlar Kodlama Sayfası'nda çalışmaktadır: her örneğin üstündeki <strong>▶ Kodlama sayfasında dene</strong> düğmesine basarak kodu açabilir, adım adım nasıl çalıştığını izleyebilirsiniz.</p>
 
-  	<div style="width: 60%; float: left;">
-		  <img src="images/intro.png" style="border-radius: 25px; margin:0px 0px 20px 20px;" alt="Matematik Operasyonlari" width="520" height="440">
-	</div>
+			<div class="sayfa-gecis">
+				<a class="sonraki" href="#variables"><small>Sonraki ›</small>1. Değişkenler</a>
+			</div>
+		</section>
 
-<h2 id="intro">Programlamaya Giriş</h2>
+		<!-- ================= 1. Değişkenler ================= -->
+		<section id="variables">
+			<div class="ust-yazi">Bölüm 1</div>
+			<h1>Değişkenler</h1>
+			<p class="ozet">Değerlerimizi saklayan ve program ilerledikçe değişebilen isimli kutular.</p>
 
-	<p>Bu sayfayı ziyaret ettiğinize göre <strong>programlama</strong> işine meraklısınız demektir. Bu platform, diğerlerinden farklı olarak programlamanın mantığını <strong>Türk</strong>'lerin ana dili olan <strong>Türkçe</strong> anlatmayı amaçlamaktadır.
-	</p>
+			<div class="gorsel-satir">
+				<div>
+					<p>Programlama yaparken <strong>değişken</strong> isimli yapılar bizim değerlerimizi sakladığımız ve program ilerlerken farklı değerleri de saklaması mümkün olabilen temel nesnelerdir. Program boyunca farklı tipteki veriler bellekte tutulmalıdır.</p>
+					<div class="kavram"><span class="simge">📦</span><div><b class="baslik">Aklında tut</b>Değişkeni, üzerinde adı yazan bir kutu gibi düşün. Kutunun içine bir değer koyar, gerektiğinde değiştirirsin.</div></div>
+				</div>
+				<img src="images/elmaArmutMuz.png" alt="Elma, armut ve muzlar" width="334" height="240">
+			</div>
 
-	<p>Öncelikle bir bilgisayar programını çalıştırmak için programı bir yazı editöründe yazmış olmamız gerekmektedir (burada editör web sayfasıdır). Sonrasında ise, program derleyiciler ya da yorumlayıcılar ile çalıştırılabilir hale dönüşür. Bu site çalıştırılabilir dosya üretmekten daha çok <strong>programın çalışma mantığını</strong> görselleştirerek anlatmaya yönelik olarak hazırlanmıştır.</p>
+			<p>İşte, verilerin bellekteki yerlerine ulaşmak <strong>değişken</strong> denilen bu isimleri kullanmakla mümkündür. Değişkenlere bu ismin verilmesinin nedeni bellekte saklanan değerlerin programın çalışması esnasında değiştirilebilmesidir.</p>
 
-	<p>Aşağıdaki bir dizi konuyu okuyup uygulayarak ilk programlarınızı geliştirebilirsiniz. Bu arada burada yer alan tüm programlar Kodlama Sayfası kısmında çalışmaktadır. Kopyala-Yapıştır yapabilir nasıl çalıştığını gözlemleyebilirsiniz. </p>
+			<h3 id="variableOperations">Değişken İşlemleri</h3>
 
+<textarea class="kod">değişken puan = 90</textarea>
 
-<h2 id="variables">1. Değişkenler</h2>
-	<p>Programlama yaparken <strong>değişken</strong> isimli yapılar bizim değerlerimizi sakladığımız ve program ilerlerken farklı değerleri de saklaması mümkün olabilen temel nesnelerdir. Program boyunca farklı tipteki veriler bellekte tutulmalıdır.</p>
+			<p>Şeklinde bir kod ile program <span class="ad">puan</span> isminde bir değişken oluşturur ve içerisinde 90 sayı değerini saklar. Bu kod çalıştıktan sonra, bilgisayarın belleğinde bu sayının tutulması için bir hücre oluşturulur ve bu değer biz değiştirene veya program bitene kadar bu hücrede saklanır.</p>
 
-    <p>İşte, verilerin bellekteki yerlerine ulaşmak <strong>değişken</strong> denilen bu isimleri kullanmakla mümkündür. Değişkenlere bu ismin verilmesinin nedeni bellekte saklanılan değerlerin programın çalışması esnasında değiştirilebilmesinden kaynaklanır.
-    </p>
+			<p>Değişkenlerin nasıl kullanıldığını birkaç örnek kod inceledikten sonra anlıyor olacaksınız. Varsayalım ki dolabımızı açtık, birtakım meyveler var. Bunların kaç tane olduğunu programımız ile bulalım. Haydi, sahip olduğumuz toplam meyvelerin sayısını bulan programı beraber yazalım.</p>
 
-<h3 id = "variableOperations"> Değişken İşlemleri</h3>
-
-<textarea class="deneme">değişken puan = 90</textarea>
-
-	<p>Şeklinde bir kod ile program <variable>puan</variable> isminde bir değişken oluşturur ve içerisinde 90 sayı değerini saklar. Bu kod çalıştıktan sonra, bilgisayarın belleğinde bu sayının tutulması için bir hücre oluşturulur ve bu değer biz değiştirene veya program bitene kadar bu hücrede saklanır.</p>
-
-
-
-<div style="width: 60%; float: left;">
-	<p>Değişkenlerin nasıl kullanıldığını bir kaç örnek kod inceledikten sonra anlıyor olacaksınız.</p>
-
-	<p>Varsalım ki dolabımız açtık, birtakım meyveler var. Bunların kaç tane olduğunu programımız ile bulalım. Haydi, sahip olduğumuz toplam meyvelerin sayısını bulan programı yazalım beraber.</p>
-
-</div>
-
-  	<div style="width: 40%; float: left;">
-		  <img src="images/elmaArmutMuz.png" style="border-radius: 25px; margin:0px 0px 20px 20px;" alt="Matematik Operasyonlari" width="334" height="240">
-	</div>
-
-
-<textarea class="deneme">değişken elma = 2
+<textarea class="kod">değişken elma = 2
 değişken armut = 1
 değişken muz = 3
 
 yaz elma + armut + muz</textarea>
 
-	<p>Gördüğünüz gibi elimizde 3 çeşit meyve var. 1-3 satırlarında kodlar ile her bir meyvenin miktarını "=" işareti kullanarak meyve isminde saklıyoruz. 4. satırda ise toplam meyve sayımızı bulabilmek için bunları toplayıp "yaz" isimli komutu kullanarak ekrana yazırıyoruz.</p>
+			<p>Gördüğünüz gibi elimizde 3 çeşit meyve var. 1-3. satırlardaki kodlar ile her bir meyvenin miktarını <code>=</code> işareti kullanarak meyvenin isminde saklıyoruz. 5. satırda ise toplam meyve sayımızı bulabilmek için bunları toplayıp <code>yaz</code> isimli komutu kullanarak ekrana yazdırıyoruz.</p>
 
- 	<p>Tebrikler! İlk programınızı yazmış oldunuz. </p>
+			<p>Tebrikler! İlk programınızı yazmış oldunuz. 🎉</p>
 
-<h3 id = "assignmentOperations">Atama Komutları</h3>
+			<h3 id="assignmentOperations">Atama Komutları</h3>
 
-		  <div style="width: 56%; float: left;">
-		  <p>Bir önceki programımızda da aslında farkettiğiniz üzere, 3 farklı meyve isminde değişkenler oluşturduk. Bunlar sırasıyla her bir meyveden kaç adet olduğunu içlerinde sakladılar. Değişkenler tanımlandığı anda değerler verdik ve toplama işlemine alındıklarında bu değerler ile işlem gördüler.</p>
+			<div class="gorsel-satir">
+				<div>
+					<p>Bir önceki programımızda da aslında fark ettiğiniz üzere, 3 farklı meyve isminde değişkenler oluşturduk. Bunlar sırasıyla her bir meyveden kaç adet olduğunu içlerinde sakladılar. Değişkenler tanımlandığı anda değerler verdik ve toplama işlemine alındıklarında bu değerler ile işlem gördüler.</p>
+					<p>Atama işleminin belli bir kuralı vardır ve buna programlama dilinde söz dizimi (syntax) adını veririz. Atama işleminin söz dizimi şu şekildedir:</p>
+				</div>
+				<img src="images/assignment.png" alt="Atama işlemi" width="340" height="240">
+			</div>
 
-		  Atama işleminin belli bir kuralı vardır ve buna programlama dilinde söz dizimi (syntax) adını veririz. Atama işlemi söz dizimi şu şekildedir:
+<pre class="soz-dizimi">değişken değişkenAdı = değer</pre>
 
-		  </div>
+			<p>Bu ifade tarzı biraz kafa karıştırabilir. Matematiksel eşitlik (=) anlamına gelen atama işlemi programlamada “sağdakini al, bunu solda gördüğün değişkenin içine koy” demektir.</p>
 
-  	<div style="width: 44%; float: left;">
-		  <img src="images/assignment.png" style="border-radius: 25px; margin:0px 0px 20px 20px;" alt="Matematik Operasyonlari" width="340" height="240">
-	</div>
+			<p>Gelin işleri biraz daha karmaşık hale getirelim. Örneklerle devam ediyoruz.</p>
 
-		  <pre><code>değişken değişken = değer </code></pre>
-
-		  <p>Bu ifade tarzı biraz kafa karıştırabilir. Matematiksel eşitlik (=) anlamına gelen atama işlemi programlamada sağdaki al, bunu solda gördüğün ifadenin (değişkenin) içine koy demektir. </p>
-
-		  <p>Gelin işleri biraz daha karmaşık hale getirelim. Örneklerle devam ediyoruz.</p>
-<textarea class="deneme">değişken a = 5
+<textarea class="kod">değişken a = 5
 değişken b = a + 3
 değişken c = a - b
 
 yaz c</textarea>
 
-		  <p>Burada ne yaptık? Yine 3 farklı değişken oluşturduk, ama bu sefer değişkenler sabit değerlerle başlamadılar, aksine bir önce tanımlanan değişkenin değerine bağlı bir değerle başladılar. <variable>a</variable> değişkeni 5 değeri ile başladı. Ardından <variable>b</variable> bunun 3 fazlası olan 8 değerini aldı. <variable>c</variable> ise bunların farkına sahip oldu.</p>
+			<p>Burada ne yaptık? Yine 3 farklı değişken oluşturduk, ama bu sefer değişkenler sabit değerlerle başlamadılar, aksine bir önce tanımlanan değişkenin değerine bağlı bir değerle başladılar. <span class="ad">a</span> değişkeni 5 değeri ile başladı. Ardından <span class="ad">b</span> bunun 3 fazlası olan 8 değerini aldı. <span class="ad">c</span> ise bunların farkına sahip oldu.</p>
 
-<h2 id = "operations">Temel İşleçler (Operatörler)</h3>
+			<div class="sayfa-gecis">
+				<a href="#intro"><small>‹ Önceki</small>Programlamaya Giriş</a>
+				<a class="sonraki" href="#operations"><small>Sonraki ›</small>2. İşleçler</a>
+			</div>
+		</section>
 
+		<!-- ================= 2. İşleçler ================= -->
+		<section id="operations">
+			<div class="ust-yazi">Bölüm 2</div>
+			<h1>Temel İşleçler (Operatörler)</h1>
+			<p class="ozet">Hesap yapmak, karşılaştırmak ve koşulları birleştirmek için kullanılan semboller.</p>
 
-<h3 id="mathematicalOperations">Matematik İşleçleri (+, -, *, /)</h3>
+			<h3 id="mathematicalOperations">Matematik İşleçleri (+, -, *, /)</h3>
 
-<div>
-	<div style="width: 60%; float: left;">
-		  <p>Aritmetik işleçler matematiksel işlemleri yapmamıza yarayan temel işleçlerdir. Yukarıdaki programlarda gördüğünüz üzere toplama (+) ve çıkarma (-) işlemlerini zaten kullanmıştık. Matematiksel işleçlerin nasıl çalıştığını örneklemek üzere gelin farklı bir program yazalım.</p>
+			<div class="gorsel-satir">
+				<p>Aritmetik işleçler matematiksel işlemleri yapmamıza yarayan temel işleçlerdir. Yukarıdaki programlarda gördüğünüz üzere toplama (+) ve çıkarma (-) işlemlerini zaten kullanmıştık. Matematiksel işleçlerin nasıl çalıştığını örneklemek üzere gelin farklı bir program yazalım.</p>
+				<img src="images/pisagorKurali.png" alt="Pisagor kuralı" width="340" height="240">
+			</div>
 
-	</div>
-  	<div style="width: 34%; float: left;">
-		  <img src="images/pisagorKurali.png" style="border-radius: 25px; margin:0px 0px 20px 20px;" alt="Metematik Operasyonlari" width="340" height="240">
-	</div>
-</div>
+			<p><strong>Örnek 1:</strong> Yurtdışından dolar para birimi üzerinden satılan birkaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bulalım. Tabii ki doların TL karşılığını değişken değeri olarak vereceğiz. Almak istediğimiz ürünlerin de dolar cinsinden tutarına sahibiz.</p>
 
-	  <br>
-		  <p><strong>Örnek1: </strong>Yurtdışından dolar para birimi üzerinden satılan bir kaç ürün almak isteyelim. Bunların TL karşılığında neye tekabül ettiğini bulalım. Tabiki doların TL karşılığını değişken değeri olarak vereceğiz. Almak istediğimiz ürünlerin de dolar cinsinden tutarına sahibiz.</p>
-
-<textarea class="deneme">değişken dolarKuru = 3.45
+<textarea class="kod">değişken dolarKuru = 3.45
 değişken saatFiyati = 60
 değişken telefonFiyati = 300
 değişken toplam = saatFiyati * dolarKuru + telefonFiyati * dolarKuru
 
 yaz toplam</textarea>
 
-		  <p><variable>saatFiyati</variable> adlı değişken almak istediğimiz saatin dolar para birimi cinsinden tutarını, <variable>telefonFiyati</variable> değişkeni ise almak istediğimiz telefonun dolar para birimi cinsinden tutarını içerisinde tutmaktadır. </p>
+			<p><span class="ad">saatFiyati</span> adlı değişken almak istediğimiz saatin dolar cinsinden tutarını, <span class="ad">telefonFiyati</span> değişkeni ise almak istediğimiz telefonun dolar cinsinden tutarını içerisinde tutmaktadır.</p>
 
-		  <p>Programımız yurtdışından almak istediğimiz bu iki ürün için o günkü dolar kuru olan 3.45 TL karşılığı ile alışveriş sonrasında toplam harcamamız gereken toplam tutarı hesapladı. </p>
+			<p>Programımız yurtdışından almak istediğimiz bu iki ürün için o günkü dolar kuru olan 3.45 TL karşılığı ile alışveriş sonrasında harcamamız gereken toplam tutarı hesapladı.</p>
 
-		  <hr>
-		  <p><strong>Örnek2: </strong>Kendi arabamız ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol katederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla katettiğimizi bulalım. </p>
+			<hr>
 
-<textarea class="deneme">değişken toplamYol = 236
+			<p><strong>Örnek 2:</strong> Kendi arabamızın ya da aile arabamızın ne kadar yaktığını hesaplayalım. Varsayalım ki babanız sizden böyle bir program yazmanızı istedi. Genel yaklaşım -ya da algoritma diyelim- şu şekilde olabilir: Bir miktar yol kat ederiz, bunun bir şekilde kaydını tutarız, o sırada ne kadar tutarda yakıt harcadığımızı tespit ederiz. Örneğin, 236 km yol aldık ve 75 TL yakıt harcadık. Hadi 1 km yolu ne kadarlık yakıtla kat ettiğimizi bulalım.</p>
+
+<textarea class="kod">değişken toplamYol = 236
 değişken toplamTutar = 75
 değişken fiyat = toplamTutar / toplamYol
 
 yaz fiyat</textarea>
 
-		  <p>Kodumuz katettiğimiz toplam yolu adlı <variable>toplamYol</variable> değişkende, bu yol katedildiğinde harcanan tutarı ise <variable>toplamTutar</variable> adlı değişkende saklamakta ve
-		  <pre><code>toplamTutar / toplamYol</code></pre> ile
-		  bölme işlemini yapıp <variable>fiyat</variable> değişkeninde saklamaktadır. Her zamanki gibi bunu da <keyword>yaz</keyword> komutu ile yazdırmaktayız.</p>
+			<p>Kodumuz kat ettiğimiz toplam yolu <span class="ad">toplamYol</span> adlı değişkende, bu yol kat edildiğinde harcanan tutarı ise <span class="ad">toplamTutar</span> adlı değişkende saklamakta ve <code>toplamTutar / toplamYol</code> ile bölme işlemini yapıp sonucu <span class="ad">fiyat</span> değişkeninde saklamaktadır. Her zamanki gibi bunu da <code>yaz</code> komutu ile yazdırmaktayız.</p>
 
+			<h3 id="comperativeOperations">İlişkisel İşleçler (eşit, küçük, büyük)</h3>
 
-<h2 id="comperativeOperations">İlişkisel İşleçler (eşit, küçük, büyük) </h2>
+			<p>Aslında ortaokuldan beri aşina olduğumuz bir konudur ilişkisel işleçler. Öncelikle, 6. sınıftan itibaren denklem çözmeyi öğrenmeye başlarız. Denklem çözerken denklemin 2 tarafının (eşitlik <strong>=</strong> ifadesinin sağı ve solu) birbirine eşit olduğunu kabul ederiz, denklemimizin bilinmeyenlerini bulmaya çalışırız. Sonrasında 7. ve 8. sınıfta da eşitsizlikler konusunu öğreniriz. <strong>&lt;</strong>, <strong>&gt;</strong>, <strong>&gt;=</strong> sembolleriyle de eşitsizlikleri çözmeye çalışırız. Denklemlerin çözüm yolları benzerlik gösterse de, denklemler ve eşitsizlikler farklı yorumlanır. Ortaokul yıllarına kısa bir gezinti yaptıktan sonra bu ifadelerin kodlama açısından neler ifade ettiğine bakalım.</p>
 
-		<p>Aslında ortaokuldan beri aşina olduğumuz bir konudur ilişkisel işleçler. Öncelikle, 6. sınıftan itibaren denklem çözmeyi öğrenmeye başlarız. Denklem çözerken denklemin 2 tarafın (eşitlik <strong>=</strong> ifadesininin sağı ve solu) birbirine eşit olduğunu kabul ederiz, denklemimizin bilinmeyenlerini bulmaya çalışırız. Sonrasında 7. ve 8. sınıfta da eşitsizlikler konusunu öğreniriz. <strong> &lt </strong>, <strong>&gt</strong>, <strong>&gt= </strong> sembollerle de eşitsizlik denklemlerini çözmeye çalışırız. Denklemlerin çözüm yolları benzerlik gösterse de, denklemler ve eşitsizlikler farklı yorumlanır. Ortaokul yıllarına kısa bir gezinti yaptıktan sonra bu ifadelerin kodlama açısından neler ifade ettiğine bakalım.</p>
+			<div class="kavram bilgi"><span class="simge">ℹ️</span><div>Kodlamada <strong>=</strong> sembolü çok farklı bir anlam ifade ediyor. <strong>x</strong>'leri bir tarafta bırakıp <strong>x</strong>'in değerini bulmak gibi bir durum kodlamada söz konusu değil! Programlamaya yeni başlayanlar bu yanılgıya maalesef çok düşüyorlar.</div></div>
 
-<div class="isa_info">
-    <i class="fa fa-info-circle"></i>
-Kodlamada <strong>=</strong> sembolü çok farklı bir mana ifade ediyor. <strong>x</strong> leri bir tarafta bırakıp <strong>x</strong> 'in değerini bulmak gibi bir durum kodlamada söz konusu değil! Programlamaya yeni başlayanlar bu yanılgıya maalesef çok düşüyorlar.
-</div>
+			<h4>Eşit “==”</h4>
 
-<h3> Eşit &quot==&quot </h3>
+			<p>İlişkisel eşitlik sembolü, sağındaki ve solundaki ifadelerin eşitliğini kontrol eder. Eğer eşitlik varsa <em>doğru</em> döndürür. Şimdi bununla alakalı olarak bir kodlama denemesi yapalım.</p>
 
-		<p>İlişkisel eşitlik sembolü, sağındaki ve solundaki ifadelerin eşitliğini kontrol eder. Eğer eşitlik varsa <em>doğru</em> döndürür.</p>
+<textarea class="kod">değişken yaş = 18
+yaş == 18</textarea>
 
-		<p>Şimdi bununla alakalı olarak bir kodlama denemesi yapalım.</p>
+			<p>Bir <span class="ad">yaş</span> değişkeni oluşturalım ve bu komutu deneyelim. Kodlama sayfasında çalıştırdığımızda, sağdaki panelde 2. satırın sonucu olarak <em>doğru</em> ya da <em>yanlış</em> göreceğiz. Eğer <span class="ad">yaş</span> değeri 18'e eşit ise <em>doğru</em>, diğer durumda ise <em>yanlış</em> yazdığını göreceğiz. Farklı değerlerle deneyelim ve bu işlecin nasıl çalıştığını anlayalım.</p>
 
-<textarea class="deneme">
-değişken yaş = 18
-yaş == 18 </textarea>
+			<div class="kavram uyari"><span class="simge">⚠️</span><div>İlişkisel eşitlik programlamada farklı bir gösterimle yapılıyor. Tek eşittir olan <strong>=</strong> sembolü değer ataması ya da değişken tanımlamasında kullanılırken, ilişkisel eşitlik için çift eşittir sembolü kullanılıyor. Yani <strong>==</strong> olarak.</div></div>
 
-		Bir <strong>yaş</strong>strong> değişkeni oluşturalım ve şu komutu deneyelim. Çalıştırdığımızda değişken değeri kısmında _doğru_ veya _yanlış_ şeklinde ibareler göreceğiz. Eğer <strong>yaş</strong> değeri 18'e eşit ise doğru diğer durumda ise yanlış yazdığını göreceğiz. Farklı değerlerle deneyelim ve bu işlecin nasıl çalıştığını anlayalım.
+			<h4>Eşit değil “!=”</h4>
 
-<div class="isa_warning">
-     <i class="fa fa-warning"></i>
-İlişkisel eşitlik ise programlamada farklı bir gösterimle yapılıyor. Tek eşitlik olan = sembölü değer ataması ya da değişken tanımlamasında kullanılırken ilişkisel eşitlik için çift eşittir sembolü kullanılıyor. Yani == olarak.
-</div>
+			<p>Bazen de iki ifadenin birbirine eşit olmadığını sorgulamak isteyebiliriz. Bu durumda eşittir sembolünün sol tarafına bir “!” işareti koyarız. Sırada ilişkisel küçük var. Burada da bir karşılaştırma söz konusu.</p>
 
-<h3> Eşit değil "!=" </h3>
+			<h4>Küçük “&lt;”</h4>
 
-<p>Bazende iki ifadenin birbirine eşit olmadığını sorgulamak isteyebiliriz. Bu durumda eşittir sembolünün sol tarafında bir "!" işareti koyarız.
-</p>
-<p>Sırada ilişkisel küçük var. Burada da bir karşılaştırma söz konusu.
-</p>
+			<p>Soldaki ifadenin sağdakinden küçük olup olmadığını kontrol eder. Doğru ya da yanlış değerini döndürür.</p>
 
-<h3> Küçük &quot; &lt; &quot; </h3>
-<p>Soldaki ifadenin sağdakinden küçük olup olmadığını kontrol eder. Doğru ya da yanlış değerini döndürür.
-</p>
-<textarea class="deneme">
-değişken yaş = 18
-yaş < 18 </textarea>
+<textarea class="kod">değişken yaş = 18
+yaş < 18</textarea>
 
-<h3> Büyük &quot; &gt; &quot; </h3>
-<p>Soldaki ifadenin sağdakinden büyük olup olmadığını kontrol eder. Doğru ya da yanlış
-değerini döndürür.</p>
+			<h4>Büyük “&gt;”</h4>
 
-<textarea class="deneme">
-değişken yaş = 18
-yaş > 18 </textarea>
+			<p>Soldaki ifadenin sağdakinden büyük olup olmadığını kontrol eder. Doğru ya da yanlış değerini döndürür.</p>
 
+<textarea class="kod">değişken yaş = 18
+yaş > 18</textarea>
 
-<h3> İlişkisel Büyük Eşit &quot; &gt;= &quot; ve Küçük Eşit &quot;&lt;=&quot; </h3>
+			<h4>Büyük eşit “&gt;=” ve küçük eşit “&lt;=”</h4>
 
-	<p>Bazı durumlarda hem büyüklük hem de eşitlik önemli olabilir. Örneğin bir kişinin yaşının 18'den büyük ya da eşit olduğunu kontrol etmek istersek bunu önce küçük sonra eşittir işareti ile yapabiliriz. Şöyle:</p>
+			<p>Bazı durumlarda hem büyüklük hem de eşitlik önemli olabilir. Örneğin bir kişinin yaşının 18'den büyük ya da 18'e eşit olduğunu kontrol etmek istersek bunu önce büyüktür, sonra eşittir işareti ile yapabiliriz. Şöyle:</p>
 
-<textarea class="deneme">
-değişken yaş = 18
+<textarea class="kod">değişken yaş = 18
 yaş >= 18</textarea>
 
-<h3> İlişkisel ifadelerin Seçme Komutları'nda kullanımı </h3>
-İlişkisel komutlar tek başına doğru ya da yanlış değerini döndürür. Bu bilgi seçme ya da döngü komutlarında daha işe yarar hale bürünür. Nasıl mı? O zaman aşağıdaki örnek koda bakalım. Bu nasıl çalıştığı hakkında az bir bilgi verecektir. Bununla alakalı detaylı bilgiyi [5. Seçme Komutları](secme-komutlari.md) 'nda görüyor olacağız.
+			<h4>İlişkisel ifadelerin seçme komutlarında kullanımı</h4>
 
+			<p>İlişkisel komutlar tek başına doğru ya da yanlış değerini döndürür. Bu bilgi seçme ya da döngü komutlarında daha işe yarar hale bürünür. Nasıl mı? O zaman aşağıdaki örnek koda bakalım. Bu, nasıl çalıştığı hakkında biraz bilgi verecektir. Bununla alakalı detaylı bilgiyi <a href="#selectionCommand">4. Seçme Komutları</a> bölümünde görüyor olacağız.</p>
 
-<textarea class="deneme">
-değişken no = 21
+<textarea class="kod">değişken no = 21
 eğer(no > 10) // burası büyüklüğü kontrol eder
 	no = no + 3
 değilse
 	no = no + 1</textarea>
 
-<div class="isa_info">
-    <i class="fa fa-info-circle"></i>
-Kodlamadaki bütün ilişkisel işleçler doğru ya da yanlış sonucunu verirler.
-</div>
+			<div class="kavram bilgi"><span class="simge">ℹ️</span><div>Kodlamadaki bütün ilişkisel işleçler <em>doğru</em> ya da <em>yanlış</em> sonucunu verirler.</div></div>
 
-Özetleyecek olursak:
+			<p>Özetleyecek olursak:</p>
 
-<table>
-<thead>
-<tr>
-<th style="text-align:center">&#x130;&#x15F;le&#xE7;</th>
-<th style="text-align:left">Anlam&#x131;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">&lt;</td>
-<td style="text-align:left">k&#xFC;&#xE7;&#xFC;k</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;</td>
-<td style="text-align:left">b&#xFC;y&#xFC;k</td>
-</tr>
-<tr>
-<td style="text-align:center">==</td>
-<td style="text-align:left">e&#x15F;it</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;=</td>
-<td style="text-align:left">b&#xFC;y&#xFC;k e&#x15F;it</td>
-</tr>
-<tr>
-<td style="text-align:center">&gt;=</td>
-<td style="text-align:left">k&#xFC;&#xE7;&#xFC;k e&#x15F;it</td>
-</tr>
-<tr>
-<td style="text-align:center">!=</td>
-<td style="text-align:left">e&#x15F;it de&#x11F;il</td>
-</tr>
-</tbody>
-</table>
+			<table>
+				<thead><tr><th>İşleç</th><th>Türkçe yazımı</th><th>Anlamı</th></tr></thead>
+				<tbody>
+					<tr><td>&lt;</td><td>küçük</td><td>küçüktür</td></tr>
+					<tr><td>&gt;</td><td>büyük</td><td>büyüktür</td></tr>
+					<tr><td>==</td><td>eşit</td><td>eşittir</td></tr>
+					<tr><td>&gt;=</td><td>büyükeşit</td><td>büyük ya da eşittir</td></tr>
+					<tr><td>&lt;=</td><td>küçükeşit</td><td>küçük ya da eşittir</td></tr>
+					<tr><td>!=</td><td>eşitdeğil</td><td>eşit değildir</td></tr>
+				</tbody>
+			</table>
 
+			<h3 id="logicalOperations">Mantıksal İşleçler (ve, veya, değil)</h3>
 
-<h2 id="mant&#x131;ksal-i&#x307;&#x15F;le&#xE7;ler-ve-veya-de&#x11F;il">Mant&#x131;ksal &#x130;&#x15F;le&#xE7;ler (ve, veya, de&#x11F;il)</h2>
-<p>&#x130;li&#x15F;kisel ifadeleri  mant&#x131;k i&#x15F;le&#xE7;leri ile birbirine ba&#x11F;layabiliriz. &#x130;sterseniz &#xF6;ncelikle basit mant&#x131;k kurallar&#x131;n&#x131; bir hat&#x131;rlayal&#x131;m:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">&#x130;&#x15F;le&#xE7;</th>
-<th style="text-align:center">Sembol&#xFC;</th>
-<th style="text-align:left">Anlam&#x131;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ve</td>
-<td style="text-align:center"><img src="../assets/veya.gif" alt=""></td>
-<td style="text-align:left">Her iki ifade birlikte do&#x11F;ru olunca do&#x11F;ru olur</td>
-</tr>
-<tr>
-<td style="text-align:center">veya</td>
-<td style="text-align:center"><img src="../assets/ve.gif" alt=""></td>
-<td style="text-align:left">&#x130;ki ifadeden birisinin do&#x11F;ru olmas&#x131; yeterli</td>
-</tr>
-<tr>
-<td style="text-align:center">de&#x11F;il</td>
-<td style="text-align:center"><img src="../assets/degil.gif" alt=""></td>
-<td style="text-align:left">Do&#x11F;ruysa yanl&#x131;&#x15F;, yanl&#x131;&#x15F;sa do&#x11F;ruya d&#xF6;n&#xFC;&#x15F;&#xFC;r</td>
-</tr>
-</tbody>
-</table>
-<p>Bir de kod &#xF6;rnekleri ve bunlar&#x131;n anlam&#x131;na bakal&#x131;m:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">&#x130;&#x15F;le&#xE7;</th>
-<th style="text-align:center">&#xD6;rnek kullan&#x131;m&#x131;</th>
-<th style="text-align:left">Anlam&#x131;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">ve</td>
-<td style="text-align:center">ya&#x15F; &gt;= 18 <strong>ve</strong> para &gt;= 2000</td>
-<td style="text-align:left">Ya&#x15F; en az 18 <strong>ve</strong> en az 2000 TL para</td>
-</tr>
-<tr>
-<td style="text-align:center">veya</td>
-<td style="text-align:center">ya&#x15F; &gt;= 18 <strong>veya</strong> &#xF6;&#x11F;renim_t&#xFC;r&#xFC; &gt;= 3</td>
-<td style="text-align:left">Ya&#x15F; en az 18 <strong>veya</strong> en az lise mezunu</td>
-</tr>
-<tr>
-<td style="text-align:center">de&#x11F;il</td>
-<td style="text-align:center"><strong>!</strong>(ya&#x15F; &gt;= 18)</td>
-<td style="text-align:left">Ya&#x15F; 18&apos;den k&#xFC;&#xE7;&#xFC;k</td>
-</tr>
-</tbody>
-</table>
-<p>Kodlar&#x131;m&#x131;z&#x131; <a href="http://turkceprogramlamadili.org" target="_blank">TPD edit&#xF6;r&#xFC;</a> &#xFC;zerinde a&#x15F;a&#x11F;&#x131;daki kod b&#xF6;l&#xFC;t&#xFC;n&#xFC; kopyala yap&#x131;&#x15F;t&#x131;r yaparak deneyebiliriz:</p>
-<textarea class="deneme">
-de&#x11F;i&#x15F;ken ya&#x15F; = 20
-de&#x11F;i&#x15F;ken para = 2500
-ya&#x15F; &gt;= 18 ve para &gt;= 2000</textarea>
+			<p>İlişkisel ifadeleri mantık işleçleri ile birbirine bağlayabiliriz. İsterseniz öncelikle basit mantık kurallarını bir hatırlayalım:</p>
 
-<p>Edit&#xF6;r&#xFC;n son sat&#x131;rdaki ifade i&#xE7;in <em>do&#x11F;ru</em> ya da <em>yanl&#x131;&#x15F;</em> de&#x11F;erleri &#xFC;retti&#x11F;ine dikkat edelim. <strong>Ya&#x15F;</strong> ya da <strong>para</strong> de&#x11F;erleri &#xFC;zerinde de&#x11F;i&#x15F;iklik yapabilir, sonu&#xE7;lar&#x131; g&#xF6;zlemleyebiliriz.</p>
-<p>Di&#x11F;er bir &#xF6;rnek: Ki&#x15F;inin ya&#x15F;&#x131;n&#x131;n 20 ile 30 aras&#x131;nda olup olmad&#x131;&#x11F;&#x131;n&#x131; anlayan program&#x131; geli&#x15F;tirelim:</p>
-<textarea id="sorunlu" class="deneme">
-de&#x11F;i&#x15F;ken ya&#x15F; = 20
+			<table>
+				<thead><tr><th>İşleç</th><th>Sembolü</th><th>Anlamı</th></tr></thead>
+				<tbody>
+					<tr><td>ve</td><td>&amp;&amp;</td><td>Her iki ifade birlikte doğru olunca doğru olur</td></tr>
+					<tr><td>veya</td><td>||</td><td>İki ifadeden birisinin doğru olması yeterli</td></tr>
+					<tr><td>değil</td><td>!</td><td>Doğruysa yanlışa, yanlışsa doğruya dönüşür</td></tr>
+				</tbody>
+			</table>
+
+			<p>Bir de kod örnekleri ve bunların anlamına bakalım:</p>
+
+			<table>
+				<thead><tr><th>İşleç</th><th>Örnek kullanımı</th><th>Anlamı</th></tr></thead>
+				<tbody>
+					<tr><td>ve</td><td>yaş &gt;= 18 <strong>ve</strong> para &gt;= 2000</td><td>Yaş en az 18 <strong>ve</strong> en az 2000 TL para</td></tr>
+					<tr><td>veya</td><td>yaş &gt;= 18 <strong>veya</strong> öğrenim_türü &gt;= 3</td><td>Yaş en az 18 <strong>veya</strong> en az lise mezunu</td></tr>
+					<tr><td>değil</td><td><strong>değil</strong> (yaş &gt;= 18)</td><td>Yaş 18'den küçük</td></tr>
+				</tbody>
+			</table>
+
+			<p>Kodlarımızı aşağıdaki örnekte <strong>▶ Kodlama sayfasında dene</strong> düğmesine basarak deneyebiliriz:</p>
+
+<textarea class="kod">değişken yaş = 20
+değişken para = 2500
+yaş >= 18 ve para >= 2000</textarea>
+
+			<p>Son satırdaki ifade için <em>doğru</em> ya da <em>yanlış</em> değerinin üretildiğine dikkat edelim. <span class="ad">yaş</span> ya da <span class="ad">para</span> değerleri üzerinde değişiklik yapabilir, sonuçları gözlemleyebiliriz.</p>
+
+			<p>Diğer bir örnek: Kişinin yaşının 20 ile 30 arasında olup olmadığını anlayan programı geliştirelim:</p>
+
+<textarea class="kod">değişken yaş = 20
 yaş >= 20 ve yaş <= 30</textarea>
 
-<p>Burada 2. sat&#x131;rda <strong>ve</strong> mant&#x131;ksal i&#x15F;lecini kullanarak bunu ba&#x15F;arabiliriz. Bu i&#x15F;le&#xE7; sa&#x11F;daki ve soldaki iki ifadenin de birden do&#x11F;ru olmas&#x131; durumunda <em>do&#x11F;ru</em> sonucunu &#xFC;retecektir. Aksi durumda, yani en az birisinin hatal&#x131; olmas&#x131; (ya&#x15F;&#x131;n 10, ya da 40 olmas&#x131; gibi) durumunda <em>yanl&#x131;&#x15F;</em> sonucunu al&#x131;yor olaca&#x11F;&#x131;z.</p>
+			<p>Burada 2. satırda <strong>ve</strong> mantıksal işlecini kullanarak bunu başarabiliriz. Bu işleç sağdaki ve soldaki iki ifadenin de birden doğru olması durumunda <em>doğru</em> sonucunu üretecektir. Aksi durumda, yani en az birisinin yanlış olması (yaşın 10 ya da 40 olması gibi) durumunda <em>yanlış</em> sonucunu alıyor olacağız.</p>
 
+			<div class="sayfa-gecis">
+				<a href="#variables"><small>‹ Önceki</small>1. Değişkenler</a>
+				<a class="sonraki" href="#inputOutputCommand"><small>Sonraki ›</small>3. Girdi ve Çıktı Komutları</a>
+			</div>
+		</section>
 
+		<!-- ================= 3. Girdi ve Çıktı ================= -->
+		<section id="inputOutputCommand">
+			<div class="ust-yazi">Bölüm 3</div>
+			<h1>Girdi ve Çıktı Komutları</h1>
+			<p class="ozet">Programların dış dünyayla iletişim kurma yolları.</p>
 
-<h2 id="inputOutputCommand">2. Girdi ve Çıktı Komutları</h2>
+			<p>Elbette programlar çalışırken etraflarındaki insanlar ile iletişim halindedir. Bazen onlardan veri alırlar, bazen de değişik iletişim araçları ile kullanıcıya veri çıktısı verirler. Örneğin klavye, fare gibi çevre birimleri ile bilgisayarlar bizden veri alırken; ekran, hoparlör ya da titreşim kaynağı gibi çevre birimleri ile de bize veri aktarırlar.</p>
 
-	<p>Elbette programlar çalışırken etraflarındaki insanlar ile iletişim halinde yer alırlar. Bazen onlardan veri alırlar. Bazen de değişik iletişim araçları ile kullanıcıya veri çıktı ederler. Örneğin klavye, fare gibi çevre birim araçları ile bilgisayarlar bizden veri alırken; ekran, hoparlör ya da titreşim kaynağı gibi çevre birimleri ile de bize veri aktarırlar.</p>
+			<h3 id="inputCommand">Girdi Komutları</h3>
 
-<h3 id="inputCommand">Girdi Komutları</h3>
+			<p>Bu kısım geliştirme aşamasındadır.</p>
 
-		<p>Bu kısım geliştirme aşamasındadır. </p>
+			<h3 id="outputCommand">Çıktı Komutları</h3>
 
-<h3 id="outputCommand">Çıktı Komutları</h3>
+			<p>Çıktı komutu olan <code>yaz</code> komutu aldığı değeri konsol ekranına yazar. Aşağıdaki gibi bir söz dizimi vardır:</p>
 
-		<p>Çıktı komutu olan <keyword>yaz</keyword> komutu aldığı değişken ismini konsol ekranına yansıtır. Aşağıdaki gibi bir söz dizimi vardır.</p>
+<pre class="soz-dizimi">yaz değişken</pre>
 
-<pre><code>yaz değişken</code></pre>
+			<p>Kodlama sayfasında bir değişkene değer atandığında değeri zaten sağdaki <strong>Hafıza</strong> panelinde görüntülenir; ama bazı değerlerin konsolda görüntülenmesi daha uygun olabileceğinden <code>yaz</code> komutu geliştirilmiştir. Metinleri ve değerleri <code>+</code> ile birleştirerek de yazdırabiliriz:</p>
 
-		Hali hazırdaki program çalışma düzeninde bir değişkene değer atandığında sağ taraftaki çıktılar bölmesinde zaten değeri görüntülenmekte, ama bazı değişkenlerin konsol kısmında görüntülenmesi daha uygun olabileceğinden yaz komutu geliştirilmiştir.
+<textarea class="kod">değişken ad = "Ayşe"
+değişken yaş = 12
+yaz ad + " " + yaş + " yaşında"</textarea>
 
-<h2 id="selectionCommand">3. Seçme Komutları</h2>
+			<div class="sayfa-gecis">
+				<a href="#operations"><small>‹ Önceki</small>2. İşleçler</a>
+				<a class="sonraki" href="#selectionCommand"><small>Sonraki ›</small>4. Seçme Komutları</a>
+			</div>
+		</section>
 
-		<p>Programımızın bazen olası kodlar arasında seçim yapmasını isteyebiliriz. Yani yukarıdan aşağı doğru bütün kodların çalışması, istediğimiz bir program çalışma düzeni olmayabilir. Dolayısıyla <keyword>eğer</keyword> ve <keyword>değilse</keyword> komutları bu noktada aradığımız komutlardır. <keyword>eğer</keyword> komutunun ardından gelen parantezlerin arasına doğruluğu kontrol edilecek olan ilişkisel komut yazılır. Doğruysa <keyword>eğer</keyword>in ardındaki kısım yanlışsa <keyword>değilse</keyword> kısmı çalışır. Zaten adı üzerinde gayet anlaşılır değil mi?</p>
+		<!-- ================= 4. Seçme Komutları ================= -->
+		<section id="selectionCommand">
+			<div class="ust-yazi">Bölüm 4</div>
+			<h1>Seçme Komutları</h1>
+			<p class="ozet"><code>eğer</code> ve <code>değilse</code> ile programın hangi yoldan gideceğine karar vermek.</p>
 
-		<p>Şöyle bir söz dizimi kuralını verelim:</p>
-		<pre><code>eğer(ilişkisel komut)
+			<p>Programımızın bazen olası kodlar arasında seçim yapmasını isteyebiliriz. Yani yukarıdan aşağı doğru bütün kodların çalışması, istediğimiz bir program çalışma düzeni olmayabilir. Dolayısıyla <code>eğer</code> ve <code>değilse</code> komutları bu noktada aradığımız komutlardır. <code>eğer</code> komutunun ardından gelen parantezlerin arasına doğruluğu kontrol edilecek olan ilişkisel komut yazılır. Doğruysa <code>eğer</code>'in ardındaki kısım, yanlışsa <code>değilse</code> kısmı çalışır. Zaten adı üzerinde, gayet anlaşılır değil mi?</p>
+
+			<p>Şöyle bir söz dizimi kuralını verelim:</p>
+
+<pre class="soz-dizimi">eğer(ilişkisel komut)
 	doğruysa çalışacak komut
 değilse
-	yanlışsa çalışacak komut</code></pre>
+	yanlışsa çalışacak komut</pre>
 
+			<p>Yine örnekler üzerinden gidelim. Hatırlatmak gerekirse; bu kodları kodlama sayfasında açıp nasıl çalıştığını adım adım gözlemleyebiliriz.</p>
 
-		<p>Yine örnekler üzerinden gidelim. Hatırlatmak gerekirse; bu kodları kodlama sayfasına kopyala yapıştır yapıp nasıl çalıştığını gözlemleyebiliriz.</p>
+			<hr>
 
-		<hr>
-		  <p><strong>Örnek1: </strong> Öğretmeniz bize bir sınav yapsın. Sınavdan önce şöyle bir şey desin: "80 den fazla not alanları ödüllendireceğim ve 10 puan ekstra vereceğim, altında alan her kişiden ise ceza amaçlı 5 puan kıracağım." Kişinin son puan durumunu hesaplayan kodu yazalım. </p>
+			<p><strong>Örnek 1:</strong> Öğretmenimiz bize bir sınav yapsın. Sınavdan önce şöyle bir şey desin: “80'den fazla not alanları ödüllendireceğim ve 10 puan ekstra vereceğim, altında alan her kişiden ise ceza amaçlı 5 puan kıracağım.” Kişinin son puan durumunu hesaplayan kodu yazalım.</p>
 
-		<textarea class="deneme">değişken puan = 75
+<textarea class="kod">değişken puan = 75
 eğer(puan > 80)
 	puan = puan + 10
 değilse
@@ -417,20 +361,22 @@ değilse
 
 yaz puan</textarea>
 
-		<hr>
-		  <p><strong>Örnek2: </strong>Ehliyet kursu yönetiyoruz. Öğrenciler bize ehliyet alabilmek için başvuruyor. Kodumuz ehliyet başvuru sisteminde çalışıyor varsayalım. Kişinin yaş bilgisine göre, "ehliyet alabilirsiniz" ya da "yaşınız ehliyet almaya yeterli değildir" gibi durum mesajlarını yazdırmak istiyoruz.</p>
+			<hr>
 
-		<textarea class="deneme">değişken yaş = 19
+			<p><strong>Örnek 2:</strong> Ehliyet kursu yönetiyoruz. Öğrenciler bize ehliyet alabilmek için başvuruyor. Kodumuzun ehliyet başvuru sisteminde çalıştığını varsayalım. Kişinin yaş bilgisine göre “ehliyet alabilirsiniz” ya da “yaşınız ehliyet almaya yeterli değildir” gibi durum mesajlarını yazdırmak istiyoruz.</p>
+
+<textarea class="kod">değişken yaş = 19
 
 eğer(yaş > 18)
 	yaz "Ehliyet alabilirsiniz"
 değilse
 	yaz "Yaşınız ehliyet almaya yeterli değildir"</textarea>
 
-		<hr>
-		  <p><strong>Örnek3: </strong>3 sayıdan en büyüğünü bulan programı yazalım. İş biraz da karmaşıklaşıyor...</p>
+			<hr>
 
-<textarea class="deneme">değişken num1 = 12
+			<p><strong>Örnek 3:</strong> 3 sayıdan en büyüğünü bulan programı yazalım. İş biraz da karmaşıklaşıyor…</p>
+
+<textarea class="kod">değişken num1 = 12
 değişken num2 = 10
 değişken num3 = 15
 
@@ -444,68 +390,83 @@ eğer(num3 > no)
 
 yaz no</textarea>
 
-		<p>Bu 3 sayıyı 3 değişken ile başlatıyoruz. İsimleri hatırlaması ve kullanması kolay olsun diye <variable>num1</variable> gibi bir isim verdik. Diğerleri de bunun ismiyle ilişkili olarak değer aldı. -Unutmayın iyi bir programcı değişken isimlerini anlamlı seçer- Sırasıyla değerlerini veriyoruz.</p>
+			<p>Bu 3 sayıyı 3 değişken ile başlatıyoruz. İsimleri hatırlaması ve kullanması kolay olsun diye <span class="ad">num1</span> gibi bir isim verdik. Diğerleri de bunun ismiyle ilişkili olarak değer aldı. -Unutmayın, iyi bir programcı değişken isimlerini anlamlı seçer- Sırasıyla değerlerini veriyoruz.</p>
 
-		<p>Bu kodu kodlama sayfasındaki yere kopyalarak programın nasıl çalıştığına bakalım. Değişkenlerin ilk değerini farklılaştırarak kodun nasıl çalıştığına bakalım. Alternatif çözümler elbette var. Bunlar üzerine düşünelim. </p>
+			<p>Bu kodu kodlama sayfasında açarak programın nasıl çalıştığına bakalım. Değişkenlerin ilk değerlerini değiştirerek kodun nasıl çalıştığını gözlemleyelim. Alternatif çözümler elbette var; bunlar üzerine düşünelim.</p>
 
-<h2 id="repetitionCommand">4. Döngü Komutları</h2>
+			<div class="sayfa-gecis">
+				<a href="#inputOutputCommand"><small>‹ Önceki</small>3. Girdi ve Çıktı Komutları</a>
+				<a class="sonraki" href="#repetitionCommand"><small>Sonraki ›</small>5. Döngü Komutları</a>
+			</div>
+		</section>
 
-<h3 id="yineleKomutu">yinele Komutu</h3>
+		<!-- ================= 5. Döngü Komutları ================= -->
+		<section id="repetitionCommand">
+			<div class="ust-yazi">Bölüm 5</div>
+			<h1>Döngü Komutları</h1>
+			<p class="ozet">Bir işi tekrar tekrar yaptırmak için <code>yinele</code> ve <code>sayarakYinele</code>.</p>
 
-		<p>Bu komut kodlarımzı yineleyerek, diğer bir ifadeyle tekrarlayarak çalışmasını sağlar. Bu yüzden adı da <keyword>yinele</keyword>. Bu komut; <keyword>eğer</keyword> komutunda olduğu gibi çalışma şartı komutun parantez içindeki ilişkisel komut kısmın doğru olması şartıdır. Burası belli bir zaman sonra yanlış olacak ve döngümüz sonlanacaktır.</p>
+			<h3 id="yineleKomutu">yinele Komutu</h3>
 
-<p>Şöyle bir söz dizimi kuralını verelim:</p>
-		<pre><code>yinele(ilişkisel komut)
-	doğru olduğu sürece çalışacak komut
-</code></pre>
+			<p>Bu komut kodlarımızı yineleyerek, diğer bir ifadeyle tekrarlayarak çalışmasını sağlar. Bu yüzden adı da <code>yinele</code>. Bu komutun da <code>eğer</code> komutunda olduğu gibi çalışma şartı, parantez içindeki ilişkisel komutun doğru olmasıdır. Burası belli bir zaman sonra yanlış olacak ve döngümüz sonlanacaktır.</p>
 
-		<p><strong>Uyarı: </strong>Unutmayalım ki; döngümüz mutlaka sonlanmalıdır. Sonlanmayan döngü istenmeyen bir durumdur.</p>
+			<p>Şöyle bir söz dizimi kuralını verelim:</p>
 
-		<p>Bu kodları Kodlama Sayfasına yapıştırıp deneyebiliriz. Kod görselleştirici kodları görsel hale getirip çalışma mantığının daha iyi anlaşılmasını sağlayacaktır.</p>
-<textarea class="deneme">değişken no = 2
+<pre class="soz-dizimi">yinele(ilişkisel komut)
+	doğru olduğu sürece çalışacak komut</pre>
+
+			<div class="kavram uyari"><span class="simge">⚠️</span><div><b class="baslik">Uyarı</b>Unutmayalım ki döngümüz mutlaka sonlanmalıdır. Sonlanmayan döngü istenmeyen bir durumdur.</div></div>
+
+			<p>Bu kodları kodlama sayfasında açıp deneyebiliriz. Kod görselleştirici, kodları görsel hale getirip çalışma mantığının daha iyi anlaşılmasını sağlayacaktır: döngünün her turunda koşulun nasıl hesaplandığını sağdaki panelde görebilirsiniz.</p>
+
+<textarea class="kod">değişken no = 2
 
 yinele(no < 10)
 	no = no + 1
 
 yaz no</textarea>
 
+			<h3 id="sayarakYineleKomutu">sayarakYinele Komutu</h3>
 
-<h3 id="sayarakYineleKomutu">sayarakYinele Komutu</h3>
+			<p>Eğer geçici bir değişkenle sayarak bir döngü kurmak istersek <code>sayarakYinele</code> aradığımız komuttur.</p>
 
-	<p>Eğer geçici bir değişkenle sayarak bir döngü kurmak istersek <keyword>sayarakYinele</keyword> aradığımız komuttur.</p>
+			<p>Şöyle bir söz dizimi kuralını verelim:</p>
 
-<p>Şöyle bir söz dizimi kuralını verelim:</p>
-		<pre><code>sayarakYinele(komut1, ilişkisel komut, komut2)
-	doğru olduğu sürece çalışacak komut</code></pre>
+<pre class="soz-dizimi">sayarakYinele(komut1, ilişkisel komut, komut2)
+	doğru olduğu sürece çalışacak komut</pre>
 
-	<p><strong>komut1</strong> geçici değişken oluşturma komutudur. Bir sayı değeri ile ilklendirme yaparız. <strong>komut2</strong> ise her döngü sonunda çalıştırılan komuttur. Aşağıdaki kodları görsel olarak görmek için denemeyi unutmayın. </p>
+			<p><strong>komut1</strong> geçici değişken oluşturma komutudur; bir sayı değeri ile ilk değer verilir. <strong>komut2</strong> ise her döngü sonunda çalıştırılan komuttur. Aşağıdaki kodları görsel olarak görmek için denemeyi unutmayın.</p>
 
-	<p>Örnek kodumuz da şu şekilde:</p>
+			<p>Örnek kodumuz da şu şekilde:</p>
 
-<textarea class="deneme">değişken no = 2
+<textarea class="kod">değişken no = 2
 
-sayarakYinele(değişken t = 0, t < 3, t = t+1)
+sayarakYinele(değişken t = 0, t < 3, t = t + 1)
 {
 	no = no + 1
 	yaz t
 }
 yaz t</textarea>
 
+			<p>Burada süslü parantezler var, bunlar ne diye soracak olabilirsiniz: döngüde birden fazla komutu tekrarlamak istediğimizde bu komutları <code>{</code> ve <code>}</code> arasına yazarız. Mantığını siz yakaladınız sanırım…</p>
 
-		<p>Burada süslü parantez var bunlar ne diye soracak olabilirsiniz. Bunları bir sonraki konumuzda işleyeceğiz. Ama mantığını siz yakaladınız sanırım...</p>
+			<div class="sayfa-gecis">
+				<a href="#selectionCommand"><small>‹ Önceki</small>4. Seçme Komutları</a>
+				<a class="sonraki" href="index.html"><small>Hadi ›</small>Kodlamaya başla</a>
+			</div>
+		</section>
 
+	</article>
+</main>
 
-<footer id="footer" style = "margin-top:50px;">
-	Copyright © 2016 - 2017 <a href="https://mehmetakifakkus.github.io/turkceprogramlamadili/">Türkçe Programlama Dili</a>
-	•
-	<a href="https://github.com/mehmetakifakkus/turkceprogramlamadili">Kaynak Kod</a>
-	•
-	<a href="https://twitter.com/turkceprogramlamadili" title="Twitter'da takip edin">Twitter</a>
-	<br>
-  </footer>
-</div>
+<footer class="alt">
+	Türkçe Programlama Dili ·
+	<a href="index.html">Kodlama</a> ·
+	<a href="hakkinda.html">Hakkında</a> ·
+	<a href="https://github.com/mehmetakifakkus/turkceprogramlamadili">GitHub</a>
+</footer>
 
-<script type="text/javascript">
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -515,27 +476,11 @@ yaz t</textarea>
   ga('send', 'pageview');
 </script>
 
-
-<script src='js/addon/simple.js'></script>
-<script src="js/mode/custom-mode.js"></script>
-
-<script type="text/javascript">
-function qsa(sel) {
-    return Array.apply(null, document.querySelectorAll(sel));
-}
-
-//deneme ismindeki tüm editörler codemirror editorü olacak
-qsa(".deneme").forEach(function (editorEl) {
-  CodeMirror.fromTextArea(editorEl, {
-    mode: "simplemode",
-	lineNumbers: true,
-    styleActiveLine: true,
-    matchBrackets: true,
-    theme: 'eclipse',
-  });
-});
-</script>
+<script src="js/lib/peg-0.9.0.min.js?v=20261102"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.28.0/codemirror.js"></script>
+<script src="js/mode/turkish.js?v=20261102"></script>
+<script src="js/calistirici.js?v=20261102"></script>
+<script src="js/sayfa.js?v=20261102"></script>
 
 </body>
-
 </html>
