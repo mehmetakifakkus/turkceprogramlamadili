@@ -11,7 +11,8 @@ CodeMirror.defineSimpleMode("simplemode", {
     // Rules are matched in the order in which they appear, so there is
     // no ambiguity between this one and the one above
     {regex: /doğru|yanlış|true|false|null|undefined/, token: "atom"},
-	{regex: /(?:yinele|sayarakYinele|eğer|değilse|değişken|yaz|üstel|mutlak|taban|tavan|function|var|return|if|for|while|else|do|this)\b/, token: "keyword"},
+	{regex: /(?:yinele|sayarakYinele|eğer|değilse|değişken|yaz|üstel|mutlak|taban|tavan|function|var|return|if|for|while|else|do|this|int|long|double|char|bool|#include)\b/, token: "keyword"},
+	{regex: /(?:printf|main|sqrt|pow|floor|ceil|fabs|fmod|abs|llabs)\b/, token: "atom"},
     {regex: /0x[a-f\d]+|[-+]?(?:\.\d+|\d+\.?\d*)(?:e[-+]?\d+)?/i, token: "number"},
     {regex: /\/\/.*/, token: "comment"},
     {regex: /\/(?:[^\\]|\\.)*?\//, token: "variable-3"},

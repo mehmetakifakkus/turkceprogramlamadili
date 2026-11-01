@@ -437,7 +437,7 @@ function cCevir(program){
 				dugum.list.forEach(function(oge){
 					if(oge.subtype != 'var') { bicim += printfMetni(oge.text); return; }
 					var x = cMetin(oge.text);
-					if(x.tur == 'bool') { bicim += '%s'; argumanlar.push(x.c + ' ? "true" : "false"'); }
+					if(x.tur == 'bool') { bicim += '%s'; argumanlar.push(x.c + ' ? "doğru" : "yanlış"'); }
 					else { bicim += {int: '%d', long: '%lld', double: '%g', metin: '%s'}[x.tur]; argumanlar.push(x.c); }
 				});
 				yaz(girinti, 'printf("' + bicim + '\\n"' + argumanlar.map(function(a){ return ', ' + a; }).join('') + ');');

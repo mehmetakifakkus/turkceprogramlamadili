@@ -43,7 +43,8 @@ CodeMirror.defineMode("turkish", function(config, parserConfig) {
 	  "var": kw("var"),
 
       "in": operator, "typeof": operator, "instanceof": operator,
-	  "ve": operator, "veya": operator, "eşit": operator, "eşitdeğil": operator, "küçük": operator, "küçükeşit": operator, "büyük": operator, "büyükeşit": operator,
+	  "ve": operator, "veya": operator, "eşit": operator, "eşitdeğil": operator, "küçük": operator, "küçükeşit": operator, "büyük": operator, "büyükeşit": operator, "değil": operator,
+      "doğru": atom, "yanlış": atom,
 
       "true": atom, "false": atom, "null": atom, "undefined": atom, "NaN": atom, "Infinity": atom,
       "this": kw("this"), "class": kw("class"), "super": kw("atom"),
