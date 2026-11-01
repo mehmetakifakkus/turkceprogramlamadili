@@ -221,6 +221,10 @@ mutlakDeger = 'mutlak' _ '(' _ exp:expression_statement _ ')'{
 ustel = 'üstel' _ '(' _ exp1:expression_statement _ ',' _ exp2:expression_statement _ ')'{
  	return {'type':'math_func', '#evaluation': 0, 'text': 'Math.pow(' + exp1.text + ','  + exp2.text + ')', 'C': 'pow(' + exp1.text + ','  + exp2.text + ')', 'lineNumber': location().end.line, 'start':location().start.column, 'end':location().end.column-1}; 
 }
+pi = 'pi' {
+    return {type: 'math_func','#evaluation': 0,text: 'Math.PI',C: 'M_PI',lineNumber: location().end.line,start: location().start.column,end: location().end.column - 1};
+}
+
 
 
 
