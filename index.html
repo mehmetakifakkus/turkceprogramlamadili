@@ -1,269 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Türkçe Programlama Dili</title>
-  <meta name="description" content="Türkçe Programlama Dili. Yeni başlayanlar için kolay, pratik programlama öğrenme aracı.">
-  <meta name="author" content="Mehmet Akif AKKUŞ, Harun Kaya">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Türkçe Programlama Dili</title>
+	<meta name="description" content="Türkçe Programlama Dili. Yeni başlayanlar için kolay, pratik programlama öğrenme aracı.">
+	<meta name="author" content="Mehmet Akif AKKUŞ, Harun Kaya">
+	<link rel="icon" href="css/tr.ico">
 
-<script src='js/lib/peg-0.9.0.min.js'></script>
-<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!-- Seçilen tema, sayfa çizilmeden önce uygulanır (göz kırpmasın) -->
+	<script>
+		try { if(localStorage.getItem('tema') == 'gece') document.documentElement.setAttribute('data-tema', 'gece'); } catch(e) {}
+	</script>
 
-<link href="css/jquery-ui-1.10.0.custom.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/codemirror.css">
+	<link rel="stylesheet" href="css/show-hint.css">
+	<link rel="stylesheet" href="css/ogrenme.css">
 
-
-<!--<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>-->
-<link rel='stylesheet prefetch' href='css/bootstrap.css'>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">  <!--Burası resize emek için gerekli	-->
-
-<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons"  rel="stylesheet">-->
-<link rel='stylesheet prefetch' href='css/codemirror.css'>
-
-	<link href="css/eclipse.css" rel="stylesheet">
-	<link href="css/3024-night.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="documentation/layout-default.css">
-
+	<script src="js/lib/peg-0.9.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 
 <body>
 
-<div class="heading">
-  <h1>Çevrimiçi Türkçe Programlama Dili</h1>
-  <h4>Yeni başlayanlar için kolay, pratik programlama öğrenme aracı</h4>
-</div>
-
-	<nav id="menu" class = "mycontainer" style = "padding: 10px; margin-top: 20px; margin-bottom: 40px;">
-<!--	<a href="http://turkceprogramlamadili.org">Ana Sayfa</a>-->
-
-	  <a class="current" href="">Kodlama Sayfası</a>
-	  <a href="rehber.html" target="_parent">Kodlama Rehberi</a>
-	  <a href="hakkinda.html">Hakkında</a>
-</nav>
-
-<div class="mycontainer ust-donme">
-	<div id="column-left-head" class="column-left">
-		<h3 id = "code-description" style="margin:8px 0px 8px 20px; white-space: nowrap;">
-			Kodu buraya yazın </h3>
+<header class="ust">
+	<a class="logo" href="index.html"><span>T</span> Türkçe Programlama</a>
+	<nav class="menu">
+		<a class="secili" href="index.html">Kodlama</a>
+		<a href="rehber.html">Rehber</a>
+		<a href="hakkinda.html">Hakkında</a>
+	</nav>
+	<div class="yol">
+		<button class="yuvarlak" id="oncekiOrnek" title="Önceki örnek" aria-label="Önceki örnek">‹</button>
+		<span class="kategori" id="ornekKategori"></span><span>›</span>
+		<b id="ornekAdi"></b>
+		<span class="rozet" id="ornekSira"></span>
+		<button class="yuvarlak" id="sonrakiOrnek" title="Sonraki örnek" aria-label="Sonraki örnek">›</button>
 	</div>
+	<button class="dugme" id="ornekleriAc">📚 <span class="genis">Tüm örnekler</span><span class="dar">Örnekler</span> <kbd>Ctrl K</kbd></button>
+	<button class="dugme ikon" id="temaDugmesi" title="Gece modu" aria-label="Gece modu">☾</button>
+</header>
 
-	<div id="column-right-head" class="column-right">
-		<h3 style="margin:8px 0px 8px 20px;   white-space: nowrap;">
-			Değişken değeri </h3>
-	</div>
-</div>
+<main class="duzen">
 
-
-<div id = "mycontainer" class="mycontainer" style="margin-top:4px;">
-
-	<div id="column-left" class="column-left codeContent" style="z-index:1">
-		<textarea id="code">değişken num1 = 12
-değişken num2 = 6
-
-yinele(num1 != num2)
-{
-  eğer(num1 > num2)
-    num1 = num1 - num2
-  değilse
-    num2 = num2 - num1
-}
-
-yaz num1</textarea>
-
-	</div>
-
-	<div id="column-right" class="column-right codeContent">
-
-		<div style="position:absolute; float:left; margin: 0px 0px 0px 0px; z-index:0">
-			<textarea id="evaluate"></textarea>
+	<section class="kart gorev">
+		<div>
+			<h2>Görev</h2>
+			<h1 id="gorevBaslik"></h1>
 		</div>
-	</div>
-
-</div>
-
-<script>
-	$("#column-left").resizable();
-
-	function helper(){
-		$('#column-right').width($("#mycontainer").width() -
-					($("#column-left").width() + $("#mycontainer").width() * 0.005));
-   		$('#column-left-head').width($("#mycontainer").width() -
-					($("#column-right").width() + $("#mycontainer").width() * 0.005));
-	    $('#column-right-head').width($("#mycontainer").width() -
-					($("#column-left").width() + $("#mycontainer").width() * 0.005));
-	}
-
-	$('#column-left').resize(function(){
-	   helper();
-	   $('#column-right').height($("#column-left").height());
-	});
-
-	$(window).resize(function(){
-		helper();
-	});
-</script>
-
-
-<div class="mycontainer" style='z-index: 0;'>
-<div class="row alt-donme">
-<button type="button" id="run" onclick="parse()" style="position:relative; float:left; z-index:3" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Çalıştır</button>
-
-	<button type="button" id="runJunk" onclick='' style="position:absolute; float:left; z-index:2; display:none" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-play icon-white"></span> Bekle..</button>
-
-	<div style="width:50px; height: auto; position:absolute; float:left; margin: -3px 0px 0px 90px; z-index:4">
-		<img id="redLight" src="images/redLight.png" style="border-radius: 8px; margin:2px 0px 20px 20px; display: none" alt="redLight" width="16px" height="36px">
-		<img id="greenLight" src="images/greenLight.png" style="border-radius: 8px; margin:2px 0px 20px 20px; display: block" alt="redLight" width="16px" height="36px">
-	</div>
-
-
-	<div style="width:480px; height: auto; position:absolute; float:left; margin: -10px 0px 0px 65px; z-index:1">
-		<textarea id="parseResult" style="height: 30px;"></textarea>
-	</div>
-
-
-
-	<button type="button" id="fullScreenB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px; " onclick="makeFullScreen()"><i class="fa fa-expand"></i></button>
-
-	<button type="button" id="compactB" class="btn btn-md btn-primary" style="float:right; margin-left:10px; margin-right:12px; font-size:16px; display: none" onclick="makeCompact()"><i class="fa fa-compress"></i></button>
-
-
-<div class = "dropright">
-	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('settings'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-gear"></i></button>
-	<!-- Çeviri butonu da burada olmalı: aşağıdaki panelin yanında olursa ayarlar açıkken panelin altına kayar -->
-	<button  type="button" class="btn btn-md btn-primary" onclick="javascript:hideshow(document.getElementById('translate'))" data-toggle="dropdown" style="float:right; margin-right:10px; padding: 2px 5px 12px 9px; font-size:20px;"><i class="fa fa-terminal"></i></button>
-	<ul id = "settings" class="mydropdown-menu" style="position:relative;" role="menu">
-
-	<hr style="style1">
-
-<div style="margin-left:-12px">
-
-	<div class="col-md-3">
-	</div>
-	<div class="col-md-3">
-	</div>
-
-	<div class="col-md-3">
-			<button type="button" class="btn btn-md btn-primary" style="float:right; margin-left:15px; margin-right:-2px;" onclick="kaydet()"><span class="glyphicon glyphicon-floppy-disk"></span></button>
-
-			<button type="button" class="btn btn-md btn-danger" style="float:right; margin-left:20px;" onclick="temizle()"><span class="glyphicon glyphicon-trash"></span></button>
-	</div>
-
-	<div class="col-md-3">
-
-		<p><strong>Çalıştırma Hızı</strong></p>
-		<div id="h-slider" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false">
-			<div class="ui-slider-range ui-widget-header ui-corner-all" href="#" style="width: 0%;"></div>
-			<a class="ui-slider-handle ui-state-default ui-corner-all" style="left: 11.1%;"></a>
+		<div class="gorev-metni" id="gorevMetni"></div>
+		<div class="gorev-kisi" id="gorevKisi"></div>
+		<div>
+			<h2>Bu kodda kullanılanlar</h2>
+			<div class="etiketler" id="kullanilanlar"></div>
 		</div>
-		<br>
-		<p>Saniyede <input type="text" style = "width:27px; line-height: 15px;" onchange="" id="amount" value="1"> satır çalışacak.</p>
+		<div class="ipucu">💡 <b>İpucu:</b> Kodu değiştirip tekrar çalıştırmaktan çekinme. <b>Adım adım</b> ile her satırda neler olduğunu izleyebilirsin.</div>
+	</section>
 
-	</div>
-</div>
-
-<script>
-$('#h-slider').slider({
-    range: "min", min: 5, max: 50, value: 10,
-    slide: function (event, ui) {
-        $("#amount").val(ui.value / 10);
-        refreshSpeed(ui.value / 10)
-    }
-});
-</script>
-	</ul>
-
-</div>
-
-
-<div class = "dropright">
-	<ul id = "translate" class="mydropdown-menu" style="position:relative;" role="menu">
-		<hr style="style1">
-
-		<div style="margin-left:6px">
-
-			<div class="col-md-10">
-				<h3><strong>Türkçe kodun C dilinde karşılığı (deneme sürümü):</strong></h3>
-				<textarea id="translateCoutput"></textarea>
+	<section class="orta">
+		<div class="kart editor-karti">
+			<div class="kart-baslik">
+				<h2>Kodun</h2>
+				<span class="durum" id="durum">Yükleniyor…</span>
+				<button class="metin-dugme" id="kaydetDugmesi" title="Kodu dosyaya kaydet">💾 Kaydet</button>
 			</div>
-
-			<div class="col-md-2"></div>
+			<textarea id="code"></textarea>
+			<div class="kontroller">
+				<button class="dugme ana" id="calistirDugmesi" title="Ctrl + Enter">▶ Çalıştır</button>
+				<button class="dugme" id="adimDugmesi">⏯ Adım adım</button>
+				<button class="dugme" id="bastanDugmesi">↺ Baştan</button>
+				<div class="hiz" id="hiz" role="group" aria-label="Çalıştırma hızı">
+					<button data-hiz="1200">🐢 Yavaş</button>
+					<button data-hiz="500" class="secili">Normal</button>
+					<button data-hiz="100">🐇 Hızlı</button>
+				</div>
+			</div>
 		</div>
-	</ul>
-</div>
 
+		<div class="kart konsol-karti">
+			<div class="kart-baslik">
+				<h2>Konsol</h2>
+				<button class="metin-dugme" id="konsoluTemizle">Temizle</button>
+			</div>
+			<pre class="konsol" id="konsol"></pre>
+		</div>
 
-<!--</div>-->
-</div>
+		<div class="kart c-karti" id="cKarti" hidden>
+			<div class="kart-baslik">
+				<h2>C dilindeki karşılığı</h2>
+				<span class="soluk">deneme sürümü</span>
+			</div>
+			<textarea id="translateCoutput"></textarea>
+		</div>
+	</section>
 
+	<section class="sag">
+		<div class="kart hafiza">
+			<h2>Hafıza (değişkenler)</h2>
+			<div class="kutular" id="hafiza"></div>
+		</div>
+		<div class="kart kosul">
+			<h2 id="kosulBaslik">Koşul</h2>
+			<div id="kosulIcerik"></div>
+		</div>
+		<label class="kart anahtar">
+			<span>C dilindeki karşılığını göster</span>
+			<input type="checkbox" id="cAnahtari"><i></i>
+		</label>
+	</section>
 
+</main>
 
-<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-bottom: 0px; margin-top: 20px; min-height: 10px; ">
-	<h3 style="margin: 0em; padding: 0em; "> Konsol </h3>
-</div>
+<footer class="alt">
+	Türkçe Programlama Dili ·
+	<a href="rehber.html">Kodlama Rehberi</a> ·
+	<a href="hakkinda.html">Hakkında</a> ·
+	<a href="https://github.com/mehmetakifakkus/turkceprogramlamadili">GitHub</a>
+</footer>
 
-<div class="container row alt-donme" style = "padding: 0px 5px 5px 5px; margin-top: 0px; background-color:#000000; min-height: 100px;">
-	<textarea id="konsol"></textarea>
-</div>
-
-
-<!--  Kullanıcı Kodları -->
-<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top:30px;">
-	<h3 style="margin: 0em; padding-top: 0px">Kullanıcıların Gönderdikleri</h3>
-</div>
-
-<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 10px 40px 20px 20px; margin-top: -7px; max-height:535px; overflow: scroll;">
-	<div id="userQuestions" class="column"></div>
-</div>
-
-
-<!--  Başlangıç Seviye Kod Örnekleri	-->
-<div class="codePart-left">
-
-	<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top: 40px;">
-		<h3 style="margin: 0em; padding-top: 0px">Başlangıç Seviye Örnekler</h3>
+<div class="perde" id="ornekPenceresi" hidden>
+	<div class="pencere" role="dialog" aria-modal="true" aria-label="Örnekler">
+		<div class="pencere-ust">
+			<input id="ornekAra" type="search" placeholder="Örnek ara…" autocomplete="off">
+			<button class="dugme ikon" id="pencereyiKapat" aria-label="Kapat">✕</button>
+		</div>
+		<div class="ornek-listesi" id="ornekListesi"></div>
 	</div>
-
-	<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; font-size: 115%; ">
-		<div id="baslangic" class="column"></div>
-	</div>
 </div>
-
-
-<!--  Orta Seviye Kod Örnekleri	-->
-<div class="codePart-right">
-
-	<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top: 40px;">
-		<h3 style="margin: 0em; padding-top: 0px">Orta Seviye Örnekler</h3>
-	</div>
-
-	<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px;">
-		<div id="ortaSeviyeSorular" class="column"></div>
-	</div>
-
-</div>
-
-<!--  İleri Seviye Kod Örnekleri	-->
-
-<div class="container row ust-donme" style = "padding: 6px 20px 7px 16px; margin-top: 40px;">
-	<h3 style="margin: 0em; padding-top: 0px"> İleri Seviye Örnekler </h3>
-</div>
-
-<div class="container row alt-donme" style= "font-family: 'Trebuchet MS', lucida, sans-serif; line-height: 1.5; padding: 20px 40px 20px 20px; margin-top: -7px; ">
-		<div id="ileriSeviyeSorular" class="column"></div>
-	</div>
-
-
-
-
-
-
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -273,59 +136,23 @@ $('#h-slider').slider({
 
   ga('create', 'UA-103667062-1', 'auto');
   ga('send', 'pageview');
-
 </script>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.28.0/codemirror.js'></script>
-<link rel="stylesheet" href="css/show-hint.css">
-
-
-<script src='js/addon/active-line.js'></script>
-<script src='js/addon/closebrackets.js'></script>
-
-<script src='js/addon/foldcode.js'></script>
-<script src='js/addon/foldgutter.js'></script>
-
-<script src='js/addon/show-hint.js'></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.28.0/codemirror.js"></script>
+<script src="js/addon/active-line.js"></script>
+<script src="js/addon/closebrackets.js"></script>
+<script src="js/addon/show-hint.js"></script>
 <script src="js/mode/turkish.js"></script>
-<script src='js/addon/turkish-hint.js'></script>
-
-<!--<script src='js/mode/javascript.js'></script>	-->
-<!--<script src='js/addon/javascript-hint.js'></script>	-->
-
-<!--<script src='js/addon/anyword-hint.js'></script>-->
-
+<script src="js/addon/turkish-hint.js"></script>
 <script src="js/addon/simple.js"></script>
 <script src="js/mode/custom-mode.js"></script>
-
-
 
 <script src="js/examples.js"></script>
 <script src="js/editorSettings.js"></script>
 <script src="js/translate.js"></script>
+<script src="js/calistirici.js"></script>
 <script src="js/index.js"></script>
-
-
-<!--https://github.com/eligrey/FileSaver.js	-->
 <script src="js/lib/FileSaver.min.js"></script>
 
 </body>
-
-
-<script type="text/javascript">
-	function hideshow(which){
-		if (!document.getElementById)
-		return
-		if (which.style.display=="block")
-		which.style.display="none"
-		else
-		{
-		which.style.display="block"
-		// Gizliyken doldurulan CodeMirror editörleri görünür olunca yeniden çizilmeli
-		$(which).find('.CodeMirror').each(function(){ this.CodeMirror.refresh(); });
-		}
-		}
-</script>
-
 </html>
