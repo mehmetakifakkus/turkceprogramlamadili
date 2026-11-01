@@ -13,11 +13,11 @@
 		try { if(localStorage.getItem('tema') == 'gece') document.documentElement.setAttribute('data-tema', 'gece'); } catch(e) {}
 	</script>
 
-	<link rel="stylesheet" href="css/codemirror.css?v=20261102">
-	<link rel="stylesheet" href="css/show-hint.css?v=20261102">
-	<link rel="stylesheet" href="css/ogrenme.css?v=20261102">
+	<link rel="stylesheet" href="css/codemirror.css?v=20261103">
+	<link rel="stylesheet" href="css/show-hint.css?v=20261103">
+	<link rel="stylesheet" href="css/ogrenme.css?v=20261103">
 
-	<script src="js/lib/peg-0.9.0.min.js?v=20261102"></script>
+	<script src="js/lib/peg-0.9.0.min.js?v=20261103"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 </head>
 
@@ -54,7 +54,8 @@
 			<h2>Bu kodda kullanılanlar</h2>
 			<div class="etiketler" id="kullanilanlar"></div>
 		</div>
-		<div class="ipucu">💡 <b>İpucu:</b> Kodu değiştirip tekrar çalıştırmaktan çekinme. <b>Adım adım</b> ile her satırda neler olduğunu izleyebilirsin.</div>
+		<div class="ipucu">💡 <b>İpucu:</b> <span id="ipucuMetni"></span></div>
+		<div class="deneme" id="deneKutusu" hidden>🧪 <b>Kendin dene:</b> <span id="deneMetni"></span></div>
 	</section>
 
 	<section class="orta">
@@ -139,20 +140,21 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.28.0/codemirror.js"></script>
-<script src="js/addon/active-line.js?v=20261102"></script>
-<script src="js/addon/closebrackets.js?v=20261102"></script>
-<script src="js/addon/show-hint.js?v=20261102"></script>
-<script src="js/mode/turkish.js?v=20261102"></script>
-<script src="js/addon/turkish-hint.js?v=20261102"></script>
-<script src="js/addon/simple.js?v=20261102"></script>
-<script src="js/mode/custom-mode.js?v=20261102"></script>
+<script src="js/addon/active-line.js?v=20261103"></script>
+<script src="js/addon/closebrackets.js?v=20261103"></script>
+<script src="js/addon/show-hint.js?v=20261103"></script>
+<script src="js/mode/turkish.js?v=20261103"></script>
+<script src="js/addon/turkish-hint.js?v=20261103"></script>
+<script src="js/addon/simple.js?v=20261103"></script>
+<script src="js/mode/custom-mode.js?v=20261103"></script>
 
-<script src="js/examples.js?v=20261102"></script>
-<script src="js/editorSettings.js?v=20261102"></script>
-<script src="js/translate.js?v=20261102"></script>
-<script src="js/calistirici.js?v=20261102"></script>
-<script src="js/index.js?v=20261102"></script>
-<script src="js/lib/FileSaver.min.js?v=20261102"></script>
+<script src="js/examples.js?v=20261103"></script>
+<script src="js/ipuclari.js?v=20261103"></script>
+<script src="js/editorSettings.js?v=20261103"></script>
+<script src="js/translate.js?v=20261103"></script>
+<script src="js/calistirici.js?v=20261103"></script>
+<script src="js/index.js?v=20261103"></script>
+<script src="js/lib/FileSaver.min.js?v=20261103"></script>
 
 </body>
 </html>
