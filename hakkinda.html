@@ -1,647 +1,232 @@
 <!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hakkında » Türkçe Programlama Dili</title>
+	<meta name="description" content="Türkçe Programlama Dili hakkında: amaç, dilin özellikleri, katkıda bulunanlar ve sürüm tarihçesi.">
+	<meta name="author" content="Mehmet Akif AKKUŞ">
+	<link rel="icon" href="css/tr.ico">
 
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script>
+		try { if(localStorage.getItem('tema') == 'gece') document.documentElement.setAttribute('data-tema', 'gece'); } catch(e) {}
+	</script>
 
-    <meta name="author" content="Mehmet Akif AKKUŞ (mehmetakifakkus@gmail.com)">
-    <meta name="copyright" content="Copyright © 2017 Mehmet Akif AKKUŞ">
-    <meta name="keywords" content="parser generator, PEG, JavaScript">
-    <meta name="description" content="Türkçe Programlama Dili Türk Dilinde Çevirimiçi kodlamaya imkan sağlayan bir dil.">
+	<link rel="stylesheet" href="css/ogrenme.css?v=20261102">
+	<link rel="stylesheet" href="css/icerik.css?v=20261102">
+</head>
 
-	<title>Kaynakça » Türkçe Programlama Dili</title>
+<body>
 
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="./documentation/quote.css">
-	<link rel="stylesheet" href="./documentation/common.css">
-    <link rel="stylesheet" href="./documentation/layout-default.css">
-    <link rel="stylesheet" href="./documentation/content.css">
-	<link rel="shortcut icon" href="css/tr.ico">
+<header class="ust">
+	<a class="logo" href="index.html"><span>T</span> Türkçe Programlama</a>
+	<nav class="menu">
+		<a href="index.html">Kodlama</a>
+		<a href="rehber.html">Rehber</a>
+		<a class="secili" href="hakkinda.html">Hakkında</a>
+	</nav>
+	<div class="bosluk"></div>
+	<a class="dugme ana" href="index.html">▶ Kodlamaya başla</a>
+	<button class="dugme ikon" id="temaDugmesi" title="Gece modu" aria-label="Gece modu">☾</button>
+</header>
 
-  </head>
-  <body>
-    <div id="main">
-      <header id="header">
-        <h1><a href="http://turkceprogramlamadili.org">Çevrimiçi Türkçe Programlama Dili</a></h1>
-        <h2>Yeni başlayanlar için kolay, pratik programlama öğrenme aracı</h2>
-      </header>
+<main class="hakkinda">
 
-      <nav id="menu">
-<!--        <a href="http://turkceprogramlamadili.org">Ana Sayfa</a>-->
+	<section class="kart vitrin" id="about">
+		<div>
+			<h2>Hakkında</h2>
+			<h1>Programlama Türkçe öğrenilebilir mi?</h1>
+			<p>Bu proje, hiç bilmeyenlerin programlamayı ana dilleriyle ve programın çalışmasını <b>görerek</b> öğrenebilmesi için, ticari bir amaç gütmeden geliştirilen açık kaynaklı bir öğrenme aracıdır.</p>
+			<div class="dugmeler">
+				<a class="dugme ana" href="index.html">▶ Hemen dene</a>
+				<a class="dugme" href="https://github.com/mehmetakifakkus/turkceprogramlamadili">GitHub'da incele</a>
+			</div>
+		</div>
+		<div class="sayilar">
+			<div class="sayi"><b>25</b><span>hazır örnek program</span></div>
+			<div class="sayi"><b>17</b><span>kullanıcıların gönderdiği kod</span></div>
+			<div class="sayi"><b>2017</b><span>yılından beri açık kaynak</span></div>
+			<div class="sayi"><b>C</b><span>diline otomatik çeviri</span></div>
+		</div>
+	</section>
 
-		  <a href="index.html">Kodlama Sayfası</a>
-        <a href="rehber.html">Kodlama Rehberi</a>
-        <a class="current" href="hakkinda.html">Hakkında</a>
+	<nav class="sekmeler" id="sekmeler" aria-label="Bölümler">
+		<a href="#nedir">Nedir?</a>
+		<a href="#features">Dilin özellikleri</a>
+		<a href="#technical">Teknik altyapı</a>
+		<a href="#thanks">Kim ne diyor?</a>
+		<a href="#acknowledgements">Katkıda bulunanlar</a>
+		<a href="#versions">Sürüm tarihçesi</a>
+		<a href="#sources">Kaynaklar</a>
 	</nav>
 
-      <div id="content">
-        <h1>Hakkında</h1>
-
-<h2 id="table-of-contents">İçerik Listesi</h2>
-
-<ul>
-  <li>
-    <a href="#about">Türkçe Programlama Dili Hakkında</a>
-    <ul>
-      <li><a href="#nedir">Nedir?</a></li>
-	  <li><a href="#features">Dilin söz dizimsel özellikleri nedir?</a></li>
-      <li><a href="#technical">Dilin teknik özellikleri nedir?</a></li>
-    </ul>
-  </li>
-  <li><a href="#developer">Geliştirici ve Katkıda Bulunanlar</a>
-    <ul>
-	  <li><a href="#acknowledgements">Katkıda bulunanlar ve konuları</a></li>
-	  <li><a href="#thanks">Kim ne diyor?</a></li>
-      <li><a href="#source">Kaynak kodlara erişim?</a></li>
-	  </ul>
-  </li>
-<li><a href="#versions">Sürüm Tarihçesi</a></li>
-<li><a href="#compatibility">Uyumluluk Notları</a></li>
-<li><a href="#sources">Kodlama İçin Bazı Kaynaklar</a></li>
-</ul>
-
-<h2 id="about">Türkçe Programlama Dili Hakkında</h2>
-
-<h3 id="nedir">Nedir?</h3>
-
-<p>Yürütülen bu proje; bir programlama dili <strong>Türkçe olabilir mi</strong>, hiç bilmeyenlerin ya da deneyim sahibi olmayanların <strong>öğrenmesine katkı sağlayabilir mi</strong> gibi sorulara cevap aranması amacıyla her hangi ticari bir amaç gütmeden ortaya konmuştur. </p>
-
-
-<p>Amaç, evrensel bir dil geliştirmekten ziyade, öğretmede kullanıbilecek <strong>pratik bir dil</strong> olmasıdır.</p>
-
-<p>Sadece dil terimlerini Türkçe'leştirmeden ziyade onları <strong>görselleştirmeye</strong> çalışması ile programlamayı yeni öğrenenlere faydalı bir biçimde öğreteceği düşünülmektedir. Yazım dili olarak <strong>C/C++/Java ve Python</strong> dillerini benimsemesi bu dillere geçişi kolaylaştırması için amaçlanmıştır.</p>
-
-
-
-<p>Geliştirilmekte olan bu dille irtibatta kalmak veya katkıda bulunmak isterseniz aktif facebook sayfasını veya alakalı grubu <a href="https://www.facebook.com/turkceprogramlamadili">buradan</a> takip edebilirsiniz.</p>
-
-<h3 id="features">Dilin söz dizimsel özellikleri nedir?</h3>
-
-<p>Kullanılan dilin söz dizimi (syntax) özgün olarak üretilmiştir. Her programlama dilinde olduğu gibi esinlendiği bir kaç güncel programlama dili mevcuttur. Bunlar arasında Java/C++ dil ailesi ile Python dili olduğu söylenebilir. </p>
-
-<p>Kullanılan dilde; öncelikle alışılageldik dil öğelerinin kullanılmasına dikkat edilmiştir. Örneğin Java dil ailesinden bileşik komutların süslü prantezde yazılması alınmış, satır sonlarının noktalı virgülle bitme zorunluluğu olmaması yönüyle de python örnek alınmış denebilir. </p>
-
-<p>Programlama öğrenen kişinin programın çalışma mantığını anlamasına yardımcı olması hedeflenen dilin özelliklerinden bir kaçını şöyle maddeler halinde sayabiliriz:</p>
-
-<ol>
- 	<li>Anlaması kolay (doğal konuşma diline yakın)</li>
- 	<li>Sadece amaca özgü olacak kadar detaylı (gereksiz detayları olmayan)</li>
- 	<li>Web üzerinde kodlanabilen ve çıktıları alınabilen/gözlemlenebilen</li>
-</ol>
-
-<p>Bu motivasyonla; öncelikle nasıl bir dil hedeflediğimizi daha kitabi bir şekilde anlatalım:</p>
-<ul>
- 	<li>
-		<strong>Dinamik tipleme (dynamically typed):</strong> yani veri türü olmayan bir dil. Bu noktada Javascript ya da Python diline benzetildiği söyleyenebilir. Buradaki amaç, kulanıcıyı gereksiz detaylara boğmadan ve çalışma aşamasında performans kaygısı gütmeden temel programlama öğelerinin anlatmaya yönelik bir dil.</li>
- 	<li>
-		<strong>Nesne yönelimli (object oriented): </strong>Güncel bir çok dilde standart halini almış olmasından ve karmaşık (complex) veri yapıları gibi kavramların kodlanabilmesi ve öğretilebilmesi adına nesne yapısı ve NYP (nesne yönelimli programlama) öemli bir hal almaktadır. Ayrıca;  bildiğini üzere veri yapılarındaki her bir eleman bir nesne olarak düşünülebilir. Örneğin bağlı listede (linked list) veya çizge (graph) üzerinde her bir eleman diğer elemanlarla etkileşim halindedir ve bazı fonksiyonları yerine getirirler. Bu nedenle veri yapılarının öğesi olan her bir eleman bir nesnedir desek çok da yanlış demiş olmayız.
-	</li>
- 	<li>
-		<strong>Üst seviyeli (high level): </strong>buradaki amacımız ise kıyasla daha kolay öğrenildiği ve uygulandığı ve yeni başlayanların çabucak anlaması için en uygun dil paradigması olan üst seviye programlama dili model edilmiştir.
-	</li>
-</ul>
-
-<h3 id="technical">Dilin teknik özellikleri nedir?</h3>
-
-<p>Bilindiği üzere her bir programlama dili makinenin anlayabileceği makine dili üzerine soyutlamalar yaparak geliştirilir ve biraz daha detaylı bahsedersek; bu bir takım araçlar özel araçlar -<strong>söz dizim hatası</strong> (syntax error) için <strong>ayrıştırıcı</strong> (parser), bunları anlamlı hale getirip makineye (bilgisayar donanımına) ileten <strong>yorumlayıcı</strong> (interpreter) ya da <strong>derleyici</strong> (compiler)- kullanılarak yapılır. </p>
-
-<p>Bizim yukarıda bahsettiğimiz gereksinimlerin karşılanabilmesi için -web üzerinde kodlanabilen ve çıktıları alınabilen/gözlemlenebilen- bahsedilen araçların da web tarayıcının imkan verdiği Javascript dilinde yazılması icap etmektedir. Javascipt <strong>istemci</strong> (client) tarafında çalıştığından sunucu taraflı sistemlere göre daha <strong>çevik</strong> (dynamic) uygulamalar yapılması söz konusu olabilmektedir.</p>
-
-Bu projede ayrıştırıcı (parser) olarak Javascript tabanlı peg.js kütüphanesi kullanılmaktadır. Peg.js farklı dillerde yazılmış <a href="http://dinosaur.compilertools.net/yacc/">Yacc</a> (Yet Another Compiler Compiler), <a href="https://www.gnu.org/software/bison/Bison">Bison</a> ve <a href="http://www.antlr.org/">ANTLR</a> benzeri bir çeşit ayrıştırıcıdır. Sözü geçen bu ayrıştırıcılar ise sırasıyla C, C++ ve Java dillerinde yazılmıştır. Ayrıştırmadan sonra elde edilen parçaların mana kazanması, işlenmesi için ise javascript dili kullanımlamktadır.
-
-<h2 id="developer">Geliştirici ve Katkıda Bulunanlar</h2>
-
-Dilin aktif olarak 2 geliştiricisi bulunmaktadır, ama fikir verme anlamında bir çok kişi projenin elinden tutmuştur.
-
-<h3 id="acknowledgements">Katkıda bulunanlar ve konuları</h3>
-
-<p>Aşağıda bir şekilde iletişime geçmiş ve değerli fikilerini paylaşmış kişilerin verdiği yorumlar mevcuttur:</p>
-
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg .tg-yw4l{vertical-align:top}
-.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
-</style>
-<table class="tg" style="undefined;table-layout: fixed; width: 893px">
-<colgroup>
-<col style="width: 30px">
-<col style="width: 145px">
-<col style="width: 594px">
-<col style="width: 122px">
-</colgroup>
-  <tr>
-    <th class="tg-yw4l"></th>
-    <th class="tg-amwm">Katkıda bulunan</th>
-    <th class="tg-amwm">Katkı yaptığı konusu</th>
-    <th class="tg-amwm">Tarih</th>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">1</td>
-    <td class="tg-yw4l">Harun Kaya</td>
-    <td class="tg-yw4l">- syntax veya runtime errorlar hakkında geliştiremeler olsa iyi olur<br>- değişken tanımlarken "var" değilde "değişken" tipini kullanılması daha makul olmaz mı?<br>- adımların ilerleme hızını ayarlabileceğimiz kaydırıcı (slider) koyarsan daha etkileşimli olur gibi sanki?</td>
-    <td class="tg-yw4l">30 Temmuz 2017</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">2</td>
-    <td class="tg-yw4l">Ahmet Sarıcı</td>
-    <td class="tg-yw4l">- Bu dil diğer dillerden farklı jenerik bir dil olduğundan, bu dilden başka dillerde çıktı üretmek mümkün olabilir mi? Mesela C veya Java gibi. <br>- Rehber kısmında başlıkları sayfa sayfa görüntülense daha iyi olmaz mı?</td>
-    <td class="tg-yw4l">2 Ağustos 2017</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">3</td>
-    <td class="tg-yw4l">Hande Çelikkanat</td>
-    <td class="tg-yw4l">- "hatali kod" yazılsa süper olur, sonra detayli aciklama girersin, bu ilk şimdi bakacak kullanıcılar icin iyi olur.<br></td>
-    <td class="tg-yw4l">31 Temmuz 2017</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">4</td>
-    <td class="tg-yw4l">Salih Can Çamdere</td>
-    <td class="tg-yw4l">- "var" yerine Türkçe bir şey yapılsa?</td>
-    <td class="tg-yw4l">1 Ağustos 2017</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">5</td>
-    <td class="tg-yw4l">Caner Topçu</td>
-    <td class="tg-yw4l">- Belki 3-4 modlu birşey olsa, önce şekillerle flowchart, sonra türkçe kodlar, sonra 2 tane programlama kod örnegi gibi modları olabilir. hatta flowchatı kademeli öğrenme şeklinde oyunlaştırarak yapabilirsin.</td>
-    <td class="tg-yw4l">2 Ağustos 2017</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">6</td>
-    <td class="tg-yw4l">Kadir Fırat Uyanık</td>
-    <td class="tg-yw4l">"var" yerine farklı bir kelime, özellikle Türkçe kullanılması mümkün olur mu?</td>
-    <td class="tg-yw4l">2 Ağustos 2017</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">7</td>
-    <td class="tg-yw4l">Murat Akın</td>
-    <td class="tg-yw4l">- Genel olarak bu tarz eğitim platformları aşamalı eğitim metodu kullanıyor. Video ile anlatıp bunun uygulamasını yaptırıyor ve doğruluğunu kontrol Edip öneride bulunuyor..<br>
-	  -Kodlama sayfasında yazdığımız kodları txt olarak kaydetmk mümkün ancak daha önceden masaüstüne yazdığımız txtleri çağırma olursa güzel olur diye düşünüyorum.</td>
-    <td class="tg-yw4l">5 Ağustos 2017</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l">8</td>
-    <td class="tg-yw4l">Caner Topçu</td>
-    <td class="tg-yw4l">- Kodu yazarkeninfo tuşuna bastığımda sayfa gitmeden gelse bu bilgiler, popup window gibi, birşeyler yazarken kodları incelemek istiyorum ama doğru mu yanlışmı diye diğer sayfaya gidince kopuyor.<br>- Bir de geri dönmek için en başa geri dönmem gerekiyor her zaman, mesela ana sayfa butonu kenarda bi yerde sabit durabilir.</td>
-    <td class="tg-yw4l">7 Ağustos 2017</td>
-  </tr>
-  <tr>
-	<td class="tg-yw4l">9</td>
-    <td class="tg-yw4l">Selin Coşar</td>
-    <td class="tg-yw4l">Merhaba, benimki naçizane bir istek. Kapaktaki görüntüde "online" kelimesinden ziyade farklı bir kelime geçse idi mutlu ederdi.</td>
-    <td class="tg-yw4l">7 Ağustos 2017</td>
-  </tr>
-
- <tr>
-	<td class="tg-yw4l">10</td>
-    <td class="tg-yw4l">Cemal Aker</td>
-    <td class="tg-yw4l">- Video derslerle çekilip olayı canlandırabilirsin biraz.   <br>
-		  				- Geliştirilen dil Ebob (En büyük ortak bölen) bulma problemi mesela öklid algoritması ile algoritması yazılabilir. Yani, aslında bi yandan da algoritma ve veri yapıları eğitimi de verilebilir. Bu sayede de hem dil gelişir hem de kullanım alanı doğar.</td>
-    <td class="tg-yw4l">8 Ağustos 2017</td>
-  </tr>
-
-	  <tr>
-	<td class="tg-yw4l">10</td>
-    <td class="tg-yw4l">Hüseyin Cahit Kebapçıoğlu</td>
-    <td class="tg-yw4l">- Forum açılır ve bir topluluk oluşturulursa çok iyi olur, bu sayede insanlar hem kodlarını paylaşabilirler hem de sorun yaşadıklarında birbirlerine danışabilirler.  <br>
-		  				- Üyelik sistemi konulup ufak daily challange'lar ve görevlerle kullanıcıların puan kazanması sağlanabilir.Bu sayede kullanıcılar forumda farklı yerlere sahip olabilirler.</td>
-    <td class="tg-yw4l">8 Ağustos 2017</td>
-  </tr>
-
-		  <tr>
-	<td class="tg-yw4l">11</td>
-    <td class="tg-yw4l">Nevzat Sevim</td>
-    <td class="tg-yw4l">- Kod syntax error oldugunda calistir dedigimiz de ya da demeden. Hata oldugunu soylese daha guzel olabilir. <br>
-		  				- Suan anladigim kadariyla sadece bu web sitesi uzerinden calisiyor. Ileride baska ortamlarda calistirabilme ihtimaline binaen, Kodlari diger ortamlara entegre olabilecek sekilde yazmak mantikli olabilir. Mesala windows uygulamasi uzerinden kod yazmayi ogreniyor olsun, belki surekli internetde olmayabilir offline mod da calisabilmesi icin de boyle bir sey yapabilirsiniz.</td>
-    <td class="tg-yw4l">9 Ağustos 2017</td>
-  </tr>
-
- <tr>
-	<td class="tg-yw4l">12</td>
-    <td class="tg-yw4l">İrfan Düzenli</td>
-    <td class="tg-yw4l">- Kaç değişken kullanılmışsa o kadar var kullanmam gerekiyor. Bu da gereksiz tekrara neden olacak. Değişkene herhangi bir değer vermezsem çalışmıyor. Bunları düzeltirseniz daha iyi olacaktır.</td>
-    <td class="tg-yw4l">15 Ağustos 2017</td>
-  </tr>
-
-<tr>
-	<td class="tg-yw4l">13</td>
-    <td class="tg-yw4l">Kadir Kara</td>
-    <td class="tg-yw4l">
-		- Hataların satınırı ve yerini gösteren hata dökümü yeni öğrenen birisinin işine epey yarar. <br>
-		- Türkçe Programlama Dili'nin gelişim sürecini raporlamak ta daha sonra bu işe gireceklere bilgi vermesi açısından raporlanabilir. <br>
-				- Sürekli Eğitim Merkezi gibi yerlerde Workshop verilerek dil tanıtılabilir.<br>
-				- Programlamaya yeni başlayan kişilerle aracın işe yararlığı test edilebilir.</td>
-    <td class="tg-yw4l">17 Ağustos 2017</td>
-  </tr>
-
-<tr>
-	<td class="tg-yw4l">14</td>
-    <td class="tg-yw4l">Kadir Akın</td>
-    <td class="tg-yw4l">- Websitesinin ismi çok uzun. Daha kısa ve kolay yazılacak bir websitesi ismi bulursanız kullancılar açısından çok daha kolay olacaktır. <br>
-				 - Bir de sanırım henüz fonksiyon tanımlaması özelliğini yapmamışsınız. Sanırım eklenecek özellikler arasında aklınızdadır.</td>
-    <td class="tg-yw4l">17 Ağustos 2017</td>
-  </tr>
-
-
-<tr>
-	<td class="tg-yw4l">15</td>
-    <td class="tg-yw4l">Efe Tiryaki</td>
-    <td class="tg-yw4l">- Turkcenin yazim cumle yapisina gore kurgulamakta fikir olarak ilginc olabilir. Örnegin: <br>
-		- eğer (a<5) ise {bir şey yap} (a < 5) ise {bir şey yap} değilse {bir şey yap} ..... <br>
-        - (a<5) iken {a++} (while döngüsü) <br>
-		- değisken x={1,2,3} ; x herbiri için{ birseyler yap} <br>
-				 - Bir de sanırım henüz fonksiyon tanımlaması özelliğini yapmamışsınız. Sanırım eklenecek özellikler arasında aklınızdadır.</td>
-    <td class="tg-yw4l">17 Ağustos 2017</td>
-  </tr>
-
-<tr>
-	<td class="tg-yw4l">16</td>
-    <td class="tg-yw4l">Fatih Toy</td>
-    <td class="tg-yw4l">- Bir önerim syntaxda gelenekselin dışına çıkıp Türkçe cümle yapısını taklit etmek olabilir. Öğrenciler konuştukları gibi kod yazabilirler ise çok faydalı olur diye düşünüyorum.</td>
-    <td class="tg-yw4l">18 Ağustos 2017</td>
-  </tr>
-
-
-<tr>
-	<td class="tg-yw4l">17</td>
-    <td class="tg-yw4l">Mustafa Yemural</td>
-    <td class="tg-yw4l">- Eğer web veya mobil gibi alanlarda uygulama geliştirmek gibi bir amacı olacaksa bence c tipi anahtar kelimelerin Türkçe'ye çevrilmesinden ziyade özgün bir syntax ve semantic kullanılarak çok güzel bir şeyler çıkabilir. Başarılar...</td>
-    <td class="tg-yw4l">21 Ağustos 2017</td>
-  </tr>
-
-<tr>
-	<td class="tg-yw4l">18</td>
-    <td class="tg-yw4l">Mehmet Emin Fedar</td>
-    <td class="tg-yw4l">- for yerine "sayarakYinele" değil de "say" veya "saydir" gibi kısa şeyler kullanılabilir. "değişken" yerine (o da kalsın tamam da ek olarak:) "değ" denebilir. Tabi bunun eğitim amaçlı olduğunu düşünürsek verilen isimler gayet de iyi :)</td>
-    <td class="tg-yw4l">22 Ağustos 2017</td>
-  </tr>
-
-
-<tr>
-	<td class="tg-yw4l">19</td>
-    <td class="tg-yw4l">Yunus Emre Düşmez</td>
-    <td class="tg-yw4l">- Benim aklıma doğrudan, türkçe olmuşken hazır bir de çocuklara yönelik bir şeyler yapılabilir mi sorusu geldi. <br>
-						- Bir de konsol kod ekranının üstünde olsa veya sağ taraftaki görüntüleme ekranının altında olsa ve konsolda yazılar alt alta yazsa daha iyi olur gibi.</td>
-    <td class="tg-yw4l">22 Ağustos 2017</td>
-  </tr>
-
-<tr>
-	<td class="tg-yw4l">20</td>
-    <td class="tg-yw4l">Mehmet Can Ertan</td>
-    <td class="tg-yw4l">- Yazılan Türkçe kodun başka dildeki örneğin Python'daki karşılığı ana kodlama alanının sağ tarafına değişken değeri koymuşsunuz ya, ana kodlama ekranının sol tarafına da yazılan kodun orjinali nasıl gözükür onu yansıtabilir.. <br>
-				</td>
-    <td class="tg-yw4l">17 Mart 2018</td>
-  </tr>
-
-</table>
-
-<h3 id="thanks">Kim ne diyor?</h3>
-
-<p>Farklı disiplinden insanları proje hakkında verdiği görüşler ise şu şekilde:</p>
-
- <div class="carousel-inner">
-
-
-		 <!-- Quote 9 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="images/fatihToy.jpg"
-					   style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Çok güzel, temel algoritma kavramlarının öğrenilmesinde çok faydalı olur, İngilizce temelli dil bazı öğrenciler icin engel olabiliyor. </p>
-
-                  <small>Yrd. Doç Fatih Toy - İstanbul Medipol University</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-	 	 	 <!-- Quote 8 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="images/kadirAkin.png" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Gerçekten çok iyi bir iş çıkartmışsınız. Özellikle bir yazılım indirmeye ve kurmaya gerek kalmadan kodlama, programlamaya yeni başlayanlar için çok kullanışlı olmuş. İlk fırsatta 11 yaşındaki kardeşime nasıl yapıldığını öğretmeye çalışacağım. </p>
-
-					<!-- <br><p>Umarım yaptığınız işle Milli Eğitim Bakanlığı'nın dikkatini çekebilirsiniz. Ortaokul veya Lise yaşlarında programlama belki ileride bu dille öğretilir. İyi günler başarılar.</p>	-->
-
-                  <small>Kadir Akın - Quantum Engineering Center, ETH Zurich</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-
-          <!-- Quote 1 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAxAAAAAJGI5MzVhNGM1LWI5MDItNGUyNS1hMjg1LTc4M2Q5OTc3ZGU1ZA.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Bunu sonunda biri yapmaya başladı. Bu tür adımların özellikle çocuklar için çok faydalı olacağını düşünüyorum. Tebrik ederim, umarım projenin devamı gelir. Başarılar</p>
-                  <small>Onur Kağan Aldemir, Mimcrea'da Android Geliştiricisi</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-          <!-- Quote 2 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="images/mustafaDisci.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Harika bir çalışma olmuş. Emeğinize sağlık. Çocuklar rüya gördüğü dilde kodlamanın mantığını öğrenirse, hayal kurması daha kolay olur.</p>
-                  <small>Mustafa Dişçi, Ustafikirler Kurucusu</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-          <!-- Quote 3 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://i1.rgstatic.net/ii/profile.image/AS%3A279723289661453%401443702637737_l/Onder_Karagoz.png" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Kamu kurumlarında da özellikle genç arkadaşlarımızı, programlama ve programlama mantığını öğrenmeye teşvik ediyoruz. Çalışmanız bu anlamda bi kat daha değerli olduğuna inanıyorum. 7'den 70'e programlama.. Emeğiniz, gayretiniz için teşekkürler.</p>
-                  <small>Önder Karagöz, DSİ Proje Mühendisi</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-	    <!-- Quote 4 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="images/pervinBuyuk.png" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Türkçe metinsel kodlama da gerekli bence, ben ilkokuldaki yeğenime biraz öğrettim hem öğrendi hem de çok sevdi, buna açık küçükler için yapılmalı, geç bile kalındı hatta.</p>
-                  <small>Pervin Büyük, Öğretmen</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-	    <!-- Quote 5 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="images/handeCelikkanat.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Kesinlikle Türkçe olması daha kolay, programlamayı öğrenme yasini düşürmede etkili olur. Bundan insanları haberdar etmek lazım, özellikle okullara duyurmak lazım.</p>
-                  <small>Hande Çelikkanat, Dr. Bilgisayar Mühendisi</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-	    <!-- Quote 6 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="images/serdarCiftci.png" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Liseden yeni gelmiş, özellikle İngilizce hazırlık bölümü bulunmayan üniversitelerimizde; programlama mantığını giriş seviyesinde anlatmada önemli bir araç olacağını düşünmekteyim.</p>
-                  <small>Serdar Çiftçi, Dr. Bilgisayar Mühendisi</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-	 	<!-- Quote 7 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/10502014_10203544249300393_4563956649878387098_n.jpg?oh=a04d74c765cdb0cc017d4f906917246e&oe=59EAC1B7" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Keşke, lise yıllarında böyle bir imkanımız olsaydı. Programlama gençlik hayalimiz. Tükçenin matematiksel gramer yapısı programlama ifadelerine de gerçekten çok uygun. Sizleri tebrik ediyorum, bu bir ihtiyaçtı.</p>
-                  <small>Ali Kumaş, -</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-
-	 	<!-- Quote 7 -->
-          <div class="item">
-            <blockquote>
-              <div class="row">
-                <div class="col-sm-3 text-center">
-                  <img class="img-circle" src="images/sebuhiNevrouz.jpg" style="width: 100px;height:100px;">
-                </div>
-                <div class="col-sm-9">
-                  <p>Gerçekten üzerine düşülmesi gereken bir konu. Sizleri tebrik eder, başarılar dilerim.
-Dilin verdiği üretkenlik gücü hiç bir şeyde yoktur... </p>
-                  <small>Sebuhi Novruzovich, Türkolog</small>
-                </div>
-              </div>
-            </blockquote>
-          </div>
-
-
-
-
-        </div>
-
-<hr>
-
-
-<h3 id="source">Kaynak kodlara erişim?</h3>
-<p>
-	Bu proje açık kaynak olarak geliştirilmektedir, ünlü versiyonlama sistemi GitHub üzerinden online olarak erişebilir, fork edip kendi dilinizi de bu projeyi örnek alarak geliştirebilirsiniz.
-</p>
-
-<p>Dil geliştirmekla alakalı soruları da açık bir şekilde cevaplayabiliriz.</p>
-
-Github bağlantisi: <a href="https://github.com/mehmetakifakkus/turkceprogramlamadili">https://github.com/mehmetakifakkus/turkceprogramlamadili</a>
-
-
-<h2 id="versions">Sürüm Tarihçesi</h2>
-
-<ul>
- 	<li>
-		<strong>0.0.1 [3 Tem 2017]- </strong> Sadece değişken tanımlama, matematiksel işlemler, "eger", "degilse". Hemen hemen bütün komutlar görsellenebilir durumda.
-	</li>
-
- 	<li>
-		<strong>0.1.0 [12 Tem 2017]- </strong> "yinele", "sayarakYinele" gibi temel programlama komutlarında hatalar bulunduğu için ilk sürümde eklenmemişti. Bunlar da eklenince tekrarlı kod yazmak için gerekli komutlar mevcut oldu.
-	</li>
-
- 	<li>
-		<strong>0.1.1 [14 Tem 2017]- </strong> Türkçe karakter kullanımına geçilerek tamamen Türkçe haline getirildi, "yanlis" yerine "yanlış", "dogru" yerine "doğru" gibi ifadeler kullanılmaya başlandı.
-	</li>
-
-	<li>
-		<strong>0.2.1 [22 Tem 2017]- </strong> Editör kısmında önemli geliştirmeler yapıldı. Siyah beyaz üzerine olan editorde hem komutlar renkli hale getirildi, hem de imlecin bulunduğu satır belirgin hale getirildi.
-	</li>
-
-	<li>
-		<strong>0.2.1 [27 Tem 2017]- </strong> Çıktılar kısmındaki değişken güncellemeleri daha düzenli hale getirildi. Yorum satırı gibi olacak şekilde renklendirilmesi ve formatlanması sağlandı. (Ahmet Selman Bozkır'a teşekkürler)
-	</li>
-
-	<li>
-		<strong>0.2.2 [29 Tem 2017]- </strong> Editörün satır sayısının artması ve azalması durumunda butonların yerinin kayarak editöre uyum sağlaması sağlandı.
-	</li>
-
-	<li>
-		<strong>0.2.3 [1 Ağu 2017]- </strong> Alt sağ köşeye "Temizle" ve "Kaydet" isminde 2 buton eklendi. Bunlara fonksiyon kazandırıldı.
-	</li>
-
-	<li>
-		<strong>0.2.4 [3 Ağu 2017]- </strong> "eğer değilse" komutunda bir hata vardı. Hatanın farkına vardıldı ve giderildi (Alican Yıldırım'a teşekkürler). Hakkında kısmı tamamlandı.
-	</li>
-
-	<li>
-		<strong>0.2.5 [5 Ağu 2017]- </strong> Kodlama Rehberi sekmesi konuları belirlendi. Değişkenler ve işlemleri ile İşleçler (Operatorler) konusuna giriş yapıldı.
-	</li>
-
-	<li>
-		<strong>0.2.6 [7 Ağu 2017]- </strong> Kodlama Rehberi'nde Seçme ve Döngü komutları konuları tamamlandı. Örnek kodlar hazırlanıp konuldu.
-	</li>
-
-	<li>
-		<strong>0.2.7 [9 Ağu 2017]- </strong> Değişken isimlerinde "_" karakterinin kullanılması eklendi. (Muharrem Engin'e teşekkürler.)
-	</li>
-
-	<li>
-		<strong>0.2.8 [11 Ağu 2017]- </strong> Ondalıklı sayılar sisteme eklendi. İşlem önceliğini yapmayı sağlayan parantez kullanımının tanınması sağlandı.
-	</li>
-
-	<li>
-		<strong>0.3.0 [13 Ağu 2017]- </strong> Bazı temel matematik fonksiyonları eklendi. "taban", "tavan", "mutlak", "karekök".
-	</li>
-
-	<li>
-		<strong>0.3.1 [16 Ağu 2017]- </strong> "eğer" ve "yinele" komutlarının iç içe çalıştırılabilmesi sağlandı.
-	</li>
-
-	<li>
-		<strong>0.3.2 [20 Ağu 2017]- </strong> Kodların yazılması esnasında otomatik olarak tamamlanması kısmı eklendi. Çalıştır butonuna basınca kod hata içeriyorsa bunun hangi satırda olduğu belirtilmesini sağlayacak kısımlar eklendi.
-	</li>
-
-
-	<li>
-		<strong>0.3.3 [22 Ağu 2017]- </strong> 	Örnek kodlara açıklamalar da eklendi, böylece kodlamanın ne amaçla yapıldığı hakkında kullanıcı bilgi sahibi olmaktadır. "değ" kelimesinin de değişken tanımı yapmak için kısaltma olarak kullanılması sağlandı.
-	</li>
-
-	<li>
-		<strong>0.3.4 [26 Ağu 2017]- </strong> 	Çalışma hızı ayarlar butonuna basılarak gelen pencereden ayarlanabilmektedir. 2 saniyede bir satır kod çalışabilmesinin yanında saniyede 5 satır kodun çalışabilmesi de mümkündür.
-	</li>
-
-
-	<li>
-		<strong>0.3.5 [27 Ağu 2017]- </strong> 	Kodlama ekranının tam ekran yapılabilmesi eklendi.
-	</li>
-
-	<li>
-		<strong>0.4.0 [28 Ağu 2017]- </strong> 	Mantiksal ifadeler "ve", "veya" ile bağlanabilir hale geldi. Bunların "eğer" veya "yinele" gibi ifadeler ile beraber kullanılması sağlandı.
-	</li>
-
-	<li>
-		<strong>0.4.1 [2 Eyl 2017]- </strong> Negatif sayılar tanımlandı ve sisteme dahil edildi.
-	</li>
-	<li>
-		<strong>0.4.2 [5 Eyl 2017]- </strong> Yaz komutu hem yazı türünde hem de sayı türünde ifadeleri parametre olarak alabilmektedir.
-	</li>
-	<li>
-		<strong>0.4.3 [8 Eyl 2017]- </strong> Örnek kodlar eklendi. Kodlar başlangıç seviyesi, orta seviye ve ileri seviye şeklinde kısımlara ayrıldı.
-	</li>
-	<li>
-		<strong>0.4.4 [12 Eyl 2017]- </strong>  Kullanıcılardan gelen kodlar anasayfaya dahil edildi.
-	</li>
-	<li>
-		<strong>0.4.5 [19 Eyl 2017]- </strong> Rehber kısmında güncellemeler yapıldı. Gitbook kitap linki eklendi.
-	</li>
-
-	<li>
-		<strong>0.4.6 [20 Eyl 2017]- </strong> Kodlama ekranındaki kayma hatası giderildi.
-	</li>
-
-</ul>
-
-
-<h2 id="compatibility">Uyumluluklar hakkında</h2>
-
-<p>Kodların çıktıları ve animasyon halinde görüntülenebilmesi aşağıdaki tarayıcı ve versiyonlarda problemsiz olarak mümkündür:</p>
-
-<ul>
-  <li>Internet Explorer 8+</li>
-  <li>Edge</li>
-  <li>Firefox</li>
-  <li>Chrome</li>
-  <li>Safari</li>
-  <li>Opera</li>
-</ul>
-
-
-<h2 id="sources">Kodlama İçin Bazı Kaynaklar</h2>
-
-<p>Kodlama yapabilmek için başka interaktif kaynaklar da mevcut, bunlar daha çok çocukların eğlenerek öğrenebileceği tarzda kaynaklar.</p>
-
-<p>Şu araçlar sürükle bırakarak kodlama yapmaya imkan sağlamaktadır:</p>
-<ul>
-  <li>
-	  <h4>Google Made with Code</h4>
-	  <a href="https://www.madewithcode.com/">Bu adreste</a> bir robota farklı görevler yaptırmaktasınız. Oldukça keyifli.
-  </li>
-  <li>
-	  <h4>Scratch</h4>
-	  <a href="https://www.madewithcode.com/">Bu adreste</a> bir kediyi ileri, geri, yukarı aşağı hareket ettirebilir, ses çıkarmasını sağlayabilir, bunları farklı yollarla tetikleyebilirsiniz (klavyeye basınca, duvara carpınca vs.)
-  </li>
-	<li>Edge</li>
-
-</ul>
-
-<br>
-<p>Şu araçlar metinsel kodlama yapmaya imkan sağlamaktadır:</p>
-<ul>
-
-	<li>
-	  <h4>Robomind</h4>
-	  <a href="	https://www.robomindacademy.com/go/robomind/home">Robomind</a> sayesinde bir kediyi ileri, geri, yukarı aşağı hareket ettirebilir, ses çıkarmasını sağlayabilir, bunları farklı yollarla tetikleyebilirsiniz (klavyeye basınca, duvara carpınca vs.)
-  </li>
-
-	<li>
-	  <h4>Kodris</h4>
-	  <a href="https://www.kodris.com/">Kodris ile</a> farklı karakterleri ileri, geri, yukarı aşağı hareket ettirerek bir hedef noktaya götürmeye çalışıyorsunuz. Python programlama dilini oyunlaştırarak öğretme amacını güdüyor bu uyguluma. Senelik ücreti var, veli ve öğretmen desteği sağlıyor
-  </li>
-</ul>
-
-
-  </div>
-
-  <footer id="footer">
-	Copyright © 2016 - 2017 <a href="https://turkceprogramlamadili.github.io/">Türkçe Programlama Dili</a>
-	•
-	<a href="https://github.com/turkceprogramlamadili/">Kaynak Kod</a>
-	•
+	<section class="kart bolum metin" id="nedir">
+		<h2>Nedir?</h2>
+		<h3>Türkçe, görsel ve pratik bir öğrenme dili</h3>
+		<p>Yürütülen bu proje; bir programlama dili <strong>Türkçe olabilir mi</strong>, hiç bilmeyenlerin ya da deneyim sahibi olmayanların <strong>öğrenmesine katkı sağlayabilir mi</strong> gibi sorulara cevap aranması amacıyla herhangi ticari bir amaç gütmeden ortaya konmuştur.</p>
+		<p>Amaç, evrensel bir dil geliştirmekten ziyade, öğretmede kullanılabilecek <strong>pratik bir dil</strong> olmasıdır.</p>
+		<p>Sadece dil terimlerini Türkçeleştirmekten ziyade onları <strong>görselleştirmeye</strong> çalışması ile programlamayı yeni öğrenenlere faydalı bir biçimde öğreteceği düşünülmektedir. Yazım dili olarak <strong>C/C++/Java ve Python</strong> dillerini benimsemesi bu dillere geçişi kolaylaştırması için amaçlanmıştır.</p>
+		<p>Geliştirilmekte olan bu dille irtibatta kalmak veya katkıda bulunmak isterseniz aktif Facebook sayfasını veya ilgili grubu <a href="https://www.facebook.com/turkceprogramlamadili">buradan</a> takip edebilirsiniz.</p>
+	</section>
+
+	<section class="kart bolum metin" id="features">
+		<h2>Dilin özellikleri</h2>
+		<h3>Söz dizimi C/Java ve Python'dan esinlendi</h3>
+		<p>Kullanılan dilin söz dizimi (syntax) özgün olarak üretilmiştir. Her programlama dilinde olduğu gibi esinlendiği birkaç güncel programlama dili mevcuttur: Java/C++ dil ailesi ile Python. Java dil ailesinden bileşik komutların süslü parantezde yazılması alınmış, satır sonlarının noktalı virgülle bitme zorunluluğu olmaması yönüyle de Python örnek alınmıştır.</p>
+		<p>Programlama öğrenen kişinin programın çalışma mantığını anlamasına yardımcı olması hedeflenen dilin özellikleri:</p>
+		<div class="ozellikler">
+			<div class="ozellik"><div class="simge">💬</div><b>Anlaması kolay</b><span>Doğal konuşma diline yakın Türkçe komutlar: eğer, değilse, yinele, yaz…</span></div>
+			<div class="ozellik"><div class="simge">🎯</div><b>Sade</b><span>Sadece amaca özgü olacak kadar detaylı; gereksiz detaylar yok.</span></div>
+			<div class="ozellik"><div class="simge">🌐</div><b>Web'de çalışır</b><span>Kurulum gerekmez; kod yazılır, adım adım çalıştırılır ve çıktısı gözlemlenir.</span></div>
+		</div>
+		<p>Bu motivasyonla, nasıl bir dil hedeflediğimizi daha kitabi bir şekilde anlatalım:</p>
+		<ul>
+			<li><strong>Dinamik tipleme (dynamically typed):</strong> Yani değişkenlere veri türü yazılmayan bir dil. Bu noktada JavaScript ya da Python diline benzetildiği söylenebilir. Buradaki amaç, kullanıcıyı gereksiz detaylara boğmadan ve çalışma aşamasında performans kaygısı gütmeden temel programlama öğelerini anlatmaya yönelik bir dil.</li>
+			<li><strong>Nesne yönelimli (object oriented):</strong> Güncel birçok dilde standart halini almış olmasından ve karmaşık (complex) veri yapıları gibi kavramların kodlanabilmesi ve öğretilebilmesi adına nesne yapısı ve NYP (nesne yönelimli programlama) önemli bir hal almaktadır. Ayrıca, bildiğiniz üzere veri yapılarındaki her bir eleman bir nesne olarak düşünülebilir. Örneğin bağlı listede (linked list) veya çizge (graph) üzerinde her bir eleman diğer elemanlarla etkileşim halindedir ve bazı fonksiyonları yerine getirirler. Bu nedenle veri yapılarının öğesi olan her bir eleman bir nesnedir desek çok da yanlış demiş olmayız.</li>
+			<li><strong>Üst seviyeli (high level):</strong> Buradaki amacımız ise kıyasla daha kolay öğrenilen ve uygulanan, yeni başlayanların çabucak anlaması için en uygun dil paradigması olan üst seviye programlama dilini model almaktır.</li>
+		</ul>
+	</section>
+
+	<section class="kart bolum metin" id="technical">
+		<h2>Teknik altyapı</h2>
+		<h3>Tarayıcıda çalışan bir ayrıştırıcı ve yorumlayıcı</h3>
+		<p>Bilindiği üzere her bir programlama dili, makinenin anlayabileceği makine dili üzerine soyutlamalar yapılarak geliştirilir. Biraz daha detaylı bahsedersek; bu, bir takım özel araçlar -<strong>söz dizimi hatası</strong> (syntax error) için <strong>ayrıştırıcı</strong> (parser), bunları anlamlı hale getirip makineye (bilgisayar donanımına) ileten <strong>yorumlayıcı</strong> (interpreter) ya da <strong>derleyici</strong> (compiler)- kullanılarak yapılır.</p>
+		<p>Yukarıda bahsettiğimiz gereksinimlerin karşılanabilmesi için -web üzerinde kodlanabilen ve çıktıları alınabilen/gözlemlenebilen- bahsedilen araçların da web tarayıcısının imkân verdiği JavaScript dilinde yazılması icap etmektedir. JavaScript <strong>istemci</strong> (client) tarafında çalıştığından sunucu taraflı sistemlere göre daha <strong>çevik</strong> (dynamic) uygulamalar yapılması söz konusu olabilmektedir.</p>
+		<p>Bu projede ayrıştırıcı (parser) olarak JavaScript tabanlı <strong>PEG.js</strong> kütüphanesi kullanılmaktadır. PEG.js, farklı dillerde yazılmış <a href="http://dinosaur.compilertools.net/yacc/">Yacc</a> (Yet Another Compiler Compiler), <a href="https://www.gnu.org/software/bison/">Bison</a> ve <a href="http://www.antlr.org/">ANTLR</a> benzeri bir ayrıştırıcı üretecidir. Sözü geçen bu araçlar ise sırasıyla C, C++ ve Java dillerinde yazılmıştır. Ayrıştırmadan sonra elde edilen parçaların anlam kazanması ve işlenmesi için ise JavaScript dili kullanılmaktadır.</p>
+	</section>
+
+	<section class="kart bolum metin" id="thanks">
+		<span id="developer"></span>
+		<h2>Kim ne diyor?</h2>
+		<p>Farklı disiplinlerden insanların proje hakkında verdiği görüşler:</p>
+		<div class="yorumlar">
+				<figure class="yorum"><p>Çok güzel, temel algoritma kavramlarının öğrenilmesinde çok faydalı olur, İngilizce temelli dil bazı öğrenciler icin engel olabiliyor.</p>
+					<figcaption class="kisi"><img src="images/fatihToy.jpg" alt="Yrd. Doç Fatih Toy" loading="lazy"><div><b>Yrd. Doç Fatih Toy</b><small>İstanbul Medipol University</small></div></figcaption></figure>
+				<figure class="yorum"><p>Gerçekten çok iyi bir iş çıkartmışsınız. Özellikle bir yazılım indirmeye ve kurmaya gerek kalmadan kodlama, programlamaya yeni başlayanlar için çok kullanışlı olmuş. İlk fırsatta 11 yaşındaki kardeşime nasıl yapıldığını öğretmeye çalışacağım.</p>
+					<figcaption class="kisi"><img src="images/kadirAkin.png" alt="Kadir Akın" loading="lazy"><div><b>Kadir Akın</b><small>Quantum Engineering Center, ETH Zurich</small></div></figcaption></figure>
+				<figure class="yorum"><p>Bunu sonunda biri yapmaya başladı. Bu tür adımların özellikle çocuklar için çok faydalı olacağını düşünüyorum. Tebrik ederim, umarım projenin devamı gelir. Başarılar</p>
+					<figcaption class="kisi"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAxAAAAAJGI5MzVhNGM1LWI5MDItNGUyNS1hMjg1LTc4M2Q5OTc3ZGU1ZA.jpg" alt="Onur Kağan Aldemir" loading="lazy"><div><b>Onur Kağan Aldemir</b><small>Mimcrea&#x27;da Android Geliştiricisi</small></div></figcaption></figure>
+				<figure class="yorum"><p>Harika bir çalışma olmuş. Emeğinize sağlık. Çocuklar rüya gördüğü dilde kodlamanın mantığını öğrenirse, hayal kurması daha kolay olur.</p>
+					<figcaption class="kisi"><img src="images/mustafaDisci.jpg" alt="Mustafa Dişçi" loading="lazy"><div><b>Mustafa Dişçi</b><small>Ustafikirler Kurucusu</small></div></figcaption></figure>
+				<figure class="yorum"><p>Kamu kurumlarında da özellikle genç arkadaşlarımızı, programlama ve programlama mantığını öğrenmeye teşvik ediyoruz. Çalışmanız bu anlamda bi kat daha değerli olduğuna inanıyorum. 7&#x27;den 70&#x27;e programlama.. Emeğiniz, gayretiniz için teşekkürler.</p>
+					<figcaption class="kisi"><img src="https://i1.rgstatic.net/ii/profile.image/AS%3A279723289661453%401443702637737_l/Onder_Karagoz.png" alt="Önder Karagöz" loading="lazy"><div><b>Önder Karagöz</b><small>DSİ Proje Mühendisi</small></div></figcaption></figure>
+				<figure class="yorum"><p>Türkçe metinsel kodlama da gerekli bence, ben ilkokuldaki yeğenime biraz öğrettim hem öğrendi hem de çok sevdi, buna açık küçükler için yapılmalı, geç bile kalındı hatta.</p>
+					<figcaption class="kisi"><img src="images/pervinBuyuk.png" alt="Pervin Büyük" loading="lazy"><div><b>Pervin Büyük</b><small>Öğretmen</small></div></figcaption></figure>
+				<figure class="yorum"><p>Kesinlikle Türkçe olması daha kolay, programlamayı öğrenme yasini düşürmede etkili olur. Bundan insanları haberdar etmek lazım, özellikle okullara duyurmak lazım.</p>
+					<figcaption class="kisi"><img src="images/handeCelikkanat.jpg" alt="Hande Çelikkanat" loading="lazy"><div><b>Hande Çelikkanat</b><small>Dr. Bilgisayar Mühendisi</small></div></figcaption></figure>
+				<figure class="yorum"><p>Liseden yeni gelmiş, özellikle İngilizce hazırlık bölümü bulunmayan üniversitelerimizde; programlama mantığını giriş seviyesinde anlatmada önemli bir araç olacağını düşünmekteyim.</p>
+					<figcaption class="kisi"><img src="images/serdarCiftci.png" alt="Serdar Çiftçi" loading="lazy"><div><b>Serdar Çiftçi</b><small>Dr. Bilgisayar Mühendisi</small></div></figcaption></figure>
+				<figure class="yorum"><p>Keşke, lise yıllarında böyle bir imkanımız olsaydı. Programlama gençlik hayalimiz. Tükçenin matematiksel gramer yapısı programlama ifadelerine de gerçekten çok uygun. Sizleri tebrik ediyorum, bu bir ihtiyaçtı.</p>
+					<figcaption class="kisi"><img src="https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-1/c0.0.160.160/p160x160/10502014_10203544249300393_4563956649878387098_n.jpg?oh=a04d74c765cdb0cc017d4f906917246e&amp;oe=59EAC1B7" alt="Ali Kumaş" loading="lazy"><div><b>Ali Kumaş</b></div></figcaption></figure>
+				<figure class="yorum"><p>Gerçekten üzerine düşülmesi gereken bir konu. Sizleri tebrik eder, başarılar dilerim.
+Dilin verdiği üretkenlik gücü hiç bir şeyde yoktur...</p>
+					<figcaption class="kisi"><img src="images/sebuhiNevrouz.jpg" alt="Sebuhi Novruzovich" loading="lazy"><div><b>Sebuhi Novruzovich</b><small>Türkolog</small></div></figcaption></figure>
+		</div>
+	</section>
+
+	<section class="kart bolum metin" id="acknowledgements">
+		<h2>Katkıda bulunanlar</h2>
+		<h3>Fikirleriyle projeye yön verenler</h3>
+		<p>Dilin aktif olarak 2 geliştiricisi bulunmaktadır, ama fikir verme anlamında birçok kişi projenin elinden tutmuştur. Aşağıda bir şekilde iletişime geçmiş ve değerli fikirlerini paylaşmış 21 kişinin önerileri yer alıyor:</p>
+		<div class="katkilar">
+				<div class="katki"><b>Harun Kaya</b><small>· 30 Temmuz 2017</small><ul><li>syntax veya runtime errorlar hakkında geliştiremeler olsa iyi olur</li><li>değişken tanımlarken &quot;var&quot; değilde &quot;değişken&quot; tipini kullanılması daha makul olmaz mı?</li><li>adımların ilerleme hızını ayarlabileceğimiz kaydırıcı (slider) koyarsan daha etkileşimli olur gibi sanki?</li></ul></div>
+				<div class="katki"><b>Ahmet Sarıcı</b><small>· 2 Ağustos 2017</small><ul><li>Bu dil diğer dillerden farklı jenerik bir dil olduğundan, bu dilden başka dillerde çıktı üretmek mümkün olabilir mi? Mesela C veya Java gibi.</li><li>Rehber kısmında başlıkları sayfa sayfa görüntülense daha iyi olmaz mı?</li></ul></div>
+				<div class="katki"><b>Hande Çelikkanat</b><small>· 31 Temmuz 2017</small><ul><li>&quot;hatali kod&quot; yazılsa süper olur, sonra detayli aciklama girersin, bu ilk şimdi bakacak kullanıcılar icin iyi olur.</li></ul></div>
+				<div class="katki"><b>Salih Can Çamdere</b><small>· 1 Ağustos 2017</small><ul><li>&quot;var&quot; yerine Türkçe bir şey yapılsa?</li></ul></div>
+				<div class="katki"><b>Caner Topçu</b><small>· 2 Ağustos 2017</small><ul><li>Belki 3-4 modlu birşey olsa, önce şekillerle flowchart, sonra türkçe kodlar, sonra 2 tane programlama kod örnegi gibi modları olabilir. hatta flowchatı kademeli öğrenme şeklinde oyunlaştırarak yapabilirsin.</li></ul></div>
+				<div class="katki"><b>Kadir Fırat Uyanık</b><small>· 2 Ağustos 2017</small><ul><li>&quot;var&quot; yerine farklı bir kelime, özellikle Türkçe kullanılması mümkün olur mu?</li></ul></div>
+		</div>
+		<details class="daha-fazla">
+			<summary>Diğer 15 kişinin önerilerini göster</summary>
+			<div class="katkilar">
+				<div class="katki"><b>Murat Akın</b><small>· 5 Ağustos 2017</small><ul><li>Genel olarak bu tarz eğitim platformları aşamalı eğitim metodu kullanıyor. Video ile anlatıp bunun uygulamasını yaptırıyor ve doğruluğunu kontrol Edip öneride bulunuyor..</li><li>Kodlama sayfasında yazdığımız kodları txt olarak kaydetmk mümkün ancak daha önceden masaüstüne yazdığımız txtleri çağırma olursa güzel olur diye düşünüyorum.</li></ul></div>
+				<div class="katki"><b>Caner Topçu</b><small>· 7 Ağustos 2017</small><ul><li>Kodu yazarkeninfo tuşuna bastığımda sayfa gitmeden gelse bu bilgiler, popup window gibi, birşeyler yazarken kodları incelemek istiyorum ama doğru mu yanlışmı diye diğer sayfaya gidince kopuyor.</li><li>Bir de geri dönmek için en başa geri dönmem gerekiyor her zaman, mesela ana sayfa butonu kenarda bi yerde sabit durabilir.</li></ul></div>
+				<div class="katki"><b>Selin Coşar</b><small>· 7 Ağustos 2017</small><ul><li>Merhaba, benimki naçizane bir istek. Kapaktaki görüntüde &quot;online&quot; kelimesinden ziyade farklı bir kelime geçse idi mutlu ederdi.</li></ul></div>
+				<div class="katki"><b>Cemal Aker</b><small>· 8 Ağustos 2017</small><ul><li>Video derslerle çekilip olayı canlandırabilirsin biraz.</li><li>Geliştirilen dil Ebob (En büyük ortak bölen) bulma problemi mesela öklid algoritması ile algoritması yazılabilir. Yani, aslında bi yandan da algoritma ve veri yapıları eğitimi de verilebilir. Bu sayede de hem dil gelişir hem de kullanım alanı doğar.</li></ul></div>
+				<div class="katki"><b>Hüseyin Cahit Kebapçıoğlu</b><small>· 8 Ağustos 2017</small><ul><li>Forum açılır ve bir topluluk oluşturulursa çok iyi olur, bu sayede insanlar hem kodlarını paylaşabilirler hem de sorun yaşadıklarında birbirlerine danışabilirler.</li><li>Üyelik sistemi konulup ufak daily challange&#x27;lar ve görevlerle kullanıcıların puan kazanması sağlanabilir.Bu sayede kullanıcılar forumda farklı yerlere sahip olabilirler.</li></ul></div>
+				<div class="katki"><b>Nevzat Sevim</b><small>· 9 Ağustos 2017</small><ul><li>Kod syntax error oldugunda calistir dedigimiz de ya da demeden. Hata oldugunu soylese daha guzel olabilir.</li><li>Suan anladigim kadariyla sadece bu web sitesi uzerinden calisiyor. Ileride baska ortamlarda calistirabilme ihtimaline binaen, Kodlari diger ortamlara entegre olabilecek sekilde yazmak mantikli olabilir. Mesala windows uygulamasi uzerinden kod yazmayi ogreniyor olsun, belki surekli internetde olmayabilir offline mod da calisabilmesi icin de boyle bir sey yapabilirsiniz.</li></ul></div>
+				<div class="katki"><b>İrfan Düzenli</b><small>· 15 Ağustos 2017</small><ul><li>Kaç değişken kullanılmışsa o kadar var kullanmam gerekiyor. Bu da gereksiz tekrara neden olacak. Değişkene herhangi bir değer vermezsem çalışmıyor. Bunları düzeltirseniz daha iyi olacaktır.</li></ul></div>
+				<div class="katki"><b>Kadir Kara</b><small>· 17 Ağustos 2017</small><ul><li>Hataların satınırı ve yerini gösteren hata dökümü yeni öğrenen birisinin işine epey yarar.</li><li>Türkçe Programlama Dili&#x27;nin gelişim sürecini raporlamak ta daha sonra bu işe gireceklere bilgi vermesi açısından raporlanabilir.</li><li>Sürekli Eğitim Merkezi gibi yerlerde Workshop verilerek dil tanıtılabilir.</li><li>Programlamaya yeni başlayan kişilerle aracın işe yararlığı test edilebilir.</li></ul></div>
+				<div class="katki"><b>Kadir Akın</b><small>· 17 Ağustos 2017</small><ul><li>Websitesinin ismi çok uzun. Daha kısa ve kolay yazılacak bir websitesi ismi bulursanız kullancılar açısından çok daha kolay olacaktır.</li><li>Bir de sanırım henüz fonksiyon tanımlaması özelliğini yapmamışsınız. Sanırım eklenecek özellikler arasında aklınızdadır.</li></ul></div>
+				<div class="katki"><b>Efe Tiryaki</b><small>· 17 Ağustos 2017</small><ul><li>Turkcenin yazim cumle yapisina gore kurgulamakta fikir olarak ilginc olabilir. Örnegin:</li><li>eğer (a&lt;5) ise {bir şey yap} (a &lt; 5) ise {bir şey yap} değilse {bir şey yap} .....</li><li>(a&lt;5) iken {a++} (while döngüsü)</li><li>değisken x={1,2,3} ; x herbiri için{ birseyler yap}</li><li>Bir de sanırım henüz fonksiyon tanımlaması özelliğini yapmamışsınız. Sanırım eklenecek özellikler arasında aklınızdadır.</li></ul></div>
+				<div class="katki"><b>Fatih Toy</b><small>· 18 Ağustos 2017</small><ul><li>Bir önerim syntaxda gelenekselin dışına çıkıp Türkçe cümle yapısını taklit etmek olabilir. Öğrenciler konuştukları gibi kod yazabilirler ise çok faydalı olur diye düşünüyorum.</li></ul></div>
+				<div class="katki"><b>Mustafa Yemural</b><small>· 21 Ağustos 2017</small><ul><li>Eğer web veya mobil gibi alanlarda uygulama geliştirmek gibi bir amacı olacaksa bence c tipi anahtar kelimelerin Türkçe&#x27;ye çevrilmesinden ziyade özgün bir syntax ve semantic kullanılarak çok güzel bir şeyler çıkabilir. Başarılar...</li></ul></div>
+				<div class="katki"><b>Mehmet Emin Fedar</b><small>· 22 Ağustos 2017</small><ul><li>for yerine &quot;sayarakYinele&quot; değil de &quot;say&quot; veya &quot;saydir&quot; gibi kısa şeyler kullanılabilir. &quot;değişken&quot; yerine (o da kalsın tamam da ek olarak:) &quot;değ&quot; denebilir. Tabi bunun eğitim amaçlı olduğunu düşünürsek verilen isimler gayet de iyi :)</li></ul></div>
+				<div class="katki"><b>Yunus Emre Düşmez</b><small>· 22 Ağustos 2017</small><ul><li>Benim aklıma doğrudan, türkçe olmuşken hazır bir de çocuklara yönelik bir şeyler yapılabilir mi sorusu geldi.</li><li>Bir de konsol kod ekranının üstünde olsa veya sağ taraftaki görüntüleme ekranının altında olsa ve konsolda yazılar alt alta yazsa daha iyi olur gibi.</li></ul></div>
+				<div class="katki"><b>Mehmet Can Ertan</b><small>· 17 Mart 2018</small><ul><li>Yazılan Türkçe kodun başka dildeki örneğin Python&#x27;daki karşılığı ana kodlama alanının sağ tarafına değişken değeri koymuşsunuz ya, ana kodlama ekranının sol tarafına da yazılan kodun orjinali nasıl gözükür onu yansıtabilir..</li></ul></div>
+			</div>
+		</details>
+
+		<h4 id="source">Kaynak kodlara erişim</h4>
+		<p>Bu proje açık kaynak olarak geliştirilmektedir. GitHub üzerinden erişebilir, fork edip kendi dilinizi de bu projeyi örnek alarak geliştirebilirsiniz. Dil geliştirmekle alakalı soruları da açık bir şekilde cevaplayabiliriz.</p>
+		<p>GitHub bağlantısı: <a href="https://github.com/mehmetakifakkus/turkceprogramlamadili">github.com/mehmetakifakkus/turkceprogramlamadili</a></p>
+	</section>
+
+	<section class="kart bolum" id="versions">
+		<h2>Sürüm tarihçesi</h2>
+		<div class="zaman">
+					<div class="surum yeni"><span class="etiket"><b>2.0</b> Kasım 2026</span><p>Yeni öğrenme modu: adım adım çalıştırma, hafıza kutuları, koşul açıklamaları, gece modu ve yenilenen Rehber ile Hakkında sayfaları. C diline çeviri baştan yazıldı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.4.6</b> 20 Eyl 2017</span><p>Kodlama ekranındaki kayma hatası giderildi.</p></div>
+					<div class="surum"><span class="etiket"><b>0.4.5</b> 19 Eyl 2017</span><p>Rehber kısmında güncellemeler yapıldı. Gitbook kitap linki eklendi.</p></div>
+					<div class="surum"><span class="etiket"><b>0.4.4</b> 12 Eyl 2017</span><p>Kullanıcılardan gelen kodlar anasayfaya dahil edildi.</p></div>
+					<div class="surum"><span class="etiket"><b>0.4.3</b> 8 Eyl 2017</span><p>Örnek kodlar eklendi. Kodlar başlangıç seviyesi, orta seviye ve ileri seviye şeklinde kısımlara ayrıldı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.4.2</b> 5 Eyl 2017</span><p>Yaz komutu hem yazı türünde hem de sayı türünde ifadeleri parametre olarak alabilmektedir.</p></div>
+		</div>
+		<details class="daha-fazla">
+			<summary>Daha eski 20 sürümü göster</summary>
+			<div class="zaman">
+					<div class="surum"><span class="etiket"><b>0.4.1</b> 2 Eyl 2017</span><p>Negatif sayılar tanımlandı ve sisteme dahil edildi.</p></div>
+					<div class="surum"><span class="etiket"><b>0.4.0</b> 28 Ağu 2017</span><p>Mantiksal ifadeler &quot;ve&quot;, &quot;veya&quot; ile bağlanabilir hale geldi. Bunların &quot;eğer&quot; veya &quot;yinele&quot; gibi ifadeler ile beraber kullanılması sağlandı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.3.5</b> 27 Ağu 2017</span><p>Kodlama ekranının tam ekran yapılabilmesi eklendi.</p></div>
+					<div class="surum"><span class="etiket"><b>0.3.4</b> 26 Ağu 2017</span><p>Çalışma hızı ayarlar butonuna basılarak gelen pencereden ayarlanabilmektedir. 2 saniyede bir satır kod çalışabilmesinin yanında saniyede 5 satır kodun çalışabilmesi de mümkündür.</p></div>
+					<div class="surum"><span class="etiket"><b>0.3.3</b> 22 Ağu 2017</span><p>Örnek kodlara açıklamalar da eklendi, böylece kodlamanın ne amaçla yapıldığı hakkında kullanıcı bilgi sahibi olmaktadır. &quot;değ&quot; kelimesinin de değişken tanımı yapmak için kısaltma olarak kullanılması sağlandı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.3.2</b> 20 Ağu 2017</span><p>Kodların yazılması esnasında otomatik olarak tamamlanması kısmı eklendi. Çalıştır butonuna basınca kod hata içeriyorsa bunun hangi satırda olduğu belirtilmesini sağlayacak kısımlar eklendi.</p></div>
+					<div class="surum"><span class="etiket"><b>0.3.1</b> 16 Ağu 2017</span><p>&quot;eğer&quot; ve &quot;yinele&quot; komutlarının iç içe çalıştırılabilmesi sağlandı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.3.0</b> 13 Ağu 2017</span><p>Bazı temel matematik fonksiyonları eklendi. &quot;taban&quot;, &quot;tavan&quot;, &quot;mutlak&quot;, &quot;karekök&quot;.</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.8</b> 11 Ağu 2017</span><p>Ondalıklı sayılar sisteme eklendi. İşlem önceliğini yapmayı sağlayan parantez kullanımının tanınması sağlandı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.7</b> 9 Ağu 2017</span><p>Değişken isimlerinde &quot;_&quot; karakterinin kullanılması eklendi. (Muharrem Engin&#x27;e teşekkürler.)</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.6</b> 7 Ağu 2017</span><p>Kodlama Rehberi&#x27;nde Seçme ve Döngü komutları konuları tamamlandı. Örnek kodlar hazırlanıp konuldu.</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.5</b> 5 Ağu 2017</span><p>Kodlama Rehberi sekmesi konuları belirlendi. Değişkenler ve işlemleri ile İşleçler (Operatorler) konusuna giriş yapıldı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.4</b> 3 Ağu 2017</span><p>&quot;eğer değilse&quot; komutunda bir hata vardı. Hatanın farkına vardıldı ve giderildi (Alican Yıldırım&#x27;a teşekkürler). Hakkında kısmı tamamlandı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.3</b> 1 Ağu 2017</span><p>Alt sağ köşeye &quot;Temizle&quot; ve &quot;Kaydet&quot; isminde 2 buton eklendi. Bunlara fonksiyon kazandırıldı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.2</b> 29 Tem 2017</span><p>Editörün satır sayısının artması ve azalması durumunda butonların yerinin kayarak editöre uyum sağlaması sağlandı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.1</b> 27 Tem 2017</span><p>Çıktılar kısmındaki değişken güncellemeleri daha düzenli hale getirildi. Yorum satırı gibi olacak şekilde renklendirilmesi ve formatlanması sağlandı. (Ahmet Selman Bozkır&#x27;a teşekkürler)</p></div>
+					<div class="surum"><span class="etiket"><b>0.2.1</b> 22 Tem 2017</span><p>Editör kısmında önemli geliştirmeler yapıldı. Siyah beyaz üzerine olan editorde hem komutlar renkli hale getirildi, hem de imlecin bulunduğu satır belirgin hale getirildi.</p></div>
+					<div class="surum"><span class="etiket"><b>0.1.1</b> 14 Tem 2017</span><p>Türkçe karakter kullanımına geçilerek tamamen Türkçe haline getirildi, &quot;yanlis&quot; yerine &quot;yanlış&quot;, &quot;dogru&quot; yerine &quot;doğru&quot; gibi ifadeler kullanılmaya başlandı.</p></div>
+					<div class="surum"><span class="etiket"><b>0.1.0</b> 12 Tem 2017</span><p>&quot;yinele&quot;, &quot;sayarakYinele&quot; gibi temel programlama komutlarında hatalar bulunduğu için ilk sürümde eklenmemişti. Bunlar da eklenince tekrarlı kod yazmak için gerekli komutlar mevcut oldu.</p></div>
+					<div class="surum"><span class="etiket"><b>0.0.1</b> 3 Tem 2017</span><p>Sadece değişken tanımlama, matematiksel işlemler, &quot;eger&quot;, &quot;degilse&quot;. Hemen hemen bütün komutlar görsellenebilir durumda.</p></div>
+			</div>
+		</details>
+	</section>
+
+	<section class="kart bolum metin" id="compatibility">
+		<h2>Uyumluluk</h2>
+		<p>Kodların çalıştırılması ve adım adım gösterilmesi, güncel sürümleriyle şu tarayıcılarda sorunsuz olarak mümkündür: <strong>Chrome</strong>, <strong>Edge</strong>, <strong>Firefox</strong>, <strong>Safari</strong> ve <strong>Opera</strong>. Internet Explorer artık desteklenmemektedir.</p>
+	</section>
+
+	<section class="kart bolum metin" id="sources">
+		<h2>Kaynaklar</h2>
+		<h3>Kodlama için başka kaynaklar</h3>
+		<p>Kodlama yapabilmek için başka interaktif kaynaklar da mevcut; bunlar daha çok çocukların eğlenerek öğrenebileceği tarzda kaynaklar.</p>
+		<div class="kaynaklar">
+			<a class="kaynak" href="https://www.madewithcode.com/"><em>Sürükle-bırak</em><b>Google Made with Code</b><span>Bir robota farklı görevler yaptırıyorsunuz. Oldukça keyifli.</span></a>
+			<a class="kaynak" href="https://scratch.mit.edu/"><em>Sürükle-bırak</em><b>Scratch</b><span>Bir kediyi ileri, geri, yukarı, aşağı hareket ettirebilir, ses çıkarmasını sağlayabilir, bunları farklı yollarla tetikleyebilirsiniz (klavyeye basınca, duvara çarpınca vs.).</span></a>
+			<a class="kaynak" href="https://www.robomindacademy.com/go/robomind/home"><em>Metinsel kodlama</em><b>Robomind</b><span>Basit bir programlama diliyle sanal bir robotu yönlendirerek görevleri tamamlıyorsunuz.</span></a>
+			<a class="kaynak" href="https://www.kodris.com/"><em>Metinsel kodlama</em><b>Kodris</b><span>Farklı karakterleri ileri, geri, yukarı, aşağı hareket ettirerek bir hedef noktaya götürmeye çalışıyorsunuz. Python programlama dilini oyunlaştırarak öğretmeyi amaçlıyor. Senelik ücreti var; veli ve öğretmen desteği sağlıyor.</span></a>
+		</div>
+	</section>
+
+</main>
+
+<footer class="alt">
+	Copyright © 2016 - 2026 Türkçe Programlama Dili ·
+	<a href="index.html">Kodlama</a> ·
+	<a href="rehber.html">Rehber</a> ·
+	<a href="https://github.com/mehmetakifakkus/turkceprogramlamadili">Kaynak kod</a> ·
 	<a href="https://twitter.com/turkceprogramlamadili" title="Twitter'da takip edin">Twitter</a>
-	<br>
-  </footer>
-</div>
+</footer>
 
-
-<script type="text/javascript">
+<script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -650,6 +235,8 @@ Github bağlantisi: <a href="https://github.com/mehmetakifakkus/turkceprogramlam
   ga('create', 'UA-103667062-1', 'auto');
   ga('send', 'pageview');
 </script>
+
+<script src="js/sayfa.js?v=20261102"></script>
 
 </body>
 </html>

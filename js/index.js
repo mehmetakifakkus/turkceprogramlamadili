@@ -10,7 +10,7 @@ var parser;
 
 // Sürüm etiketi: dosyalar değiştiğinde tarayıcı önbellekteki eski kopyayı kullanmasın
 // (index.html içindeki ?v= değerleriyle birlikte güncellenmeli)
-var SURUM = '20261101';
+var SURUM = '20261102';
 
 $.get("grammer.pegjs?v=" + SURUM, function(response) {
 	parser = PEG.buildParser(response);
@@ -62,6 +62,7 @@ function ornegiYukle(k, s, adresiGuncelle){
 	el('ornekKategori').textContent = kategori.ad;
 	el('ornekAdi').textContent = ornek.name;
 	el('ornekSira').textContent = (s + 1) + ' / ' + kategori.ornekler.length;
+	el('ornekSira').hidden = false;
 	el('gorevBaslik').textContent = ornek.name;
 
 	var aciklama = (ornek.description || '').replace(/(\s*<br\s*\/?>\s*)+$/i, '').trim();
@@ -86,9 +87,28 @@ function komsuOrnek(yon){
 el('oncekiOrnek').onclick = function(){ komsuOrnek(-1); };
 el('sonrakiOrnek').onclick = function(){ komsuOrnek(1); };
 
+// Rehberdeki "Kodlama sayfasında dene" düğmeleri kodu adresle gönderir: #kod=...
+function adrestenKod(){
+	if(location.hash.indexOf('#kod=') != 0) return null;
+	try { return decodeURIComponent(location.hash.slice(5)); } catch(e) { return null; }
+}
+
+function rehberKodunuYukle(kod){
+	el('ornekKategori').textContent = 'Rehber';
+	el('ornekAdi').textContent = 'Rehberden gelen örnek';
+	el('ornekSira').hidden = true;
+	el('gorevBaslik').textContent = 'Rehberden gelen örnek';
+	el('gorevMetni').innerHTML = 'Bu kodu <a href="rehber.html">Kodlama Rehberi</a>\'nden açtın. <b>Çalıştır</b> ya da <b>Adım adım</b> ile neler olduğunu izle, sonra kodu değiştirip yeniden dene.';
+	el('gorevKisi').hidden = true;
+	editor.setValue(kod);
+	editor.clearHistory();
+	bastan();
+}
+
 // Adresten örnek: #orta-3, eski kısa bağlantılar (#padisahinbugdaylari) de çalışır
 function adrestenOrnek(){
-	var parca = decodeURIComponent(location.hash.slice(1));
+	var parca;
+	try { parca = decodeURIComponent(location.hash.slice(1)); } catch(e) { return null; }
 	for(var k = 0; k < KATEGORILER.length; k++){
 		var kat = KATEGORILER[k];
 		for(var s = 0; s < kat.ornekler.length; s++)
@@ -442,11 +462,14 @@ el('kaydetDugmesi').onclick = window.kaydet;
 /* ---------- Başlangıç ---------- */
 
 (function(){
-	var adres = adrestenOrnek();
-	if(adres) ornegiYukle(adres.kategori, adres.sira, false);
+	var kod = adrestenKod(), adres = adrestenOrnek();
+	if(kod !== null) { secili = {kategori: 1, sira: 2}; rehberKodunuYukle(kod); }
+	else if(adres) ornegiYukle(adres.kategori, adres.sira, false);
 	else ornegiYukle(1, 2, false);	// Orta seviye: Öğrenci'nin dersi geçip geçmediği
 })();
 window.addEventListener('hashchange', function(){
+	var kod = adrestenKod();
+	if(kod !== null) { rehberKodunuYukle(kod); return; }
 	var adres = adrestenOrnek();
 	if(adres && (adres.kategori != secili.kategori || adres.sira != secili.sira)) ornegiYukle(adres.kategori, adres.sira, false);
 });
