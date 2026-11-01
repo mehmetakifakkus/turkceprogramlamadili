@@ -7,7 +7,7 @@
 *	üretilir) ve açılmayan profil fotoğrafları yerine baş harfler.
 */
 
-var SURUM = '20261102';
+var SURUM = '20261103';
 
 function el(id){ return document.getElementById(id); }
 

@@ -10,7 +10,7 @@ var parser;
 
 // Sürüm etiketi: dosyalar değiştiğinde tarayıcı önbellekteki eski kopyayı kullanmasın
 // (index.html içindeki ?v= değerleriyle birlikte güncellenmeli)
-var SURUM = '20261102';
+var SURUM = '20261103';
 
 $.get("grammer.pegjs?v=" + SURUM, function(response) {
 	parser = PEG.buildParser(response);
@@ -69,6 +69,7 @@ function ornegiYukle(k, s, adresiGuncelle){
 	el('gorevMetni').innerHTML = (aciklama && aciklama != '-') ? aciklama : 'Kodu incele, çalıştır ve her satırın ne yaptığını izle.';
 	el('gorevKisi').textContent = ornek.username ? ornek.username + ' gönderdi · ' + ornek.date : '';
 	el('gorevKisi').hidden = !ornek.username;
+	ipucunuGoster(IPUCLARI[ornek.name]);
 
 	editor.setValue(ornek.code);
 	editor.clearHistory();
@@ -76,6 +77,14 @@ function ornegiYukle(k, s, adresiGuncelle){
 
 	if(adresiGuncelle !== false && history.replaceState)
 		history.replaceState(null, '', '#' + kategori.kod + '-' + (s + 1));
+}
+
+// Örneğe özel ipucu ve "Kendin dene" önerisi (js/ipuclari.js); yoksa genel ipucu
+var GENEL_IPUCU = 'Kodu değiştirip tekrar çalıştırmaktan çekinme. <b>Adım adım</b> ile her satırda neler olduğunu izleyebilirsin.';
+function ipucunuGoster(metinler){
+	el('ipucuMetni').innerHTML = (metinler && metinler.ipucu) || GENEL_IPUCU;
+	el('deneMetni').innerHTML = (metinler && metinler.dene) || '';
+	el('deneKutusu').hidden = !(metinler && metinler.dene);
 }
 
 function komsuOrnek(yon){
@@ -100,6 +109,7 @@ function rehberKodunuYukle(kod){
 	el('gorevBaslik').textContent = 'Rehberden gelen örnek';
 	el('gorevMetni').innerHTML = 'Bu kodu <a href="rehber.html">Kodlama Rehberi</a>\'nden açtın. <b>Çalıştır</b> ya da <b>Adım adım</b> ile neler olduğunu izle, sonra kodu değiştirip yeniden dene.';
 	el('gorevKisi').hidden = true;
+	ipucunuGoster(null);
 	editor.setValue(kod);
 	editor.clearHistory();
 	bastan();

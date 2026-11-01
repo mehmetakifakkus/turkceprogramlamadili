@@ -271,6 +271,24 @@ h2 {
 	font-size: 13px;
 	font-family: var(--kod-yazi);
 }
+.gorev code {
+	font-family: var(--kod-yazi);
+	font-size: .9em;
+	background: var(--mor-acik);
+	color: var(--mor);
+	border-radius: 5px;
+	padding: 0 4px;
+	white-space: nowrap;
+}
+.deneme {
+	border: 2px dashed var(--cizgi);
+	border-radius: 12px;
+	padding: 12px 14px;
+	font-size: 14px;
+	line-height: 1.55;
+	color: var(--metin-2);
+}
+.deneme b { color: var(--metin); }
 .ipucu {
 	background: var(--sari);
 	border-radius: 12px;
