@@ -8,7 +8,11 @@
 
 var parser;
 
-$.get("grammer.pegjs", function(response) {
+// Sürüm etiketi: dosyalar değiştiğinde tarayıcı önbellekteki eski kopyayı kullanmasın
+// (index.html içindeki ?v= değerleriyle birlikte güncellenmeli)
+var SURUM = '20261101';
+
+$.get("grammer.pegjs?v=" + SURUM, function(response) {
 	parser = PEG.buildParser(response);
 	ceviriyiGuncelle();
 	durumYaz('Hazır', '');
